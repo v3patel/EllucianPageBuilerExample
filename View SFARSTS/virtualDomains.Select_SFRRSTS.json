@@ -1,0 +1,18 @@
+{
+   "codePost": null,
+   "virtualDomainRoles": [
+      {
+         "allowGet": true,
+         "allowPost": false,
+         "allowPut": false,
+         "roleName": "ALLROLES",
+         "allowDelete": false
+      }
+   ],
+   "codePut": null,
+   "fileTimestamp": null,
+   "codeDelete": null,
+   "codeGet": "select sfrrsts.*, stvrsts_desc from sfrrsts, stvrsts\r\nwhere stvrsts_code = sfrrsts_rsts_code \r\nand (sfrrsts_term_code like :term or :term is null)\r\nand (sfrrsts_ptrm_code like :ptrm or :ptrm is null)\r\norder by sfrrsts_rsts_code",
+   "typeOfCode": "S",
+   "serviceName": "Select_SFRRSTS"
+}

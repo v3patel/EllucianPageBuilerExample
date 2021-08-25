@@ -1,0 +1,204 @@
+{
+   "constantName": "View_SFARSTS",
+   "extendsPage": null,
+   "fileTimestamp": "2017-05-01T20:51:03Z",
+   "modelView": {
+      "components": [
+         {
+            "name": "SFRRSTS_Resource",
+            "resource": "virtualDomains.Select_SFRRSTS",
+            "staticData": [],
+            "type": "resource"
+         },
+         {
+            "name": "SFRRFCR_Resource",
+            "resource": "virtualDomains.Select_SFRRFCR",
+            "staticData": [],
+            "type": "resource"
+         },
+         {
+            "components": [
+               {
+                  "allowDelete": false,
+                  "allowModify": false,
+                  "allowNew": false,
+                  "allowReload": false,
+                  "components": [
+                     {
+                        "label": "Status",
+                        "loadInitially": true,
+                        "model": "SFRRSTS_RSTS_CODE",
+                        "name": "SFRRSTS_RSTS_CODE",
+                        "parameters": {},
+                        "readonly": true,
+                        "required": true,
+                        "type": "text",
+                        "validation": {}
+                     },
+                     {
+                        "label": "Description",
+                        "loadInitially": true,
+                        "model": "STVRSTS_DESC",
+                        "name": "STVRSTS_DESC",
+                        "parameters": {},
+                        "readonly": true,
+                        "required": true,
+                        "type": "text",
+                        "validation": {}
+                     },
+                     {
+                        "booleanFalseValue": "N",
+                        "booleanTrueValue": "Y",
+                        "label": "Affected by Student Status",
+                        "loadInitially": true,
+                        "model": "SFRRSTS_EFF_BY_ENRL_STAT",
+                        "name": "SFRRSTS_EFF_BY_ENRL_STAT",
+                        "readonly": true,
+                        "type": "boolean"
+                     },
+                     {
+                        "label": "Start Date",
+                        "loadInitially": true,
+                        "model": "SFRRSTS_START_DATE",
+                        "name": "SFRRSTS_START_DATE",
+                        "parameters": {},
+                        "readonly": true,
+                        "required": true,
+                        "type": "datetime",
+                        "validation": {}
+                     },
+                     {
+                        "label": "End Date",
+                        "loadInitially": true,
+                        "model": "SFRRSTS_END_DATE",
+                        "name": "SFRRSTS_END_DATE",
+                        "parameters": {},
+                        "readonly": true,
+                        "required": true,
+                        "type": "datetime",
+                        "validation": {}
+                     },
+                     {
+                        "label": "Voice Response Indicator",
+                        "loadInitially": true,
+                        "model": "SFRRSTS_VR_ELIG_IND",
+                        "name": "SFRRSTS_VR_ELIG_IND",
+                        "readonly": true,
+                        "type": "boolean"
+                     }
+                  ],
+                  "loadInitially": true,
+                  "model": "SFRRSTS_Resource",
+                  "name": "SFRRSTS_Grid",
+                  "onClick": "$selTerm = currentSelection.SFRRSTS_TERM_CODE; \n$selPtrm = currentSelection.SFRRSTS_PTRM_CODE; \n$selRSTS = currentSelection.SFRRSTS_RSTS_CODE; \n$SFRRFCR_Grid.$load();",
+                  "pageSize": 10,
+                  "parameters": {
+                     "ptrm": "1",
+                     "term": "201710"
+                  },
+                  "type": "grid"
+               }
+            ],
+            "label": "Course Registration Status Dates",
+            "name": "Status_Dates_Form",
+            "nextButtonLabel": "Next",
+            "showInitially": true,
+            "type": "form"
+         },
+         {
+            "components": [
+               {
+                  "allowDelete": false,
+                  "allowModify": false,
+                  "allowNew": false,
+                  "allowReload": false,
+                  "components": [
+                     {
+                        "documentation": "",
+                        "label": "Status",
+                        "loadInitially": true,
+                        "model": "SFRRFCR_RSTS_CODE",
+                        "name": "SFRRFCR_RSTS_CODE",
+                        "parameters": {},
+                        "readonly": true,
+                        "required": true,
+                        "type": "text",
+                        "validation": {}
+                     },
+                     {
+                        "label": "Start Date",
+                        "loadInitially": true,
+                        "model": "SFRRFCR_FROM_DATE",
+                        "name": "SFRRFCR_FROM_DATE",
+                        "parameters": {},
+                        "readonly": true,
+                        "required": true,
+                        "type": "datetime",
+                        "validation": {}
+                     },
+                     {
+                        "documentation": "",
+                        "label": "End Date",
+                        "loadInitially": true,
+                        "model": "SFRRFCR_TO_DATE",
+                        "name": "SFRRFCR_TO_DATE",
+                        "parameters": {},
+                        "readonly": true,
+                        "required": true,
+                        "type": "datetime",
+                        "validation": {}
+                     },
+                     {
+                        "fractionDigits": 0,
+                        "label": "Percentage Tuition Refund",
+                        "loadInitially": true,
+                        "model": "SFRRFCR_TUIT_REFUND",
+                        "name": "SFRRFCR_TUIT_REFUND",
+                        "parameters": {},
+                        "readonly": true,
+                        "required": true,
+                        "type": "number",
+                        "validation": {}
+                     },
+                     {
+                        "fractionDigits": 0,
+                        "label": "Percentage Fees Refund",
+                        "loadInitially": true,
+                        "model": "SFRRFCR_FEES_REFUND",
+                        "name": "SFRRFCR_FEES_REFUND",
+                        "parameters": {},
+                        "readonly": true,
+                        "required": true,
+                        "type": "number",
+                        "validation": {}
+                     }
+                  ],
+                  "loadInitially": false,
+                  "model": "SFRRFCR_Resource",
+                  "name": "SFRRFCR_Grid",
+                  "pageSize": 5,
+                  "parameters": {
+                     "ptrm": "$selPtrm",
+                     "rsts": "$selRSTS",
+                     "term": "$selTerm"
+                  },
+                  "type": "grid"
+               }
+            ],
+            "label": "Course Registration Status Refund Rules",
+            "name": "Refund_Rules_Form",
+            "nextButtonLabel": "Next",
+            "showInitially": true,
+            "type": "form"
+         }
+      ],
+      "name": "ViewSFARSTS",
+      "type": "page"
+   },
+   "pageRoles": [
+      {
+         "roleName": "ALLROLES",
+         "allow": true
+      }
+   ]
+}

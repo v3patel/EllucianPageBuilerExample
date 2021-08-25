@@ -1,0 +1,121 @@
+{
+   "constantName": "TESTONEVDMULTIPLEPICKLISTS",
+   "developerSecurity": [],
+   "extendsPage": null,
+   "fileTimestamp": "2021-08-24T15:19:25Z",
+   "modelView": {
+      "components": [
+         {
+            "resource": "virtualDomains.guruobjsByModule",
+            "documentation": "set parameter to one of these: GEN, FAID, FIN, HR, STDT",
+            "name": "picklistsVD",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "components": [
+               {
+                  "valueStyle": "",
+                  "sourceParameters": {
+                     "qtype": "\\\"GEN\\\""
+                  },
+                  "name": "genPicklist",
+                  "labelStyle": "",
+                  "sourceModel": "picklistsVD",
+                  "style": "",
+                  "label": "Gen Objects:",
+                  "loadInitially": true,
+                  "type": "select",
+                  "labelKey": "GUBOBJS_NAME",
+                  "valueKey": "GUBOBJS_NAME",
+                  "required": false
+               },
+               {
+                  "valueStyle": "",
+                  "sourceParameters": {
+                     "qtype": "\\\"FIN\\\""
+                  },
+                  "name": "finPicklist",
+                  "labelStyle": "",
+                  "sourceModel": "picklistsVD",
+                  "style": "",
+                  "label": "Fin Objects:",
+                  "loadInitially": true,
+                  "type": "select",
+                  "labelKey": "GUBOBJS_NAME",
+                  "valueKey": "GUBOBJS_NAME",
+                  "required": false
+               },
+               {
+                  "valueStyle": "",
+                  "sourceParameters": {
+                     "qtype": "\\\"FAID\\\""
+                  },
+                  "name": "faidPicklist",
+                  "labelStyle": "",
+                  "sourceModel": "picklistsVD",
+                  "style": "",
+                  "label": "Faid Objects:",
+                  "loadInitially": true,
+                  "type": "select",
+                  "labelKey": "GUBOBJS_NAME",
+                  "valueKey": "GUBOBJS_NAME",
+                  "required": false
+               },
+               {
+                  "sourceParameters": {
+                     "qtype": "\\\"POS\\\""
+                  },
+                  "name": "posnPicklist",
+                  "sourceModel": "picklistsVD",
+                  "label": "Position Ctl Picklist:",
+                  "loadInitially": true,
+                  "type": "select",
+                  "labelKey": "GUBOBJS_NAME",
+                  "valueKey": "GUBOBJS_NAME",
+                  "required": false
+               },
+               {
+                  "sourceParameters": {
+                     "qtype": "\\\"PAY\\\""
+                  },
+                  "name": "payrollPicklist",
+                  "sourceModel": "picklistsVD",
+                  "label": "Payroll Picklist:",
+                  "loadInitially": true,
+                  "type": "select",
+                  "labelKey": "GUBOBJS_NAME",
+                  "valueKey": "GUBOBJS_NAME",
+                  "required": false
+               },
+               {
+                  "sourceParameters": {
+                     "qtype": "\\\"STDT\\\""
+                  },
+                  "name": "stdtPicklist",
+                  "sourceModel": "picklistsVD",
+                  "label": "Student Picklist:",
+                  "loadInitially": true,
+                  "type": "select",
+                  "labelKey": "GUBOBJS_NAME",
+                  "valueKey": "GUBOBJS_NAME",
+                  "required": false
+               }
+            ],
+            "name": "picklistBlock",
+            "showInitially": true,
+            "style": "",
+            "type": "block"
+         }
+      ],
+      "name": "TESTONEVDMULTIPLEPICKLISTS",
+      "type": "page"
+   },
+   "owner": null,
+   "pageRoles": [
+      {
+         "roleName": "ADMIN-GPBADMN",
+         "allow": true
+      }
+   ]
+}

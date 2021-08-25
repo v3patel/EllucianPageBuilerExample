@@ -1,0 +1,63 @@
+{
+   "constantName": "sandefer-gorblob",
+   "extendsPage": null,
+   "fileTimestamp": "2018-05-18T18:40:46Z",
+   "modelView": {
+      "components": [
+         {
+            "name": "gorblobResource",
+            "resource": "virtualDomains.sandefer-gorblob",
+            "staticData": [],
+            "type": "resource"
+         },
+         {
+            "name": "fileUploadLiteral",
+            "type": "literal",
+            "value": "<div>\n   <label for=\"input-file\">Specify a file:</label><br>\n   <input type=\"file\" id=\"input-file\">\n</div>"
+         },
+         {
+            "components": [
+               {
+                  "loadInitially": true,
+                  "model": "file",
+                  "name": "gorblobTextArea",
+                  "parameters": {},
+                  "readonly": false,
+                  "required": false,
+                  "type": "textArea",
+                  "validation": {}
+               },
+               {
+                  "label": "Upload File",
+                  "name": "submitButton",
+                  "onClick": "$gorblobResource.$post(\n   {//params\n     file: $(\"#pbid-gorblobTextArea\").val()\n   },\n   null,\n   function(response) {\n      //success\n      alert('Record Updated.');\n },\n   function(response) {\n      //error\n      errorMsgArray = response.data.errors.errorMessage.split('::');\n      // First and last element contain extraneous text.  Remove these elements\n      errorMsgArray.splice(0, 1); //Remove first element\n      errorMsgArray.splice(-1, 1); //Remove last element\n      $.each(errorMsgArray, function(index, item) {\n         if (item.length > 0) {\n            alert(item, {type:\"error\"});\n         }\n      });\n});",
+                  "type": "button"
+               }
+            ],
+            "name": "gorblobForm",
+            "nextButtonLabel": "Next",
+            "showInitially": true,
+            "submitLabel": "Save",
+            "type": "form"
+         },
+         {
+            "name": "jsLiteral",
+            "type": "literal",
+            "value": "<script>\ndocument.getElementById('input-file')\n  .addEventListener('change', getFile)\n\nfunction getFile(event) {\n\tconst input = event.target\n  if ('files' in input && input.files.length > 0) {\n\t  placeFileContent(\n      document.getElementById('pbid-gorblobTextArea'),\n      input.files[0])\n  }\n}\n\nfunction placeFileContent(target, file) {\n\treadFileContent(file).then(content => {\n  \ttarget.value = btoa(content)\n  }).catch(error => console.log(error))\n}\n\nfunction readFileContent(file) {\n\tconst reader = new FileReader()\n  return new Promise((resolve, reject) => {\n    reader.onload = event => resolve(event.target.result)\n    reader.onerror = error => reject(error)\n    reader.readAsBinaryString(file)\n  })\n}\n</script>"
+         },
+         {
+            "name": "cssLiteral",
+            "type": "literal",
+            "value": "<style>\n#pbid-gorblobTextArea {\n   display:none;\n}\n</style>"
+         }
+      ],
+      "name": "sandeferGorblob",
+      "type": "page"
+   },
+   "pageRoles": [
+      {
+         "roleName": "PB_DEVELOPER",
+         "allow": true
+      }
+   ]
+}

@@ -1,0 +1,18 @@
+{
+   "codePut": null,
+   "codeDelete": null,
+   "virtualDomainRoles": [
+      {
+         "allowDelete": true,
+         "allowPost": true,
+         "allowPut": true,
+         "roleName": "PB_DEVELOPER",
+         "allowGet": true
+      }
+   ],
+   "codeGet": "select * from gorblob",
+   "typeOfCode": "S",
+   "fileTimestamp": null,
+   "serviceName": "sandefer-gorblob",
+   "codePost": "DECLARE\r\n   l_rowid VARCHAR2(30) := :id;\r\n   myBlob BLOB;\r\n   v_offset integer := 1;\r\n   v_buffer_size binary_integer := 4800;\r\n   v_buffer_varchar varchar2(4800);\r\n   v_buffer_raw raw(4800);\r\nBEGIN\r\n   dbms_lob.CreateTemporary(myBlob, true);\r\n\r\n   FOR i IN 1 .. CEIL(dbms_lob.getlength(:file) / v_buffer_size) LOOP\r\n      dbms_lob.read(:file, v_buffer_size, v_offset, v_buffer_varchar);\r\n      v_buffer_raw := utl_raw.cast_to_raw(v_buffer_varchar);\r\n      v_buffer_raw := utl_encode.base64_decode(v_buffer_raw);\r\n      dbms_lob.writeappend(myBlob, utl_raw.length(v_buffer_raw), v_buffer_raw);\r\n      v_offset := v_offset + v_buffer_size;\r\n   END LOOP;\r\n\r\n   INSERT INTO gorblob (\r\n      gorblob_media_id, gorblob_blot_code, gorblob_user_id,\r\n      gorblob_activity_date, gorblob_blob\r\n   ) (SELECT NVL(MAX(gorblob_media_id),0) + 1, 'TXT', user,\r\n         SYSDATE, myBlob\r\n      FROM gorblob\r\n   );\r\nEND;"
+}

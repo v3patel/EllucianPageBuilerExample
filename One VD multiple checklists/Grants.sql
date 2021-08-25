@@ -1,0 +1,1 @@
+grant select  on gurjob to ban_default_pagebuilder_m;

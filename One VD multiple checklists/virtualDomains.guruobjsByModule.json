@@ -1,0 +1,27 @@
+{
+   "owner": null,
+   "codePut": null,
+   "codeDelete": null,
+   "virtualDomainRoles": [
+      {
+         "allowDelete": false,
+         "allowPost": false,
+         "allowPut": false,
+         "roleName": "ADMIN-KCCD_GET_BAN_DEFAULT_M",
+         "allowGet": true
+      },
+      {
+         "allowDelete": false,
+         "allowPost": false,
+         "allowPut": false,
+         "roleName": "ADMIN-GPBADMN",
+         "allowGet": true
+      }
+   ],
+   "codeGet": "select GUBOBJS_NAME from gubobjs where GUBOBJS_OBJT_CODE in ('FORM','JOBS') AND SUBSTR(GUBOBJS_NAME,1,1) = 'G' and :qtype = 'GEN'\r\nunion\r\nselect GUBOBJS_NAME from gubobjs where GUBOBJS_OBJT_CODE in ('FORM','JOBS') AND SUBSTR(GUBOBJS_NAME,1,1) = 'F' and :qtype = 'FIN'\r\nunion\r\nselect GUBOBJS_NAME from gubobjs where GUBOBJS_OBJT_CODE in ('FORM','JOBS') AND SUBSTR(GUBOBJS_NAME,1,1) = 'R' and :qtype = 'FAID'\r\nunion\r\nselect GUBOBJS_NAME from gubobjs where GUBOBJS_OBJT_CODE in ('FORM','JOBS') AND SUBSTR(GUBOBJS_NAME,1,1) = 'P' and :qtype = 'PAY'\r\nunion\r\nselect GUBOBJS_NAME from gubobjs where GUBOBJS_OBJT_CODE in ('FORM','JOBS') AND SUBSTR(GUBOBJS_NAME,1,1) = 'N' and :qtype = 'POS'\r\nunion\r\nselect GUBOBJS_NAME from gubobjs where GUBOBJS_OBJT_CODE in ('FORM','JOBS') AND SUBSTR(GUBOBJS_NAME,1,1) = 'S' and :qtype = 'STDT'",
+   "typeOfCode": "S",
+   "fileTimestamp": null,
+   "serviceName": "guruobjsByModule",
+   "codePost": null,
+   "developerSecurity": []
+}

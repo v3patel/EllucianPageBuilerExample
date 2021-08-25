@@ -1,0 +1,18 @@
+{
+   "codePost": null,
+   "virtualDomainRoles": [
+      {
+         "allowGet": true,
+         "allowPost": false,
+         "allowPut": false,
+         "roleName": "ALLROLES",
+         "allowDelete": false
+      }
+   ],
+   "codePut": null,
+   "fileTimestamp": null,
+   "codeDelete": null,
+   "codeGet": "select * from sfrrfcr\r\nwhere (sfrrfcr_term_code like :term or :term is null)\r\nand (sfrrfcr_ptrm_code like :ptrm or :ptrm is null)\r\nand (sfrrfcr_rsts_code like :rsts or :rsts is null)\r\n",
+   "typeOfCode": "S",
+   "serviceName": "Select_SFRRFCR"
+}

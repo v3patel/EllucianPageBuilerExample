@@ -1,0 +1,1 @@
+grant select, insert on gorblob to ban_default_pagebuilder_m;
