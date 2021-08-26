@@ -1,0 +1,57 @@
+{
+   "constantName": "RADIO_EXAMPLE",
+   "developerSecurity": [],
+   "extendsPage": null,
+   "fileTimestamp": "2020-02-04T16:58:39Z",
+   "modelView": {
+      "components": [
+         {
+            "resource": "virtualDomains.SPBPERS_domain",
+            "name": "spbpers_res",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "resource": "virtualDomains.STVMRTL_domain",
+            "name": "stvmrtl_res",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "allowDelete": false,
+            "components": [
+               {
+                  "sourceParameters": {},
+                  "name": "theRadio",
+                  "sourceModel": "stvmrtl_res",
+                  "model": "SPBPERS_MRTL_CODE",
+                  "label": "Marital Status:",
+                  "loadInitially": true,
+                  "type": "radio",
+                  "labelKey": "STVMRTL_DESC",
+                  "valueKey": "STVMRTL_CODE",
+                  "required": false
+               }
+            ],
+            "allowNew": false,
+            "name": "theDetail",
+            "allowModify": true,
+            "pageSize": 1,
+            "model": "spbpers_res",
+            "allowReload": true,
+            "loadInitially": true,
+            "type": "detail",
+            "parameters": {}
+         }
+      ],
+      "name": "RADIOEXAMPLE",
+      "type": "page"
+   },
+   "owner": null,
+   "pageRoles": [
+      {
+         "roleName": "ALLROLES",
+         "allow": true
+      }
+   ]
+}

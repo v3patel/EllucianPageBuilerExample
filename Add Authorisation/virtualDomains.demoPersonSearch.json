@@ -1,0 +1,25 @@
+{
+   "codePost": null,
+   "virtualDomainRoles": [
+      {
+         "allowGet": true,
+         "allowPost": false,
+         "allowPut": false,
+         "roleName": "ALLROLES",
+         "allowDelete": false
+      },
+      {
+         "allowGet": true,
+         "allowPost": false,
+         "allowPut": false,
+         "roleName": "ADMIN-GPBADMN",
+         "allowDelete": false
+      }
+   ],
+   "codePut": null,
+   "fileTimestamp": null,
+   "codeDelete": null,
+   "codeGet": "select\r\n    s.rowid \"id\", \r\n    s.spriden_first_name,\r\n    s.spriden_mi,\r\n    s.spriden_last_name,\r\n    s.spriden_id,\r\n    g.goremal_email_address\r\nfrom spriden s\r\n    left join goremal g on s.spriden_pidm = g.goremal_pidm\r\nwhere \r\n    s.spriden_change_ind is null\r\n    and g.goremal_preferred_ind = 'Y'\r\n    and (\r\n        UPPER(s.spriden_last_name || ', ' || s.spriden_first_name) like UPPER(:p_search_string)||'%'\r\n        or g.goremal_email_address like :p_search_string||'%'\r\n    )",
+   "typeOfCode": "S",
+   "serviceName": "demoPersonSearch"
+}

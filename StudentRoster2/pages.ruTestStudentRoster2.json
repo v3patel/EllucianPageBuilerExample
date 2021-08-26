@@ -1,0 +1,118 @@
+{
+   "constantName": "ruTestStudentRoster2",
+   "extendsPage": null,
+   "fileTimestamp": "2018-10-19T15:47:15Z",
+   "modelView": {
+      "components": [
+         {
+            "name": "resterms",
+            "resource": "virtualDomains.ruTestTerms",
+            "staticData": [],
+            "type": "resource"
+         },
+         {
+            "name": "rescrns",
+            "resource": "virtualDomains.ruTestCrns",
+            "staticData": [
+               {}
+            ],
+            "type": "resource"
+         },
+         {
+            "name": "resstudents",
+            "resource": "virtualDomains.ruTestStudents",
+            "staticData": [],
+            "type": "resource"
+         },
+         {
+            "components": [
+               {
+                  "label": "Term",
+                  "labelKey": "STVTERM_DESC",
+                  "loadInitially": true,
+                  "model": "",
+                  "name": "filterTerm",
+                  "onUpdate": "$filterCrn.$load();",
+                  "placeholder": "Select term...",
+                  "required": false,
+                  "sourceModel": "resterms",
+                  "sourceParameters": {},
+                  "type": "select",
+                  "valueKey": "STVTERM_CODE"
+               },
+               {
+                  "label": "CRN",
+                  "labelKey": "TITLE",
+                  "loadInitially": false,
+                  "name": "filterCrn",
+                  "onUpdate": "$gridStudents.$load();",
+                  "placeholder": "Select a CRN...",
+                  "required": false,
+                  "sourceModel": "rescrns",
+                  "sourceParameters": {
+                     "p_term_code": "$filterTerm"
+                  },
+                  "type": "select",
+                  "valueKey": "CRN"
+               }
+            ],
+            "label": "Filter",
+            "name": "Keyblock",
+            "showInitially": true,
+            "type": "block"
+         },
+         {
+            "allowDelete": false,
+            "allowModify": false,
+            "allowNew": false,
+            "allowReload": true,
+            "components": [
+               {
+                  "label": "Banner ID",
+                  "loadInitially": true,
+                  "model": "SPRIDEN_ID",
+                  "name": "studentID",
+                  "parameters": {},
+                  "readonly": false,
+                  "required": false,
+                  "type": "text",
+                  "validation": {}
+               },
+               {
+                  "label": "Name",
+                  "loadInitially": true,
+                  "model": "STUDENT",
+                  "name": "studentName",
+                  "parameters": {},
+                  "readonly": false,
+                  "required": false,
+                  "type": "text",
+                  "validation": {}
+               }
+            ],
+            "label": "My Students",
+            "loadInitially": false,
+            "model": "resstudents",
+            "name": "gridStudents",
+            "pageSize": 10,
+            "parameters": {
+               "p_crn": "$filterCrn",
+               "p_term_code": "$filterTerm"
+            },
+            "refreshDataLabel": "Refresh",
+            "type": "grid"
+         }
+      ],
+      "label": "My Student Roster",
+      "name": "ruTestStudentRoster2",
+      "style": "ruDefault",
+      "title": "My Student Roster",
+      "type": "page"
+   },
+   "pageRoles": [
+      {
+         "roleName": "ADMIN-GPBADMN",
+         "allow": true
+      }
+   ]
+}

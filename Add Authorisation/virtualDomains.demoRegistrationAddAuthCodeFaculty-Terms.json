@@ -1,0 +1,25 @@
+{
+   "codePost": null,
+   "virtualDomainRoles": [
+      {
+         "allowGet": true,
+         "allowPost": false,
+         "allowPut": false,
+         "roleName": "ADMIN-GPBADMN",
+         "allowDelete": false
+      },
+      {
+         "allowGet": true,
+         "allowPost": false,
+         "allowPut": false,
+         "roleName": "ALLROLES",
+         "allowDelete": false
+      }
+   ],
+   "codePut": null,
+   "fileTimestamp": null,
+   "codeDelete": null,
+   "codeGet": "select t.rowid \"id\", t.stvterm_code, t.stvterm_desc\r\nfrom stvterm t where t.stvterm_code in (select sirasgn_term_code from sirasgn where sirasgn_pidm = :parm_user_pidm)",
+   "typeOfCode": "S",
+   "serviceName": "demoRegistrationAddAuthCodeFaculty-Terms"
+}

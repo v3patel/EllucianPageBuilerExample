@@ -1,0 +1,25 @@
+{
+   "codePost": null,
+   "virtualDomainRoles": [
+      {
+         "allowGet": true,
+         "allowPost": false,
+         "allowPut": true,
+         "roleName": "ALLROLES",
+         "allowDelete": false
+      },
+      {
+         "allowGet": true,
+         "allowPost": false,
+         "allowPut": true,
+         "roleName": "ADMIN-GPBADMN",
+         "allowDelete": false
+      }
+   ],
+   "codePut": "DECLARE\r\n  l_pidm sfbauth.sfbauth_pidm%TYPE;\r\nBEGIN\r\n  l_pidm := gb_common.f_get_pidm (:SPRIDEN_ID);\r\n  update sfbauth set sfbauth_pidm = l_pidm where rowid=:id;\r\n  commit;\r\nEND;",
+   "fileTimestamp": null,
+   "codeDelete": null,
+   "codeGet": "select \r\n    rowidtochar(a.rowid) \"id\", \r\n    a.sfbauth_term_code, \r\n    a.sfbauth_crn, \r\n    a.sfbauth_auth_cde, \r\n    CASE a.sfbauth_active_ind WHEN 'Y' THEN 'Active' ELSE 'Inactive' END sfbauth_active_ind, \r\n    TO_CHAR(a.sfbauth_activity_date, 'mm/dd/yyyy') sfbauth_activity_date,\r\n    TO_CHAR(a.sfbauth_generate_date, 'mm/dd/yyyy') sfbauth_generate_date,\r\n    b.ssbsect_ptrm_code,\r\n    b.ssbsect_subj_code,\r\n    b.ssbsect_crse_numb,\r\n    c.scbcrse_title,\r\n    s.spriden_first_name,\r\n    s.spriden_mi,\r\n    s.spriden_last_name,\r\n    s.spriden_id,\r\n    g.sirasgn_pidm\r\nfrom sfbauth a\r\n    left join spriden s on a.sfbauth_pidm = s.spriden_pidm and s.spriden_change_ind is null\r\n    join ssbsect b on a.sfbauth_term_code = b.ssbsect_term_code and a.sfbauth_crn = b.ssbsect_crn\r\n    join sirasgn g on a.sfbauth_term_code = g.sirasgn_term_code \r\n        and a.sfbauth_crn = g.sirasgn_crn \r\n        and g.sirasgn_pidm = :parm_user_pidm\r\n    join scbcrse c on c.scbcrse_subj_code = b.ssbsect_subj_code \r\n        and c.scbcrse_crse_numb = b.ssbsect_crse_numb and c.scbcrse_eff_term < :p_term_code\r\nwhere a.sfbauth_term_code = :p_term_code\r\n    and a.sfbauth_crn like :p_crn||'%'\r\n    and b.ssbsect_subj_code like :p_subj_code||'%'\r\n    and b.ssbsect_crse_numb like :p_crse_numb||'%'\r\n    and c.scbcrse_title like :p_course_title||'%'\r\norder by \r\n    b.ssbsect_ptrm_code,\r\n    b.ssbsect_subj_code,\r\n    b.ssbsect_crse_numb,\r\n    c.scbcrse_title,\r\n    s.spriden_last_name, \r\n    s.spriden_first_name,\r\n    s.spriden_mi\r\n    ",
+   "typeOfCode": "S",
+   "serviceName": "demoRegistrationAddAuthCodeFaculty-Codes"
+}

@@ -1,0 +1,20 @@
+{
+   "owner": null,
+   "codePut": "begin\r\n\r\nupdate spbpers\r\nset SPBPERS_MRTL_CODE = :SPBPERS_MRTL_CODE\r\nwhere rowid = :id;\r\n\r\nend;",
+   "codeDelete": null,
+   "virtualDomainRoles": [
+      {
+         "allowDelete": false,
+         "allowPost": true,
+         "allowPut": true,
+         "roleName": "ALLROLES",
+         "allowGet": true
+      }
+   ],
+   "codeGet": "select rowidtochar(rowid) \"id\", s.* from spbpers s\r\nwhere spbpers_pidm = :parm_user_pidm",
+   "typeOfCode": "S",
+   "fileTimestamp": null,
+   "serviceName": "SPBPERS_domain",
+   "codePost": null,
+   "developerSecurity": []
+}

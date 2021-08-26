@@ -1,0 +1,18 @@
+{
+   "codePut": "declare \r\n\r\nbegin\r\n update gtvemal\r\n set gtvemal_desc = :DESC,\r\n  gtvemal_activity_date = sysdate,\r\n  gtvemal_disp_web_ind = :WEB,\r\n  gtvemal_url_ind = :URL\r\n where rowid = :id;\r\n\r\nend;",
+   "codeDelete": null,
+   "virtualDomainRoles": [
+      {
+         "allowDelete": false,
+         "allowPost": true,
+         "allowPut": true,
+         "roleName": "ALLROLES",
+         "allowGet": true
+      }
+   ],
+   "codeGet": "select rowidtochar(rowid) \"id\", g.* from gtvemal g\r\nwhere gtvemal_code = 'PB'\r\norder by gtvemal_code",
+   "typeOfCode": "S",
+   "fileTimestamp": null,
+   "serviceName": "GTVEMAL_Domain",
+   "codePost": "declare \r\n\r\nbegin\r\n insert into GTVEMAL (\r\n GTVEMAL_CODE,\r\n GTVEMAL_DESC,\r\n GTVEMAL_ACTIVITY_DATE,\r\n GTVEMAL_DISP_WEB_IND,\r\n GTVEMAL_URL_IND)\r\n values(\r\n  :CODE, :DESC, sysdate, :WEB, :URL);\r\nend;"
+}

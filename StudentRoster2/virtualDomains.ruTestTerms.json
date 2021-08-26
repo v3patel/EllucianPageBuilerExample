@@ -1,0 +1,18 @@
+{
+   "codePost": null,
+   "virtualDomainRoles": [
+      {
+         "allowGet": true,
+         "allowPost": false,
+         "allowPut": false,
+         "roleName": "ADMIN-GPBADMN",
+         "allowDelete": false
+      }
+   ],
+   "codePut": null,
+   "fileTimestamp": null,
+   "codeDelete": null,
+   "codeGet": "select rowidtochar(rowid) \"ID\", STVTERM_CODE, STVTERM_DESC\r\nfrom stvterm\r\nwhere (stvterm_code like '2018%'\r\nor stvterm_code like '2019%')\r\nand stvterm_code <= ruca.get_current_term\r\norder by STVTERM_CODE desc",
+   "typeOfCode": "S",
+   "serviceName": "ruTestTerms"
+}

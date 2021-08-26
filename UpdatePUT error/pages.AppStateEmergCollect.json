@@ -1,0 +1,199 @@
+{
+   "constantName": "AppStateEmergCollect",
+   "developerSecurity": [],
+   "extendsPage": null,
+   "fileTimestamp": "2019-12-12T17:52:23Z",
+   "modelView": {
+      "components": [
+         {
+            "resource": "virtualDomains.AppStateEmergencyVoice",
+            "name": "AppStateEmergencyVoice",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "resource": "virtualDomains.AppStateEmergencyText",
+            "name": "AppStateEmergencyText",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "resource": "virtualDomains.ActionItemStatus",
+            "name": "ActionItemStatus",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "resource": "virtualDomains.ActionItemContent",
+            "name": "ActionItemUpdate",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "components": [
+               {
+                  "components": [
+                     {
+                        "components": [
+                           {
+                              "name": "EmergVoiceDisclaimer",
+                              "type": "literal",
+                              "value": "<div>\nStep 1. Please provide <b>your</b> cell phone number so the University may contact you during an emergency situation. Listing your number here automatically registers you for AppState-ALERT voice messages.\n</div>"
+                           },
+                           {
+                              "allowDelete": false,
+                              "components": [
+                                 {
+                                    "readonly": false,
+                                    "name": "EmergVoice_AreaCode",
+                                    "model": "AREA_CODE",
+                                    "label": "Area Code:",
+                                    "loadInitially": false,
+                                    "type": "text",
+                                    "parameters": {},
+                                    "onUpdate": "params.isResponseModified = true;",
+                                    "validation": {},
+                                    "required": true
+                                 },
+                                 {
+                                    "readonly": false,
+                                    "name": "EmergVoice_Phone",
+                                    "model": "PHONE_NUMBER",
+                                    "label": "Phone Number:",
+                                    "loadInitially": false,
+                                    "type": "text",
+                                    "parameters": {},
+                                    "onUpdate": "params.isResponseModified = true;",
+                                    "validation": {},
+                                    "required": true
+                                 }
+                              ],
+                              "allowNew": false,
+                              "name": "EmergVoiceDetail",
+                              "allowModify": true,
+                              "pageSize": 5,
+                              "onLoad": "$(\"#pbid-EmergVoiceDetail-save-button\").hide()",
+                              "model": "AppStateEmergencyVoice",
+                              "allowReload": false,
+                              "loadInitially": true,
+                              "type": "detail",
+                              "parameters": {}
+                           }
+                        ],
+                        "name": "EmergVoiceBlock",
+                        "showInitially": true,
+                        "type": "block"
+                     },
+                     {
+                        "allowDelete": false,
+                        "components": [
+                           {
+                              "name": "EmergTextDisclaimer",
+                              "type": "literal",
+                              "value": "<div>\nStep 2. Please provide <b>your</b> cell phone number to receive emergency text messages. Even if this number is the same number that you used above, please enter the information again. Listing your number here automatically registers you for AppState-ALERT text messages. If you do not want to receive emergency text messages you may leave this field blank. Standard text messaging rates apply.\n</div>"
+                           },
+                           {
+                              "readonly": false,
+                              "name": "EmergText_AreaCode",
+                              "model": "AREA_CODE",
+                              "label": "Area Code:",
+                              "loadInitially": false,
+                              "type": "text",
+                              "parameters": {},
+                              "onUpdate": "params.isResponseModified = true;\nif($AppStateEmergencyText.\\$valid) {\nconsole.log('Text is valid')\n} else {\nconsole.log('Text is invalid')\n}",
+                              "validation": {
+                                 "pattern": "^\\d{3}"
+                              },
+                              "required": false
+                           },
+                           {
+                              "readonly": false,
+                              "name": "EmergText_Phone",
+                              "model": "PHONE_NUMBER",
+                              "label": "Phone Number:",
+                              "loadInitially": false,
+                              "type": "text",
+                              "parameters": {},
+                              "onUpdate": "params.isResponseModified = true;\nif($AppStateEmergencyText.\\$isvalid) {\nconsole.log('Text is valid')\n} else {\nconsole.log('Text is invalid')\n}",
+                              "validation": {
+                                 "pattern": "^\\d{7}"
+                              },
+                              "required": false
+                           }
+                        ],
+                        "onError": "var errorMessage =response.data.errors? response.data.errors.errorMessage: null;\nif (errorMessage && errorMessage.indexOf(\"ORA-20000\") > -1) {\n  alert(\"An entry already exists for this virtual domain and role, cannot add a duplicate\", {type:\"error\"});\n} else {\n  alert( errorMessage?errorMessage:response.data, {type:\"error\"});\n}",
+                        "allowNew": false,
+                        "pageSize": 5,
+                        "loadInitially": true,
+                        "type": "detail",
+                        "name": "EmergTextDetail",
+                        "allowModify": true,
+                        "onLoad": "",
+                        "model": "AppStateEmergencyText",
+                        "allowReload": false,
+                        "parameters": {}
+                     }
+                  ],
+                  "nextButtonLabel": "Next",
+                  "name": "AppStateEmergCollectForm",
+                  "showInitially": true,
+                  "type": "form"
+               },
+               {
+                  "allowDelete": false,
+                  "components": [
+                     {
+                        "sourceParameters": {
+                           "actionitemid": "$$params.actionItemId"
+                        },
+                        "name": "AppStateEmergCollectAgree",
+                        "onLoad": "$(\"#PBContent\").css({'margin-bottom':'30px'})",
+                        "sourceModel": "ActionItemStatus",
+                        "loadInitially": true,
+                        "type": "radio",
+                        "labelKey": "STATUS_RULE_LABEL_TEXT",
+                        "valueKey": "STATUS_RULE_ID",
+                        "onUpdate": "$(\"#pbid-AppStateEmergCollectSave\").removeClass(\"disabled\");\nparams.isResponseModified = true;",
+                        "required": false
+                     }
+                  ],
+                  "onError": "var errorMessage =response.data.errors? response.data.errors.errorMessage: null;\nif (errorMessage && errorMessage.indexOf(\"ORA-20000\") > -1) {\n  alert(\"An entry already exists for this virtual domain and role, cannot add a duplicate\", {type:\"error\"});\n} else {\n  alert( errorMessage?errorMessage:response.data, {type:\"error\"});\n}",
+                  "allowNew": false,
+                  "pageSize": 5,
+                  "onSaveSuccess": "alert($.i18n.prop(\"js.notification.success\"), {type:\"success\", flash:true}); window.params.saved=true;\n$AppStateEmergCollectConfirmation.$load();",
+                  "loadInitially": true,
+                  "type": "detail",
+                  "name": "AppStateEmergCollectConfirmation",
+                  "allowModify": false,
+                  "model": "ActionItemUpdate",
+                  "allowReload": false,
+                  "parameters": {
+                     "actionitemid": "$$params.actionItemId",
+                     "pageid": "$$params.id"
+                  }
+               },
+               {
+                  "valueStyle": "btn btn-primary pull-left disabled",
+                  "onClick": "if(!$AppStateEmergencyVoice.AREA_CODE || !$AppStateEmergencyVoice.PHONE_NUMBER)\n{\nalert(\"Please enter a valid area code and phone number\", {type:\"error\", flash:true});\nwindow.params.saved=false;\nreturn;\n}\nif($AppStateEmergencyVoice.\\$dirty) {\n// TODO add phone validation here?\n$AppStateEmergencyVoice.$save();\n}\nif($AppStateEmergencyText.\\$dirty) {\n// TODO add phone validation here?\n$AppStateEmergencyText.$save();\n}\n$(\"#pbid-AppStateEmergCollectSave\").addClass(\"disabled\")",
+                  "name": "AppStateEmergCollectSave",
+                  "label": "Save",
+                  "type": "button"
+               }
+            ],
+            "name": "AppStateEmergCollectBlock",
+            "showInitially": true,
+            "label": "Cell Phone Registration for Emergencies and AppState-ALERT",
+            "type": "block"
+         }
+      ],
+      "name": "AppStateEmergCollect",
+      "type": "page"
+   },
+   "owner": null,
+   "pageRoles": [
+      {
+         "roleName": "ALLROLES",
+         "allow": true
+      }
+   ]
+}

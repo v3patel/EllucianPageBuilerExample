@@ -1,0 +1,46 @@
+{
+   "constantName": "Resource_Methods_Example",
+   "extendsPage": null,
+   "fileTimestamp": "2018-04-27T15:05:22Z",
+   "modelView": {
+      "components": [
+         {
+            "name": "GTVEMAL_Res",
+            "resource": "virtualDomains.GTVEMAL_Domain",
+            "staticData": [],
+            "type": "resource"
+         },
+         {
+            "label": "Insert Record",
+            "name": "GTVEMAL_Btn1",
+            "onClick": "console.log('Insert Button Test');\n$GTVEMAL_Res.$post( { CODE: 'PB', DESC: 'Page Builder Test', WEB: 'Y', URL: 'N' });",
+            "type": "button"
+         },
+         {
+            "label": "Update Record",
+            "name": "GTVEMAL_Btn2",
+            "onClick": "console.log('Update Button Test');\n$GTVEMAL_Res.$put( { id: $Rec_Rowid.id, CODE: 'PB', DESC: 'New Desc: Page Builder Test', WEB: 'N', URL: 'N' });",
+            "type": "button"
+         },
+         {
+            "loadInitially": true,
+            "model": "GTVEMAL_Res.id",
+            "name": "Rec_Rowid",
+            "parameters": {},
+            "readonly": false,
+            "required": false,
+            "style": "",
+            "type": "text",
+            "validation": {}
+         }
+      ],
+      "name": "ResourceMethodsExample",
+      "type": "page"
+   },
+   "pageRoles": [
+      {
+         "roleName": "ALLROLES",
+         "allow": true
+      }
+   ]
+}

@@ -1,0 +1,73 @@
+{
+   "constantName": "BLOB_Example",
+   "developerSecurity": [],
+   "extendsPage": null,
+   "fileTimestamp": "2020-04-30T18:51:50Z",
+   "modelView": {
+      "components": [
+         {
+            "resource": "virtualDomains.BLOB_Domain",
+            "name": "blobRes",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "allowDelete": false,
+            "components": [
+               {
+                  "readonly": true,
+                  "name": "theText",
+                  "model": "FILENAME",
+                  "label": "Filename",
+                  "loadInitially": true,
+                  "type": "text",
+                  "parameters": {},
+                  "validation": {},
+                  "required": false
+               },
+               {
+                  "name": "theHidden",
+                  "model": "IMGFILE",
+                  "loadInitially": true,
+                  "type": "hidden"
+               }
+            ],
+            "onClick": "console.log('Button Fired');\n$theFilename = currentSelection.FILENAME;\n$(\"#imgSelected\")[0].src=\"data:image/jpeg;base64,\"+currentSelection.IMGFILE;",
+            "allowNew": false,
+            "pageSize": 5,
+            "label": "Click filename to view associated image:",
+            "loadInitially": true,
+            "type": "grid",
+            "name": "theGrid",
+            "allowModify": false,
+            "model": "blobRes",
+            "allowReload": false,
+            "parameters": {}
+         },
+         {
+            "readonly": false,
+            "name": "theFilename",
+            "label": "Selected Image:",
+            "loadInitially": true,
+            "type": "text",
+            "parameters": {},
+            "validation": {},
+            "required": false
+         },
+         {
+            "name": "theLiteral",
+            "type": "literal",
+            "value": "<img id=\"imgSelected\" src=\"\">"
+         }
+      ],
+      "name": "BLOBExample",
+      "type": "page"
+   },
+   "owner": null,
+   "pageRoles": [
+      {
+         "roleName": "ALLROLES",
+         "allow": true
+      }
+   ]
+}

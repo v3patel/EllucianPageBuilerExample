@@ -1,0 +1,69 @@
+{
+   "constantName": "Calc_Total_Example",
+   "developerSecurity": [],
+   "extendsPage": null,
+   "fileTimestamp": "2019-08-30T19:05:09Z",
+   "modelView": {
+      "components": [
+         {
+            "name": "data_res",
+            "resource": "virtualDomains.SCBCRSE_Domain",
+            "staticData": [],
+            "type": "resource"
+         },
+         {
+            "allowDelete": false,
+            "allowModify": false,
+            "allowNew": false,
+            "allowReload": false,
+            "components": [
+               {
+                  "label": "Low",
+                  "loadInitially": true,
+                  "model": "SCBCRSE_CREDIT_HR_LOW",
+                  "name": "theGrid_low",
+                  "parameters": {},
+                  "readonly": false,
+                  "required": false,
+                  "type": "text",
+                  "validation": {}
+               },
+               {
+                  "label": "High",
+                  "loadInitially": true,
+                  "model": "SCBCRSE_CREDIT_HR_HIGH",
+                  "name": "theGrid_high",
+                  "parameters": {},
+                  "readonly": false,
+                  "required": false,
+                  "type": "text",
+                  "validation": {}
+               },
+               {
+                  "label": "Total",
+                  "name": "theGrid_total",
+                  "type": "literal",
+                  "value": "{{$item.SCBCRSE_CREDIT_HR_LOW + $item.SCBCRSE_CREDIT_HR_HIGH | number: 3}}"
+               }
+            ],
+            "label": "Calculate Total Example",
+            "loadInitially": true,
+            "model": "data_res",
+            "name": "theGrid",
+            "pageSize": 25,
+            "parameters": {},
+            "type": "grid"
+         }
+      ],
+      "name": "CalcTotalExample",
+      "title": "Calculate Total Example",
+      "type": "page"
+   },
+   "owner": null,
+   "pageRoles": [
+      {
+         "roleName": "ALLROLES",
+         "allow": true
+      }
+   ]
+}

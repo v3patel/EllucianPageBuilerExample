@@ -1,0 +1,25 @@
+{
+   "codePost": null,
+   "virtualDomainRoles": [
+      {
+         "allowGet": true,
+         "allowPost": false,
+         "allowPut": false,
+         "roleName": "ADMIN-GPBADMN",
+         "allowDelete": false
+      },
+      {
+         "allowGet": true,
+         "allowPost": false,
+         "allowPut": false,
+         "roleName": "ALLROLES",
+         "allowDelete": false
+      }
+   ],
+   "codePut": null,
+   "fileTimestamp": null,
+   "codeDelete": null,
+   "codeGet": "select rowid \"id\", spriden_id from spriden where spriden_pidm = :parm_user_pidm and spriden_change_ind is null",
+   "typeOfCode": "S",
+   "serviceName": "demoBarCode"
+}

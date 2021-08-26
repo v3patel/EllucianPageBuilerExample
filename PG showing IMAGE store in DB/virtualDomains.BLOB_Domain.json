@@ -1,0 +1,20 @@
+{
+   "owner": null,
+   "codePut": null,
+   "codeDelete": null,
+   "virtualDomainRoles": [
+      {
+         "allowDelete": false,
+         "allowPost": false,
+         "allowPut": false,
+         "roleName": "ALLROLES",
+         "allowGet": true
+      }
+   ],
+   "codeGet": "select  filename, imgfile\r\nfrom blob_test\r\n",
+   "typeOfCode": "S",
+   "fileTimestamp": null,
+   "serviceName": "BLOB_Domain",
+   "codePost": null,
+   "developerSecurity": []
+}

@@ -1,0 +1,748 @@
+{
+   "constantName": "demoRegistrationAddAuthCodeFaculty",
+   "extendsPage": {
+      "constantName": "demoPersonSearch"
+   },
+   "fileTimestamp": "2017-10-25T15:03:02Z",
+   "modelView": {
+      "baseRoot": "demoPersonSearch",
+      "deltaVersion": "1.0",
+      "deltas": {
+         "authCRN": {
+            "label": {
+               "ext": "Course Reference Number"
+            },
+            "loadInitially": {
+               "ext": true
+            },
+            "meta": {
+               "ext": {
+                  "nextSibling": "authCourseSubject",
+                  "parent": "authResultsGrid"
+               }
+            },
+            "model": {
+               "ext": "SFBAUTH_CRN"
+            },
+            "name": {
+               "ext": "authCRN"
+            },
+            "parameters": {
+               "ext": {}
+            },
+            "readonly": {
+               "ext": true
+            },
+            "required": {
+               "ext": false
+            },
+            "type": {
+               "ext": "text"
+            },
+            "validation": {
+               "ext": {}
+            }
+         },
+         "authCode": {
+            "label": {
+               "ext": "Authorization Code"
+            },
+            "loadInitially": {
+               "ext": true
+            },
+            "meta": {
+               "ext": {
+                  "nextSibling": "authStatus",
+                  "parent": "authResultsGrid"
+               }
+            },
+            "model": {
+               "ext": "SFBAUTH_AUTH_CODE"
+            },
+            "name": {
+               "ext": "authCode"
+            },
+            "parameters": {
+               "ext": {}
+            },
+            "readonly": {
+               "ext": true
+            },
+            "required": {
+               "ext": false
+            },
+            "type": {
+               "ext": "text"
+            },
+            "validation": {
+               "ext": {}
+            }
+         },
+         "authCodeForm": {
+            "label": {
+               "ext": "Auth Code Assignment"
+            },
+            "meta": {
+               "ext": {
+                  "firstChild": "authInstructions",
+                  "nextSibling": "personSearchForm",
+                  "parent": "_root"
+               }
+            },
+            "name": {
+               "ext": "authCodeForm"
+            },
+            "nextButtonLabel": {
+               "ext": "Student Search"
+            },
+            "showInitially": {
+               "ext": true
+            },
+            "type": {
+               "ext": "form"
+            }
+         },
+         "authCourseNumber": {
+            "label": {
+               "ext": "Course Number"
+            },
+            "loadInitially": {
+               "ext": true
+            },
+            "meta": {
+               "ext": {
+                  "nextSibling": "authCourseTitle",
+                  "parent": "authResultsGrid"
+               }
+            },
+            "model": {
+               "ext": "SSBSECT_CRSE_NUMB"
+            },
+            "name": {
+               "ext": "authCourseNumber"
+            },
+            "parameters": {
+               "ext": {}
+            },
+            "readonly": {
+               "ext": true
+            },
+            "required": {
+               "ext": false
+            },
+            "type": {
+               "ext": "text"
+            },
+            "validation": {
+               "ext": {}
+            }
+         },
+         "authCourseSubject": {
+            "label": {
+               "ext": "Course Subject"
+            },
+            "loadInitially": {
+               "ext": true
+            },
+            "meta": {
+               "ext": {
+                  "nextSibling": "authCourseNumber",
+                  "parent": "authResultsGrid"
+               }
+            },
+            "model": {
+               "ext": "SSBSECT_SUBJ_CODE"
+            },
+            "name": {
+               "ext": "authCourseSubject"
+            },
+            "parameters": {
+               "ext": {}
+            },
+            "readonly": {
+               "ext": true
+            },
+            "required": {
+               "ext": false
+            },
+            "type": {
+               "ext": "text"
+            },
+            "validation": {
+               "ext": {}
+            }
+         },
+         "authCourseTitle": {
+            "label": {
+               "ext": "Course Title"
+            },
+            "loadInitially": {
+               "ext": true
+            },
+            "meta": {
+               "ext": {
+                  "nextSibling": "authCode",
+                  "parent": "authResultsGrid"
+               }
+            },
+            "model": {
+               "ext": "SCBCRSE_TITLE"
+            },
+            "name": {
+               "ext": "authCourseTitle"
+            },
+            "parameters": {
+               "ext": {}
+            },
+            "readonly": {
+               "ext": true
+            },
+            "required": {
+               "ext": false
+            },
+            "type": {
+               "ext": "text"
+            },
+            "validation": {
+               "ext": {}
+            }
+         },
+         "authFirstName": {
+            "label": {
+               "ext": "First Name"
+            },
+            "loadInitially": {
+               "ext": true
+            },
+            "meta": {
+               "ext": {
+                  "nextSibling": "authLastName",
+                  "parent": "authResultsGrid"
+               }
+            },
+            "model": {
+               "ext": "SPRIDEN_FIRST_NAME"
+            },
+            "name": {
+               "ext": "authFirstName"
+            },
+            "parameters": {
+               "ext": {}
+            },
+            "readonly": {
+               "ext": true
+            },
+            "required": {
+               "ext": false
+            },
+            "type": {
+               "ext": "text"
+            },
+            "validation": {
+               "ext": {}
+            }
+         },
+         "authFlow": {
+            "activated": {
+               "ext": true
+            },
+            "meta": {
+               "ext": {
+                  "nextSibling": "authCodeForm",
+                  "parent": "_root"
+               }
+            },
+            "name": {
+               "ext": "authFlow"
+            },
+            "sequence": {
+               "ext": "authCodeForm, personSearchForm, authCodeForm"
+            },
+            "type": {
+               "ext": "flow"
+            }
+         },
+         "authInstructions": {
+            "meta": {
+               "ext": {
+                  "nextSibling": "filterBlock",
+                  "parent": "authCodeForm"
+               }
+            },
+            "name": {
+               "ext": "authInstructions"
+            },
+            "type": {
+               "ext": "literal"
+            },
+            "value": {
+               "ext": "<p>Registration Add Authorization Codes are special codes that are assigned to students that allow them to register for course sections that are no longer available for normal registration. Examples of why a course may be unavailable are the course being full or registration being closed.</p><p>This page displays any Registration Add Authorization Codes that are available for course sections where you are the instructor. Select the term to see Registration Add Authorization Codes that are available for the selected term.</p><p>To assign Authorization Codes to student, enter the Banner ID for the student(s) in the appropriate field (s) corresponding to the course(s) and Save. If you do not have the Banner ID, use the Student Search feature to search for students.</p><hr />\n<p><em>This example was created to fulfill <a href=\"https://ellucian.my.salesforce.com/ideas/viewIdea.apexp?id=087G00000004a4G\">\nIDEA-15595-Need Add Authorization Codes to appear on Faculty Class Rosters</a></em></p>\n<hr />"
+            }
+         },
+         "authLastName": {
+            "label": {
+               "ext": "Last Name"
+            },
+            "loadInitially": {
+               "ext": true
+            },
+            "meta": {
+               "ext": {
+                  "parent": "authResultsGrid"
+               }
+            },
+            "model": {
+               "ext": "SPRIDEN_LAST_NAME"
+            },
+            "name": {
+               "ext": "authLastName"
+            },
+            "parameters": {
+               "ext": {}
+            },
+            "readonly": {
+               "ext": true
+            },
+            "required": {
+               "ext": false
+            },
+            "type": {
+               "ext": "text"
+            },
+            "validation": {
+               "ext": {}
+            }
+         },
+         "authResultsGrid": {
+            "allowDelete": {
+               "ext": false
+            },
+            "allowModify": {
+               "ext": false
+            },
+            "allowNew": {
+               "ext": false
+            },
+            "allowReload": {
+               "ext": false
+            },
+            "loadInitially": {
+               "ext": true
+            },
+            "meta": {
+               "ext": {
+                  "firstChild": "authCRN",
+                  "nextSibling": "authSeparator",
+                  "parent": "authCodeForm"
+               }
+            },
+            "model": {
+               "ext": "resourceCodes"
+            },
+            "name": {
+               "ext": "authResultsGrid"
+            },
+            "onClick": {
+               "ext": ""
+            },
+            "pageSize": {
+               "ext": 5
+            },
+            "parameters": {
+               "ext": {
+                  "p_course_title": "$filterCourseTitle",
+                  "p_crn": "$filterCRN",
+                  "p_crse_numb": "$filterCourseNumber",
+                  "p_student_id": "$spridenID",
+                  "p_subj_code": "$filterCourseSubject",
+                  "p_term_code": "$filterTerm"
+               }
+            },
+            "type": {
+               "ext": "grid"
+            }
+         },
+         "authSeparator": {
+            "meta": {
+               "ext": {
+                  "parent": "authCodeForm"
+               }
+            },
+            "name": {
+               "ext": "authSeparator"
+            },
+            "type": {
+               "ext": "literal"
+            },
+            "value": {
+               "ext": "<hr />"
+            }
+         },
+         "authSpridenID": {
+            "label": {
+               "ext": "Banner ID"
+            },
+            "loadInitially": {
+               "ext": true
+            },
+            "meta": {
+               "ext": {
+                  "nextSibling": "authFirstName",
+                  "parent": "authResultsGrid"
+               }
+            },
+            "model": {
+               "ext": "SPRIDEN_ID"
+            },
+            "name": {
+               "ext": "authSpridenID"
+            },
+            "parameters": {
+               "ext": {}
+            },
+            "readonly": {
+               "ext": true
+            },
+            "required": {
+               "ext": false
+            },
+            "type": {
+               "ext": "text"
+            },
+            "validation": {
+               "ext": {}
+            }
+         },
+         "authStatus": {
+            "label": {
+               "ext": "Status"
+            },
+            "loadInitially": {
+               "ext": true
+            },
+            "meta": {
+               "ext": {
+                  "nextSibling": "authSpridenID",
+                  "parent": "authResultsGrid"
+               }
+            },
+            "model": {
+               "ext": "SFBAUTH_ACTIVE_IND"
+            },
+            "name": {
+               "ext": "authStatus"
+            },
+            "parameters": {
+               "ext": {}
+            },
+            "readonly": {
+               "ext": true
+            },
+            "required": {
+               "ext": false
+            },
+            "type": {
+               "ext": "text"
+            },
+            "validation": {
+               "ext": {}
+            }
+         },
+         "demoPersonSearch": {
+            "_name": {
+               "base": "demoPersonSearch",
+               "ext": "demoRegistrationAddAuthCodeFaculty"
+            },
+            "label": {
+               "base": "",
+               "ext": "Faculty View of Registration Add Authorization Codes"
+            },
+            "title": {
+               "base": "",
+               "ext": "Add Auth View for Faculty"
+            }
+         },
+         "filterBlock": {
+            "meta": {
+               "ext": {
+                  "firstChild": "filterTerm",
+                  "nextSibling": "authResultsGrid",
+                  "parent": "authCodeForm"
+               }
+            },
+            "name": {
+               "ext": "filterBlock"
+            },
+            "showInitially": {
+               "ext": true
+            },
+            "type": {
+               "ext": "block"
+            }
+         },
+         "filterCRN": {
+            "label": {
+               "ext": "Course Reference Number (CRN):"
+            },
+            "loadInitially": {
+               "ext": true
+            },
+            "meta": {
+               "ext": {
+                  "nextSibling": "filterCourseSubject",
+                  "parent": "filterBlock"
+               }
+            },
+            "name": {
+               "ext": "filterCRN"
+            },
+            "onUpdate": {
+               "ext": "$authResultsGrid.$load();"
+            },
+            "parameters": {
+               "ext": {}
+            },
+            "readonly": {
+               "ext": false
+            },
+            "required": {
+               "ext": false
+            },
+            "type": {
+               "ext": "text"
+            },
+            "validation": {
+               "ext": {}
+            }
+         },
+         "filterCourseNumber": {
+            "label": {
+               "ext": "Course Number:"
+            },
+            "loadInitially": {
+               "ext": true
+            },
+            "meta": {
+               "ext": {
+                  "nextSibling": "filterCourseTitle",
+                  "parent": "filterBlock"
+               }
+            },
+            "name": {
+               "ext": "filterCourseNumber"
+            },
+            "onUpdate": {
+               "ext": "$authResultsGrid.$load();"
+            },
+            "parameters": {
+               "ext": {}
+            },
+            "readonly": {
+               "ext": false
+            },
+            "required": {
+               "ext": false
+            },
+            "type": {
+               "ext": "text"
+            },
+            "validation": {
+               "ext": {}
+            }
+         },
+         "filterCourseSubject": {
+            "label": {
+               "ext": "Course Subject:"
+            },
+            "loadInitially": {
+               "ext": true
+            },
+            "meta": {
+               "ext": {
+                  "nextSibling": "filterCourseNumber",
+                  "parent": "filterBlock"
+               }
+            },
+            "name": {
+               "ext": "filterCourseSubject"
+            },
+            "onUpdate": {
+               "ext": "$authResultsGrid.$load();"
+            },
+            "parameters": {
+               "ext": {}
+            },
+            "readonly": {
+               "ext": false
+            },
+            "required": {
+               "ext": false
+            },
+            "type": {
+               "ext": "text"
+            },
+            "validation": {
+               "ext": {}
+            }
+         },
+         "filterCourseTitle": {
+            "label": {
+               "ext": "Course Title:"
+            },
+            "loadInitially": {
+               "ext": true
+            },
+            "meta": {
+               "ext": {
+                  "parent": "filterBlock"
+               }
+            },
+            "name": {
+               "ext": "filterCourseTitle"
+            },
+            "onUpdate": {
+               "ext": "$authResultsGrid.$load();"
+            },
+            "parameters": {
+               "ext": {}
+            },
+            "readonly": {
+               "ext": false
+            },
+            "required": {
+               "ext": false
+            },
+            "type": {
+               "ext": "text"
+            },
+            "validation": {
+               "ext": {}
+            }
+         },
+         "filterTerm": {
+            "label": {
+               "ext": "Term:"
+            },
+            "labelKey": {
+               "ext": "STVTERM_DESC"
+            },
+            "loadInitially": {
+               "ext": true
+            },
+            "meta": {
+               "ext": {
+                  "nextSibling": "filterCRN",
+                  "parent": "filterBlock"
+               }
+            },
+            "model": {
+               "ext": ""
+            },
+            "name": {
+               "ext": "filterTerm"
+            },
+            "onUpdate": {
+               "ext": "$authResultsGrid.$load();"
+            },
+            "placeholder": {
+               "ext": "Select a term..."
+            },
+            "required": {
+               "ext": false
+            },
+            "sourceModel": {
+               "ext": "resourceTerms"
+            },
+            "sourceParameters": {
+               "ext": {}
+            },
+            "type": {
+               "ext": "select"
+            },
+            "valueKey": {
+               "ext": "STVTERM_CODE"
+            }
+         },
+         "personSearchForm": {
+            "nextButtonLabel": {
+               "base": "",
+               "ext": "Return to Assignment"
+            }
+         },
+         "resourceCodes": {
+            "meta": {
+               "ext": {
+                  "nextSibling": "scriptCopyToClipboard",
+                  "parent": "_root"
+               }
+            },
+            "name": {
+               "ext": "resourceCodes"
+            },
+            "resource": {
+               "ext": "virtualDomains.demoRegistrationAddAuthCodeFaculty-Codes"
+            },
+            "staticData": {
+               "ext": []
+            },
+            "type": {
+               "ext": "resource"
+            }
+         },
+         "resourcePersonSearch": {
+            "meta": {
+               "base": {
+                  "nextSibling": "scriptCopyToClipboard",
+                  "parent": "_root"
+               },
+               "ext": {
+                  "nextSibling": "resourceTerms",
+                  "parent": "_root"
+               }
+            }
+         },
+         "resourceTerms": {
+            "meta": {
+               "ext": {
+                  "nextSibling": "resourceCodes",
+                  "parent": "_root"
+               }
+            },
+            "name": {
+               "ext": "resourceTerms"
+            },
+            "resource": {
+               "ext": "virtualDomains.demoRegistrationAddAuthCodeFaculty-Terms"
+            },
+            "staticData": {
+               "ext": []
+            },
+            "type": {
+               "ext": "resource"
+            }
+         },
+         "scriptCopyToClipboard": {
+            "meta": {
+               "base": {
+                  "nextSibling": "personSearchForm",
+                  "parent": "_root"
+               },
+               "ext": {
+                  "nextSibling": "authFlow",
+                  "parent": "_root"
+               }
+            }
+         }
+      }
+   },
+   "pageRoles": [
+      {
+         "roleName": "ADMIN-GPBADMN",
+         "allow": true
+      },
+      {
+         "roleName": "ALLROLES",
+         "allow": true
+      }
+   ]
+}

@@ -1,0 +1,39 @@
+{
+   "constantName": "PROCEDURE_EXAMPLE",
+   "extendsPage": null,
+   "fileTimestamp": "2018-10-24T20:11:36Z",
+   "modelView": {
+      "components": [
+         {
+            "name": "ProcedureWrapper",
+            "resource": "virtualDomains.TH_GURDBUG_PROC",
+            "staticData": [],
+            "type": "resource"
+         },
+         {
+            "loadInitially": true,
+            "name": "dataText",
+            "onUpdate": "",
+            "parameters": {},
+            "readonly": false,
+            "required": false,
+            "type": "text",
+            "validation": {}
+         },
+         {
+            "label": "Submit",
+            "name": "theBtn",
+            "onClick": "console.log(\"Button clicked\");\nconsole.log($dataText);\n$ProcedureWrapper.$post({thedata: $dataText});",
+            "type": "button"
+         }
+      ],
+      "name": "PROCEDUREEXAMPLE",
+      "type": "page"
+   },
+   "pageRoles": [
+      {
+         "roleName": "ALLROLES",
+         "allow": true
+      }
+   ]
+}

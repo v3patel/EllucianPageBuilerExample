@@ -1,0 +1,25 @@
+{
+   "codePost": null,
+   "virtualDomainRoles": [
+      {
+         "allowGet": true,
+         "allowPost": false,
+         "allowPut": false,
+         "roleName": "ADMIN-GPBADMN",
+         "allowDelete": false
+      },
+      {
+         "allowGet": true,
+         "allowPost": false,
+         "allowPut": false,
+         "roleName": "ALLROLES",
+         "allowDelete": false
+      }
+   ],
+   "codePut": null,
+   "fileTimestamp": null,
+   "codeDelete": null,
+   "codeGet": "select \r\n    a.rowid \"id\",\r\n    b.ssbsect_ptrm_code,\r\n    b.ssbsect_subj_code,\r\n    b.ssbsect_crse_numb,\r\n    c.scbcrse_title,\r\n    a.sfbauth_term_code, \r\n    a.sfbauth_crn, \r\n    a.sfbauth_auth_cde, \r\n    a.sfbauth_pidm,\r\n    CASE a.sfbauth_active_ind WHEN 'Y' THEN 'Active' ELSE 'Inactive' END sfbauth_active_ind, \r\n    TO_CHAR(a.sfbauth_activity_date, 'mm/dd/yyyy') sfbauth_activity_date,\r\n    TO_CHAR(a.sfbauth_generate_date, 'mm/dd/yyyy') sfbauth_generate_date\r\nfrom sfbauth a\r\n    join ssbsect b on a.sfbauth_term_code = b.ssbsect_term_code and a.sfbauth_crn = b.ssbsect_crn\r\n    join scbcrse c on c.scbcrse_subj_code = b.ssbsect_subj_code and c.scbcrse_crse_numb = b.ssbsect_crse_numb and c.scbcrse_eff_term < :p_term_code\r\nwhere a.sfbauth_term_code = :p_term_code\r\n    and a.sfbauth_pidm = :parm_user_pidm",
+   "typeOfCode": "S",
+   "serviceName": "demoRegistrationAddAuthCodeSS-Codes"
+}

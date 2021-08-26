@@ -1,0 +1,53 @@
+{
+   "constantName": "demoBarCode",
+   "extendsPage": null,
+   "fileTimestamp": "2018-07-18T15:29:51Z",
+   "modelView": {
+      "components": [
+         {
+            "name": "personID",
+            "resource": "virtualDomains.demoBarCode",
+            "staticData": [],
+            "type": "resource"
+         },
+         {
+            "name": "barCode",
+            "type": "literal",
+            "value": "<div><svg id=\"barcode\"></svg></div>\n\n<div id=\"id_photo\"></div>"
+         },
+         {
+            "name": "barCodeLibrary",
+            "type": "literal",
+            "value": "<script type=\"text/javascript\" src=\"https://cdn.jsdelivr.net/jsbarcode/3.6.0/JsBarcode.all.min.js\"></script>\n<script type=\"text/javascript\">\nconst id_base_url = '[Insert base URL here]';\n</script>"
+         },
+         {
+            "allowDelete": false,
+            "allowModify": false,
+            "allowNew": false,
+            "allowReload": false,
+            "components": [],
+            "loadInitially": true,
+            "model": "personID",
+            "name": "barCodeBlock",
+            "onLoad": "function UrlExists(url)\n{\n    var http = new XMLHttpRequest();\n    http.open('HEAD', url, false);\n    http.send();\n    return http.status!=404;\n}\n\n$barCodeBlock.$data.forEach(function(element) {\n  console.log(element.SPRIDEN_ID);\n  JsBarcode(\"#barcode\", element.SPRIDEN_ID);\n\n  if (UrlExists(id_base_url + element.SPRIDEN_ID + '.jpg')) {\n    document.getElementById(\"id_photo\").innerHTML = '<img src=\"' + id_base_url + element.SPRIDEN_ID + '.jpg\" />';\n  } else if (UrlExists(id_base_url + element.SPRIDEN_ID + '.JPG')) {\n        document.getElementById(\"id_photo\").innerHTML = '<img src=\"' + id_base_url + element.SPRIDEN_ID + '.JPG\" />';\n  } else {\n   document.getElementById(\"id_photo\").innerHTML = '<p>No photo available.</p>';\n  }\n});",
+            "pageSize": 5,
+            "parameters": {},
+            "type": "detail"
+         }
+      ],
+      "label": "Institution ID",
+      "name": "demoBarCode",
+      "title": "Institution ID",
+      "type": "page"
+   },
+   "pageRoles": [
+      {
+         "roleName": "ADMIN-GPBADMN",
+         "allow": true
+      },
+      {
+         "roleName": "ALLROLES",
+         "allow": true
+      }
+   ]
+}

@@ -1,0 +1,20 @@
+{
+   "owner": null,
+   "codePut": "BEGIN\r\n   APPSTATE_EMERG.P_UpdateEmergInfo(pidm        => :parm_user_pidm,\r\n                                    areacode    => :AREA_CODE,\r\n                                    numberphone => :PHONE_NUMBER,\r\n                                    emergType   => 'V');\r\nEND;",
+   "codeDelete": "begin\r\n raise_application_error(-20001,'Called delete on voice');\r\nend; ",
+   "virtualDomainRoles": [
+      {
+         "allowDelete": false,
+         "allowPost": false,
+         "allowPut": true,
+         "roleName": "ALLROLES",
+         "allowGet": true
+      }
+   ],
+   "codeGet": "SELECT a.spremrg_phone_area AS AREA_CODE,\r\n       a.spremrg_phone_number AS PHONE_NUMBER,\r\n       nvl(a.spremrg_priority, 0) AS PRIORITY,\r\n       b.spriden_last_name AS LAST_NAME,\r\n       b.spriden_first_name AS FIRST_NAME\r\n  FROM spriden b\r\n  LEFT OUTER JOIN spremrg a\r\n    ON a.spremrg_pidm = b.spriden_pidm\r\n   AND a.spremrg_relt_code = 'V'\r\n   AND a.spremrg_priority =\r\n       (SELECT MAX(b.spremrg_priority)\r\n          FROM spremrg b\r\n         WHERE b.spremrg_pidm = a.spremrg_pidm\r\n           AND b.spremrg_relt_code = a.spremrg_relt_code)\r\n WHERE b.spriden_pidm = :parm_user_pidm\r\n   AND b.spriden_change_ind IS NULL",
+   "typeOfCode": "S",
+   "fileTimestamp": null,
+   "serviceName": "AppStateEmergencyVoice",
+   "codePost": "begin\r\n raise_application_error(-20001,'Called update on voice');\r\nend;",
+   "developerSecurity": []
+}

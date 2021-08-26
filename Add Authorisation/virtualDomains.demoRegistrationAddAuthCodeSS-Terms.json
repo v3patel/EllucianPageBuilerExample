@@ -1,0 +1,25 @@
+{
+   "codePost": null,
+   "virtualDomainRoles": [
+      {
+         "allowGet": true,
+         "allowPost": false,
+         "allowPut": false,
+         "roleName": "ALLROLES",
+         "allowDelete": false
+      },
+      {
+         "allowGet": true,
+         "allowPost": false,
+         "allowPut": false,
+         "roleName": "ADMIN-GPBADMN",
+         "allowDelete": false
+      }
+   ],
+   "codePut": null,
+   "fileTimestamp": null,
+   "codeDelete": null,
+   "codeGet": "select distinct(t.rowid) \"id\", t.stvterm_code, t.stvterm_desc\r\nfrom stvterm t \r\n    join sfbauth a on t.stvterm_code = a.sfbauth_term_code\r\nwhere a.sfbauth_pidm = :parm_user_pidm",
+   "typeOfCode": "S",
+   "serviceName": "demoRegistrationAddAuthCodeSS-Terms"
+}

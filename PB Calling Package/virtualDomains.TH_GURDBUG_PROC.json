@@ -1,0 +1,18 @@
+{
+   "codePut": "declare\r\nbegin\r\nP_BAN_DEBUG('PageBuilder',nvl(:thedata,'NULL'));\r\nend;",
+   "codeDelete": null,
+   "virtualDomainRoles": [
+      {
+         "allowDelete": true,
+         "allowPost": true,
+         "allowPut": true,
+         "roleName": "ALLROLES",
+         "allowGet": true
+      }
+   ],
+   "codeGet": "select dummy \"thedata\" from dual",
+   "typeOfCode": "S",
+   "fileTimestamp": null,
+   "serviceName": "TH_GURDBUG_PROC",
+   "codePost": "declare\r\nbegin\r\nP_BAN_DEBUG('PageBuilder',nvl(:thedata,'NULL'));\r\nend;"
+}

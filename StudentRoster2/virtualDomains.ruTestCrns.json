@@ -1,0 +1,18 @@
+{
+   "codePost": null,
+   "virtualDomainRoles": [
+      {
+         "allowGet": true,
+         "allowPost": false,
+         "allowPut": false,
+         "roleName": "ADMIN-GPBADMN",
+         "allowDelete": false
+      }
+   ],
+   "codePut": null,
+   "fileTimestamp": null,
+   "codeDelete": null,
+   "codeGet": "select rowidtochar(t.rowid) \"ID\", ssbsect_crn \"CRN\",INITCAP(NVL(SSBSECT_CRSE_TITLE,SCBCRSE_TITLE))||' ('||SSBSECT_CRN||'|'||SSBSECT_SUBJ_CODE||'|'||SSBSECT_CRSE_NUMB||')' \"TITLE\"\r\n, ssbsect_term_code\r\nfrom ssbsect t, scbcrse s\r\nwhere ssbsect_term_code = :p_term_code\r\nand   ssbsect_subj_code = scbcrse_subj_code\r\nand   ssbsect_crse_numb = scbcrse_crse_numb\r\nand   scbcrse_eff_term = (select max(scbcrse_eff_term)\r\n                            from scbcrse\r\n                           where scbcrse_subj_code = s.scbcrse_subj_code\r\n                             and scbcrse_crse_numb = s.scbcrse_crse_numb\r\n                             and scbcrse_eff_term <= t.ssbsect_term_code)\r\nand exists (select 1\r\n              from sfrstcr   \r\n             where sfrstcr_term_code = ssbsect_term_code\r\n               and sfrstcr_crn = ssbsect_crn) \r\norder by TITLE",
+   "typeOfCode": "S",
+   "serviceName": "ruTestCrns"
+}

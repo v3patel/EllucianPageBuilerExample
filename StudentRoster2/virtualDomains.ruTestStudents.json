@@ -1,0 +1,18 @@
+{
+   "codePost": null,
+   "virtualDomainRoles": [
+      {
+         "allowGet": true,
+         "allowPost": false,
+         "allowPut": false,
+         "roleName": "ADMIN-GPBADMN",
+         "allowDelete": false
+      }
+   ],
+   "codePut": null,
+   "fileTimestamp": null,
+   "codeDelete": null,
+   "codeGet": "select rowidtochar(s.rowid) \"ID\",  f_getspridenid(sfrstcr_pidm) \"SPRIDEN_ID\", f_format_name(sfrstcr_pidm,'LFMI') \"STUDENT\"            from sfrstcr s\r\nwhere sfrstcr_crn like :p_crn\r\nand sfrstcr_term_code like :p_term_code\r\norder by student\r\n",
+   "typeOfCode": "S",
+   "serviceName": "ruTestStudents"
+}

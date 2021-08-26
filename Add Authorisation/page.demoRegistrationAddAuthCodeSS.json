@@ -1,0 +1,193 @@
+{
+   "constantName": "demoRegistrationAddAuthCodeSS",
+   "extendsPage": null,
+   "fileTimestamp": "2017-10-25T15:02:52Z",
+   "modelView": {
+      "components": [
+         {
+            "name": "resourceTerms",
+            "resource": "virtualDomains.demoRegistrationAddAuthCodeSS-Terms",
+            "staticData": [],
+            "type": "resource"
+         },
+         {
+            "name": "resourceCodes",
+            "resource": "virtualDomains.demoRegistrationAddAuthCodeSS-Codes",
+            "staticData": [],
+            "type": "resource"
+         },
+         {
+            "name": "scriptCopyToClipboard",
+            "type": "literal",
+            "value": "<script>\nfunction copyToClipboard(text) {\n \nif (window.clipboardData && window.clipboardData.setData) {\n // IE specific code path to prevent textarea being shown while dialog is visible.\n \nreturn clipboardData.setData(\"Text\", text); \n \n} \n \nelse if (document.queryCommandSupported && document.queryCommandSupported(\"copy\")) {\n        var textarea = document.createElement(\"textarea\");\n        textarea.textContent = text;\n        textarea.style.position = \"fixed\";  // Prevent scrolling to bottom of page in MS Edge.\n        document.body.appendChild(textarea);\n        textarea.select();\n        try {\n            return document.execCommand(\"copy\"); // Security exception may be thrown by some browsers.\n        } catch (ex) {\n            console.warn(\"Copy to clipboard failed.\", ex);\n            return false;\n        } finally {\n            document.body.removeChild(textarea);\n        }\n    }\n}\n</script>"
+         },
+         {
+            "components": [
+               {
+                  "label": "Instructions",
+                  "name": "instructions",
+                  "type": "literal",
+                  "value": "<p>This page displays any Registration Add Authorization Codes that have been assigned to you. Select the term to see Registration Add Authorization Codes that are available for the selected term. Click to copy the Authorization Code to the clipboard, and use it within Registration to register for the specified course section.</p> \n<p>Registration Add Authorization Codes are special codes that are assigned to students that allow them to register for course sections that are no longer available for normal registration. Examples of why a course may be unavailable are the course being full or registration being closed.</p>\n<p><em>This example was created to fulfill <a href=\"https://ellucian.my.salesforce.com/ideas/viewIdea.apexp?id=087G00000004a4G\">\nIDEA-15595-Need Add Authorization Codes to appear on Faculty Class Rosters</a></em></p>\n<hr />"
+               }
+            ],
+            "name": "instructionBlock",
+            "showInitially": true,
+            "type": "block"
+         },
+         {
+            "components": [
+               {
+                  "label": "Term:",
+                  "labelKey": "STVTERM_DESC",
+                  "loadInitially": true,
+                  "name": "filterTerm",
+                  "onUpdate": "$resultsGrid.$load();",
+                  "placeholder": "Select a term....",
+                  "required": false,
+                  "sourceModel": "resourceTerms",
+                  "sourceParameters": {},
+                  "type": "select",
+                  "valueKey": "STVTERM_CODE"
+               }
+            ],
+            "label": "Filters:",
+            "name": "filterBlock",
+            "showInitially": true,
+            "type": "block"
+         },
+         {
+            "components": [
+               {
+                  "allowDelete": false,
+                  "allowModify": false,
+                  "allowNew": false,
+                  "allowReload": false,
+                  "components": [
+                     {
+                        "label": "Course Reference Number",
+                        "loadInitially": true,
+                        "model": "SFBAUTH_CRN",
+                        "name": "crn",
+                        "parameters": {},
+                        "readonly": true,
+                        "required": false,
+                        "type": "text",
+                        "validation": {}
+                     },
+                     {
+                        "documentation": "",
+                        "label": "Course Subject",
+                        "loadInitially": true,
+                        "model": "SSBSECT_SUBJ_CODE",
+                        "name": "subject",
+                        "parameters": {},
+                        "readonly": true,
+                        "required": false,
+                        "type": "text",
+                        "validation": {}
+                     },
+                     {
+                        "documentation": "",
+                        "label": "Course Number",
+                        "loadInitially": true,
+                        "model": "SSBSECT_CRSE_NUMB",
+                        "name": "number",
+                        "parameters": {},
+                        "readonly": true,
+                        "required": false,
+                        "type": "text",
+                        "validation": {}
+                     },
+                     {
+                        "label": "Course Title",
+                        "loadInitially": true,
+                        "model": "SCBCRSE_TITLE",
+                        "name": "courseTitle",
+                        "parameters": {},
+                        "readonly": true,
+                        "required": false,
+                        "type": "text",
+                        "validation": {}
+                     },
+                     {
+                        "label": "Authorization Code",
+                        "loadInitially": true,
+                        "model": "SFBAUTH_AUTH_CDE",
+                        "name": "authCode",
+                        "parameters": {},
+                        "readonly": true,
+                        "required": false,
+                        "type": "text",
+                        "validation": {}
+                     },
+                     {
+                        "label": "Status",
+                        "loadInitially": true,
+                        "model": "SFBAUTH_ACTIVE_IND",
+                        "name": "status",
+                        "parameters": {},
+                        "readonly": true,
+                        "required": false,
+                        "type": "text",
+                        "validation": {}
+                     },
+                     {
+                        "label": "Activity Date",
+                        "loadInitially": true,
+                        "model": "SFBAUTH_ACTIVITY_DATE",
+                        "name": "activityDate",
+                        "parameters": {},
+                        "readonly": true,
+                        "required": false,
+                        "type": "text",
+                        "validation": {}
+                     },
+                     {
+                        "label": "Code Generation Date",
+                        "loadInitially": true,
+                        "model": "SFBAUTH_GENERATE_DATE",
+                        "name": "generationDate",
+                        "parameters": {},
+                        "readonly": true,
+                        "required": false,
+                        "type": "text",
+                        "validation": {}
+                     }
+                  ],
+                  "label": "Add Authorization Codes for Selected Term:",
+                  "loadInitially": false,
+                  "model": "resourceCodes",
+                  "name": "resultsGrid",
+                  "onClick": "copyToClipboard(currentSelection.SFBAUTH_AUTH_CDE);\nalert(currentSelection.SFBAUTH_AUTH_CDE + \" copied to clipboard\", {flash: true});",
+                  "onLoad": "$resultsBlock.$show()",
+                  "pageSize": 5,
+                  "parameters": {
+                     "p_crn": "$filterCRN",
+                     "p_crse_numb": "$filterCourseNumber",
+                     "p_subj_code": "$filterSubjectCode",
+                     "p_term_code": "$filterTerm"
+                  },
+                  "type": "grid"
+               }
+            ],
+            "name": "resultsBlock",
+            "showInitially": true,
+            "type": "block"
+         }
+      ],
+      "label": "Student View of Registration Add Authorization Codes",
+      "name": "demoRegistrationAddAuthCodeSS",
+      "title": "Add Authorization Code Student View",
+      "type": "page"
+   },
+   "pageRoles": [
+      {
+         "roleName": "ADMIN-GPBADMN",
+         "allow": true
+      },
+      {
+         "roleName": "ALLROLES",
+         "allow": true
+      }
+   ]
+}

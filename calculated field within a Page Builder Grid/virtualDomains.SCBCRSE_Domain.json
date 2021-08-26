@@ -1,0 +1,20 @@
+{
+   "owner": null,
+   "codePut": null,
+   "codeDelete": null,
+   "virtualDomainRoles": [
+      {
+         "allowDelete": false,
+         "allowPost": false,
+         "allowPut": false,
+         "roleName": "ALLROLES",
+         "allowGet": true
+      }
+   ],
+   "codeGet": "select distinct SCBCRSE_CREDIT_HR_LOW,\r\n SCBCRSE_CREDIT_HR_HIGH\r\nfrom scbcrse\r\nwhere SCBCRSE_CREDIT_HR_LOW > 0\r\nand SCBCRSE_CREDIT_HR_HIGH > 0\r\n",
+   "typeOfCode": "S",
+   "fileTimestamp": null,
+   "serviceName": "SCBCRSE_Domain",
+   "codePost": null,
+   "developerSecurity": []
+}
