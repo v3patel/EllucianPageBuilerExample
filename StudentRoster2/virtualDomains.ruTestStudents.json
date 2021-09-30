@@ -1,18 +1,27 @@
 {
-   "codePost": null,
+   "owner": null,
+   "codePut": null,
+   "codeDelete": null,
    "virtualDomainRoles": [
       {
-         "allowGet": true,
+         "allowDelete": false,
+         "allowPost": false,
+         "allowPut": false,
+         "roleName": "ALLROLES",
+         "allowGet": true
+      },
+      {
+         "allowDelete": false,
          "allowPost": false,
          "allowPut": false,
          "roleName": "ADMIN-GPBADMN",
-         "allowDelete": false
+         "allowGet": true
       }
    ],
-   "codePut": null,
-   "fileTimestamp": null,
-   "codeDelete": null,
-   "codeGet": "select rowidtochar(s.rowid) \"ID\",  f_getspridenid(sfrstcr_pidm) \"SPRIDEN_ID\", f_format_name(sfrstcr_pidm,'LFMI') \"STUDENT\"            from sfrstcr s\r\nwhere sfrstcr_crn like :p_crn\r\nand sfrstcr_term_code like :p_term_code\r\norder by student\r\n",
+   "codeGet": "select rowidtochar(s.rowid) \"ID\",  f_getspridenid(sfrstcr_pidm) \"SPRIDEN_ID\", f_format_name(sfrstcr_pidm,'LFMI') \"STUDENT\"            from sfrstcr s\r\nwhere 1 = 1\r\n and  sfrstcr_crn like :p_cno\r\nand sfrstcr_term_code like :p_term_code\r\norder by student",
    "typeOfCode": "S",
-   "serviceName": "ruTestStudents"
+   "fileTimestamp": "2021-08-25T21:32:11Z",
+   "serviceName": "ruTestStudents",
+   "codePost": null,
+   "developerSecurity": []
 }

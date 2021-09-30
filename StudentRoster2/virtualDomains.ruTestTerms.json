@@ -1,18 +1,20 @@
 {
-   "codePost": null,
+   "owner": null,
+   "codePut": null,
+   "codeDelete": null,
    "virtualDomainRoles": [
       {
-         "allowGet": true,
+         "allowDelete": false,
          "allowPost": false,
          "allowPut": false,
          "roleName": "ADMIN-GPBADMN",
-         "allowDelete": false
+         "allowGet": true
       }
    ],
-   "codePut": null,
-   "fileTimestamp": null,
-   "codeDelete": null,
-   "codeGet": "select rowidtochar(rowid) \"ID\", STVTERM_CODE, STVTERM_DESC\r\nfrom stvterm\r\nwhere (stvterm_code like '2018%'\r\nor stvterm_code like '2019%')\r\nand stvterm_code <= ruca.get_current_term\r\norder by STVTERM_CODE desc",
+   "codeGet": "select rowidtochar(rowid) \"ID\", STVTERM_CODE, STVTERM_DESC\r\nfrom stvterm\r\nwhere (stvterm_code like '2020%'\r\nor stvterm_code like '2021%')\r\norder by STVTERM_CODE desc",
    "typeOfCode": "S",
-   "serviceName": "ruTestTerms"
+   "fileTimestamp": "2021-08-25T21:32:11Z",
+   "serviceName": "ruTestTerms",
+   "codePost": null,
+   "developerSecurity": []
 }

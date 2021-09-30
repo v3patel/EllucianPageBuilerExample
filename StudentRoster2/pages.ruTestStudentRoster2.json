@@ -1,114 +1,116 @@
 {
    "constantName": "ruTestStudentRoster2",
+   "developerSecurity": [],
    "extendsPage": null,
-   "fileTimestamp": "2018-10-19T15:47:15Z",
+   "fileTimestamp": "2021-08-26T15:58:02Z",
    "modelView": {
       "components": [
          {
-            "name": "resterms",
             "resource": "virtualDomains.ruTestTerms",
-            "staticData": [],
-            "type": "resource"
+            "name": "resterms",
+            "type": "resource",
+            "staticData": []
          },
          {
-            "name": "rescrns",
             "resource": "virtualDomains.ruTestCrns",
+            "name": "rescrns",
+            "type": "resource",
             "staticData": [
                {}
-            ],
-            "type": "resource"
+            ]
          },
          {
-            "name": "resstudents",
             "resource": "virtualDomains.ruTestStudents",
-            "staticData": [],
-            "type": "resource"
+            "name": "resstudents",
+            "type": "resource",
+            "staticData": []
          },
          {
             "components": [
                {
-                  "label": "Term",
-                  "labelKey": "STVTERM_DESC",
-                  "loadInitially": true,
-                  "model": "",
-                  "name": "filterTerm",
-                  "onUpdate": "$filterCrn.$load();",
-                  "placeholder": "Select term...",
-                  "required": false,
-                  "sourceModel": "resterms",
                   "sourceParameters": {},
+                  "name": "filterTerm",
+                  "model": "",
+                  "sourceModel": "resterms",
+                  "label": "Term",
+                  "loadInitially": true,
+                  "placeholder": "Select term...",
+                  "labelKey": "STVTERM_DESC",
                   "type": "select",
-                  "valueKey": "STVTERM_CODE"
+                  "valueKey": "STVTERM_CODE",
+                  "onUpdate": "$filterCrn.$load();",
+                  "required": false
                },
                {
-                  "label": "CRN",
-                  "labelKey": "TITLE",
-                  "loadInitially": false,
-                  "name": "filterCrn",
-                  "onUpdate": "$gridStudents.$load();",
-                  "placeholder": "Select a CRN...",
-                  "required": false,
-                  "sourceModel": "rescrns",
                   "sourceParameters": {
                      "p_term_code": "$filterTerm"
                   },
+                  "name": "filterCrn",
+                  "sourceModel": "rescrns",
+                  "label": "CRN",
+                  "loadInitially": false,
+                  "placeholder": "Select a CRN...",
+                  "labelKey": "TITLE",
                   "type": "select",
-                  "valueKey": "CRN"
+                  "valueKey": "CRN",
+                  "onUpdate": "$gridStudents.$load();",
+                  "required": false
                }
             ],
-            "label": "Filter",
             "name": "Keyblock",
             "showInitially": true,
+            "label": "Filter",
             "type": "block"
          },
          {
             "allowDelete": false,
-            "allowModify": false,
-            "allowNew": false,
-            "allowReload": true,
             "components": [
                {
+                  "readonly": false,
+                  "name": "studentID",
+                  "model": "SPRIDEN_ID",
                   "label": "Banner ID",
                   "loadInitially": true,
-                  "model": "SPRIDEN_ID",
-                  "name": "studentID",
-                  "parameters": {},
-                  "readonly": false,
-                  "required": false,
                   "type": "text",
+                  "parameters": {},
+                  "required": false,
                   "validation": {}
                },
                {
+                  "readonly": false,
+                  "name": "studentName",
+                  "model": "STUDENT",
                   "label": "Name",
                   "loadInitially": true,
-                  "model": "STUDENT",
-                  "name": "studentName",
-                  "parameters": {},
-                  "readonly": false,
-                  "required": false,
                   "type": "text",
+                  "parameters": {},
+                  "required": false,
                   "validation": {}
                }
             ],
+            "allowNew": false,
+            "pageSize": 10,
             "label": "My Students",
             "loadInitially": false,
-            "model": "resstudents",
-            "name": "gridStudents",
-            "pageSize": 10,
-            "parameters": {
-               "p_crn": "$filterCrn",
-               "p_term_code": "$filterTerm"
-            },
+            "type": "grid",
             "refreshDataLabel": "Refresh",
-            "type": "grid"
+            "name": "gridStudents",
+            "allowModify": false,
+            "model": "resstudents",
+            "allowReload": true,
+            "parameters": {
+               "p_cno": "$filterCrn",
+               "p_term_code": "$filterTerm"
+            }
          }
       ],
-      "label": "My Student Roster",
       "name": "ruTestStudentRoster2",
       "style": "ruDefault",
+      "label": "My Student Roster",
       "title": "My Student Roster",
       "type": "page"
    },
+   "owner": null,
    "pageRoles": [
       {
          "roleName": "ADMIN-GPBADMN",
