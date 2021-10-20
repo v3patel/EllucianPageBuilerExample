@@ -1,0 +1,18 @@
+{
+   "codePut": null,
+   "codeDelete": null,
+   "virtualDomainRoles": [
+      {
+         "allowDelete": false,
+         "allowPost": false,
+         "allowPut": false,
+         "roleName": "GUEST",
+         "allowGet": true
+      }
+   ],
+   "codeGet": "select 'Red' name, 'Red' value from dual\r\nunion\r\nselect 'Blue' name, 'Blue' value from dual\r\nunion\r\nselect 'Green' name, 'Green' value from dual\r\nunion\r\nselect 'Yellow' name, 'Yellow' value from dual\r\nunion\r\nselect 'White' name, 'White' value from dual\r\nunion\r\nselect 'Black' name, 'Black' value from dual",
+   "typeOfCode": "S",
+   "fileTimestamp": null,
+   "serviceName": "colorPickerData",
+   "codePost": null
+}

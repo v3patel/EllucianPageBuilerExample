@@ -1,0 +1,68 @@
+{
+   "constantName": "testparams",
+   "extendsPage": null,
+   "fileTimestamp": "2019-05-25T12:40:31Z",
+   "modelView": {
+      "components": [
+         {
+            "name": "colorPicker",
+            "resource": "virtualDomains.colorPickerData",
+            "staticData": [],
+            "type": "resource"
+         },
+         {
+            "components": [
+               {
+                  "components": [
+                     {
+                        "label": "Choose color:",
+                        "labelKey": "NAME",
+                        "loadInitially": true,
+                        "name": "colorValueOut",
+                        "onLoad": "console.log('colorValueOut load event');",
+                        "onUpdate": "console.log('colorValueOut update event')",
+                        "placeholder": "Select ...",
+                        "required": false,
+                        "sourceModel": "colorPicker",
+                        "sourceParameters": {},
+                        "type": "select",
+                        "valueKey": "VALUE"
+                     }
+                  ],
+                  "name": "colorForm",
+                  "nextButtonLabel": "",
+                  "showInitially": true,
+                  "submit": "document.location=$$contextRoot  + 'customPage/page/testparams?color=' + btoa(btoa($colorValueOut));",
+                  "submitLabel": "Submit",
+                  "type": "form"
+               },
+               {
+                  "label": "Passed color:",
+                  "labelKey": "NAME",
+                  "loadInitially": true,
+                  "name": "colorValueIn",
+                  "onLoad": "if ($$params.color) {  \nconsole.log('decode param');\n$colorValueIn = atob(atob($$params.color)); \n}",
+                  "required": false,
+                  "sourceModel": "colorPicker",
+                  "sourceParameters": {},
+                  "type": "select",
+                  "value": "",
+                  "valueKey": "VALUE"
+               }
+            ],
+            "label": "Test for passing encoded parameter to page.",
+            "name": "colorBlock",
+            "showInitially": true,
+            "type": "block"
+         }
+      ],
+      "name": "testparams",
+      "type": "page"
+   },
+   "pageRoles": [
+      {
+         "roleName": "ALLROLES",
+         "allow": true
+      }
+   ]
+}

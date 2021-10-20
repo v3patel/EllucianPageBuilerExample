@@ -1,0 +1,20 @@
+{
+   "owner": null,
+   "codePut": null,
+   "codeDelete": null,
+   "virtualDomainRoles": [
+      {
+         "allowDelete": false,
+         "allowPost": false,
+         "allowPut": false,
+         "roleName": "ADMIN-GPBADMN",
+         "allowGet": true
+      }
+   ],
+   "codeGet": "select * from (select 1 col1, 'A' col2 from dual\r\nunion\r\nselect 1 col1, 'B' col2 from dual\r\nunion\r\nselect 1 col1, 'C' col2 from dual\r\nunion\r\nselect 2 col1, 'X' col2 from dual\r\nunion\r\nselect 2 col1, 'Y' col2 from dual\r\nunion\r\nselect 2 col1, 'Z' col2 from dual)\r\nwhere (col1 = :col1 or :col1 is null )",
+   "typeOfCode": "S",
+   "fileTimestamp": null,
+   "serviceName": "X_DEMO_LOV",
+   "codePost": null,
+   "developerSecurity": []
+}

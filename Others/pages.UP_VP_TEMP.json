@@ -1,0 +1,211 @@
+{
+   "constantName": "UP_VP_TEMP",
+   "developerSecurity": [],
+   "extendsPage": null,
+   "fileTimestamp": "2021-10-05T14:00:49Z",
+   "modelView": {
+      "components": [
+         {
+            "resource": "virtualDomains.X_DEMO_LOV",
+            "name": "DEMO_LOV",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "components": [
+               {
+                  "allowDelete": false,
+                  "components": [
+                     {
+                        "readonly": false,
+                        "name": "BL_GRID_COl1",
+                        "model": "COL1",
+                        "label": "Column 1",
+                        "loadInitially": true,
+                        "type": "text",
+                        "parameters": {},
+                        "validation": {},
+                        "required": false
+                     },
+                     {
+                        "readonly": false,
+                        "name": "BL_GRID_col2",
+                        "model": "COL2",
+                        "label": "Column 2",
+                        "loadInitially": true,
+                        "type": "text",
+                        "parameters": {},
+                        "validation": {},
+                        "required": false
+                     },
+                     {
+                        "sourceParameters": {},
+                        "name": "BL_GRID_Select",
+                        "sourceModel": "DEMO_LOV",
+                        "model": "COl2",
+                        "label": "Select",
+                        "loadInitially": true,
+                        "type": "select",
+                        "labelKey": "COL1",
+                        "valueKey": "COL2",
+                        "required": false
+                     },
+                     {
+                        "name": "BL_GRID_var_col1",
+                        "label": "Variable Col1",
+                        "type": "literal",
+                        "value": "{{$item.COL1}} - {{row.entity.COl1}} -"
+                     }
+                  ],
+                  "allowNew": false,
+                  "name": "BL_GRID_child_1",
+                  "allowModify": false,
+                  "pageSize": 6,
+                  "model": "DEMO_LOV",
+                  "allowReload": false,
+                  "loadInitially": true,
+                  "type": "grid",
+                  "parameters": {}
+               }
+            ],
+            "name": "BL_GRID",
+            "showInitially": true,
+            "label": "Block with grid",
+            "type": "block"
+         },
+         {
+            "components": [
+               {
+                  "allowDelete": false,
+                  "components": [
+                     {
+                        "readonly": false,
+                        "name": "BL_HTML_COl1",
+                        "model": "COL1",
+                        "label": "Column 1",
+                        "loadInitially": true,
+                        "type": "text",
+                        "parameters": {},
+                        "validation": {},
+                        "required": false
+                     },
+                     {
+                        "readonly": false,
+                        "name": "BL_HTML_col2",
+                        "model": "COL2",
+                        "label": "Column 2",
+                        "loadInitially": true,
+                        "type": "text",
+                        "parameters": {},
+                        "validation": {},
+                        "required": false
+                     },
+                     {
+                        "sourceParameters": {},
+                        "name": "BL_HTML_Select",
+                        "sourceModel": "DEMO_LOV",
+                        "model": "COl1",
+                        "label": "Select",
+                        "loadInitially": true,
+                        "type": "select",
+                        "labelKey": "COL2",
+                        "valueKey": "COL1",
+                        "required": false
+                     },
+                     {
+                        "name": "BL_HTML_var_col1",
+                        "label": "Variable Col1",
+                        "type": "literal",
+                        "value": "{{$item.COL1}} - {{row.entity.COl1}} -"
+                     }
+                  ],
+                  "allowNew": false,
+                  "name": "BL_HTML_child_1",
+                  "allowModify": false,
+                  "pageSize": 6,
+                  "model": "DEMO_LOV",
+                  "allowReload": false,
+                  "loadInitially": true,
+                  "type": "htable",
+                  "parameters": {}
+               }
+            ],
+            "name": "BL_HTML",
+            "showInitially": true,
+            "label": "Block with HTML Table",
+            "type": "block"
+         },
+         {
+            "components": [
+               {
+                  "allowDelete": false,
+                  "components": [
+                     {
+                        "readonly": false,
+                        "name": "BL_DETAIL_COl1",
+                        "model": "COL1",
+                        "label": "Column 1",
+                        "loadInitially": true,
+                        "type": "text",
+                        "parameters": {},
+                        "validation": {},
+                        "required": false
+                     },
+                     {
+                        "readonly": false,
+                        "name": "BL_DETAIL_col2",
+                        "model": "COL2",
+                        "label": "Column 2",
+                        "loadInitially": true,
+                        "type": "text",
+                        "parameters": {},
+                        "validation": {},
+                        "required": false
+                     },
+                     {
+                        "sourceParameters": {},
+                        "name": "BL_DETAIL_Select",
+                        "sourceModel": "DEMO_LOV",
+                        "model": "COl2",
+                        "label": "Select",
+                        "loadInitially": true,
+                        "type": "select",
+                        "labelKey": "COL1",
+                        "valueKey": "COL2",
+                        "required": false
+                     },
+                     {
+                        "name": "BL_DETAIL_var_col1",
+                        "label": "Variable Col1",
+                        "type": "literal",
+                        "value": "{{$item.COL1}} - {{row.entity.COl1}} -"
+                     }
+                  ],
+                  "allowNew": false,
+                  "name": "BL_DETAIL_child_1",
+                  "allowModify": false,
+                  "pageSize": 1,
+                  "model": "DEMO_LOV",
+                  "allowReload": false,
+                  "loadInitially": true,
+                  "type": "detail",
+                  "parameters": {}
+               }
+            ],
+            "name": "BL_DETAIL",
+            "showInitially": true,
+            "label": "Block with DETAIL",
+            "type": "block"
+         }
+      ],
+      "name": "GRADECHANGEAUTO",
+      "type": "page"
+   },
+   "owner": null,
+   "pageRoles": [
+      {
+         "roleName": "ADMIN-GPBADMN",
+         "allow": true
+      }
+   ]
+}

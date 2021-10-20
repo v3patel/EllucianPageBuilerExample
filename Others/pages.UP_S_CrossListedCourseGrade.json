@@ -1,0 +1,231 @@
+{
+   "constantName": "UP_S_CrossListedCourseGrade",
+   "developerSecurity": [],
+   "extendsPage": null,
+   "fileTimestamp": "2021-10-04T18:45:07Z",
+   "modelView": {
+      "components": [
+         {
+            "resource": "virtualDomains.UP_S_COURSE_LIST",
+            "name": "XL_CRNS",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "resource": "virtualDomains.UP_S_CLASS_LIST",
+            "name": "XL_STUDENTS",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "resource": "virtualDomains.UP_S_GRADES",
+            "name": "XL_GRADES",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "name": "UPSCrossListedCourseGrade_child_1",
+            "type": "literal",
+            "value": "<b>This page is under development</b>"
+         },
+         {
+            "allowDelete": false,
+            "components": [
+               {
+                  "readonly": false,
+                  "name": "XL_GRADING_STATUS",
+                  "model": "GRADEDING_STATUS",
+                  "label": "Grading Status",
+                  "loadInitially": true,
+                  "type": "text",
+                  "parameters": {},
+                  "validation": {},
+                  "required": false
+               },
+               {
+                  "readonly": false,
+                  "name": "XL_ROLLED",
+                  "model": "ROLLED",
+                  "label": "Rolled",
+                  "loadInitially": true,
+                  "type": "text",
+                  "parameters": {},
+                  "validation": {},
+                  "required": false
+               },
+               {
+                  "readonly": false,
+                  "documentation": "",
+                  "name": "XL_SUBJECT",
+                  "model": "SUBJECT",
+                  "label": "Subject",
+                  "loadInitially": true,
+                  "type": "text",
+                  "parameters": {},
+                  "validation": {},
+                  "required": false
+               },
+               {
+                  "readonly": false,
+                  "name": "XL_COURSE",
+                  "model": "COURSE",
+                  "label": "Course",
+                  "loadInitially": true,
+                  "type": "text",
+                  "parameters": {},
+                  "validation": {},
+                  "required": false
+               },
+               {
+                  "readonly": false,
+                  "name": "XL_SECTION",
+                  "model": "SECTION",
+                  "label": "Section",
+                  "loadInitially": true,
+                  "type": "text",
+                  "parameters": {},
+                  "validation": {},
+                  "required": false
+               },
+               {
+                  "readonly": false,
+                  "name": "XL_TITLE",
+                  "model": "COURSETITLE",
+                  "label": "Title",
+                  "loadInitially": true,
+                  "type": "text",
+                  "parameters": {},
+                  "validation": {},
+                  "required": false
+               },
+               {
+                  "readonly": false,
+                  "name": "XL_TERM",
+                  "model": "TERM",
+                  "label": "Term",
+                  "loadInitially": true,
+                  "type": "text",
+                  "parameters": {},
+                  "validation": {},
+                  "required": false
+               },
+               {
+                  "readonly": false,
+                  "name": "XL_CRN",
+                  "model": "CRN",
+                  "label": "CRN",
+                  "loadInitially": true,
+                  "type": "text",
+                  "parameters": {},
+                  "validation": {},
+                  "required": false
+               },
+               {
+                  "readonly": false,
+                  "name": "XL_CROSS_LISTED",
+                  "model": "XLISTEDGROUPS",
+                  "label": "Cross listed CRN's",
+                  "loadInitially": true,
+                  "type": "text",
+                  "parameters": {},
+                  "validation": {},
+                  "required": false
+               },
+               {
+                  "name": "XL_TERM1",
+                  "model": "TERM1",
+                  "loadInitially": true,
+                  "type": "hidden"
+               },
+               {
+                  "name": "XL_FACULTYPIDM",
+                  "model": "FACULTYPIDM",
+                  "loadInitially": true,
+                  "type": "hidden"
+               }
+            ],
+            "onClick": "// Show Child\n$termcode = currentSelection.TERM1; \n$crn =  currentSelection.CRN; \n$facultypidm =  currentSelection.FACULTYPIDM; \n$XL_Class_list.$load();",
+            "allowNew": false,
+            "name": "XL_CRN_LIST",
+            "allowModify": false,
+            "pageSize": 5,
+            "model": "XL_CRNS",
+            "allowReload": false,
+            "loadInitially": true,
+            "type": "grid",
+            "parameters": {}
+         },
+         {
+            "allowDelete": false,
+            "components": [
+               {
+                  "name": "XLS_PIC",
+                  "label": "Picture",
+                  "type": "literal",
+                  "value": "<img src=\"{{ $item.PIC_URL}}\" width=\"100\" height=\"100\">"
+               },
+               {
+                  "asHtml": false,
+                  "name": "XLS_NAME",
+                  "model": "STUDENT_NAME",
+                  "label": "Name",
+                  "loadInitially": true,
+                  "type": "display"
+               },
+               {
+                  "asHtml": false,
+                  "name": "XLS_ID",
+                  "model": "SID",
+                  "label": "ID",
+                  "loadInitially": true,
+                  "type": "display"
+               },
+               {
+                  "sourceParameters": {
+                     "scrn": "$item.CRN",
+                     "spidm": "$item.SFRSTCR_PIDM",
+                     "stermcode": "$item.SFRSTCR_TERM_CODE"
+                  },
+                  "name": "XLS_FINAL",
+                  "model": "Final",
+                  "sourceModel": "XL_GRADES",
+                  "loadInitially": true,
+                  "label": "Final",
+                  "type": "select",
+                  "labelKey": "GCODE",
+                  "valueKey": "GCODE",
+                  "required": false
+               },
+               {
+                  "readonly": false,
+                  "name": "XLS_LAST_ATT",
+                  "model": "SFRAREG_START_DATE",
+                  "label": "Last Attended",
+                  "loadInitially": true,
+                  "type": "datetime",
+                  "parameters": {},
+                  "validation": {},
+                  "required": false
+               }
+            ],
+            "allowNew": false,
+            "name": "XL_Class_list",
+            "allowModify": false,
+            "pageSize": 5,
+            "model": "XL_STUDENTS",
+            "allowReload": false,
+            "loadInitially": true,
+            "type": "grid",
+            "parameters": {
+               "facultypidm": "$facultypidm",
+               "termcode": "$termcode",
+               "crn": "$crn"
+            }
+         }
+      ],
+      "name": "UPSCrossListedCourseGrade",
+      "type": "page"
+   },
+   "owner": null,
+   "pageRoles": []
+}

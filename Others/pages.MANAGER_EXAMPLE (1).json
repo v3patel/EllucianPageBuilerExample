@@ -1,0 +1,116 @@
+{
+   "constantName": "MANAGER_EXAMPLE",
+   "extendsPage": null,
+   "fileTimestamp": "2018-09-12T16:37:28Z",
+   "modelView": {
+      "components": [
+         {
+            "name": "Res_isMgr",
+            "resource": "virtualDomains.isManager",
+            "staticData": [],
+            "type": "resource"
+         },
+         {
+            "name": "Res_Name",
+            "resource": "virtualDomains.TH_F_FORMAT_NAME",
+            "staticData": [],
+            "type": "resource"
+         },
+         {
+            "components": [
+               {
+                  "loadInitially": true,
+                  "model": "Res_isMgr.ISMANAGER",
+                  "name": "Hidden_isMgr",
+                  "onLoad": "console.log(\"Loaded! \"+$Hidden_isMgr.ISMANAGER);\n\nif($Hidden_isMgr.ISMANAGER == 'y'){\n  $Mgr_Grid.$load();\n  $Emp_Block.$visible = false;\n  $Mgr_Block.$visible = true;\n  console.log(\"Yes!\");\n}else{\n  $Emp_Grid.$load();\n  $Mgr_Block.$visible = false;\n  $Emp_Block.$visible = true;\n console.log(\"No!\");\n}",
+                  "onUpdate": "console.log(\"Updated? \");",
+                  "parameters": {},
+                  "readonly": false,
+                  "required": false,
+                  "type": "text",
+                  "validation": {}
+               }
+            ],
+            "name": "Hidden_Block",
+            "showInitially": false,
+            "type": "block"
+         },
+         {
+            "components": [
+               {
+                  "allowDelete": false,
+                  "allowModify": false,
+                  "allowNew": false,
+                  "allowReload": false,
+                  "components": [
+                     {
+                        "loadInitially": true,
+                        "model": "formated_name",
+                        "name": "Emp_Block_child_2_child_1",
+                        "onLoad": "",
+                        "parameters": {},
+                        "readonly": false,
+                        "required": false,
+                        "type": "text",
+                        "validation": {}
+                     }
+                  ],
+                  "label": "Employee Grid",
+                  "loadInitially": false,
+                  "model": "Res_Name",
+                  "name": "Emp_Grid",
+                  "onLoad": "",
+                  "pageSize": 5,
+                  "parameters": {},
+                  "type": "grid"
+               }
+            ],
+            "name": "Emp_Block",
+            "showInitially": true,
+            "type": "block"
+         },
+         {
+            "components": [
+               {
+                  "allowDelete": false,
+                  "allowModify": false,
+                  "allowNew": false,
+                  "allowReload": false,
+                  "components": [
+                     {
+                        "loadInitially": true,
+                        "model": "formated_name",
+                        "name": "Mgr_Block_child_2_child_1",
+                        "onLoad": "",
+                        "parameters": {},
+                        "readonly": false,
+                        "required": false,
+                        "type": "text",
+                        "validation": {}
+                     }
+                  ],
+                  "label": "Manager Grid",
+                  "loadInitially": false,
+                  "model": "Res_Name",
+                  "name": "Mgr_Grid",
+                  "onLoad": "",
+                  "pageSize": 5,
+                  "parameters": {},
+                  "type": "grid"
+               }
+            ],
+            "name": "Mgr_Block",
+            "showInitially": true,
+            "type": "block"
+         }
+      ],
+      "name": "MANAGEREXAMPLE",
+      "type": "page"
+   },
+   "pageRoles": [
+      {
+         "roleName": "ALLROLES",
+         "allow": true
+      }
+   ]
+}
