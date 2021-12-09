@@ -1,0 +1,210 @@
+{
+   "constantName": "PageModel4",
+   "extendsPage": null,
+   "modelView": {
+      "components": [
+         {
+            "resource": "virtualDomains.stvnation",
+            "documentation": "Retrieve nation desc and code",
+            "name": "CountryData",
+            "type": "resource"
+         },
+         {
+            "resource": "virtualDomains.stvstat",
+            "name": "StateData",
+            "type": "resource"
+         },
+         {
+            "resource": "virtualDomains.PRAddress",
+            "name": "PRAddressData",
+            "type": "resource"
+         },
+         {
+            "components": [
+               {
+                  "name": "confirmAddress",
+                  "type": "literal",
+                  "value": "Please confirm or correct the address information below. This form shows the current home (permanent) address and your current term time address that we have recorded for you. <p>If you have not yet moved in and / or you know the date that you are leaving please enter the appropriate dates.<br>If you need to make changes please enter the details and press the appropriate Submit button.<\/p>"
+               },
+               {
+                  "allowDelete": false,
+                  "components": [
+                     {
+                        "asHtml": false,
+                        "name": "addressType",
+                        "model": "STVATYP_DESC",
+                        "style": "columns-2",
+                        "label": "Address Type",
+                        "loadInitially": true,
+                        "type": "display"
+                     },
+                     {
+                        "readonly": false,
+                        "name": "validFrom",
+                        "model": "SPRADDR_FROM_DATE",
+                        "style": "columns-2",
+                        "label": "Date the address is valid from",
+                        "loadInitially": true,
+                        "type": "datetime",
+                        "parameters": {},
+                        "required": false,
+                        "validation": {}
+                     },
+                     {
+                        "readonly": false,
+                        "name": "validTo",
+                        "model": "SPRADDR_TO_DATE",
+                        "style": "columns-2",
+                        "label": "Date (if any) you are planning to move",
+                        "loadInitially": true,
+                        "type": "datetime",
+                        "parameters": {},
+                        "required": false,
+                        "validation": {}
+                     },
+                     {
+                        "readonly": false,
+                        "name": "houseNumber",
+                        "model": "SPRADDR_HOUSE_NUMBER",
+                        "style": "columns-2",
+                        "label": "House Number",
+                        "loadInitially": true,
+                        "type": "text",
+                        "parameters": {},
+                        "required": false,
+                        "validation": {}
+                     },
+                     {
+                        "readonly": false,
+                        "name": "line1",
+                        "model": "SPRADDR_STREET_LINE1",
+                        "style": "columns-2",
+                        "label": "Address line 1",
+                        "loadInitially": true,
+                        "type": "text",
+                        "parameters": {},
+                        "required": false,
+                        "validation": {}
+                     },
+                     {
+                        "readonly": false,
+                        "name": "line2",
+                        "model": "SPRADDR_STREET_LINE2",
+                        "style": "columns-2",
+                        "label": "Address line 2",
+                        "loadInitially": true,
+                        "type": "text",
+                        "parameters": {},
+                        "required": false,
+                        "validation": {}
+                     },
+                     {
+                        "readonly": false,
+                        "name": "line3",
+                        "model": "SPRADDR_STREET_LINE3",
+                        "style": "columns-2",
+                        "label": "Address line 3",
+                        "loadInitially": true,
+                        "type": "text",
+                        "parameters": {},
+                        "required": false,
+                        "validation": {}
+                     },
+                     {
+                        "readonly": false,
+                        "name": "line4",
+                        "model": "SPRADDR_STREET_LINE4",
+                        "style": "columns-2",
+                        "label": "Address line 4",
+                        "loadInitially": true,
+                        "type": "text",
+                        "parameters": {},
+                        "required": false,
+                        "validation": {}
+                     },
+                     {
+                        "readonly": false,
+                        "name": "city",
+                        "model": "SPRADDR_CITY",
+                        "style": "columns-2",
+                        "label": "Town / City",
+                        "loadInitially": true,
+                        "type": "text",
+                        "parameters": {},
+                        "required": false,
+                        "validation": {}
+                     },
+                     {
+                        "readonly": false,
+                        "name": "zipcode",
+                        "model": "SPRADDR_ZIP",
+                        "style": "columns-2",
+                        "label": "Zip Code",
+                        "loadInitially": true,
+                        "type": "text",
+                        "parameters": {},
+                        "required": false,
+                        "validation": {}
+                     },
+                     {
+                        "sourceParameters": {"countrycode": "$selectCountry"},
+                        "labelStyle": "",
+                        "name": "selectState",
+                        "model": "SPRADDR_STAT_CODE",
+                        "sourceModel": "StateData",
+                        "style": "columns-2",
+                        "label": "State",
+                        "loadInitially": true,
+                        "labelKey": "STVSTAT_DESC",
+                        "type": "select",
+                        "valueKey": "STVSTAT_CODE",
+                        "required": false
+                     },
+                     {
+                        "sourceParameters": {},
+                        "name": "selectCountry",
+                        "model": "SPRADDR_NATN_CODE",
+                        "sourceModel": "CountryData",
+                        "style": "columns-2",
+                        "label": "Country",
+                        "loadInitially": true,
+                        "labelKey": "STVNATN_NATION",
+                        "type": "select",
+                        "valueKey": "STVNATN_CODE",
+                        "onUpdate": "$selectState.$populateSource();",
+                        "required": false
+                     }
+                  ],
+                  "onError": "alert(response.data.errors.errorMessage);",
+                  "allowNew": false,
+                  "pageSize": 5,
+                  "label": "Address Details",
+                  "loadInitially": true,
+                  "type": "detail",
+                  "name": "AddressDetails",
+                  "allowModify": true,
+                  "model": "PRAddressData",
+                  "style": "",
+                  "allowReload": true,
+                  "parameters": {"pidm": "$$pidm"}
+               }
+            ],
+            "nextButtonLabel": "Next",
+            "name": "AddressForm",
+            "showInitially": true,
+            "label": "Permanent Address",
+            "type": "form"
+         }
+      ],
+      "name": "AddressPage",
+      "scriptingLanguage": "JavaScript",
+      "title": "Address Change Page",
+      "type": "page",
+      "importCSS": ""
+   },
+   "fileTimestamp": "2016-01-08T14:15:52Z",
+   "pageRoles": [{
+      "allow": true,
+      "roleName": "WTAILORADMIN"
+   }]
+}

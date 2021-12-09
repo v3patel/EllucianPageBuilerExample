@@ -1,0 +1,145 @@
+{
+   "constantName": "bcmPersonSearch",
+   "extendsPage": null,
+   "modelView": {
+      "components": [
+         {
+            "resource": "virtualDomains.bcmPersonSearch",
+            "name": "personSearch1",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "submitLabel": "Apply Filter",
+            "components": [
+               {
+                  "readonly": false,
+                  "name": "banner_id_f",
+                  "style": "columns-2",
+                  "label": "Banner ID",
+                  "loadInitially": true,
+                  "type": "text",
+                  "parameters": {},
+                  "value": "",
+                  "required": false,
+                  "validation": {}
+               },
+               {
+                  "readonly": false,
+                  "name": "last_name_f",
+                  "style": "columns-2",
+                  "label": "Last Name",
+                  "loadInitially": true,
+                  "type": "text",
+                  "parameters": {},
+                  "required": false,
+                  "validation": {}
+               },
+               {
+                  "readonly": false,
+                  "name": "birth_date_min_f",
+                  "style": "columns-2",
+                  "label": "Minimum birth date:",
+                  "loadInitially": true,
+                  "type": "datetime",
+                  "parameters": {},
+                  "required": false,
+                  "validation": {}
+               },
+               {
+                  "readonly": false,
+                  "name": "birth_date_max_f",
+                  "style": "columns-2",
+                  "label": "Maximum birth date:",
+                  "loadInitially": true,
+                  "type": "datetime",
+                  "parameters": {},
+                  "required": false,
+                  "validation": {}
+               }
+            ],
+            "submit": "$searchResults.$load()",
+            "nextButtonLabel": "Next",
+            "name": "filterForm",
+            "showInitially": true,
+            "style": "",
+            "label": "Search Criteria",
+            "type": "form"
+         },
+         {
+            "components": [{
+               "allowDelete": false,
+               "components": [
+                  {
+                     "asHtml": false,
+                     "name": "SPRIDEN_ID",
+                     "model": "SPRIDEN_ID",
+                     "label": "Banner ID",
+                     "loadInitially": true,
+                     "type": "display"
+                  },
+                  {
+                     "asHtml": false,
+                     "name": "SPRIDEN_LAST_NAME",
+                     "model": "SPRIDEN_LAST_NAME",
+                     "label": "Last Name",
+                     "loadInitially": true,
+                     "type": "display"
+                  },
+                  {
+                     "asHtml": false,
+                     "name": "SPRIDEN_FIRST_NAME",
+                     "model": "SPRIDEN_FIRST_NAME",
+                     "label": "First Name",
+                     "loadInitially": true,
+                     "type": "display"
+                  },
+                  {
+                     "name": "SPBPERS_BIRTH_DATE",
+                     "model": "SPBPERS_BIRTH_DATE",
+                     "label": "Birth Date",
+                     "loadInitially": true,
+                     "type": "datetime",
+                     "parameters": {},
+                     "required": false
+                  },
+                  {
+                     "readonly": false,
+                     "name": "EXCLUDE_PERSON",
+                     "label": "Exclude",
+                     "loadInitially": true,
+                     "type": "boolean"
+                  }
+               ],
+               "allowNew": false,
+               "name": "searchResults",
+               "allowModify": false,
+               "pageSize": 10,
+               "model": "personSearch1",
+               "allowReload": false,
+               "label": "Matching people",
+               "loadInitially": false,
+               "type": "grid",
+               "parameters": {
+                  "spbpers_birth_date_min": "$birth_date_min_f",
+                  "spbpers_birth_date_max": "$birth_date_max_f",
+                  "spriden_id": "$banner_id_f",
+                  "spriden_last_name": "$last_name_f"
+               }
+            }],
+            "name": "searchResultsBlock",
+            "showInitially": true,
+            "type": "block"
+         }
+      ],
+      "name": "bcmPersonSearch",
+      "scriptingLanguage": "JavaScript",
+      "title": "Person Search",
+      "type": "page"
+   },
+   "fileTimestamp": "2016-01-08T14:16:25Z",
+   "pageRoles": [{
+      "allow": true,
+      "roleName": "WTAILORADMIN"
+   }]
+}

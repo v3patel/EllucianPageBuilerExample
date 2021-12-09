@@ -1,0 +1,60 @@
+{
+   "extendsPage": {"constantName": "testZBasePage1"},
+   "pageRoles": [{
+      "allow": true,
+      "roleName": "WTAILORADMIN"
+   }],
+   "fileTimestamp": "2016-04-08T11:48:26Z",
+   "modelView": {"deltas": {
+      "theText": {
+         "validation": {"base": {}},
+         "placeholder": {"base": "Enter some Text"},
+         "name": {"base": "theText"},
+         "label": {"base": "Text Box"},
+         "parameters": {"base": {}},
+         "type": {"base": "text"},
+         "required": {"base": false},
+         "readonly": {"base": false},
+         "loadInitially": {"base": true},
+         "meta": {"base": {"parent": "basePage"}}
+      },
+      "xeTextArea": {
+         "validation": {"ext": {}},
+         "placeholder": {"ext": "Enter some text"},
+         "name": {"ext": "xeTextArea"},
+         "label": {"ext": "Text Area"},
+         "parameters": {"ext": {}},
+         "type": {"ext": "textArea"},
+         "required": {"ext": false},
+         "readonly": {"ext": false},
+         "loadInitially": {"ext": true},
+         "meta": {"ext": {"parent": "basePage"}}
+      },
+      "basePage": {
+         "title": {
+            "base": "Test Base Page",
+            "ext": "Test Extension Page"
+         },
+         "meta": {
+            "base": {"firstChild": "theText"},
+            "ext": {"firstChild": "xeTextBox"}
+         }
+      },
+      "xeTextBox": {
+         "validation": {"ext": {}},
+         "placeholder": {"ext": "Enter some Text"},
+         "name": {"ext": "xeTextBox"},
+         "label": {"ext": "Text Box"},
+         "parameters": {"ext": {}},
+         "type": {"ext": "text"},
+         "required": {"ext": false},
+         "readonly": {"ext": false},
+         "loadInitially": {"ext": true},
+         "meta": {"ext": {
+            "parent": "basePage",
+            "nextSibling": "xeTextArea"
+         }}
+      }
+   }},
+   "constantName": "testAExtPage1"
+}

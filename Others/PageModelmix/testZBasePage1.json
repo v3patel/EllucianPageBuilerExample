@@ -1,0 +1,26 @@
+{
+   "extendsPage": null,
+   "pageRoles": [{
+      "allow": true,
+      "roleName": "WTAILORADMIN"
+   }],
+   "fileTimestamp": "2016-04-08T11:48:26Z",
+   "modelView": {
+      "title": "Test Base Page",
+      "scriptingLanguage": "JavaScript",
+      "name": "basePage",
+      "components": [{
+         "validation": {},
+         "placeholder": "Enter some Text",
+         "name": "theText",
+         "label": "Text Box",
+         "parameters": {},
+         "type": "text",
+         "required": false,
+         "readonly": false,
+         "loadInitially": true
+      }],
+      "type": "page"
+   },
+   "constantName": "testZBasePage"
+}

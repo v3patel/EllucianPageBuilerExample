@@ -1,0 +1,66 @@
+{
+   "constantName": "PageModel6",
+   "extendsPage": null,
+   "modelView": {
+      "components": [{
+         "submitLabel": "Submit and hide",
+         "components": [
+            {
+               "readonly": false,
+               "name": "input11",
+               "label": "This is a required field",
+               "loadInitially": true,
+               "placeholder": "Enter between 2 and 3 digits",
+               "type": "text",
+               "parameters": {},
+               "required": true,
+               "validation": {
+                  "minlength": 2,
+                  "maxlength": 3,
+                  "pattern": "\\d+"
+               }
+            },
+            {
+               "readonly": false,
+               "name": "number2",
+               "fractionDigits": 2,
+               "label": "Number Not required",
+               "loadInitially": true,
+               "type": "number",
+               "parameters": {},
+               "required": false,
+               "validation": {
+                  "minlength": 2,
+                  "min": -10,
+                  "max": 100
+               }
+            },
+            {
+               "readonly": false,
+               "name": "inputPattern",
+               "label": "Input with pattern ^\\w+$",
+               "loadInitially": true,
+               "type": "text",
+               "parameters": {},
+               "required": false,
+               "validation": {"pattern": "^\\w+$"}
+            }
+         ],
+         "submit": "($form1.$valid) && (\n  $form1.$visible=false)",
+         "nextButtonLabel": "Next",
+         "name": "form1",
+         "showInitially": true,
+         "label": "Common Form",
+         "type": "form"
+      }],
+      "name": "ValidationDemoPage",
+      "scriptingLanguage": "JavaScript",
+      "title": "Validation Control Demo Page",
+      "type": "page"
+   },
+   "fileTimestamp": "2016-01-08T14:15:52Z",
+   "pageRoles": [{
+      "allow": true,
+      "roleName": "WTAILORADMIN"
+   }]
+}

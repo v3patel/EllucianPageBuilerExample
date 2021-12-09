@@ -1,0 +1,29 @@
+{
+   "dataSource": "B",
+   "virtualDomainRoles": [{
+      "allowGet": true,
+      "id": null,
+      "allowPost": false,
+      "allowPut": false,
+      "virtualDomain": {
+         "_ref": "../..",
+         "class": "net.hedtech.banner.virtualDomain.VirtualDomain"
+      },
+      "class": "net.hedtech.banner.virtualDomain.VirtualDomainRole",
+      "roleName": "WTAILORADMIN",
+      "allowDelete": false,
+      "version": null
+   }],
+   "codePut": null,
+   "class": "net.hedtech.banner.virtualDomain.VirtualDomain",
+   "lastUpdated": null,
+   "codeDelete": null,
+   "codeGet": "select dat.*, chc.comments child_comments, pac.comments parent_comments from (\r\nselect child_owner,child_table, child_constraint,\r\n      parent_owner, parent_table, parent_constraint, parent_constraint_type\r\nfrom\r\n (select owner child_owner,\r\n        --constraint_type child_constraint_type, \r\n        table_name child_table,\r\n        constraint_name child_constraint,\r\n        r_owner child_r_owner, \r\n        r_constraint_name child_r_constraint\r\n  from all_constraints \r\n  where constraint_type='R'\r\n    and (table_name=:child_table or :child_table is null)\r\n    and (owner=:child_owner or :child_owner is null)\r\n) ch,\r\n (select owner parent_owner,\r\n         table_name parent_table,\r\n         constraint_name parent_constraint,\r\n         constraint_type parent_constraint_type          \r\n         --r_owner parent_r_owner, r_constraint_name parent_r_constraint\r\n  from all_constraints  \r\n  where constraint_type in ('P','U')\r\n    and (table_name=:parent_table or :parent_table is null)\r\n    and (owner=:parent_owner or :parent_owner is null)\r\n  ) pa\r\nwhere child_r_constraint=parent_constraint\r\n  and child_r_owner=parent_owner\r\nunion all -- missing relations:\r\nselect 'SATURN', 'SPRADDR', 'FKFAKE_SPRADDR_SPBPERS','SATURN', 'SPBPERS', 'PK_SPBPERS','P' from dual\r\nunion all\r\nselect 'SATURN', 'SPRIDEN', 'FKFAKE_SPRIDEN_SPBPERS','SATURN', 'SPBPERS', 'PK_SPBPERS','P' from dual\r\nunion all\r\nselect 'SATURN', 'SPRTELE', 'FKFAKE_SPRTELE_SPBPERS','SATURN', 'SPBPERS', 'PK_SPBPERS','P' from dual\r\n) dat\r\n, all_tab_comments chc, all_tab_comments pac\r\nwhere chc.owner=child_owner and chc.table_name=child_table\r\n  and pac.owner=parent_owner and pac.table_name=parent_table\r\n  and (child_table=:child_table or :child_table is null)\r\n  and (child_owner=:child_owner or :child_owner is null)\r\n  and (parent_table=:parent_table or :parent_table is null)\r\n  and (parent_owner=:parent_owner or :parent_owner is null)",
+   "version": null,
+   "serviceName": "bcmRelatedTableLookup",
+   "id": null,
+   "codePost": null,
+   "dateCreated": null,
+   "fileTimestamp": "2013-12-05T09:20:35Z",
+   "typeOfCode": "S"
+}

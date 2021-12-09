@@ -1,0 +1,146 @@
+{
+   "constantName": "PageModel5",
+   "extendsPage": null,
+   "modelView": {
+      "components": [
+         {
+            "resource": "virtualDomains.employee",
+            "name": "EmployeeRes",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "sequence": "form1, form2, form3",
+            "name": "managerFlow",
+            "type": "flow",
+            "activated": false
+         },
+         {
+            "sequence": "form1, form3",
+            "name": "employeeFlow",
+            "type": "flow",
+            "activated": false
+         },
+         {
+            "sourceParameters": {},
+            "name": "selectEmployee",
+            "sourceModel": "EmployeeRes",
+            "label": "Choose an employee to see different flows",
+            "loadInitially": true,
+            "labelKey": "ENAME",
+            "type": "select",
+            "valueKey": "EMPNO",
+            "onUpdate": "$EmployeeData.$load();",
+            "required": false
+         },
+         {
+            "onError": "alert(response.data.errors[0].errorMessage);",
+            "name": "EmployeeData",
+            "onLoad": "if ($EmployeeData.JOB =='MANAGER') $$activateFlow('managerFlow'); else $$activateFlow('employeeFlow');",
+            "model": "EmployeeRes",
+            "loadInitially": true,
+            "type": "data",
+            "parameters": {"EMPNO": "$selectEmployee"}
+         },
+         {
+            "components": [{
+               "name": "employeeRequest",
+               "type": "literal",
+               "value": "Complete $EmployeeData.JOB forms for $EmployeeData.ENAME"
+            }],
+            "name": "Banner",
+            "showInitially": true,
+            "type": "block"
+         },
+         {
+            "components": [
+               {
+                  "name": "age",
+                  "label": "Age (required)",
+                  "type": "text",
+                  "required": true,
+                  "validation": {
+                     "minlength": 1,
+                     "maxlength": 2,
+                     "pattern": "\\d+"
+                  }
+               },
+               {
+                  "name": "input12",
+                  "label": "This is an optional field",
+                  "type": "text"
+               }
+            ],
+            "nextButtonLabel": "Next",
+            "name": "form1",
+            "showInitially": false,
+            "label": "Common Form",
+            "type": "form"
+         },
+         {
+            "components": [
+               {
+                  "name": "address",
+                  "label": "Address (required)",
+                  "type": "text",
+                  "required": true
+               },
+               {
+                  "readonly": false,
+                  "name": "input22",
+                  "label": "This is an optional field",
+                  "loadInitially": true,
+                  "type": "text",
+                  "parameters": {},
+                  "required": false,
+                  "validation": {}
+               }
+            ],
+            "nextButtonLabel": "Next",
+            "name": "form2",
+            "showInitially": false,
+            "label": "Manager Only Form",
+            "type": "form"
+         },
+         {
+            "submitLabel": "Submit",
+            "components": [
+               {
+                  "readonly": false,
+                  "name": "email",
+                  "label": "email (required)",
+                  "loadInitially": true,
+                  "type": "email",
+                  "parameters": {},
+                  "required": true,
+                  "validation": {"minlength": 3}
+               },
+               {
+                  "readonly": false,
+                  "name": "input32",
+                  "label": "This is an optional field",
+                  "loadInitially": true,
+                  "type": "text",
+                  "parameters": {},
+                  "required": false,
+                  "validation": {}
+               }
+            ],
+            "submit": "$age=null;$address=null;$email=null;",
+            "nextButtonLabel": "Finish",
+            "name": "form3",
+            "showInitially": false,
+            "label": "All Employee Form",
+            "type": "form"
+         }
+      ],
+      "name": "FlowDemoPage",
+      "title": "Flow Control Demo Page",
+      "type": "page"
+   },
+   "fileTimestamp": "2016-01-08T14:15:52Z",
+   "pageRoles": [{
+      "allow": true,
+      "roleName": "WTAILORADMIN"
+   }]
+}

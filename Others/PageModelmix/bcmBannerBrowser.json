@@ -1,0 +1,226 @@
+{
+   "constantName": "bcmBannerBrowser",
+   "extendsPage": null,
+   "modelView": {
+      "components": [
+         {
+            "resource": "virtualDomains.bcmProductLookup",
+            "name": "ProductResource",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "resource": "virtualDomains.bcmTableLookup",
+            "name": "TableResource",
+            "type": "resource"
+         },
+         {
+            "resource": "virtualDomains.bcmRelatedTableLookup",
+            "name": "RelatedTableResource",
+            "type": "resource"
+         },
+         {
+            "components": [
+               {
+                  "sourceParameters": {},
+                  "name": "productSelection",
+                  "model": "productSelection",
+                  "sourceModel": "ProductResource",
+                  "label": "Product:",
+                  "loadInitially": true,
+                  "placeholder": "Select product...",
+                  "labelKey": "DESCRIPTION",
+                  "type": "select",
+                  "valueKey": "OWNER",
+                  "onUpdate": "$TablesNGrid.$load()",
+                  "required": false
+               },
+               {
+                  "name": "tableFilter",
+                  "model": "",
+                  "label": "Table:",
+                  "loadInitially": true,
+                  "type": "text",
+                  "onUpdate": "$TablesNGrid.$load()",
+                  "parameters": {},
+                  "required": false,
+                  "validation": {}
+               },
+               {
+                  "name": "commentsFilter",
+                  "label": "Table Description:",
+                  "loadInitially": true,
+                  "type": "text",
+                  "onUpdate": "$TablesNGrid.$load()",
+                  "parameters": {},
+                  "required": false
+               }
+            ],
+            "name": "ProductFilter",
+            "showInitially": true,
+            "type": "block"
+         },
+         {
+            "components": [
+               {
+                  "allowDelete": false,
+                  "components": [
+                     {
+                        "asHtml": false,
+                        "name": "OWNER",
+                        "model": "OWNER",
+                        "label": "Owner",
+                        "loadInitially": true,
+                        "type": "display"
+                     },
+                     {
+                        "readonly": true,
+                        "name": "TABLE_NAME",
+                        "model": "TABLE_NAME",
+                        "label": "Table",
+                        "loadInitially": true,
+                        "type": "text",
+                        "parameters": {},
+                        "required": false,
+                        "validation": {}
+                     },
+                     {
+                        "asHtml": false,
+                        "name": "COMMENTS",
+                        "model": "COMMENTS",
+                        "label": "Description",
+                        "loadInitially": true,
+                        "type": "display"
+                     }
+                  ],
+                  "onClick": "$ChildTablesNGrid.$load();$ParentTablesNGrid.$load();$ChildTables_visible=true;$ParentTables_visible=true;",
+                  "allowNew": false,
+                  "pageSize": 5,
+                  "label": "Tables",
+                  "loadInitially": false,
+                  "type": "grid",
+                  "name": "TablesNGrid",
+                  "allowModify": false,
+                  "model": "TableResource",
+                  "allowReload": true,
+                  "parameters": {
+                     "owner": "$productSelection",
+                     "comments": "$commentsFilter",
+                     "table": "$tableFilter"
+                  }
+               },
+               {
+                  "components": [{
+                     "allowDelete": false,
+                     "components": [
+                        {
+                           "asHtml": false,
+                           "name": "CHILD_OWNER",
+                           "model": "CHILD_OWNER",
+                           "label": "Owner",
+                           "loadInitially": true,
+                           "type": "display"
+                        },
+                        {
+                           "asHtml": false,
+                           "name": "CHILD_TABLE",
+                           "model": "CHILD_TABLE",
+                           "label": "Table",
+                           "loadInitially": true,
+                           "type": "display"
+                        },
+                        {
+                           "asHtml": false,
+                           "name": "CHILD_COMMENTS",
+                           "model": "CHILD_COMMENTS",
+                           "label": "Description",
+                           "loadInitially": false,
+                           "type": "display"
+                        }
+                     ],
+                     "allowNew": false,
+                     "name": "ChildTablesNGrid",
+                     "allowModify": false,
+                     "pageSize": 3,
+                     "model": "RelatedTableResource",
+                     "allowReload": true,
+                     "label": "",
+                     "loadInitially": false,
+                     "type": "grid",
+                     "parameters": {
+                        "parent_owner": "$TablesNGrid.OWNER",
+                        "parent_table": "$TablesNGrid.TABLE_NAME"
+                     }
+                  }],
+                  "name": "ChildTables",
+                  "showInitially": false,
+                  "label": "Child Tables of {{$TablesNGrid.TABLE_NAME}}",
+                  "type": "block"
+               },
+               {
+                  "components": [{
+                     "allowDelete": false,
+                     "components": [
+                        {
+                           "asHtml": false,
+                           "name": "PARENT_OWNER",
+                           "model": "CHILD_OWNER",
+                           "label": "Owner",
+                           "loadInitially": true,
+                           "type": "display"
+                        },
+                        {
+                           "asHtml": false,
+                           "name": "PARENT_TABLE",
+                           "model": "PARENT_TABLE",
+                           "label": "Table",
+                           "loadInitially": true,
+                           "type": "display"
+                        },
+                        {
+                           "asHtml": false,
+                           "name": "PARENT_COMMENTS",
+                           "model": "PARENT_COMMENTS",
+                           "label": "Description",
+                           "loadInitially": false,
+                           "type": "display"
+                        }
+                     ],
+                     "allowNew": false,
+                     "name": "ParentTablesNGrid",
+                     "allowModify": false,
+                     "pageSize": 3,
+                     "model": "RelatedTableResource",
+                     "allowReload": true,
+                     "label": "Parent Tables",
+                     "loadInitially": false,
+                     "type": "grid",
+                     "parameters": {
+                        "child_owner": "$TablesNGrid.OWNER",
+                        "child_table": "$TablesNGrid.TABLE_NAME"
+                     }
+                  }],
+                  "name": "ParentTables",
+                  "showInitially": false,
+                  "label": "Parent Tables of {{$TablesNGrid.TABLE_NAME}}",
+                  "type": "block"
+               }
+            ],
+            "name": "Objects",
+            "showInitially": true,
+            "label": "Product Tables",
+            "type": "block"
+         }
+      ],
+      "name": "bcmBannerBrowser",
+      "scriptingLanguage": "JavaScript",
+      "label": "Banner DB Browser",
+      "title": "Banner DB Browser",
+      "type": "page"
+   },
+   "fileTimestamp": "2016-01-08T14:16:25Z",
+   "pageRoles": [{
+      "allow": true,
+      "roleName": "WTAILORADMIN"
+   }]
+}

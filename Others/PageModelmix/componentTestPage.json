@@ -1,0 +1,363 @@
+{
+   "constantName": "componentTestPage",
+   "extendsPage": null,
+   "modelView": {
+      "components": [
+         {
+            "name": "testRadioModel",
+            "type": "resource",
+            "staticData": [
+               {
+                  "gender": "F",
+                  "description": "Female"
+               },
+               {
+                  "gender": "M",
+                  "description": "Male"
+               },
+               {
+                  "gender": "U",
+                  "description": "Unknown"
+               }
+            ]
+         },
+         {
+            "resource": "virtualDomains.stvnation",
+            "name": "nationResource",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "name": "testSelectModel",
+            "type": "resource",
+            "staticData": [
+               {
+                  "code": "A",
+                  "description": "Car",
+                  "vehicle": "C"
+               },
+               {
+                  "code": "B",
+                  "description": "Bicycle",
+                  "vehicle": "B"
+               },
+               {
+                  "code": "C",
+                  "description": "Lorry",
+                  "vehicle": "L"
+               },
+               {
+                  "code": "D",
+                  "description": "Van",
+                  "vehicle": "V"
+               }
+            ]
+         },
+         {
+            "resource": "virtualDomains.course",
+            "name": "course",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "resource": "virtualDomains.f_term",
+            "name": "terms",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "resource": "virtualDomains.f_programme",
+            "name": "programmes",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "components": [{
+               "components": [
+                  {
+                     "sourceParameters": {},
+                     "name": "testSelectComponent",
+                     "sourceModel": "testSelectModel",
+                     "label": "Test select:",
+                     "loadInitially": true,
+                     "labelKey": "description",
+                     "type": "select",
+                     "valueKey": "code",
+                     "required": false
+                  },
+                  {
+                     "sourceParameters": {},
+                     "name": "testRadioComponent",
+                     "sourceModel": "testRadioModel",
+                     "label": "Test Radio:",
+                     "loadInitially": true,
+                     "labelKey": "description",
+                     "type": "radio",
+                     "valueKey": "gender",
+                     "required": false
+                  },
+                  {
+                     "readonly": false,
+                     "name": "testTextComponent",
+                     "label": "Test text:",
+                     "loadInitially": true,
+                     "placeholder": "Enter some text.",
+                     "type": "text",
+                     "parameters": {},
+                     "required": false,
+                     "validation": {}
+                  },
+                  {
+                     "asHtml": false,
+                     "name": "testDisplayComponent",
+                     "label": "Test display:",
+                     "loadInitially": true,
+                     "type": "display",
+                     "value": "Display only value"
+                  },
+                  {
+                     "readonly": false,
+                     "name": "testTextAreaComponent",
+                     "label": "Test textarea:",
+                     "loadInitially": true,
+                     "placeholder": "Enter some multi-line text",
+                     "type": "textArea",
+                     "parameters": {},
+                     "required": false,
+                     "validation": {}
+                  },
+                  {
+                     "readonly": false,
+                     "name": "testNumberComponent",
+                     "fractionDigits": 2,
+                     "label": "Test number:",
+                     "loadInitially": true,
+                     "placeholder": "Enter a number",
+                     "type": "number",
+                     "parameters": {},
+                     "value": "6",
+                     "required": false,
+                     "validation": {}
+                  },
+                  {
+                     "readonly": false,
+                     "name": "testDatetimeComponent",
+                     "label": "Test datetime:",
+                     "loadInitially": true,
+                     "type": "datetime",
+                     "parameters": {},
+                     "required": false,
+                     "validation": {}
+                  },
+                  {
+                     "readonly": false,
+                     "name": "testEmailComponent",
+                     "label": "Test email:",
+                     "loadInitially": true,
+                     "type": "email",
+                     "parameters": {},
+                     "required": false,
+                     "validation": {}
+                  },
+                  {
+                     "readonly": false,
+                     "name": "testTelephoneComponent",
+                     "label": "Test telephone:",
+                     "loadInitially": true,
+                     "type": "tel",
+                     "parameters": {},
+                     "required": false,
+                     "validation": {}
+                  },
+                  {
+                     "name": "testLinkComponent",
+                     "description": "Google link",
+                     "label": "Test link:",
+                     "type": "link",
+                     "replaceView": true,
+                     "url": "http://www.google.com"
+                  },
+                  {
+                     "readonly": false,
+                     "booleanTrueValue": "Y",
+                     "booleanFalseValue": "N",
+                     "name": "testBooleanComponent",
+                     "label": "Test boolean:",
+                     "loadInitially": true,
+                     "type": "boolean"
+                  },
+                  {
+                     "onClick": "alert('testButtonComponent clicked');",
+                     "name": "testButtonComponent",
+                     "label": "test button",
+                     "type": "button"
+                  }
+               ],
+               "nextButtonLabel": "Next",
+               "name": "testForm1",
+               "showInitially": true,
+               "label": "Test Form 1",
+               "type": "form"
+            }],
+            "name": "formBlock",
+            "showInitially": true,
+            "label": "Form Block",
+            "type": "block"
+         },
+         {
+            "components": [{
+               "allowDelete": false,
+               "components": [
+                  {
+                     "asHtml": false,
+                     "name": "STVNATN_CODE",
+                     "model": "STVNATN_CODE",
+                     "label": "Code",
+                     "loadInitially": true,
+                     "type": "display"
+                  },
+                  {
+                     "readonly": false,
+                     "name": "STVNATN_NATION",
+                     "model": "STVNATN_NATION",
+                     "label": "Nation",
+                     "loadInitially": true,
+                     "type": "text",
+                     "parameters": {},
+                     "required": false,
+                     "validation": {}
+                  }
+               ],
+               "allowNew": false,
+               "name": "nationGrid",
+               "allowModify": false,
+               "pageSize": 5,
+               "model": "nationResource",
+               "allowReload": false,
+               "label": "Nation Grid",
+               "loadInitially": true,
+               "type": "grid",
+               "parameters": {}
+            }],
+            "name": "gridBlock",
+            "showInitially": true,
+            "label": "Grid Block",
+            "type": "block"
+         },
+         {
+            "components": [{
+               "onClick": "$TermCode = currentSelection.STVTERM_CODE;\n$LevelCode = null;\n$Campus = null;\n$College = null;\n$termProgramDetail.$load();\n$programDetailBlock.$visible = true;",
+               "name": "termsList",
+               "pageSize": 5,
+               "model": "terms",
+               "allowReload": false,
+               "label": "Term",
+               "loadInitially": true,
+               "type": "list",
+               "parameters": {},
+               "value": "STVTERM_CODE",
+               "required": false
+            }],
+            "name": "listBlock",
+            "showInitially": true,
+            "label": "List Block",
+            "type": "block"
+         },
+         {
+            "components": [{
+               "allowDelete": false,
+               "components": [
+                  {
+                     "asHtml": false,
+                     "name": "SMRPRLE_PROGRAM",
+                     "model": "SMRPRLE_PROGRAM",
+                     "label": "Program",
+                     "loadInitially": true,
+                     "type": "display"
+                  },
+                  {
+                     "asHtml": false,
+                     "name": "SMRPRLE_PROGRAM_DESC",
+                     "model": "SMRPRLE_PROGRAM_DESC",
+                     "label": "Description",
+                     "loadInitially": true,
+                     "type": "display"
+                  }
+               ],
+               "allowNew": false,
+               "name": "termProgramDetail",
+               "allowModify": false,
+               "pageSize": 5,
+               "model": "programmes",
+               "allowReload": false,
+               "label": "Programmes for Term $TermCode",
+               "loadInitially": false,
+               "type": "detail",
+               "parameters": {
+                  "CAMPUS": "$Campus",
+                  "COLLEGE": "$College",
+                  "TERM": "$TermCode",
+                  "LEVL": "$LevelCode"
+               }
+            }],
+            "name": "programDetailBlock",
+            "showInitially": false,
+            "type": "block"
+         },
+         {
+            "components": [{
+               "allowDelete": false,
+               "components": [
+                  {
+                     "asHtml": false,
+                     "name": "courseNumber",
+                     "model": "courseNumber",
+                     "label": "Course Number",
+                     "loadInitially": true,
+                     "type": "display"
+                  },
+                  {
+                     "asHtml": false,
+                     "name": "subjectCode",
+                     "model": "subjectCode",
+                     "label": "Subject Code",
+                     "loadInitially": true,
+                     "type": "display"
+                  },
+                  {
+                     "asHtml": false,
+                     "name": "courseTitle",
+                     "model": "courseTitle",
+                     "label": "Title",
+                     "loadInitially": true,
+                     "type": "display"
+                  }
+               ],
+               "allowNew": false,
+               "name": "courseHTMLTable",
+               "allowModify": false,
+               "pageSize": 5,
+               "model": "course",
+               "allowReload": false,
+               "label": "Courses Table",
+               "loadInitially": true,
+               "type": "htable",
+               "parameters": {}
+            }],
+            "name": "htmlTableBlock",
+            "showInitially": true,
+            "label": "HTML Table Block",
+            "type": "block"
+         }
+      ],
+      "name": "componentTestPage",
+      "scriptingLanguage": "JavaScript",
+      "title": "Component Test Page",
+      "type": "page"
+   },
+   "fileTimestamp": "2016-01-08T14:16:14Z",
+   "pageRoles": [{
+      "allow": true,
+      "roleName": "WTAILORADMIN"
+   }]
+}

@@ -1,0 +1,45 @@
+{
+   "dataSource": "B",
+   "virtualDomainRoles": [
+      {
+         "allowGet": true,
+         "id": null,
+         "allowPost": true,
+         "allowPut": true,
+         "virtualDomain": {
+            "_ref": "../..",
+            "class": "net.hedtech.banner.virtualDomain.VirtualDomain"
+         },
+         "class": "net.hedtech.banner.virtualDomain.VirtualDomainRole",
+         "roleName": "WTAILORADMIN",
+         "allowDelete": true,
+         "version": null
+      },
+      {
+         "allowGet": true,
+         "id": null,
+         "allowPost": false,
+         "allowPut": false,
+         "virtualDomain": {
+            "_ref": "../..",
+            "class": "net.hedtech.banner.virtualDomain.VirtualDomain"
+         },
+         "class": "net.hedtech.banner.virtualDomain.VirtualDomainRole",
+         "roleName": "GUEST",
+         "allowDelete": false,
+         "version": null
+      }
+   ],
+   "codePut": "DECLARE\r\n  l_cnt    INTEGER;\r\n  l_deptno INTEGER :=:DEPTNO;\r\n  l_empno INTEGER :=:EMPNO;\r\nBEGIN\r\n  IF :DEPTNO IS NOT NULL AND :DNAME IS NOT NULL THEN \r\n    SELECT COUNT(*) INTO l_cnt FROM dept WHERE deptno=:DEPTNO;\r\n    IF l_cnt=0 THEN\r\n      INSERT INTO dept\r\n        (deptno,dname,loc\r\n        ) VALUES\r\n        (:DEPTNO,:DNAME,:LOC\r\n        );\r\n    ELSE\r\n      UPDATE dept SET dname=:DNAME, loc=:LOC WHERE deptno=:DEPTNO;\r\n    END IF;\r\n  END IF;\r\n  SELECT COUNT(*) INTO l_cnt FROM emp WHERE empno=:EMPNO;\r\n  IF l_cnt      =0 THEN\r\n    IF :DEPTNO IS NULL THEN\r\n      SELECT deptno INTO l_deptno FROM dept WHERE dname=:DNAME;\r\n    END IF;\r\n   IF :EMPNO IS NULL THEN\r\n     SELECT MAX(empno)+1 INTO l_empno FROM emp;\r\n   END IF;\r\n    INSERT\r\n    INTO emp\r\n      (\r\n        empno,\r\n        ename,\r\n        job,\r\n        mgr,\r\n        hiredate,\r\n        sal,\r\n        comm,\r\n        sex,\r\n        deptno\r\n      )\r\n      VALUES\r\n      (\r\n        l_empno,\r\n        :ENAME,\r\n        :JOB,\r\n        :MGR,\r\n        :HIREDATE,\r\n        :SAL,\r\n        :COMM,\r\n        :SEX,\r\n        l_deptno\r\n      );\r\n  ELSE\r\n    UPDATE emp\r\n    SET ename  =NVL(:ENAME,NULL),\r\n      job      =NVL(:JOB,NULL),\r\n      mgr      =NVL(:MGR,NULL),\r\n      hiredate =:HIREDATE,\r\n      sal      =NVL(:SAL,NULL),\r\n      comm     =NVL(:COMM,0),\r\n      deptno   =NVL(:DEPTNO,NULL),\r\n      sex       =NVL(:SEX,NULL)\r\n    WHERE empno=:EMPNO;\r\n\r\n  END IF;\r\n  --Update this (colon)id on the client - if we created a new record it will not be set\r\n  --(colon)id=(colon)EMPNO||','||(colon)DEPTNO;\r\nEND;",
+   "class": "net.hedtech.banner.virtualDomain.VirtualDomain",
+   "lastUpdated": null,
+   "codeDelete": " \t\t\t  declare\r\n \t\t\t      l_cnt integer;\r\n \t\t\t      l_empno number;\r\n \t\t\t      --l_deptno number;  do not delete departments here\r\n\t\t\t  begin\r\n\t\t\t    l_empno:=substr(:id,1, instr(:id,',')-1);\r\n\t\t\t    delete from emp where empno=l_empno;\r\n                /*raise_application_error(-20000,'Deleted  '||sql%rowcount||' empno='||l_empno);*/\r\n\r\n\t\t\t  end;\r\n",
+   "codeGet": "            select empno||','||deptno  \"id\", q.*\r\n            from\r\n            (select * from emp natural join dept) q\r\n             where (empno = :empno  or :empno is null)\r\n               and ename like nvl(:ename,'%')\r\n               and (deptno = :deptno  or :deptno is null)\r\n               and dname like nvl(:dname,'%')\r\n               and (substr(:id,1, instr(:id,',')-1) is null or empno=substr(:id,1, instr(:id,',')-1) )\r\n               and (substr(:id,instr(:id,',')+1)   is null  or deptno=substr(:id,instr(:id,',')+1) )\r\n            order by deptno,empno\r\n",
+   "version": null,
+   "serviceName": "empdept",
+   "id": null,
+   "codePost": "DECLARE\r\n  l_cnt    INTEGER;\r\n  l_deptno INTEGER :=:DEPTNO;\r\n  l_empno INTEGER :=:EMPNO;\r\nBEGIN\r\n  SELECT COUNT(*) INTO l_cnt FROM emp WHERE empno=:EMPNO;\r\n  IF l_cnt      =0 THEN\r\n   IF :EMPNO IS NULL THEN\r\n     SELECT MAX(empno)+1 INTO l_empno FROM emp;\r\n   END IF;\r\n    INSERT\r\n    INTO emp\r\n      (\r\n        empno,\r\n        ename,\r\n        job,\r\n        mgr,\r\n        hiredate,\r\n        sal,\r\n        comm,\r\n        sex,\r\n        deptno\r\n      )\r\n      VALUES\r\n      (\r\n        l_empno,\r\n        :ENAME,\r\n        :JOB,\r\n        :MGR,\r\n        :HIREDATE,\r\n        :SAL,\r\n        :COMM,\r\n        :SEX,\r\n        l_deptno\r\n      );\r\n  ELSE\r\n    UPDATE emp\r\n    SET ename  =NVL(:ENAME,NULL),\r\n      job      =NVL(:JOB,NULL),\r\n      mgr      =NVL(:MGR,NULL),\r\n      hiredate =:HIREDATE,\r\n      sal      =NVL(:SAL,NULL),\r\n      comm     =NVL(:COMM,0),\r\n      deptno   =NVL(:DEPTNO,NULL),\r\n      sex       =NVL(:SEX,NULL)\r\n    WHERE empno=:EMPNO;\r\n  END IF;\r\n  --Update this (colon)id on the client - if we created a new record it will not be set\r\n  --(colon)id=(colon)EMPNO||','||(colon)DEPTNO;\r\nEND;",
+   "dateCreated": null,
+   "fileTimestamp": "2013-11-25T11:19:56Z",
+   "typeOfCode": "S"
+}

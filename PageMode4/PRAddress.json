@@ -1,0 +1,44 @@
+{
+   "codePost": "declare\r\n  l_rowid varchar2(30):=:id;\r\nbegin\r\n  if l_rowid is null then\r\n    raise_application_error(-20000,'Insert of address is not implemented');\r\n  end if;\r\n  update SPRADDR\r\n     set --probably no need to update PIDM and SEQNO\r\n           SPRADDR_STREET_LINE1 = :SPRADDR_STREET_LINE1,\r\n           SPRADDR_STREET_LINE2 = :SPRADDR_STREET_LINE2, \r\n            SPRADDR_STREET_LINE3 = :SPRADDR_STREET_LINE3, \r\n            SPRADDR_STREET_LINE4 = :SPRADDR_STREET_LINE4, \r\n            SPRADDR_HOUSE_NUMBER = :SPRADDR_HOUSE_NUMBER, \r\n            SPRADDR_CITY         = nvl(:SPRADDR_CITY         , SPRADDR_CITY         ), \r\n            SPRADDR_ZIP          = nvl(:SPRADDR_ZIP          , SPRADDR_ZIP          ), \r\n            SPRADDR_STAT_CODE    = :SPRADDR_STAT_CODE,\r\n           SPRADDR_NATN_CODE    = nvl(:SPRADDR_NATN_CODE    , SPRADDR_NATN_CODE    ),\r\n           SPRADDR_FROM_DATE    = nvl(:SPRADDR_FROM_DATE    , SPRADDR_FROM_DATE    ),\r\n           SPRADDR_TO_DATE      = :SPRADDR_TO_DATE\r\n  where ROWID=l_rowid\r\n     and SPRADDR_PIDM=:parm_user_pidm;\r\nend;",
+   "id": null,
+   "virtualDomainRoles": [
+      {
+         "allowGet": true,
+         "id": null,
+         "allowPost": false,
+         "allowPut": false,
+         "virtualDomain": {
+            "_ref": "../..",
+            "class": "net.hedtech.banner.virtualDomain.VirtualDomain"
+         },
+         "class": "net.hedtech.banner.virtualDomain.VirtualDomainRole",
+         "roleName": "WEBUSER",
+         "allowDelete": false,
+         "version": null
+      },
+      {
+         "allowGet": true,
+         "id": null,
+         "allowPost": true,
+         "allowPut": true,
+         "virtualDomain": {
+            "_ref": "../..",
+            "class": "net.hedtech.banner.virtualDomain.VirtualDomain"
+         },
+         "class": "net.hedtech.banner.virtualDomain.VirtualDomainRole",
+         "roleName": "WTAILORADMIN",
+         "allowDelete": true,
+         "version": null
+      }
+   ],
+   "codePut": "declare\r\n  l_rowid varchar2(30):=:id;\r\nbegin\r\n  if l_rowid is null then\r\n    raise_application_error(-20000,'Insert of address is not implemented');\r\n  end if;\r\n  update SPRADDR\r\n     set --probably no need to update PIDM and SEQNO\r\n           SPRADDR_STREET_LINE1 = :SPRADDR_STREET_LINE1,\r\n           SPRADDR_STREET_LINE2 = :SPRADDR_STREET_LINE2, \r\n            SPRADDR_STREET_LINE3 = :SPRADDR_STREET_LINE3, \r\n            SPRADDR_STREET_LINE4 = :SPRADDR_STREET_LINE4, \r\n            SPRADDR_HOUSE_NUMBER = :SPRADDR_HOUSE_NUMBER, \r\n            SPRADDR_CITY         = nvl(:SPRADDR_CITY         , SPRADDR_CITY         ), \r\n            SPRADDR_ZIP          = nvl(:SPRADDR_ZIP          , SPRADDR_ZIP          ), \r\n            SPRADDR_STAT_CODE    = :SPRADDR_STAT_CODE,\r\n           SPRADDR_NATN_CODE    = nvl(:SPRADDR_NATN_CODE    , SPRADDR_NATN_CODE    ),\r\n           SPRADDR_FROM_DATE    = nvl(:SPRADDR_FROM_DATE    , SPRADDR_FROM_DATE    ),\r\n           SPRADDR_TO_DATE      = :SPRADDR_TO_DATE\r\n  where ROWID=l_rowid\r\n     and SPRADDR_PIDM=:parm_user_pidm;\r\nend;",
+   "lastUpdated": null,
+   "fileTimestamp": "2016-06-06T15:21:57Z",
+   "dateCreated": null,
+   "class": "net.hedtech.banner.virtualDomain.VirtualDomain",
+   "codeDelete": null,
+   "codeGet": "SELECT   rowidtochar(SPRADDR.ROWID) \"id\",\r\n         SPRADDR_PIDM,\r\n         SPRADDR_SEQNO,\r\n         SPRADDR_ATYP_CODE,\r\n         STVATYP_DESC,\r\n         SPRADDR_STREET_LINE1,  -- now 75 long\r\n         SPRADDR_STREET_LINE2,  -- now 75 long\r\n         SPRADDR_STREET_LINE3,  -- now 75 long\r\n         SPRADDR_STREET_LINE4,  -- new\r\n         SPRADDR_HOUSE_NUMBER,  -- new         \r\n         SPRADDR_CITY,          -- now 50 long\r\n         SPRADDR_ZIP,           -- now 30 long\r\n         SPRADDR_STAT_CODE,\r\n         SPRADDR_NATN_CODE,\r\n         SPRADDR_FROM_DATE,\r\n         SPRADDR_TO_DATE\r\n  FROM   SPRADDR, STVATYP\r\nWHERE   SPRADDR_ATYP_CODE = STVATYP_CODE AND SPRADDR_PIDM = :parm_user_pidm AND SPRADDR_ATYP_CODE = 'PR' AND SPRADDR_STATUS_IND IS NULL\r\n         AND SYSDATE BETWEEN NVL (SPRADDR_FROM_DATE, SYSDATE - 1) AND  NVL (SPRADDR_TO_DATE, SYSDATE + 1)",
+   "typeOfCode": "S",
+   "serviceName": "PRAddress",
+   "version": null
+}

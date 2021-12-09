@@ -1,0 +1,70 @@
+{
+   "constantName": "testparams",
+   "developerSecurity": [],
+   "extendsPage": null,
+   "fileTimestamp": "2021-10-26T14:09:35Z",
+   "modelView": {
+      "components": [
+         {
+            "resource": "",
+            "name": "colorPicker",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "components": [
+               {
+                  "submitLabel": "Submit",
+                  "components": [
+                     {
+                        "sourceParameters": {},
+                        "name": "colorValueOut",
+                        "onLoad": "console.log('colorValueOut load event');",
+                        "sourceModel": "colorPicker",
+                        "label": "Choose color:",
+                        "loadInitially": true,
+                        "placeholder": "Select ...",
+                        "labelKey": "NAME",
+                        "type": "select",
+                        "valueKey": "VALUE",
+                        "onUpdate": "console.log('colorValueOut update event')",
+                        "required": false
+                     }
+                  ],
+                  "submit": "document.location=$$contextRoot  + 'customPage/page/testparams?color=' + btoa(btoa($colorValueOut));",
+                  "nextButtonLabel": "",
+                  "name": "colorForm",
+                  "showInitially": true,
+                  "type": "form"
+               },
+               {
+                  "sourceParameters": {},
+                  "name": "colorValueIn",
+                  "onLoad": "debugger;\nif ($$params.color) {  \nconsole.log('decode param');\n$colorValueIn = atob(atob($$params.color)); \n  var random_number = \"Nw%3D%3Dc3Rlcm1jb2Rl=OTE%3DMjAyMTEw&OTY%3Dc2Nybg%3D%3D=OQ%3D%3DMTAwMDE%3D&OTc%3Dc3BpZG0%3D=OTU%3DNjk4MTE%3D\"; // generate random number between 0 and 1\n  alert(atob(atob(random_number)), {});\n}",
+                  "sourceModel": "colorPicker",
+                  "label": "Passed color:",
+                  "loadInitially": true,
+                  "labelKey": "NAME",
+                  "type": "select",
+                  "valueKey": "VALUE",
+                  "value": "",
+                  "required": false
+               }
+            ],
+            "name": "colorBlock",
+            "showInitially": true,
+            "label": "Test for passing encoded parameter to page.",
+            "type": "block"
+         }
+      ],
+      "name": "testparams",
+      "type": "page"
+   },
+   "owner": null,
+   "pageRoles": [
+      {
+         "roleName": "ALLROLES",
+         "allow": true
+      }
+   ]
+}

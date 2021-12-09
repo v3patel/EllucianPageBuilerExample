@@ -1,0 +1,45 @@
+{
+   "dataSource": "B",
+   "virtualDomainRoles": [
+      {
+         "allowGet": true,
+         "id": null,
+         "allowPost": false,
+         "allowPut": false,
+         "virtualDomain": {
+            "_ref": "../..",
+            "class": "net.hedtech.banner.virtualDomain.VirtualDomain"
+         },
+         "class": "net.hedtech.banner.virtualDomain.VirtualDomainRole",
+         "roleName": "STUDENT",
+         "allowDelete": false,
+         "version": null
+      },
+      {
+         "allowGet": true,
+         "id": null,
+         "allowPost": true,
+         "allowPut": true,
+         "virtualDomain": {
+            "_ref": "../..",
+            "class": "net.hedtech.banner.virtualDomain.VirtualDomain"
+         },
+         "class": "net.hedtech.banner.virtualDomain.VirtualDomainRole",
+         "roleName": "WTAILORADMIN",
+         "allowDelete": true,
+         "version": null
+      }
+   ],
+   "codePut": null,
+   "class": "net.hedtech.banner.virtualDomain.VirtualDomain",
+   "lastUpdated": null,
+   "codeDelete": null,
+   "codeGet": "select \r\nrowidtochar(smrprle.rowid) \"id\"\n,stvlevl_desc\r\n,stvcamp_desc\r\n,stvcoll_desc\r\n,stvdegc_desc\r\n,smrprle.*\r\nfrom smrprle ,stvlevl , stvcamp, stvcoll, stvdegc\r\nwhere stvlevl_code=smrprle_levl_code\r\n  and stvcamp_code(+)=smrprle_camp_code\r\n  and stvcoll_code(+)=smrprle_coll_code\r\n  and stvdegc_code(+)=smrprle_degc_code\r\n  and smrprle_program like nvl(:programme,'%')\r\n",
+   "version": null,
+   "serviceName": "f_programme_details",
+   "id": null,
+   "codePost": null,
+   "dateCreated": null,
+   "fileTimestamp": "2013-11-25T11:19:56Z",
+   "typeOfCode": "S"
+}

@@ -1,0 +1,59 @@
+{
+   "dataSource": "S",
+   "virtualDomainRoles": [
+      {
+         "allowGet": true,
+         "id": null,
+         "allowPost": true,
+         "allowPut": true,
+         "virtualDomain": {
+            "_ref": "../..",
+            "class": "net.hedtech.banner.virtualDomain.VirtualDomain"
+         },
+         "class": "net.hedtech.banner.virtualDomain.VirtualDomainRole",
+         "roleName": "WTAILORADMIN",
+         "allowDelete": true,
+         "version": null
+      },
+      {
+         "allowGet": true,
+         "id": null,
+         "allowPost": false,
+         "allowPut": false,
+         "virtualDomain": {
+            "_ref": "../..",
+            "class": "net.hedtech.banner.virtualDomain.VirtualDomain"
+         },
+         "class": "net.hedtech.banner.virtualDomain.VirtualDomainRole",
+         "roleName": "STUDENT",
+         "allowDelete": false,
+         "version": null
+      },
+      {
+         "allowGet": true,
+         "id": null,
+         "allowPost": false,
+         "allowPut": false,
+         "virtualDomain": {
+            "_ref": "../..",
+            "class": "net.hedtech.banner.virtualDomain.VirtualDomain"
+         },
+         "class": "net.hedtech.banner.virtualDomain.VirtualDomainRole",
+         "roleName": "GUEST",
+         "allowDelete": false,
+         "version": null
+      }
+   ],
+   "codePut": null,
+   "class": "net.hedtech.banner.virtualDomain.VirtualDomain",
+   "lastUpdated": null,
+   "codeDelete": null,
+   "codeGet": "select * from dept",
+   "version": null,
+   "serviceName": "department",
+   "id": null,
+   "codePost": null,
+   "dateCreated": null,
+   "fileTimestamp": "2013-11-25T11:19:57Z",
+   "typeOfCode": "S"
+}

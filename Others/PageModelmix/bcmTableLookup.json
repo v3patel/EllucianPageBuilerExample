@@ -1,0 +1,29 @@
+{
+   "dataSource": "B",
+   "virtualDomainRoles": [{
+      "allowGet": true,
+      "id": null,
+      "allowPost": false,
+      "allowPut": false,
+      "virtualDomain": {
+         "_ref": "../..",
+         "class": "net.hedtech.banner.virtualDomain.VirtualDomain"
+      },
+      "class": "net.hedtech.banner.virtualDomain.VirtualDomainRole",
+      "roleName": "WTAILORADMIN",
+      "allowDelete": false,
+      "version": null
+   }],
+   "codePut": null,
+   "class": "net.hedtech.banner.virtualDomain.VirtualDomain",
+   "lastUpdated": null,
+   "codeDelete": null,
+   "codeGet": "select \r\nowner, table_name, comments\r\nfrom all_tab_comments\r\nwhere (owner like :owner or :owner is null)\r\n  and (table_name like upper(:table) or :table is null)\r\n  and (comments like :comments or :comments is null)",
+   "version": null,
+   "serviceName": "bcmTableLookup",
+   "id": null,
+   "codePost": null,
+   "dateCreated": null,
+   "fileTimestamp": "2013-12-05T09:20:35Z",
+   "typeOfCode": "S"
+}

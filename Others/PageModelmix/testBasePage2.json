@@ -1,0 +1,23 @@
+{
+   "extendsPage": null,
+   "pageRoles": [],
+   "fileTimestamp": "2016-04-08T11:48:26Z",
+   "modelView": {
+      "title": "Test Base Page 2",
+      "scriptingLanguage": "JavaScript",
+      "name": "basePage2",
+      "components": [{
+         "validation": {},
+         "placeholder": "Enter some text",
+         "name": "xeTextBox",
+         "label": "xe Text",
+         "parameters": {},
+         "type": "text",
+         "required": false,
+         "readonly": false,
+         "loadInitially": true
+      }],
+      "type": "page"
+   },
+   "constantName": "testBasePage2"
+}

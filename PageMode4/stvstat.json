@@ -1,0 +1,29 @@
+{
+   "dataSource": "B",
+   "virtualDomainRoles": [{
+      "allowGet": true,
+      "id": null,
+      "allowPost": false,
+      "allowPut": false,
+      "virtualDomain": {
+         "_ref": "../..",
+         "class": "net.hedtech.banner.virtualDomain.VirtualDomain"
+      },
+      "class": "net.hedtech.banner.virtualDomain.VirtualDomainRole",
+      "roleName": "WEBUSER",
+      "allowDelete": false,
+      "version": null
+   }],
+   "codePut": null,
+   "class": "net.hedtech.banner.virtualDomain.VirtualDomain",
+   "lastUpdated": null,
+   "codeDelete": null,
+   "codeGet": "select  STVSTAT_CODE, STVSTAT_DESC from stvstat, stvnatn where stvstat_statscan_cde=stvnatn_edi_equiv and stvnatn_code like NVL(:countrycode, '%') union\r\nselect null, '- select' from dual\r\norder by 2\r\n",
+   "version": null,
+   "serviceName": "stvstat",
+   "id": null,
+   "codePost": null,
+   "dateCreated": null,
+   "fileTimestamp": "2013-11-25T11:19:57Z",
+   "typeOfCode": "S"
+}

@@ -1,0 +1,45 @@
+{
+   "dataSource": "B",
+   "virtualDomainRoles": [
+      {
+         "allowGet": true,
+         "id": null,
+         "allowPost": false,
+         "allowPut": false,
+         "virtualDomain": {
+            "_ref": "../..",
+            "class": "net.hedtech.banner.virtualDomain.VirtualDomain"
+         },
+         "class": "net.hedtech.banner.virtualDomain.VirtualDomainRole",
+         "roleName": "STUDENT",
+         "allowDelete": false,
+         "version": null
+      },
+      {
+         "allowGet": true,
+         "id": null,
+         "allowPost": true,
+         "allowPut": true,
+         "virtualDomain": {
+            "_ref": "../..",
+            "class": "net.hedtech.banner.virtualDomain.VirtualDomain"
+         },
+         "class": "net.hedtech.banner.virtualDomain.VirtualDomainRole",
+         "roleName": "WTAILORADMIN",
+         "allowDelete": true,
+         "version": null
+      }
+   ],
+   "codePut": null,
+   "class": "net.hedtech.banner.virtualDomain.VirtualDomain",
+   "lastUpdated": null,
+   "codeDelete": null,
+   "codeGet": "SELECT   DISTINCT STVLEVL_CODE, STVLEVL_DESC\r\n  FROM   STVLEVL, SMRPRLE,    SMBPGEN PGEN1\r\n                           LEFT OUTER JOIN\r\n                              SOBCURR\r\n                           ON SOBCURR_PROGRAM = SMBPGEN_PROGRAM\r\n                              AND SOBCURR_TERM_CODE_INIT <= :TERM                        \r\n WHERE       STVLEVL_CODE = NVL (SOBCURR_LEVL_CODE, SMRPRLE_LEVL_CODE)\r\n         AND SMRPRLE_PROGRAM = SMBPGEN_PROGRAM\r\n         AND SMBPGEN_ACTIVE_IND = 'Y'\r\n         AND SMBPGEN_TERM_CODE_EFF = (SELECT   MAX (PGEN2.SMBPGEN_TERM_CODE_EFF)\r\n                                        FROM   SMBPGEN PGEN2\r\n                                       WHERE   PGEN2.SMBPGEN_PROGRAM = PGEN1.SMBPGEN_PROGRAM\r\n                                               AND PGEN2.SMBPGEN_TERM_CODE_EFF <= :TERM)\r\n         AND NVL (NVL (SOBCURR_CAMP_CODE, SMRPRLE_CAMP_CODE), '****') = NVL (:campus, NVL (NVL (SOBCURR_CAMP_CODE, SMRPRLE_CAMP_CODE), '****'))\r\n         AND NVL (NVL (SOBCURR_COLL_CODE, SMRPRLE_COLL_CODE), '****') = NVL (:college, NVL (NVL (SOBCURR_COLL_CODE, SMRPRLE_COLL_CODE), '****'))\r\n         AND (EXISTS (SELECT   1\r\n                        FROM   SORWDSP\r\n                       WHERE   SORWDSP_TABLE_NAME = 'STVLEVL'\r\n                               AND SORWDSP_CODE = NVL (NVL (SOBCURR_LEVL_CODE, SMRPRLE_LEVL_CODE), SORWDSP_CODE))\r\n              OR NOT EXISTS (SELECT   1\r\n                               FROM   SORWDSP\r\n                              WHERE   SORWDSP_TABLE_NAME = 'STVLEVL'))\r\n         AND (EXISTS (SELECT   1\r\n                        FROM   SORWDSP\r\n                       WHERE   SORWDSP_TABLE_NAME = 'STVCAMP'\r\n                               AND SORWDSP_CODE = NVL (NVL (SOBCURR_CAMP_CODE, SMRPRLE_CAMP_CODE), SORWDSP_CODE))\r\n              OR NOT EXISTS (SELECT   1\r\n                               FROM   SORWDSP\r\n                              WHERE   SORWDSP_TABLE_NAME = 'STVCAMP'))\r\n         AND (EXISTS (SELECT   1\r\n                        FROM   SORWDSP\r\n                       WHERE   SORWDSP_TABLE_NAME = 'STVCOLL'\r\n                               AND SORWDSP_CODE = NVL (NVL (SOBCURR_COLL_CODE, SMRPRLE_COLL_CODE), SORWDSP_CODE))\r\n              OR NOT EXISTS (SELECT   1\r\n                               FROM   SORWDSP\r\n                              WHERE   SORWDSP_TABLE_NAME = 'STVCOLL'))\r\nUNION\r\nSELECT   NULL, G$_NLS.GET ('ESC_PROGCAT_S_FINDPR-0011', 'SSEN', ' all levels') FROM DUAL\r\nORDER BY   2\r\n",
+   "version": null,
+   "serviceName": "f_level",
+   "id": null,
+   "codePost": null,
+   "dateCreated": null,
+   "fileTimestamp": "2013-11-25T11:19:56Z",
+   "typeOfCode": "S"
+}

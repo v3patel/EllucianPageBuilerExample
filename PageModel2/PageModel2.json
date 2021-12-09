@@ -1,0 +1,264 @@
+{
+   "constantName": "PageModel2",
+   "extendsPage": null,
+   "modelView": {
+      "components": [
+         {
+            "resource": "virtualDomains.empdept",
+            "name": "Empdept",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "resource": "virtualDomains.department",
+            "name": "Dept",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "name": "Gender",
+            "type": "resource",
+            "staticData": [
+               {
+                  "sex": "F",
+                  "label": "Female"
+               },
+               {
+                  "sex": "U",
+                  "label": "Unknown"
+               },
+               {
+                  "sex": "M",
+                  "label": "Male"
+               }
+            ]
+         },
+         {
+            "components": [
+               {
+                  "sourceParameters": {},
+                  "name": "SelectDept",
+                  "sourceModel": "Dept",
+                  "label": "Department",
+                  "loadInitially": true,
+                  "placeholder": "All Departments",
+                  "labelKey": "DNAME",
+                  "type": "select",
+                  "valueKey": "DEPTNO",
+                  "onUpdate": "$EmpDetails.$load()",
+                  "value": "",
+                  "required": false
+               },
+               {
+                  "readonly": false,
+                  "name": "EmployeeNameFilter",
+                  "label": "Employee Name",
+                  "loadInitially": true,
+                  "placeholder": "Filter with wild cards",
+                  "type": "text",
+                  "onUpdate": "$EmpDetails.$load()",
+                  "parameters": {},
+                  "required": false,
+                  "validation": {}
+               },
+               {
+                  "readonly": false,
+                  "name": "EmployeeNumberFilter",
+                  "label": "Employee Number",
+                  "loadInitially": true,
+                  "placeholder": "Filter",
+                  "type": "text",
+                  "onUpdate": "$EmpDetails.$load()",
+                  "parameters": {},
+                  "required": false,
+                  "validation": {}
+               }
+            ],
+            "nextButtonLabel": "Next",
+            "name": "SelectDepartment",
+            "showInitially": true,
+            "label": "Filter",
+            "type": "form"
+         },
+         {
+            "components": [{
+               "allowDelete": true,
+               "components": [
+                  {
+                     "name": "ID",
+                     "model": "id",
+                     "loadInitially": true,
+                     "type": "hidden"
+                  },
+                  {
+                     "readonly": false,
+                     "name": "EMPNO",
+                     "fractionDigits": 0,
+                     "model": "EMPNO",
+                     "label": "Employee Number",
+                     "loadInitially": true,
+                     "type": "number",
+                     "parameters": {},
+                     "required": false,
+                     "validation": {}
+                  },
+                  {
+                     "sourceParameters": {},
+                     "name": "SEX",
+                     "model": "SEX",
+                     "sourceModel": "Gender",
+                     "label": "Gender",
+                     "loadInitially": true,
+                     "placeholder": "Choose Gender",
+                     "labelKey": "label",
+                     "type": "select",
+                     "valueKey": "sex",
+                     "required": false
+                  },
+                  {
+                     "readonly": false,
+                     "name": "ENAME",
+                     "model": "ENAME",
+                     "label": "Employee Name",
+                     "loadInitially": true,
+                     "type": "text",
+                     "parameters": {},
+                     "required": false,
+                     "validation": {}
+                  },
+                  {
+                     "sourceParameters": {},
+                     "name": "DEPTNO",
+                     "model": "DEPTNO",
+                     "sourceModel": "Dept",
+                     "label": "Department Name",
+                     "loadInitially": true,
+                     "labelKey": "DNAME",
+                     "type": "select",
+                     "valueKey": "DEPTNO",
+                     "required": false
+                  },
+                  {
+                     "valueStyle": "align-right float-right",
+                     "fractionDigits": 2,
+                     "label": "Salary",
+                     "loadInitially": true,
+                     "type": "number",
+                     "required": false,
+                     "readonly": false,
+                     "labelStyle": "align-right",
+                     "name": "SAL",
+                     "model": "SAL",
+                     "style": "",
+                     "parameters": {},
+                     "validation": {}
+                  },
+                  {
+                     "valueStyle": "align-right float-right",
+                     "fractionDigits": 2,
+                     "label": "Commission",
+                     "loadInitially": true,
+                     "type": "number",
+                     "required": false,
+                     "readonly": false,
+                     "labelStyle": "align-right",
+                     "name": "COMM",
+                     "model": "COMM",
+                     "style": "",
+                     "placeholder": "Enter",
+                     "parameters": {},
+                     "validation": {}
+                  },
+                  {
+                     "valueStyle": "align-right float-right",
+                     "labelStyle": "align-right",
+                     "name": "TOTAL",
+                     "style": "",
+                     "label": "Total Payment",
+                     "type": "literal",
+                     "value": "{{$item.SAL + $item.COMM | number:2}}"
+                  },
+                  {
+                     "readonly": false,
+                     "name": "HIREDATE",
+                     "model": "HIREDATE",
+                     "label": "Hire Date",
+                     "loadInitially": true,
+                     "type": "datetime",
+                     "parameters": {},
+                     "required": false,
+                     "validation": {}
+                  }
+               ],
+               "onClick": "console.log('Grid On Click' +currentSelection.ROW_NUMBER );",
+               "onError": "alert(response.data.errors.errorMessage);",
+               "allowNew": true,
+               "pageSize": 8,
+               "saveDataLabel": "",
+               "label": "",
+               "loadInitially": true,
+               "type": "grid",
+               "newRecordLabel": "",
+               "refreshDataLabel": "",
+               "name": "EmpDetails",
+               "allowModify": true,
+               "model": "Empdept",
+               "allowReload": true,
+               "parameters": {
+                  "ENAME": "$EmployeeNameFilter",
+                  "EMPNO": "$EmployeeNumberFilter",
+                  "DEPTNO": "$SelectDept"
+               }
+            }],
+            "nextButtonLabel": "Next",
+            "name": "EditEmpList",
+            "showInitially": true,
+            "label": "Edit Employees",
+            "type": "form"
+         },
+         {
+            "components": [
+               {
+                  "name": "GridSelection",
+                  "label": "&#36;EmpDetails.&#36;selection:",
+                  "type": "literal",
+                  "value": "$EmpDetails.$selection"
+               },
+               {
+                  "labelStyle": "",
+                  "name": "GridItem",
+                  "label": "&#36;EmpDetails.EMPNO:",
+                  "type": "literal",
+                  "value": "$EmpDetails.EMPNO"
+               },
+               {
+                  "name": "GridValue",
+                  "label": "&#36;EmpDetails:",
+                  "type": "literal",
+                  "value": "$EmpDetails"
+               }
+            ],
+            "nextButtonLabel": "",
+            "name": "SelectedEmployee",
+            "showInitially": false,
+            "label": "Below some methods to access data from the Grid above",
+            "type": "form"
+         }
+      ],
+      "name": "EmployeePage",
+      "scriptingLanguage": "JavaScript",
+      "title": "Employee Details page",
+      "type": "page"
+   },
+   "fileTimestamp": "2016-01-14T15:13:33Z",
+   "pageRoles": [
+      {
+         "allow": true,
+         "roleName": "GUEST"
+      },
+      {
+         "allow": true,
+         "roleName": "WTAILORADMIN"
+      }
+   ]
+}

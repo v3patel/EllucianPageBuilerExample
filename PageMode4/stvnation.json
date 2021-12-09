@@ -1,0 +1,29 @@
+{
+   "dataSource": "B",
+   "virtualDomainRoles": [{
+      "allowGet": true,
+      "id": null,
+      "allowPost": false,
+      "allowPut": false,
+      "virtualDomain": {
+         "_ref": "../..",
+         "class": "net.hedtech.banner.virtualDomain.VirtualDomain"
+      },
+      "class": "net.hedtech.banner.virtualDomain.VirtualDomainRole",
+      "roleName": "WEBUSER",
+      "allowDelete": false,
+      "version": null
+   }],
+   "codePut": null,
+   "class": "net.hedtech.banner.virtualDomain.VirtualDomain",
+   "lastUpdated": null,
+   "codeDelete": null,
+   "codeGet": "select stvnatn_code, stvnatn_nation from stvnatn\r\nunion\r\nselect null, '- select' from dual\r\norder by 2",
+   "version": null,
+   "serviceName": "stvnation",
+   "id": null,
+   "codePost": null,
+   "dateCreated": null,
+   "fileTimestamp": "2013-11-25T11:19:57Z",
+   "typeOfCode": "S"
+}

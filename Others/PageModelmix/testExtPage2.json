@@ -1,0 +1,42 @@
+{
+   "extendsPage": {"constantName": "testBasePage2"},
+   "pageRoles": [],
+   "fileTimestamp": "2016-04-08T11:48:26Z",
+   "modelView": {"deltas": {
+      "basePage2": {
+         "title": {
+            "base": "Test Base Page 2",
+            "ext": "Test Extension Page 2"
+         },
+         "meta": {
+            "base": {"firstChild": "xeTextBox"},
+            "ext": {"firstChild": "aText"}
+         }
+      },
+      "aText": {
+         "validation": {"ext": {}},
+         "placeholder": {"ext": "Enter some text"},
+         "name": {"ext": "aText"},
+         "label": {"ext": "xe Text"},
+         "parameters": {"ext": {}},
+         "type": {"ext": "text"},
+         "required": {"ext": false},
+         "readonly": {"ext": false},
+         "loadInitially": {"ext": true},
+         "meta": {"ext": {"parent": "basePage2"}}
+      },
+      "xeTextBox": {
+         "validation": {"base": {}},
+         "placeholder": {"base": "Enter some text"},
+         "name": {"base": "xeTextBox"},
+         "label": {"base": "xe Text"},
+         "parameters": {"base": {}},
+         "type": {"base": "text"},
+         "required": {"base": false},
+         "readonly": {"base": false},
+         "loadInitially": {"base": true},
+         "meta": {"base": {"parent": "basePage2"}}
+      }
+   }},
+   "constantName": "testExtPage2"
+}

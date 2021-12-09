@@ -1,0 +1,247 @@
+{
+   "constantName": "HOMEPAGE",
+   "developerSecurity": [],
+   "extendsPage": null,
+   "fileTimestamp": "2020-10-02T17:55:41Z",
+   "modelView": {
+      "components": [
+         {
+            "asHtml": false,
+            "name": "Welcome",
+            "style": "welcome",
+            "label": "Welcome to Self-Service Banner",
+            "loadInitially": true,
+            "type": "display",
+            "value": ""
+         },
+         {
+            "resource": "virtualDomains.GOVROLE_Domain",
+            "name": "GovroleRes",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "components": [
+               {
+                  "name": "GovroleData",
+                  "pageSize": 1,
+                  "onLoad": "$(\".hide_all\").hide();\n$(\".GeneralBlock\").show();\n\nif($GovroleData.GOVROLE_STUDENT_IND == 'Y'){\n$(\".StudentBtn\").show();\n}else{\n$(\".StudentBtn\").hide();\n}\n\nif($GovroleData.GOVROLE_FINAID_IND == 'Y'){\n$(\".FinAidBtn\").show();\n}else{\n$(\".FinAidBtn\").hide();\n}\n\nif($GovroleData.GOVROLE_FACULTY_IND == 'Y'){\n$(\".FacultyBtn\").show();\n}else{\n$(\".FacultyBtn\").hide();\n}\n\nif($GovroleData.GOVROLE_EMPLOYEE_IND == 'Y'){\n$(\".EmployeeBtn\").show();\n}else{\n$(\".EmployeeBtn\").hide();\n}\n\nif($GovroleData.GOVROLE_FINANCE_IND == 'Y'){\n$(\".FinanceBtn\").show();\n}else{\n$(\".FinanceBtn\").hide();\n}",
+                  "model": "GovroleRes",
+                  "loadInitially": true,
+                  "type": "data",
+                  "parameters": {}
+               },
+               {
+                  "readonly": false,
+                  "name": "linkTarget",
+                  "onLoad": "",
+                  "loadInitially": true,
+                  "type": "text",
+                  "parameters": {},
+                  "value": "_blank",
+                  "validation": {},
+                  "required": false
+               },
+               {
+                  "readonly": false,
+                  "name": "DefaultIconURL",
+                  "onLoad": "",
+                  "loadInitially": true,
+                  "type": "text",
+                  "parameters": {},
+                  "value": "https://banner.school.edu/BannerGeneralSsb/assets/personal_info.svg",
+                  "validation": {},
+                  "required": false
+               },
+               {
+                  "readonly": false,
+                  "name": "GeneralBaseURL",
+                  "loadInitially": true,
+                  "type": "text",
+                  "parameters": {},
+                  "value": "https://banner.school.edu/BannerGeneralSsb/",
+                  "validation": {},
+                  "required": false
+               },
+               {
+                  "readonly": false,
+                  "name": "StudentBaseURL",
+                  "loadInitially": true,
+                  "type": "text",
+                  "parameters": {},
+                  "value": "https://banner.school.edu/StudentSelfService/",
+                  "validation": {},
+                  "required": false
+               },
+               {
+                  "readonly": false,
+                  "name": "RegistrationBaseURL",
+                  "loadInitially": true,
+                  "type": "text",
+                  "parameters": {},
+                  "value": "https://banner.school.edu/StudentRegistrationSsb/",
+                  "validation": {},
+                  "required": false
+               },
+               {
+                  "readonly": false,
+                  "name": "FacultyBaseURL",
+                  "loadInitially": true,
+                  "type": "text",
+                  "parameters": {},
+                  "value": "https://banner.school.edu/FacultySelfService/",
+                  "validation": {},
+                  "required": false
+               },
+               {
+                  "readonly": false,
+                  "name": "EmployeeBaseURL",
+                  "loadInitially": true,
+                  "type": "text",
+                  "parameters": {},
+                  "value": "https://banner.school.edu/EmployeeSelfService/",
+                  "validation": {},
+                  "required": false
+               },
+               {
+                  "readonly": false,
+                  "name": "FinanceBaseURL",
+                  "loadInitially": true,
+                  "type": "text",
+                  "parameters": {},
+                  "value": "https://banner.school.edu/FinanceSelfService/",
+                  "validation": {},
+                  "required": false
+               }
+            ],
+            "name": "HiddenBlock",
+            "showInitially": false,
+            "type": "block"
+         },
+         {
+            "components": [
+               {
+                  "valueStyle": "navBtn",
+                  "onClick": "$(\".hide_all\").hide();\n$(\".GeneralBlock\").show();",
+                  "name": "AllUsersBtn",
+                  "style": "AllUsersBtn navBlock",
+                  "label": "All Users",
+                  "type": "button"
+               },
+               {
+                  "valueStyle": "navBtn",
+                  "onClick": "$(\".hide_all\").hide();\n$(\".StudentBlock\").show();\n$(\".RegistrationBlock\").show();",
+                  "name": "StudentBtn",
+                  "style": "StudentBtn navBlock",
+                  "label": "Students",
+                  "type": "button"
+               },
+               {
+                  "valueStyle": "navBtn",
+                  "onClick": "$(\".hide_all\").hide();\n$(\".FinAidBlock\").show();",
+                  "name": "FinAidBtn",
+                  "style": "FinAidBtn navBlock",
+                  "label": "Financial Aid",
+                  "type": "button"
+               },
+               {
+                  "valueStyle": "navBtn",
+                  "onClick": "$(\".hide_all\").hide();\n$(\".FacultyBlock\").show();",
+                  "name": "FacultyBtn",
+                  "style": "FacultyBtn navBlock",
+                  "label": "Faculty",
+                  "type": "button"
+               },
+               {
+                  "valueStyle": "navBtn",
+                  "onClick": "$(\".hide_all\").hide();\n$(\".EmployeeBlock\").show();",
+                  "name": "EmployeeBtn",
+                  "style": "EmployeeBtn navBlock",
+                  "label": "Employees",
+                  "type": "button"
+               },
+               {
+                  "valueStyle": "navBtn",
+                  "onClick": "$(\".hide_all\").hide();\n$(\".FinanceBlock\").show();",
+                  "name": "FinanceBtn",
+                  "style": "FinanceBtn navBlock",
+                  "label": "Finance",
+                  "type": "button"
+               }
+            ],
+            "name": "ButtonBlock",
+            "showInitially": true,
+            "style": "navBlock",
+            "type": "block"
+         },
+         {
+            "components": [
+               {
+                  "name": "BuildTileFunction",
+                  "type": "literal",
+                  "value": "<script>\nfunction buildTile(title, desc, url, icon, target, div){\n\nvar tileStr = '<a href=' + url + ' class=\"gen-app-tile\" target=' + target + '>' +\n'<button class=\"gen-app-tile\">' +\n'    <div class=\"tile-icon\">' +\n'        <img src=' + icon + '>' +\n'    </div>' +\n'    <div class=\"tile-content\" >' +\n'        <div class=\"tile-title\">' + title +'</div>' +\n'        <div class=\"tile-desc\">' + desc + '</div>' +\n'    </div>' +\n'</button></a>';\n\n$(tileStr).appendTo(div);\n}\n</script>"
+               },
+               {
+                  "name": "GeneralTiles",
+                  "style": "GeneralBlock hide_all",
+                  "type": "literal",
+                  "value": "<h3 class=\"pb-block-label\">All Users</h3>\n<div class=\"GeneralBlockDiv\"></div>\n<script>\n\nbuildTile(\n\"Personal Information\", \n\"View and update your biographical and demographic information.\",\n\"{{GeneralBaseURL}}ssb/personalInformation\",\n\"{{DefaultIconURL}}\",\n\"{{linkTarget}}\",\n$('DIV.GeneralBlockDiv'));\n\nbuildTile(\n\"Direct Deposit\", \n\"Create, view and update your direct deposit allocation(s).\",\n\"{{GeneralBaseURL}}ssb/directDeposit\",\n\"{{DefaultIconURL}}\",\n\"{{linkTarget}}\",\n$('DIV.GeneralBlockDiv'));\n\nbuildTile(\n\"Action Items\", \n\"View and process your assigned Action Items.\",\n\"{{GeneralBaseURL}}ssb/aip/#/list\",\n\"{{DefaultIconURL}}\",\n\"{{linkTarget}}\",\n$('DIV.GeneralBlockDiv'));\n\n</script>"
+               },
+               {
+                  "name": "StudentTiles",
+                  "style": "StudentBlock hide_all",
+                  "type": "literal",
+                  "value": "<h3 class=\"pb-block-label\">Students</h3>\n<div class=\"StudentBlockDiv\"></div>\n<script>\n\nbuildTile(\n\"Student Profile\", \n\"View detailed student information including biographical, curriculum, etc.\",\n\"{{StudentBaseURL}}ssb/studentProfile\",\n\"{{DefaultIconURL}}\",\n\"{{linkTarget}}\",\n$('DIV.StudentBlockDiv'));\n\nbuildTile(\n\"Grades\", \n\" View grades by term and level, or across terms, or across levels.\",\n\"{{StudentBaseURL}}ssb/studentGrades\",\n\"{{DefaultIconURL}}\",\n\"{{linkTarget}}\",\n$('DIV.StudentBlockDiv'));\n\nbuildTile(\n\"Graduation Application\", \n\"Apply to graduate.\",\n\"{{StudentBaseURL}}ssb/graduationApplication\",\n\"{{DefaultIconURL}}\",\n\"{{linkTarget}}\",\n$('DIV.StudentBlockDiv'));\n\nbuildTile(\n\"Enrollment Verification\", \n\"Request an enrollment verification.\",\n\"{{StudentBaseURL}}ssb/enrollmentVerificationRequest\",\n\"{{DefaultIconURL}}\",\n\"{{linkTarget}}\",\n$('DIV.StudentBlockDiv'));\n\nbuildTile(\n\"Degree Evaluation\", \n\"Curriculum, advising and program planning on the Web.\",\n\"{{StudentBaseURL}}ssb/degreeEvaluation\",\n\"{{DefaultIconURL}}\",\n\"{{linkTarget}}\",\n$('DIV.StudentBlockDiv'));\n\nbuildTile(\n\"Account Information\", \n\"View account information including summary and details of transactions.\",\n\"{{StudentBaseURL}}ssb/accountInformation\",\n\"{{DefaultIconURL}}\",\n\"{{linkTarget}}\",\n$('DIV.StudentBlockDiv'));\n\nbuildTile(\n\"Account Detail for Term\", \n\"Display the detailed account information for the selected term.\",\n\"{{StudentBaseURL}}ssb/accountDetailByTerm\",\n\"{{DefaultIconURL}}\",\n\"{{linkTarget}}\",\n$('DIV.StudentBlockDiv'));\n\nbuildTile(\n\"Tax Notification (1098-T)\", \n\"Review your 1098-T form for a specific tax year.\",\n\"{{StudentBaseURL}}ssb/studentTaxNotification\",\n\"{{DefaultIconURL}}\",\n\"{{linkTarget}}\",\n$('DIV.StudentBlockDiv'));\n\nbuildTile(\n\"Statement and Processing History\", \n\"View and print stored statements, payment history, and unbilled activity for an account.\",\n\"{{StudentBaseURL}}ssb/statementAndPaymentHistory\",\n\"{{DefaultIconURL}}\",\n\"{{linkTarget}}\",\n$('DIV.StudentBlockDiv'));\n\nbuildTile(\n\"Payment and Deposit Processing\", \n\"Submit payments for deposits or other transaction fees.\",\n\"{{StudentBaseURL}}ssb/depositProcessing\",\n\"{{DefaultIconURL}}\",\n\"{{linkTarget}}\",\n$('DIV.StudentBlockDiv'));\n\n</script>"
+               },
+               {
+                  "name": "RegistrationTiles",
+                  "style": "RegistrationBlock hide_all",
+                  "type": "literal",
+                  "value": "<h3 class=\"pb-block-label\">Students - Registration</h3>\n<div class=\"RegistrationBlockDiv\"></div>\n<script>\n\nbuildTile(\n\"Register for Classes\", \n\"Search and register for your classes. You can also view and manage your schedule.\",\n\"{{RegistrationBaseURL}}ssb/registration/registerPostSignIn?mode=registration\",\n\"{{DefaultIconURL}}\",\n\"{{linkTarget}}\",\n$('DIV.RegistrationBlockDiv'));\n\n\nbuildTile(\n\"Browse Classes\", \n\"Looking for classes? In this section you can browse classes you find interesting.\",\n\"{{RegistrationBaseURL}}ssb/term/termSelection?mode=search\",\n\"{{DefaultIconURL}}\",\n\"{{linkTarget}}\",\n$('DIV.RegistrationBlockDiv'));\n\nbuildTile(\n\"Browse Course Catalog\", \n\" Look up basic course information like subject, course and description.\",\n\"{{RegistrationBaseURL}}ssb/term/termSelection?mode=courseSearch\",\n\"{{DefaultIconURL}}\",\n\"{{linkTarget}}\",\n$('DIV.RegistrationBlockDiv'));\n\nbuildTile(\n\"View Registration Information\", \n\"View your past schedules and your ungraded classes.\",\n\"{{RegistrationBaseURL}}ssb/registrationHistory/registrationHistory\",\n\"{{DefaultIconURL}}\",\n\"{{linkTarget}}\",\n$('DIV.RegistrationBlockDiv'));\n\nbuildTile(\n\"Prepare for Registration\", \n\"View registration status, update student term data, and complete pre-registration requirements.\",\n\"{{RegistrationBaseURL}}ssb/registration/registerPostSignIn?mode=preReg\",\n\"{{DefaultIconURL}}\",\n\"{{linkTarget}}\",\n$('DIV.RegistrationBlockDiv'));\n\nbuildTile(\n\"Plan Ahead\", \n\"Give yourself a head start by building plans. When you're ready to register, you'll be able to load these plans.\",\n\"{{RegistrationBaseURL}}ssb/registration/registerPostSignIn?mode=plan\",\n\"{{DefaultIconURL}}\",\n\"{{linkTarget}}\",\n$('DIV.RegistrationBlockDiv'));\n\n</script>"
+               },
+               {
+                  "name": "FinAidTiles",
+                  "style": "FinAidBlock hide_all",
+                  "type": "literal",
+                  "value": "<h3 class=\"pb-block-label\">Students - Financial Aid</h3>\n<div class=\"FinAidBlockDiv\"></div>\n<script>\n\nbuildTile(\n\"Financial Aid Dashboard\", \n\"Award offer, award history, college financing plan, etc.\",\n\"{{StudentBaseURL}}ssb/financialAid\",\n\"{{DefaultIconURL}}\",\n\"{{linkTarget}}\",\n$('DIV.FinAidBlockDiv'));\n\n</script>"
+               },
+               {
+                  "name": "FacultyTiles",
+                  "style": "FacultyBlock hide_all",
+                  "type": "literal",
+                  "value": "<h3 class=\"pb-block-label\">Faculty</h3>\n<div class=\"FacultyBlockDiv\"></div>\n<script>\n\nbuildTile(\n\"Faculty Grade Entry\", \n\"Enter and update midterm, final, and incomplete grades.\",\n\"{{FacultyBaseURL}}ssb/GradeEntry\",\n\"{{DefaultIconURL}}\",\n\"{{linkTarget}}\",\n$('DIV.FacultyBlockDiv'));\n\nbuildTile(\n\"Attendance Tracking\", \n\"Track attendance and absence statistics for students by CRN and meeting.\",\n\"{{FacultyBaseURL}}ssb/facultyAttendanceTracking\",\n\"{{DefaultIconURL}}\",\n\"{{linkTarget}}\",\n$('DIV.FacultyBlockDiv'));\n\nbuildTile(\n\"Academic Review\", \n\"Evaluate a student's academic performance for a selected term.\",\n\"{{FacultyBaseURL}}ssb/StudentAcademicReview\",\n\"{{DefaultIconURL}}\",\n\"{{linkTarget}}\",\n$('DIV.FacultyBlockDiv'));\n\nbuildTile(\n\"Faculty Feedback\", \n\"Identify and monitor students who may be at risk academically.\",\n\"{{FacultyBaseURL}}ssb/facultyFeedback\",\n\"{{DefaultIconURL}}\",\n\"{{linkTarget}}\",\n$('DIV.FacultyBlockDiv'));\n\nbuildTile(\n\"Detail Schedule\", \n\"Faculty member's schedule for the selected term.\",\n\"{{FacultyBaseURL}}ssb/facultyDetailSchedule\",\n\"{{DefaultIconURL}}\",\n\"{{linkTarget}}\",\n$('DIV.FacultyBlockDiv'));\n\nbuildTile(\n\"Week at a Glance\", \n\"All of your classes for the selected week are displayed, both traditional and open learning.\",\n\"{{FacultyBaseURL}}ssb/facultyWeekAtAGlance\",\n\"{{DefaultIconURL}}\",\n\"{{linkTarget}}\",\n$('DIV.FacultyBlockDiv'));\n\nbuildTile(\n\"Office Hours\", \n\"View or maintain office hours for a class.\",\n\"{{FacultyBaseURL}}ssb/officeHours\",\n\"{{DefaultIconURL}}\",\n\"{{linkTarget}}\",\n$('DIV.FacultyBlockDiv'));\n\nbuildTile(\n\"Assignments\", \n\"Display active assignments and the history of assignments for your classes.\",\n\"{{FacultyBaseURL}}ssb/assignments\",\n\"{{DefaultIconURL}}\",\n\"{{linkTarget}}\",\n$('DIV.FacultyBlockDiv'));\n\nbuildTile(\n\"Syllabus Information\", \n\"Provide additional syllabus information for your classes.\",\n\"{{FacultyBaseURL}}ssb/syllabus\",\n\"{{DefaultIconURL}}\",\n\"{{linkTarget}}\",\n$('DIV.FacultyBlockDiv'));\n\nbuildTile(\n\"Registration Overrides\", \n\"Perform permits/overrides for students.\",\n\"{{FacultyBaseURL}}ssb/Registration%20Overrides\",\n\"{{DefaultIconURL}}\",\n\"{{linkTarget}}\",\n$('DIV.FacultyBlockDiv'));\n\nbuildTile(\n\"Security Information\", \n\"Review your authorization and security setup.\",\n\"{{FacultyBaseURL}}ssb/facultyAdvisorSecurityInfo\",\n\"{{DefaultIconURL}}\",\n\"{{linkTarget}}\",\n$('DIV.FacultyBlockDiv'));\n\n</script>"
+               },
+               {
+                  "name": "EmployeeTiles",
+                  "style": "EmployeeBlock hide_all",
+                  "type": "literal",
+                  "value": "<h3 class=\"pb-block-label\">Employees</h3>\n<div class=\"EmployeeBlockDiv\"></div>\n<script>\n\nbuildTile(\n\"Employee Dashboard\", \n\"Pay information, benefits, leave information, etc.\",\n\"{{EmployeeBaseURL}}ssb/hrDashboard\",\n\"{{DefaultIconURL}}\",\n\"{{linkTarget}}\",\n$('DIV.EmployeeBlockDiv'));\n\nbuildTile(\n\"Time Entry\", \n\"Enter time, enter leave requests, time entry approvals, etc.\",\n\"{{EmployeeBaseURL}}ssb/timeEntry\",\n\"{{DefaultIconURL}}\",\n\"{{linkTarget}}\",\n$('DIV.EmployeeBlockDiv'));\n\nbuildTile(\n\"Labor Redistribution\", \n\"Redistribute the labor costs for the institution.\",\n\"{{EmployeeBaseURL}}ssb/laborRedistribution\",\n\"{{DefaultIconURL}}\",\n\"{{linkTarget}}\",\n$('DIV.EmployeeBlockDiv'));\n\nbuildTile(\n\"Position Description\", \n\"Create and maintain position descriptions.\",\n\"{{EmployeeBaseURL}}ssb/positionDescription\",\n\"{{DefaultIconURL}}\",\n\"{{linkTarget}}\",\n$('DIV.EmployeeBlockDiv'));\n\n</script>"
+               },
+               {
+                  "name": "FinanceTiles",
+                  "style": "FinanceBlock hide_all",
+                  "type": "literal",
+                  "value": "<h3 class=\"pb-block-label\">Finance</h3>\n<div class=\"FinanceBlockDiv\"></div>\n<script>\n\nbuildTile(\n\"Finance Queries\", \n\"Create, view and share budget availability, encumbrance and payroll queries.\",\n\"{{FinanceBaseURL}}ssb/myFinanceQuery\",\n\"{{DefaultIconURL}}\",\n\"{{linkTarget}}\",\n$('DIV.FinanceBlockDiv'));\n\nbuildTile(\n\"My Requisitions\", \n\"Create and view draft, pending and completed requisitions and supporting documentation.\",\n\"{{FinanceBaseURL}}ssb/myRequisitions\",\n\"{{DefaultIconURL}}\",\n\"{{linkTarget}}\",\n$('DIV.FinanceBlockDiv'));\n\nbuildTile(\n\"My Journals\", \n\"Create and view draft, pending and completed journals and supporting documentation.\",\n\"{{FinanceBaseURL}}ssb/myJournals\",\n\"{{DefaultIconURL}}\",\n\"{{linkTarget}}\",\n$('DIV.FinanceBlockDiv'));\n\nbuildTile(\n\"Purchase Orders\", \n\"Create purchase orders or review purchase orders in process.\",\n\"{{FinanceBaseURL}}ssb/purchaseOrders\",\n\"{{DefaultIconURL}}\",\n\"{{linkTarget}}\",\n$('DIV.FinanceBlockDiv'));\n\nbuildTile(\n\"Approve Documents\", \n\"View list of documents pending approval. Approve, disapprove, or deny.\",\n\"{{FinanceBaseURL}}ssb/approveDocuments\",\n\"{{DefaultIconURL}}\",\n\"{{linkTarget}}\",\n$('DIV.FinanceBlockDiv'));\n\nbuildTile(\n\"Budget Development\", \n\"Create and review fiscal year operating budgets for the budget development process.\",\n\"{{FinanceBaseURL}}ssb/budgetDevelopment\",\n\"{{DefaultIconURL}}\",\n\"{{linkTarget}}\",\n$('DIV.FinanceBlockDiv'));\n\nbuildTile(\n\"Delete Finance Template\", \n\"Delete templates for Finance Queries, Budget Development, and Purchase Orders.\",\n\"{{FinanceBaseURL}}ssb/deleteTemplate\",\n\"{{DefaultIconURL}}\",\n\"{{linkTarget}}\",\n$('DIV.FinanceBlockDiv'));\n\n</script>"
+               }
+            ],
+            "name": "LayoutBlock",
+            "style": "",
+            "showInitially": true,
+            "label": "",
+            "type": "block"
+         }
+      ],
+      "name": "HOMEPAGE",
+      "label": "",
+      "type": "page",
+      "title": "Banner Homepage",
+      "importCSS": "home"
+   },
+   "owner": null,
+   "pageRoles": [
+      {
+         "roleName": "ALLROLES",
+         "allow": true
+      }
+   ]
+}

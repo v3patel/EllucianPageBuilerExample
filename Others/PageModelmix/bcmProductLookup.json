@@ -1,0 +1,29 @@
+{
+   "dataSource": "B",
+   "virtualDomainRoles": [{
+      "allowGet": true,
+      "id": null,
+      "allowPost": false,
+      "allowPut": false,
+      "virtualDomain": {
+         "_ref": "../..",
+         "class": "net.hedtech.banner.virtualDomain.VirtualDomain"
+      },
+      "class": "net.hedtech.banner.virtualDomain.VirtualDomainRole",
+      "roleName": "WTAILORADMIN",
+      "allowDelete": false,
+      "version": null
+   }],
+   "codePut": null,
+   "class": "net.hedtech.banner.virtualDomain.VirtualDomain",
+   "lastUpdated": null,
+   "codeDelete": null,
+   "codeGet": "select 'GENERAL' owner, 'GENERAL' product, 'General' description from dual\r\nunion all\r\nselect 'SATURN', 'STUDENT', 'Student' from dual\r\nunion all\r\nselect 'TAISMGR', 'ARSYS', 'Accounts Receivable' from dual\r\nunion all\r\nselect 'FAISMGR', 'FINAID', 'Financial Aid' from dual",
+   "version": null,
+   "serviceName": "bcmProductLookup",
+   "id": null,
+   "codePost": null,
+   "dateCreated": null,
+   "fileTimestamp": "2013-12-05T09:20:35Z",
+   "typeOfCode": "S"
+}
