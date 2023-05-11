@@ -1,0 +1,146 @@
+{
+   "constantName": "ELIVE_EXAMPLE3_PAGE",
+   "developerSecurity": [],
+   "extendsPage": null,
+   "fileTimestamp": "2021-04-02T13:38:25Z",
+   "modelView": {
+      "components": [
+         {
+            "resource": "virtualDomains.ELIVE_EXAMPLE3_ID_LIST",
+            "name": "BannerIdListResource",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "resource": "virtualDomains.ELIVE_EXAMPLE3_CHARGES",
+            "name": "ParkingChargesResource",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "components": [
+               {
+                  "readonly": false,
+                  "name": "BannerId",
+                  "label": "ID:",
+                  "loadInitially": true,
+                  "type": "text",
+                  "parameters": {},
+                  "validation": {},
+                  "required": false
+               },
+               {
+                  "onClick": "var bannerIdValue = $BannerId;\nconsole.log(\"id lookup clicked id:\" + bannerIdValue);\n$BannerIdDetailData.$load();\n$ParkingChargesTable.$load();",
+                  "name": "BannerIdLookupBtn",
+                  "label": "Look Up Id",
+                  "type": "button"
+               }
+            ],
+            "name": "BannerIdLookupBlock",
+            "showInitially": true,
+            "type": "block"
+         },
+         {
+            "components": [
+               {
+                  "allowDelete": false,
+                  "allowNew": false,
+                  "name": "BannerIdDetailData",
+                  "allowModify": false,
+                  "pageSize": 5,
+                  "onLoad": "if (typeof  $BannerIdDetailData !== 'undefined') {\n    $ChargesDetailBlock.$visible=true;\n}\nelse {\n    $ChargesDetailBlock.$visible=false;\n     alert(\"ID:\" + $BannerId + \" is not valid or has no parking fees in Banner\");\n}",
+                  "model": "BannerIdListResource",
+                  "allowReload": false,
+                  "loadInitially": false,
+                  "type": "detail",
+                  "parameters": {
+                     "banner_id": "$BannerId"
+                  }
+               }
+            ],
+            "name": "BannerIdDetailBlock",
+            "showInitially": true,
+            "type": "block"
+         },
+         {
+            "components": [
+               {
+                  "allowDelete": false,
+                  "components": [
+                     {
+                        "readonly": true,
+                        "name": "ChargeDate",
+                        "style": "ng-scope",
+                        "model": "TRANSACTION_DATE",
+                        "label": "Date",
+                        "loadInitially": false,
+                        "type": "datetime",
+                        "parameters": {},
+                        "validation": {},
+                        "required": false
+                     },
+                     {
+                        "asHtml": false,
+                        "name": "ChargeAmount",
+                        "style": "border: 1px solid black;",
+                        "model": "TRANSACTION_AMOUNT",
+                        "label": "Amount",
+                        "loadInitially": false,
+                        "type": "display"
+                     },
+                     {
+                        "readonly": false,
+                        "booleanTrueValue": "Y",
+                        "booleanFalseValue": "N",
+                        "name": "IsPaid",
+                        "model": "IS_PAID",
+                        "loadInitially": true,
+                        "label": "Charge Paid",
+                        "type": "boolean",
+                        "value": ""
+                     },
+                     {
+                        "readonly": true,
+                        "name": "DatePaid",
+                        "model": "DATE_PAID",
+                        "label": "Date Paid",
+                        "placeholder": "",
+                        "loadInitially": false,
+                        "type": "datetime",
+                        "parameters": {},
+                        "validation": {},
+                        "required": false
+                     }
+                  ],
+                  "allowNew": false,
+                  "name": "ParkingChargesTable",
+                  "allowModify": false,
+                  "pageSize": 5,
+                  "model": "ParkingChargesResource",
+                  "style": "charges-table",
+                  "allowReload": false,
+                  "loadInitially": false,
+                  "type": "htable",
+                  "parameters": {
+                     "banner_id": "$BannerId"
+                  }
+               }
+            ],
+            "name": "ChargesDetailBlock",
+            "showInitially": false,
+            "label": "Parking Charges",
+            "type": "block"
+         }
+      ],
+      "name": "ELIVEEXAMPLE3PAGE",
+      "type": "page",
+      "importCSS": "eLiveExamples"
+   },
+   "owner": null,
+   "pageRoles": [
+      {
+         "roleName": "ADMIN-GPBADMN",
+         "allow": true
+      }
+   ]
+}

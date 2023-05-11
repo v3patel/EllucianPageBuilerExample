@@ -1,0 +1,27 @@
+{
+   "owner": null,
+   "codePut": null,
+   "codeDelete": null,
+   "virtualDomainRoles": [
+      {
+         "allowDelete": false,
+         "allowPost": false,
+         "allowPut": false,
+         "roleName": "FACULTY",
+         "allowGet": true
+      },
+      {
+         "allowDelete": false,
+         "allowPost": false,
+         "allowPut": false,
+         "roleName": "ADMIN-GPBADMN",
+         "allowGet": true
+      }
+   ],
+   "codeGet": "  SELECT CASE facultyadv0_.GRADED_STATUS\r\n             WHEN 'N' THEN 'Not Started'\r\n             WHEN 'IP' THEN 'In Progress'\r\n             WHEN 'C' THEN 'Completed'\r\n             ELSE '??'\r\n         END                                                              GRADEDING_STATUS\r\n        ,CASE facultyadv0_.ROLLED_STATUS\r\n             WHEN 'N' THEN 'Not Started'\r\n             WHEN 'IP' THEN 'In Progress'\r\n             WHEN 'C' THEN 'Completed'\r\n             ELSE '??'\r\n         END                                                              ROLLED\r\n        ,facultyadv0_.SUBJECTCODE || ' - ' || facultyadv0_.SUBJECTDESC    SUBJECT\r\n        ,facultyadv0_.COURSENUMBER                                        Course\r\n        ,facultyadv0_.SEQUENCENUMBER                                      Section\r\n        ,facultyadv0_.COURSETITLE\r\n        ,facultyadv0_.TERM || ' - ' || facultyadv0_.TERMDESC              Term\r\n        ,facultyadv0_.COURSEREFERENCENUMBER                               crn\r\n        ,(SELECT LISTAGG (SSRXLST_CRN, ',') WITHIN GROUP (ORDER BY SSRXLST_CRN)\r\n            FROM SSRXLST a\r\n           WHERE     a.ssrxlst_term_code = facultyadv0_.TERM\r\n             AND a.SSRXLST_CRN !=\r\n                                 facultyadv0_.COURSEREFERENCENUMBER\r\n                 AND a.SSRXLST_XLST_GROUP =\r\n                     (SELECT b.SSRXLST_XLST_GROUP\r\n                        FROM SSRXLST b\r\n                       WHERE     b.ssrxlst_term_code = a.ssrxlst_term_code\r\n                             AND b.SSRXLST_CRN =\r\n                                 facultyadv0_.COURSEREFERENCENUMBER))     xlistedgroups\r\n        ,facultyadv0_.SIRASGN_SURROGATE_ID\r\n        ,facultyadv0_.SOBTERM_CLASLST_WEB_DISP_IND\r\n        ,facultyadv0_.COURSENUMBER\r\n        ,facultyadv0_.COURSEREFERENCENUMBER\r\n        ,facultyadv0_.COURSESTATUS\r\n        ,facultyadv0_.ENROLLMENT\r\n        ,facultyadv0_.ENTERACCESS\r\n        ,facultyadv0_.FACULTYPIDM\r\n        ,facultyadv0_.FINGRDDISPLAY\r\n        ,facultyadv0_.FINGRDWEBUPDIND\r\n        ,facultyadv0_.FINAL_GRADING_ENABLED\r\n        ,facultyadv0_.GRADABLE_COUNT\r\n        ,facultyadv0_.GRADABLE_IND\r\n        ,facultyadv0_.GRADABLE_ROSTER_COUNT\r\n        ,facultyadv0_.GRADED_STATUS\r\n        ,facultyadv0_.MIDTERM_GRADABLE_COUNT\r\n        ,facultyadv0_.MIDTERM_GRADABLE_ROSTER_COUNT\r\n        ,facultyadv0_.MIDGRDDISPLAY\r\n        ,facultyadv0_.MIDGRDWEBUPDIND\r\n        ,facultyadv0_.MIDTERM_GRADED_STATUS\r\n        ,facultyadv0_.MIDTERM_GRADING_ENABLED\r\n        ,facultyadv0_.PARTOFTERM\r\n        ,facultyadv0_.ROLLED_STATUS\r\n        ,facultyadv0_.ROSTER_GRADED_COUNT\r\n        ,facultyadv0_.ROSTER_MIDTERM_GRADED_COUNT\r\n        ,facultyadv0_.SIRASGN_VERSION\r\n        ,facultyadv0_.VIEWACCESS\r\n        ,facultyadv0_.TERM term1\r\n    FROM SVQ_CRN_ASSIGN facultyadv0_\r\n   WHERE     1 = 1\r\n         AND facultyadv0_.FACULTYPIDM = 114402\r\n         AND (   facultyadv0_.ENTERACCESS = 'Y'\r\n              OR facultyadv0_.ENTERACCESS = 'P'\r\n              OR facultyadv0_.VIEWACCESS = 'Y'\r\n              OR facultyadv0_.VIEWACCESS = 'P')\r\n         AND facultyadv0_.GRADABLE_IND = 'Y'\r\n         AND (   facultyadv0_.SOBTERM_CLASLST_WEB_DISP_IND = 'Y'\r\n              OR facultyadv0_.FINAL_GRADING_ENABLED = 'Y')\r\n         AND (   facultyadv0_.GRADABLE_ROSTER_COUNT > 0\r\n              OR facultyadv0_.MIDTERM_GRADABLE_ROSTER_COUNT > 0)",
+   "typeOfCode": "S",
+   "fileTimestamp": null,
+   "serviceName": "UP_S_COURSE_LIST",
+   "codePost": null,
+   "developerSecurity": []
+}

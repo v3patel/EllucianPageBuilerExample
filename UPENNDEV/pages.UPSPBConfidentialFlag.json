@@ -1,0 +1,111 @@
+{
+   "constantName": "UPSPBConfidentialFlag",
+   "developerSecurity": [],
+   "extendsPage": null,
+   "fileTimestamp": "2022-07-06T22:29:02Z",
+   "modelView": {
+      "components": [
+         {
+            "resource": "virtualDomains.UPSVDConfidInd",
+            "name": "UPSVDConfidInd",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "resource": "",
+            "name": "UPSVDConfidIndRadio",
+            "type": "resource",
+            "staticData": [
+               {
+                  "FLAG_DESC": "Yes, Penn is allowed to share my Directory Information",
+                  "FLAG_VALUE": "N"
+               },
+               {
+                  "FLAG_DESC": "No, please do not share my Directory Information",
+                  "FLAG_VALUE": "Y"
+               }
+            ]
+         },
+         {
+            "name": "jsLitreal",
+            "type": "literal",
+            "value": "<SCRIPT>\n\nfunction save_rec() {\n    debugger;\n    alert(\"hI\", {type:\"success\", flash:true});\n    console.info(\"You have click me \");\n   // $UPSVDConfidentialFlagRec.save();\n}\n\n\n//var language = window.navigator.userLanguage || window.navigator.language;\n//alert(language , {type:\"success\", flash:true});\n//console.info(language );\nconsole.info(\"hi there \");\n</SCRIPT>"
+         },
+         {
+            "name": "cssLitreal",
+            "type": "literal",
+            "value": "<style>\nlabel.pb-detail.pb-display.pb-item.pb-label {\n  display: block;\n}\n</style>"
+         },
+         {
+            "components": [
+               {
+                  "name": "BeforeRadioButtons_new",
+                  "type": "literal",
+                  "value": "The federal law, Family Educational Rights and Privacy Act (FERPA), protects the privacy of student \"education\" records. Under FERPA, Penn may release certain information designated as \"directory information\" to third parties without your consent, unless you have specifically asked Penn not to do so (\"opted out\"). Directory information is generally regarded to be less sensitive than other types of information in a student’s education record. At Penn, directory information includes the following categories: a student's name, addresses, telephone number, date and place of birth, dates of attendance, enrollment status (full-time, half-time, etc.), major field of study, degrees and awards received, previous educational institutions attended, participation in officially recognized activities (including social and honorary fraternities), and sports, weight and height if a member of an athletic team. Students may \"opt out\" to direct Penn not to disclose their directory information. <b>Students should consider very carefully the possible consequences of opting-out of sharing FERPA directory information which may include, without limitation, Penn not providing your information to potential employers for recruitment purposes; alumni for mentoring and networking opportunities; publications for honor, award, or commencement announcements; or certain interest or affinity groups for informational mailings. Without your specific written consent, University officials will also not be able to verify your enrollment status or degree received, unless the disclosure would otherwise be permitted by another exception under FERPA. </b>\n<p></p>\nStudents who have previously chosen to \"opt out\" may decide to reverse this decision by returning to this page at any time. Please note that this FERPA opt-out form does not affect your listing in the Penn Online Directory.\n<p></p>"
+               },
+               {
+                  "allowDelete": false,
+                  "components": [
+                     {
+                        "name": "BLANKINE",
+                        "style": "",
+                        "type": "literal",
+                        "value": "<p>  </p><b> FERPA Directory Information Opt-Out:</b><p></p>"
+                     },
+                     {
+                        "valueStyle": "",
+                        "booleanFalseValue": "N",
+                        "loadInitially": true,
+                        "label": "Checking this box confirms you opt-out from sharing all FERPA directory information.",
+                        "type": "boolean",
+                        "readonly": false,
+                        "booleanTrueValue": "Y",
+                        "labelStyle": "",
+                        "name": "ConfidentialFlag1",
+                        "onLoad": "",
+                        "model": "SPBPERS_CONFID_IND",
+                        "style": "",
+                        "onUpdate": "$(\"#pbid-Save\").removeClass(\"disabled\"); \nparams.isResponseModified = true;"
+                     }
+                  ],
+                  "onError": "var errorMessage =response.data.errors? response.data.errors.errorMessage: null;\n\nif (errorMessage && errorMessage.indexOf(\"ORA-20000\") > -1) { \n         alert(\"An entry already exists for this virtual domain and role, cannot add a duplicate\", {type:\"error\"});\n} else {  \n        alert( errorMessage?errorMessage:response.data, {type:\"error\"});\n}",
+                  "onSave": "",
+                  "allowNew": false,
+                  "onSaveSuccess": "$UPSVDConfidentialFlagRec.$load();\nalert($.i18n.prop(\"js.notification.success\"), {type:\"success\", flash:true});\n window.params.saved=true;",
+                  "pageSize": 1,
+                  "saveDataLabel": "Confirm",
+                  "loadInitially": true,
+                  "label": "",
+                  "type": "detail",
+                  "name": "UPSVDConfidentialFlagRec",
+                  "allowModify": true,
+                  "onLoad": "",
+                  "model": "UPSVDConfidInd",
+                  "style": "",
+                  "allowReload": false,
+                  "parameters": {}
+               }
+            ],
+            "name": "UPSVDConfidentialFlag",
+            "showInitially": true,
+            "style": "",
+            "label": "FERPA Directory Information Opt-Out",
+            "type": "block"
+         }
+      ],
+      "documentation": "How to  Authorize University  for Title IV Authorisation",
+      "name": "UPSPBConfidentialFlag",
+      "style": "",
+      "label": "",
+      "type": "page",
+      "title": "UPENN : FERPA Directory Information Opt-Out",
+      "importCSS": ""
+   },
+   "owner": null,
+   "pageRoles": [
+      {
+         "roleName": "STUDENT",
+         "allow": true
+      }
+   ]
+}

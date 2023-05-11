@@ -1,0 +1,20 @@
+{
+   "owner": null,
+   "codePut": null,
+   "codeDelete": null,
+   "virtualDomainRoles": [
+      {
+         "allowDelete": true,
+         "allowPost": true,
+         "allowPut": true,
+         "roleName": "ADMIN-GPBADMN",
+         "allowGet": true
+      }
+   ],
+   "codeGet": "SELECT SPRIDEN_LAST_NAME||' '||SPRIDEN_FIRST_NAME||' '||SPRIDEN_MI||' '||SPRIDEN_ID SPRIDEN_DISPLAY\r\n,SPRIDEN_PIDM\r\nFROM SPRIDEN\r\nWHERE ROWNUM < 20",
+   "typeOfCode": "S",
+   "fileTimestamp": null,
+   "serviceName": "MYPAGE_SPRIDEN",
+   "codePost": null,
+   "developerSecurity": []
+}

@@ -1,0 +1,374 @@
+{
+   "constantName": "SZATRAV",
+   "extendsPage": null,
+   "fileTimestamp": "2019-05-30T17:52:25Z",
+   "modelView": {
+      "components": [
+         {
+            "name": "SWRAPOS2",
+            "resource": "virtualDomains.SWRAPOS2",
+            "staticData": [],
+            "type": "resource"
+         },
+         {
+            "name": "SWRAPOS",
+            "resource": "virtualDomains.SWRAPOS",
+            "staticData": [],
+            "type": "resource"
+         },
+         {
+            "name": "SWVAPPR",
+            "resource": "virtualDomains.SwvapprDomain",
+            "staticData": [],
+            "type": "resource"
+         },
+         {
+            "name": "ApproverIds2",
+            "resource": "virtualDomains.ApproverIds2",
+            "staticData": [],
+            "type": "resource"
+         },
+         {
+            "name": "ApproverIds",
+            "resource": "virtualDomains.ApproverIds",
+            "staticData": [],
+            "type": "resource"
+         },
+         {
+            "name": "STVPRIOR",
+            "resource": "virtualDomains.STVPRIOR",
+            "staticData": [],
+            "type": "resource"
+         },
+         {
+            "name": "FTVORGN",
+            "resource": "virtualDomains.FTVORGN",
+            "staticData": [],
+            "type": "resource"
+         },
+         {
+            "name": "FTVCOAS",
+            "resource": "virtualDomains.FTVCOAS",
+            "staticData": [],
+            "type": "resource"
+         },
+         {
+            "name": "ApproverIDs3",
+            "resource": "virtualDomains.ApproverIDs3",
+            "staticData": [],
+            "type": "resource"
+         },
+         {
+            "components": [
+               {
+                  "label": "Approval Type:",
+                  "name": "KeyBlockApprCode",
+                  "type": "literal",
+                  "value": "TEM"
+               },
+               {
+                  "label": "COAS:",
+                  "labelKey": "FTVCOAS_TITLE",
+                  "loadInitially": true,
+                  "name": "KeyBlockCoasCode",
+                  "onUpdate": "",
+                  "placeholder": "...",
+                  "required": true,
+                  "sourceModel": "FTVCOAS",
+                  "sourceParameters": {},
+                  "type": "select",
+                  "valueKey": "FTVCOAS_COAS_CODE"
+               },
+               {
+                  "label": "Organization:",
+                  "labelKey": "FTVORGN_TITLE",
+                  "loadInitially": true,
+                  "name": "KeyBlockOrgnCode",
+                  "placeholder": "...",
+                  "required": false,
+                  "sourceModel": "FTVORGN",
+                  "sourceParameters": {},
+                  "type": "select",
+                  "valueKey": "FTVORGN_ORGN_CODE"
+               },
+               {
+                  "label": "OR, Enter an Org Code:",
+                  "loadInitially": true,
+                  "name": "KeyBlockOrgnCode2",
+                  "parameters": {},
+                  "placeholder": "...",
+                  "readonly": false,
+                  "required": false,
+                  "type": "text",
+                  "validation": {}
+               },
+               {
+                  "label": "Search",
+                  "name": "KeyBlockSearch",
+                  "onClick": "var entered1  = true;\nvar entered2 = true;\nvar enteredcoas = true;\n\n\nif  ($KeyBlockOrgnCode===undefined || $KeyBlockOrgnCode===null || $KeyBlockOrgnCode===\"\" )  { entered1 = false; }\nif  ($KeyBlockOrgnCode2===undefined || $KeyBlockOrgnCode2===null  || $KeyBlockOrgnCode2===\"\" || $KeyBlockOrgnCode2.length < 2)  { entered2 = false }\nif  ($KeyBlockCoasCode===undefined || $KeyBlockCoasCode===null || $KeyBlockCoasCode===\"\")  { enteredcoas = false }\n/*\nalert(\n\"KeyBlockOrgnCode is:  \" + \n$KeyBlockOrgnCode + \n\" KeyBlockOrgnCode2 is  : \" + \n$KeyBlockOrgnCode2 + \n\"  entered1 is:  \" + \nentered1 + \n\"   entered2 is:  \" + \nentered2\n);\n*/\nif ( !enteredcoas ) {\n       alert(\"Please choose a Chart of Accounts.\",\n                                {type:\"error\"});\n} else if  (  !entered1  &&  !entered2 ) {\n   alert(\"Please choose an Organization code.\",\n   {type:\"error\"});\n}  else if  ( entered1  &&  entered2  ) {  \n           alert(\"Please enter an organization or choose an organization from the drop down, not both.  Please Clear the fields and re-enter your choices.\",\n                                {type:\"error\"});\n} \nelse {\n        $GridP.$load();\n        $GridS.$load();\n                }",
+                  "type": "button"
+               },
+               {
+                  "label": "Clear Search Fields",
+                  "name": "KeyBlockReset",
+                  "onClick": "document.getElementById(\"pbid-KeyBlock\").reset();\n$KeyBlockOrgnCode = \"\";\n$KeyBlockOrgnCode2 = \"\";",
+                  "type": "button"
+               }
+            ],
+            "label": "",
+            "name": "KeyBlock",
+            "nextButtonLabel": "Next",
+            "showInitially": true,
+            "type": "form"
+         },
+         {
+            "components": [
+               {
+                  "components": [
+                     {
+                        "name": "PopupContent",
+                        "type": "literal",
+                        "value": "<p style=\"text-align: left;\"><strong>Alert</strong></p>\n<p style=\"text-align: left;\">No Primary Data Found</p>"
+                     },
+                     {
+                        "label": "OK",
+                        "name": "PopupButton",
+                        "onClick": "$PopupNoDataFound.$visible=!$PopupNoDataFound.$visible;",
+                        "type": "button"
+                     }
+                  ],
+                  "name": "PopupInner",
+                  "showInitially": true,
+                  "type": "block"
+               }
+            ],
+            "name": "PopupNoDataFound",
+            "showInitially": false,
+            "type": "block"
+         },
+         {
+            "components": [
+               {
+                  "allowDelete": true,
+                  "allowModify": true,
+                  "allowNew": true,
+                  "allowReload": true,
+                  "components": [
+                     {
+                        "labelKey": "APPROVER_NAME",
+                        "loadInitially": true,
+                        "model": "SWRAPOS_APPR_PIDM",
+                        "name": "GridPApprover",
+                        "required": true,
+                        "sourceModel": "ApproverIDs3",
+                        "sourceParameters": {},
+                        "type": "select",
+                        "valueKey": "APPROVER_PIDM"
+                     },
+                     {
+                        "loadInitially": true,
+                        "model": "SWRAPOS_PROXY_IND",
+                        "name": "GridPProxy",
+                        "type": "hidden"
+                     },
+                     {
+                        "label": "Level",
+                        "labelKey": "STVPRIOR_TITLE",
+                        "loadInitially": true,
+                        "model": "SWRAPOS_PRIOR_LEVL",
+                        "name": "GridPLevel",
+                        "required": true,
+                        "sourceModel": "STVPRIOR",
+                        "sourceParameters": {},
+                        "type": "select",
+                        "valueKey": "STVPRIOR_CODE"
+                     },
+                     {
+                        "label": "Start Date",
+                        "loadInitially": true,
+                        "model": "SWRAPOS_ORG_START_DATE",
+                        "name": "GridPStartDate",
+                        "parameters": {},
+                        "readonly": false,
+                        "required": false,
+                        "type": "datetime",
+                        "validation": {}
+                     },
+                     {
+                        "label": "End Date",
+                        "loadInitially": true,
+                        "model": "SWRAPOS_ORG_END_DATE",
+                        "name": "GridPEndDate",
+                        "parameters": {},
+                        "readonly": false,
+                        "required": false,
+                        "type": "datetime",
+                        "validation": {}
+                     },
+                     {
+                        "booleanFalseValue": "N",
+                        "booleanTrueValue": "Y",
+                        "label": "Inactive",
+                        "loadInitially": true,
+                        "model": "SWRAPOS_INACTIVE_IND",
+                        "name": "GridPInactiveInd",
+                        "onUpdate": "var date3 = new Date(Date.now()); \nif ( currentSelection.SWRAPOS_INACTIVE_IND =='Y' ) {\n          currentSelection.SWRAPOS_ORG_END_DATE = date3; \n    } \nif ( currentSelection.SWRAPOS_INACTIVE_IND == 'N' && \n     currentSelection.SWRAPOS_ORG_END_DATE==currentSelection.SWRAPOS_ORG_BEGIN_DATE || \n    currentSelection.SWRAPOS_ORG_END_DATE<=currentSelection.SWRAPOS_ORG_BEGIN_DATE\n) { \n     alert(\"Please be sure you change your end date to be in the future \",{type:\"warn\"}); \n    }",
+                        "readonly": false,
+                        "type": "boolean"
+                     },
+                     {
+                        "loadInitially": true,
+                        "model": "SWRAPOS_ORGN_CODE",
+                        "name": "GridPOrgn",
+                        "type": "hidden",
+                        "value": "nvl($KeyBlockOrgnCode2, $KeyBlockOrgnCode)"
+                     },
+                     {
+                        "loadInitially": true,
+                        "model": "SWRAPOS_COAS_CODE",
+                        "name": "GridPCoas",
+                        "type": "hidden",
+                        "value": "$KeyBlockCoasCode"
+                     }
+                  ],
+                  "label": "Primary Approvers",
+                  "loadInitially": false,
+                  "model": "SWRAPOS",
+                  "name": "GridP",
+                  "onClick": "var date1 = new Date(Date.now());\nvar date2= new Date('January 1, 2099 00:00:00');\nif (!currentSelection.SWRAPOS_ORG_START_DATE) {currentSelection.SWRAPOS_ORG_START_DATE = date1;}if (!currentSelection.SWRAPOS_ORG_END_DATE) {currentSelection.SWRAPOS_ORG_END_DATE = date2;}",
+                  "onError": "/*var errors = response.data.errors;\nvar msg = errors.toString();\nif (response.status == 404) {  msg = 'Invalid Resource';} \nelse if (response.status == 500) {  \n\tmsg = errors.errorMessage ? errors.errorMessage : errors[0].errorMessage;\n}\nif (msg.includes('ORA-00001')) {  msg = \"The record already exists\";} \nelse if (msg.includes('ORA-20001')) {  msg = \"End term must be later than the Begin Term\";\n} else if (msg.includes('ORA-20002')) {  msg = \"Only one Level 1 Approver can exist for the Term span, major, campus\";} else if (msg.includes('ORA-20003')) {  msg = \"Only one Level 2 Approver can exist for the Term span, major, campus\";}  else if (msg.includes('ORA-20004')) {  msg = \"The end term is the same as the begin term.  Make inactive or make the end term in the future please\";} else if (msg.includes('ORA-20005')) {  msg = \"A record with this same info already exists\";} else if (msg.includes('PRIOR_LEVL')) {  msg = \"Priority Level is required\";} else if (msg.includes('APPR_PIDM')) {  msg = \"Approver is required\";} else if (msg.includes('ORA-')) {  msg = \"Please make sure you have included all required fields\";}alert(msg, {  type: \"error\"});\n*/\nif (response.status == 404)alert('invalid resource');else if (response.status == 500) {if (response.data.errors.errorMessage)alert(response.data.errors.errorMessage);else alert(response.data.errors[0].errorMessage);}",
+                  "onLoad": "if($GridP.$data.length == 0) {\n\t\t$PopupNoDataFound.$visible=true;\n\t\t$PopupInner.$visible=true;\n    }  else {$PopupNoDataFound.$visible=false;\n\t\t$PopupInner.$visible=false;\n\t\t}",
+                  "onSave": "",
+                  "onSaveSuccess": "alert(\"Changes saved successfully\",{type:\"success\",flash:true});",
+                  "pageSize": 5,
+                  "parameters": {
+                     "coascode": "$KeyBlockCoasCode",
+                     "orgncode": "$KeyBlockOrgnCode",
+                     "orgncode2": "$KeyBlockOrgnCode2"
+                  },
+                  "type": "grid"
+               },
+               {
+                  "allowDelete": true,
+                  "allowModify": true,
+                  "allowNew": true,
+                  "allowReload": true,
+                  "components": [
+                     {
+                        "labelKey": "APPROVER_NAME",
+                        "loadInitially": true,
+                        "model": "SWRAPOS_APPR_PIDM",
+                        "name": "GridSApprover",
+                        "required": true,
+                        "sourceModel": "ApproverIDs3",
+                        "sourceParameters": {},
+                        "type": "select",
+                        "valueKey": "APPROVER_PIDM"
+                     },
+                     {
+                        "loadInitially": true,
+                        "model": "SWRAPOS_PROXY_IND",
+                        "name": "GridSProxy",
+                        "type": "hidden"
+                     },
+                     {
+                        "label": "Level",
+                        "labelKey": "STVPRIOR_TITLE",
+                        "loadInitially": true,
+                        "model": "SWRAPOS_PRIOR_LEVL",
+                        "name": "GridSLevel",
+                        "required": true,
+                        "sourceModel": "STVPRIOR",
+                        "sourceParameters": {},
+                        "type": "select",
+                        "valueKey": "STVPRIOR_CODE"
+                     },
+                     {
+                        "label": "Start Date",
+                        "loadInitially": true,
+                        "model": "SWRAPOS_ORG_START_DATE",
+                        "name": "GridSStartDate",
+                        "parameters": {},
+                        "readonly": false,
+                        "required": false,
+                        "type": "datetime",
+                        "validation": {}
+                     },
+                     {
+                        "label": "End Date",
+                        "loadInitially": true,
+                        "model": "SWRAPOS_ORG_END_DATE",
+                        "name": "GridSEndDate",
+                        "parameters": {},
+                        "readonly": false,
+                        "required": true,
+                        "type": "datetime",
+                        "validation": {}
+                     },
+                     {
+                        "booleanFalseValue": "N",
+                        "booleanTrueValue": "Y",
+                        "label": "Inactive",
+                        "loadInitially": true,
+                        "model": "SWRAPOS_INACTIVE_IND",
+                        "name": "GridSInactiveInd",
+                        "onUpdate": "var date4 = new Date(Date.now()); \nif ( currentSelection.SWRAPOS_INACTIVE_IND =='Y') {\n     currentSelection.SWRAPOS_ORG_END_DATE = date4; \n    } \nif ( currentSelection.SWRAPOS_INACTIVE_IND == 'N' && \n     currentSelection.SWRAPOS_ORG_END_DATE==currentSelection.SWRAPOS_ORG_BEGIN_DATE || \n    currentSelection.SWRAPOS_ORG_END_DATE<=currentSelection.SWRAPOS_ORG_BEGIN_DATE\n) { \n     alert(\"Please be sure you change your end date to be in the future \",{type:\"warn\"}); \n    }",
+                        "readonly": false,
+                        "type": "boolean"
+                     },
+                     {
+                        "loadInitially": true,
+                        "model": "SWRAPOS_COAS_CODE",
+                        "name": "GridSCoas",
+                        "type": "hidden",
+                        "value": "$KeyBlockCoasCode"
+                     },
+                     {
+                        "loadInitially": true,
+                        "model": "SWRAPOS_ORGN_CODE",
+                        "name": "GridSOrgn",
+                        "type": "hidden",
+                        "value": "nvl($KeyBlockOrgnCode2, $KeyBlockOrgnCode)"
+                     }
+                  ],
+                  "label": "Secondary Approvers",
+                  "loadInitially": false,
+                  "model": "SWRAPOS2",
+                  "name": "GridS",
+                  "onClick": "var date4 = new Date(Date.now());\nvar date5 = new Date('January 1, 2099 00:00:00');\nif (!currentSelection.SWRAPOS_ORG_START_DATE) {\ncurrentSelection.SWRAPOS_ORG_START_DATE = date4;\n}\nif (!currentSelection.SWRAPOS_ORG_END_DATE) {\ncurrentSelection.SWRAPOS_ORG_END_DATE = date5;\n}",
+                  "onError": "/*var errors = response.data.errors;\nvar msg = errors.toString();\nif (response.status == 404) {  msg = 'Invalid Resource';} \nelse if (response.status == 500) {  \n\tmsg = errors.errorMessage ? errors.errorMessage : errors[0].errorMessage;\n}\nif (msg.includes('ORA-00001')) {  msg = \"The record already exists\";} \nelse if (msg.includes('ORA-20001')) {  msg = \"End term must be later than the Begin Term\";\n} else if (msg.includes('ORA-20002')) {  msg = \"Only one Level 1 Approver can exist for the Term span, major, campus\";} else if (msg.includes('ORA-20003')) {  msg = \"Only one Level 2 Approver can exist for the Term span, major, campus\";}  else if (msg.includes('ORA-20004')) {  msg = \"The end term is the same as the begin term.  Make inactive or make the end term in the future please\";} else if (msg.includes('ORA-20005')) {  msg = \"A record with this same info already exists\";} else if (msg.includes('PRIOR_LEVL')) {  msg = \"Priority Level is required\";} else if (msg.includes('APPR_PIDM')) {  msg = \"Approver is required\";} else if (msg.includes('ORA-')) {  msg = \"Please make sure you have included all required fields\";}alert(msg, {  type: \"error\"});\n*/\nif (response.status == 404)alert('invalid resource');else if (response.status == 500) {if (response.data.errors.errorMessage)alert(response.data.errors.errorMessage);else alert(response.data.errors[0].errorMessage);}",
+                  "onLoad": "",
+                  "onSave": "",
+                  "onSaveSuccess": "alert(\"Changes saved successfully\",{type:\"success\",flash:true});",
+                  "pageSize": 5,
+                  "parameters": {
+                     "coascode": "$KeyBlockCoasCode",
+                     "orgncode": "$KeyBlockOrgnCode",
+                     "orgncode2": "$KeyBlockOrgnCode2"
+                  },
+                  "type": "grid"
+               }
+            ],
+            "name": "SBlock",
+            "showInitially": true,
+            "type": "block"
+         }
+      ],
+      "importCSS": "xeStyle,horizontalContainer",
+      "label": "Travel and  Expense Approvers",
+      "name": "SZATRAV",
+      "style": "",
+      "title": "Travel and Expense Approvers",
+      "type": "page"
+   },
+   "pageRoles": [
+      {
+         "roleName": "ADMIN-GPBADMN",
+         "allow": true
+      },
+      {
+         "roleName": "ADMIN-SZATRAV",
+         "allow": true
+      }
+   ]
+}

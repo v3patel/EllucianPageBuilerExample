@@ -1,0 +1,20 @@
+{
+   "owner": null,
+   "codePut": null,
+   "codeDelete": null,
+   "virtualDomainRoles": [
+      {
+         "allowDelete": false,
+         "allowPost": false,
+         "allowPut": false,
+         "roleName": "ALLROLES",
+         "allowGet": true
+      }
+   ],
+   "codeGet": "SELECT    a.SPREMRG_FIRST_NAME\r\n         || ' '\r\n         || CASE WHEN a.SPREMRG_MI IS NULL THEN '' ELSE a.SPREMRG_MI || ' ' END\r\n         || a.SPREMRG_LAST_NAME                                    CONTACTNAME\r\n        ,   a.SPREMRG_STREET_LINE1\r\n         || ' '\r\n         || a.SPREMRG_STREET_LINE2\r\n         || ' '\r\n         || a.SPREMRG_STREET_LINE3\r\n         || ' '\r\n         || a.SPREMRG_CITY\r\n         || ', '\r\n         || a.SPREMRG_STAT_CODE\r\n         || ' '\r\n         || a.SPREMRG_ZIP                                          CONTACTADDRESS\r\n        ,a.SPREMRG_NATN_CODE\r\n        ,   a.SPREMRG_PHONE_AREA\r\n         || ' '\r\n         || a.SPREMRG_PHONE_NUMBER\r\n         || ' '\r\n         || a.SPREMRG_PHONE_EXT                                    CONTACTPHONE\r\n        ,STVRELT_DESC                                              RELATIONSHIP\r\n        ,a1.gorsdav_value.accessVARCHAR2 ()                        CONTACTEMAIL\r\n        ,MAX (NVL (SORFOLK_PARENT_EMPLOYER, 'NO'))\r\n             OVER (PARTITION BY SPREMRG_PIDM, SPREMRG_PRIORITY)    ACADEMICRELEASE\r\n        ,MAX (NVL (SORFOLK_PARENT_JOB_TITLE, 'NO'))\r\n             OVER (PARTITION BY SPREMRG_PIDM, SPREMRG_PRIORITY)    FINANCIALRELEASE\r\n    FROM spremrg a\r\n        ,gorsdav a1\r\n        ,gorsdav a2\r\n        ,sorfolk folk\r\n        ,stvrelt\r\n   WHERE   spremrg_pidm = :pidm\r\n         --  AND (spremrg_priority = :spremrg_priority OR :spremrg_priority IS NULL)\r\n         AND a1.gorsdav_table_name(+) = 'SPREMRG'\r\n         AND a1.gorsdav_attr_name(+) = 'EMAIL_ADDRESS'\r\n         AND a1.gorsdav_pk_parenttab(+) =\r\n             SPREMRG_pidm || CHR (1) || SPREMRG_PRIORITY\r\n         AND a2.gorsdav_table_name(+) = 'SPREMRG'\r\n         AND a2.gorsdav_attr_name(+) = 'TELEPHONE_TYPE'\r\n         AND a2.gorsdav_pk_parenttab(+) =\r\n             SPREMRG_pidm || CHR (1) || SPREMRG_PRIORITY\r\n         AND folk.sorfolk_pidm(+) = SPREMRG_pidm\r\n         AND folk.SORFOLK_PARENT_LAST(+) = SPREMRG_LAST_NAME\r\n         AND folk.SORFOLK_PARENT_FIRST(+) = SPREMRG_FIRST_NAME\r\n         AND NVL (folk.SORFOLK_PARENT_MI(+), '@') = NVL (SPREMRG_MI, '@')\r\n         AND folk.SORFOLK_RELT_CODE(+) = SPREMRG_RELT_CODE\r\n         AND STVRELT_CODE = SPREMRG_RELT_CODE\r\nORDER BY spremrg_activity_date DESC",
+   "typeOfCode": "S",
+   "fileTimestamp": "2022-03-29T14:52:17Z",
+   "serviceName": "UPSFACFerpaEmergencyINFOVD",
+   "codePost": null,
+   "developerSecurity": []
+}

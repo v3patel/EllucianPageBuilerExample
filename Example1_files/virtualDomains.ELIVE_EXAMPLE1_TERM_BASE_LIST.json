@@ -1,0 +1,20 @@
+{
+   "owner": null,
+   "codePut": "BEGIN\r\nUPDATE SOBTERM\r\n  SET SOBTERM_FEE_ASSESSMENT = :ONLINE_FEE_ASSESSMENT,\r\n      SOBTERM_REFUND_IND = :REFUND_BY_TOTAL,\r\n      SOBTERM_BYCRN_IND = :REFUND_BY_CRN,\r\n      SOBTERM_USER_ID = USER,\r\n      SOBTERM_ACTIVITY_DATE = SYSDATE\r\nWHERE SOBTERM_TERM_CODE = :TERM_CODE;\r\nEND;\r\n",
+   "codeDelete": "BEGIN\r\n  IF :id = null THEN\r\n    null; \r\n  END IF;\r\n  raise_application_error (-20000, 'This part is only visible in the logs and for users with a debug role. @USERMESSAGE: Delete not allowed');\r\nEND;\r\n",
+   "virtualDomainRoles": [
+      {
+         "allowDelete": false,
+         "allowPost": false,
+         "allowPut": true,
+         "roleName": "ADMIN-GPBADMN",
+         "allowGet": true
+      }
+   ],
+   "codeGet": "select rowidtochar(rowid) \"id\"\r\n,sobterm_term_code      TERM_CODE\r\n,SOBTERM_REFUND_IND     REFUND_BY_CRN                                                                                                                                                                                   \r\n,SOBTERM_BYCRN_IND      REFUND_BY_TOTAL                                                                                                                                                                                 \r\n,SOBTERM_FEE_ASSESSMENT ONLINE_FEE_ASSESSMENT                                   \r\n,SOBTERM_FEE_ASSESSMNT_EFF_DATE ONLINE_ASSESS_EFF_DATE                                       \r\n  from sobterm\r\nwhere sobterm_term_code = :term_code\r\n",
+   "typeOfCode": "S",
+   "fileTimestamp": null,
+   "serviceName": "ELIVE_EXAMPLE1_TERM_BASE_LIST",
+   "codePost": "BEGIN\r\n  IF :id = null THEN\r\n    null; \r\n  END IF;\r\n  raise_application_error (-20000, 'This part is only visible in the logs and for users with a debug role. @USERMESSAGE: Insert/Create not allowed');\r\nEND;\r\n",
+   "developerSecurity": []
+}

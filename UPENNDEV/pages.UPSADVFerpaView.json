@@ -1,0 +1,411 @@
+{
+   "constantName": "UPSADVFerpaView",
+   "developerSecurity": [],
+   "extendsPage": null,
+   "fileTimestamp": "2022-07-06T22:29:01Z",
+   "modelView": {
+      "components": [
+         {
+            "resource": "virtualDomains.UPSFACFerpaStudentINFOVD",
+            "name": "StudentINFO",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "resource": "virtualDomains.UPSFACFerpaEmergencyINFOVD",
+            "name": "EmergencyINFO",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "resource": "virtualDomains.UPSFACFerpaparentINFOVD",
+            "name": "ParetnINFO",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "resource": "virtualDomains.UPSFACFerpaAdddressVD",
+            "name": "AddressVD",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "name": "cssLiteral",
+            "type": "literal",
+            "value": "<style>\nh1,h2 {\n   border-bottom: 2px solid #011F5B\n}\ndiv[ng-grid] {\n    font-size: 12px;\n}\n</style>"
+         },
+         {
+            "components": [
+               {
+                  "allowDelete": false,
+                  "components": [
+                     {
+                        "label": "ID",
+                        "loadInitially": true,
+                        "type": "text",
+                        "required": false,
+                        "readonly": true,
+                        "name": "StudentID",
+                        "style": "",
+                        "model": "PENN_ID",
+                        "placeholder": "",
+                        "onUpdate": "",
+                        "parameters": {},
+                        "value": "",
+                        "validation": {}
+                     },
+                     {
+                        "readonly": true,
+                        "name": "StudentName",
+                        "style": "",
+                        "model": "STUDENTNAME",
+                        "label": "Last Name",
+                        "loadInitially": true,
+                        "placeholder": "",
+                        "type": "text",
+                        "onUpdate": "",
+                        "parameters": {},
+                        "required": false,
+                        "validation": {}
+                     }
+                  ],
+                  "onClick": "$pidm = currentSelection.SPRIDEN_PIDM;\n$EmergencyINFOGRID.$load();\n$AddressVDGrid.$load();\n$ParetnINFOGrid.$load();\nconsole.log('Studentinfo Clicked');",
+                  "allowNew": false,
+                  "pageSize": 1,
+                  "loadInitially": true,
+                  "type": "grid",
+                  "name": "StudentINFOGRID",
+                  "allowModify": false,
+                  "onLoad": "console.log('Studentinfo Loaded');\ndebugger;\nif ($StudentINFOGRIDDS.totalCount == 1 ){\n$pidm = $StudentINFOGRIDDS.currentRecord.SPRIDEN_PIDM;\n$EmergencyINFOGRID.$load();\n$AddressVDGrid.$load();\n$ParetnINFOGrid.$load();\n} else {\n     console.log ('Bad Banner id entered ' + $$params.bannerId);\n       alert(\"invalid Banner id entered \" + $$params.bannerId + \" or You are not authorized to view\", {type:\"error\", flash:true});\n}",
+                  "model": "StudentINFO",
+                  "allowReload": false,
+                  "parameters": {
+                     "p_id": "$$params.bannerId"
+                  }
+               }
+            ],
+            "name": "PesonsCriteriaRow",
+            "showInitially": true,
+            "style": "",
+            "label": "Addresses, Emergency Contacts, and Disclosures",
+            "type": "block"
+         },
+         {
+            "allowDelete": false,
+            "components": [
+               {
+                  "readonly": true,
+                  "name": "conName",
+                  "model": "CONTACTNAME",
+                  "style": "",
+                  "label": "Contact Name",
+                  "loadInitially": true,
+                  "type": "text",
+                  "parameters": {},
+                  "required": false,
+                  "validation": {}
+               },
+               {
+                  "readonly": true,
+                  "name": "conAddress",
+                  "model": "CONTACTADDRESS",
+                  "style": "",
+                  "label": "Contact Address",
+                  "loadInitially": true,
+                  "type": "text",
+                  "parameters": {},
+                  "required": false,
+                  "validation": {}
+               },
+               {
+                  "readonly": true,
+                  "name": "CONTACTPHONE",
+                  "model": "CONTACTPHONE",
+                  "label": "Contact Phone",
+                  "loadInitially": true,
+                  "type": "text",
+                  "parameters": {},
+                  "validation": {},
+                  "required": false
+               },
+               {
+                  "readonly": true,
+                  "name": "RELATIONSHIP",
+                  "model": "RELATIONSHIP",
+                  "label": "Relationship",
+                  "loadInitially": true,
+                  "type": "text",
+                  "parameters": {},
+                  "validation": {},
+                  "required": false
+               },
+               {
+                  "readonly": true,
+                  "name": "CONTACTEMAIL",
+                  "model": "CONTACTEMAIL",
+                  "label": "Contact Email",
+                  "loadInitially": true,
+                  "type": "text",
+                  "parameters": {},
+                  "validation": {},
+                  "required": false
+               },
+               {
+                  "readonly": true,
+                  "name": "ACADEMICRELEASE",
+                  "model": "ACADEMICRELEASE",
+                  "label": "Disclose academic information",
+                  "loadInitially": true,
+                  "type": "text",
+                  "parameters": {},
+                  "validation": {},
+                  "required": false
+               },
+               {
+                  "readonly": true,
+                  "name": "FINANCIALRELEASE",
+                  "model": "FINANCIALRELEASE",
+                  "label": "Disclose financial information",
+                  "loadInitially": true,
+                  "type": "text",
+                  "parameters": {},
+                  "validation": {},
+                  "required": false
+               }
+            ],
+            "onClick": "",
+            "allowNew": false,
+            "pageSize": 3,
+            "loadInitially": false,
+            "label": "Emergency Contact/Disclosures",
+            "type": "grid",
+            "name": "EmergencyINFOGRID",
+            "allowModify": false,
+            "onLoad": "console.log('Emergency Info Loaded');\n  $EmergencyINFOGRIDGrid.columnDefs[1].width = \"25%\";",
+            "model": "EmergencyINFO",
+            "style": "",
+            "allowReload": false,
+            "parameters": {
+               "pidm": "$pidm"
+            }
+         },
+         {
+            "allowDelete": false,
+            "components": [
+               {
+                  "readonly": true,
+                  "name": "STVRELT_DESC",
+                  "model": "STVRELT_DESC",
+                  "label": "Relation",
+                  "loadInitially": true,
+                  "type": "text",
+                  "parameters": {},
+                  "validation": {},
+                  "required": false
+               },
+               {
+                  "readonly": true,
+                  "name": "pARENT_NAME",
+                  "model": "PARENT_NAME",
+                  "label": "Name",
+                  "loadInitially": true,
+                  "type": "text",
+                  "parameters": {},
+                  "validation": {},
+                  "required": false
+               },
+               {
+                  "readonly": true,
+                  "name": "SORFOLK_PARENT_NAME_PREFIX",
+                  "model": "SORFOLK_PARENT_NAME_PREFIX",
+                  "label": "Prefix",
+                  "loadInitially": true,
+                  "type": "text",
+                  "parameters": {},
+                  "validation": {},
+                  "required": false
+               },
+               {
+                  "readonly": true,
+                  "name": "SORFOLK_PARENT_NAME_SUFFIX",
+                  "model": "SORFOLK_PARENT_NAME_SUFFIX",
+                  "label": "Suffix",
+                  "loadInitially": true,
+                  "type": "text",
+                  "parameters": {},
+                  "validation": {},
+                  "required": false
+               },
+               {
+                  "readonly": true,
+                  "name": "SORFOLK_DECEASED_IND",
+                  "model": "SORFOLK_DECEASED_IND",
+                  "label": "Deceased?",
+                  "loadInitially": true,
+                  "type": "text",
+                  "parameters": {},
+                  "validation": {},
+                  "required": false
+               },
+               {
+                  "readonly": true,
+                  "name": "SORFOLK_PARENT_EMPLOYER",
+                  "model": "SORFOLK_PARENT_EMPLOYER",
+                  "label": "Disclose academic information",
+                  "loadInitially": true,
+                  "type": "text",
+                  "parameters": {},
+                  "validation": {},
+                  "required": false
+               },
+               {
+                  "readonly": true,
+                  "name": "SORFOLK_PARENT_JOB_TITLE",
+                  "model": "SORFOLK_PARENT_JOB_TITLE",
+                  "label": "Disclose financial information",
+                  "loadInitially": true,
+                  "type": "text",
+                  "parameters": {},
+                  "validation": {},
+                  "required": false
+               }
+            ],
+            "allowNew": false,
+            "pageSize": 3,
+            "loadInitially": false,
+            "label": "Family/Guardian/Disclosures",
+            "type": "grid",
+            "name": "ParetnINFOGrid",
+            "allowModify": false,
+            "onLoad": "console.log('parent Info Loaded');",
+            "model": "ParetnINFO",
+            "allowReload": false,
+            "parameters": {
+               "pidm": "$pidm"
+            }
+         },
+         {
+            "allowDelete": false,
+            "components": [
+               {
+                  "readonly": true,
+                  "name": "SPRADDR_ATYP_CODE",
+                  "model": "SPRADDR_ATYP_CODE",
+                  "label": "Address Type",
+                  "loadInitially": true,
+                  "type": "text",
+                  "parameters": {},
+                  "validation": {},
+                  "required": false
+               },
+               {
+                  "readonly": true,
+                  "name": "SPRADDR_FROM_DATE",
+                  "model": "SPRADDR_FROM_DATE",
+                  "label": "From Date",
+                  "loadInitially": true,
+                  "type": "text",
+                  "parameters": {},
+                  "validation": {},
+                  "required": false
+               },
+               {
+                  "readonly": true,
+                  "name": "SPRADDR_TO_DATE",
+                  "model": "SPRADDR_TO_DATE",
+                  "label": "To Date",
+                  "loadInitially": true,
+                  "type": "text",
+                  "parameters": {},
+                  "validation": {},
+                  "required": false
+               },
+               {
+                  "readonly": true,
+                  "name": "SPRADDR_STREET_LINE1",
+                  "model": "SPRADDR_STREET_LINE1",
+                  "label": "Line 1",
+                  "loadInitially": true,
+                  "type": "text",
+                  "parameters": {},
+                  "validation": {},
+                  "required": false
+               },
+               {
+                  "readonly": true,
+                  "documentation": "Line 2",
+                  "name": "SPRADDR_STREET_LINE2",
+                  "model": "SPRADDR_STREET_LINE2",
+                  "loadInitially": true,
+                  "type": "text",
+                  "parameters": {},
+                  "validation": {},
+                  "required": false
+               },
+               {
+                  "readonly": true,
+                  "name": "SPRADDR_CITY",
+                  "model": "SPRADDR_CITY",
+                  "label": "City",
+                  "loadInitially": true,
+                  "type": "text",
+                  "parameters": {},
+                  "validation": {},
+                  "required": false
+               },
+               {
+                  "readonly": true,
+                  "name": "SPRADDR_STAT_CODE",
+                  "model": "SPRADDR_STAT_CODE",
+                  "label": "State",
+                  "loadInitially": true,
+                  "type": "text",
+                  "parameters": {},
+                  "validation": {},
+                  "required": false
+               },
+               {
+                  "readonly": true,
+                  "name": "SPRADDR_ZIP",
+                  "model": "SPRADDR_ZIP",
+                  "label": "Zip",
+                  "loadInitially": true,
+                  "type": "text",
+                  "parameters": {},
+                  "validation": {},
+                  "required": false
+               }
+            ],
+            "allowNew": false,
+            "pageSize": 5,
+            "loadInitially": false,
+            "label": "Address",
+            "type": "grid",
+            "name": "AddressVDGrid",
+            "allowModify": false,
+            "onLoad": "console.log('Address Info Loaded');",
+            "model": "AddressVD",
+            "allowReload": false,
+            "parameters": {
+               "pidm": "$pidm"
+            }
+         }
+      ],
+      "name": "UPSADVFerpaView",
+      "label": "",
+      "title": "Addresses, Emergency Contacts, and Disclosures",
+      "type": "page",
+      "importCSS": ""
+   },
+   "owner": null,
+   "pageRoles": [
+      {
+         "roleName": "FACULTY",
+         "allow": true
+      },
+      {
+         "roleName": "REGISTRAR",
+         "allow": true
+      }
+   ]
+}

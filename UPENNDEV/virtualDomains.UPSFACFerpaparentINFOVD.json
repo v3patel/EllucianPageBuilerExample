@@ -1,0 +1,20 @@
+{
+   "owner": null,
+   "codePut": null,
+   "codeDelete": null,
+   "virtualDomainRoles": [
+      {
+         "allowDelete": false,
+         "allowPost": false,
+         "allowPut": false,
+         "roleName": "ALLROLES",
+         "allowGet": true
+      }
+   ],
+   "codeGet": "SELECT stvrelt_desc\r\n        ,   SORFOLK_PARENT_FIRST\r\n         || CASE\r\n                WHEN SORFOLK_PARENT_MI IS NULL THEN ''\r\n                ELSE SORFOLK_PARENT_MI || ' '\r\n            END\r\n         || ' '\r\n         || SORFOLK_PARENT_LAST                                         pARENT_NAME\r\n        ,SORFOLK_PARENT_NAME_PREFIX\r\n        ,SORFOLK_PARENT_NAME_SUFFIX\r\n        ,CASE WHEN SORFOLK_DECEASED_IND = 'Y' THEN 'Yes' ELSE NULL END    SORFOLK_DECEASED_IND\r\n        ,SORFOLK_PARENT_EMPLOYER\r\n        ,SORFOLK_PARENT_JOB_TITLE\r\n        ,SORFOLK_PARENT_DEGREE\r\n    FROM sorfolk folk, stvrelt\r\n   WHERE    sorfolk_pidm = :pidm\r\n         AND STVRELT_CODE = sorfolk_RELT_CODE\r\n         AND NOT EXISTS\r\n                 (SELECT 1\r\n                    FROM spremrg\r\n                   WHERE     sorfolk_pidm = SPREMRG_pidm\r\n                         AND SORFOLK_PARENT_LAST = SPREMRG_LAST_NAME\r\n                         AND SORFOLK_PARENT_FIRST = SPREMRG_FIRST_NAME\r\n                         AND NVL (folk.SORFOLK_PARENT_MI, '@') =\r\n                             NVL (SPREMRG_MI, '@'))\r\nORDER BY SORFOLK_ACTIVITY_DATE DESC",
+   "typeOfCode": "S",
+   "fileTimestamp": "2022-03-29T14:52:17Z",
+   "serviceName": "UPSFACFerpaparentINFOVD",
+   "codePost": null,
+   "developerSecurity": []
+}

@@ -1,0 +1,20 @@
+{
+   "owner": null,
+   "codePut": null,
+   "codeDelete": null,
+   "virtualDomainRoles": [
+      {
+         "allowDelete": false,
+         "allowPost": false,
+         "allowPut": false,
+         "roleName": "ADMIN-GPBADMN",
+         "allowGet": true
+      }
+   ],
+   "codeGet": "SELECT *\r\n  FROM TABLE(baninst1.gzk_example_3.f_get_parking_charge_data(:banner_id)) T1",
+   "typeOfCode": "S",
+   "fileTimestamp": null,
+   "serviceName": "ELIVE_EXAMPLE3_CHARGES",
+   "codePost": null,
+   "developerSecurity": []
+}

@@ -1,0 +1,27 @@
+{
+   "owner": null,
+   "codePut": null,
+   "codeDelete": null,
+   "virtualDomainRoles": [
+      {
+         "allowDelete": false,
+         "allowPost": false,
+         "allowPut": false,
+         "roleName": "FACULTY",
+         "allowGet": true
+      },
+      {
+         "allowDelete": false,
+         "allowPost": false,
+         "allowPut": false,
+         "roleName": "ADMIN-GPBADMN",
+         "allowGet": true
+      }
+   ],
+   "codeGet": "SELECT DISTINCT\r\n       g.shrgrdo_grde_code     GCODE\r\n      ,g.shrgrdo_grde_code     GDESC\r\n      ,SHRGRDE_NUMERIC_VALUE\r\n  FROM shrgrdo g, sfrstcr r, shrgrde ge\r\n WHERE     g.shrgrdo_term_code_effective =\r\n           (SELECT MAX (g1.shrgrdo_term_code_effective)\r\n              FROM shrgrdo g1\r\n             WHERE g1.shrgrdo_term_code_effective <= r.sfrstcr_term_code)\r\n       AND r.sfrstcr_gmod_code = g.shrgrdo_gmod_code\r\n       AND r.sfrstcr_levl_code = g.shrgrdo_levl_code\r\n       AND ge.shrgrde_levl_code = g.shrgrdo_levl_code\r\n       AND ge.shrgrde_code = g.shrgrdo_grde_code\r\n       AND ge.SHRGRDE_TERM_CODE_EFFECTIVE = g.shrgrdo_term_code_effective\r\n       AND ge.shrgrde_web_entry_ind = 'Y'\r\n       AND ge.shrgrde_grde_status_ind = 'A'\r\n       AND r.sfrstcr_pidm = NVL ( :spidm, 71120)\r\n       AND r.sfrstcr_crn = NVL ( :scrn, '10001')\r\n       AND r.sfrstcr_term_code = NVL ( :stermcode, '202110')\r\nUNION\r\nSELECT '- Please select' GCODE, NULL GDESC, null SHRGRDE_NUMERIC_VALUE FROM DUAL\r\nORDER BY SHRGRDE_NUMERIC_VALUE DESC, GCODE ASC",
+   "typeOfCode": "S",
+   "fileTimestamp": null,
+   "serviceName": "UP_S_GRADES",
+   "codePost": null,
+   "developerSecurity": []
+}

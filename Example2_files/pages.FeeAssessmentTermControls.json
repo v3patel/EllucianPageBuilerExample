@@ -1,0 +1,174 @@
+{
+   "constantName": "FeeAssessmentTermControls",
+   "developerSecurity": [],
+   "extendsPage": null,
+   "fileTimestamp": "2021-03-20T00:40:16Z",
+   "modelView": {
+      "components": [
+         {
+            "resource": "virtualDomains.TERM_LIST",
+            "name": "TermListResource",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "resource": "virtualDomains.TERM_BASE_LIST",
+            "name": "TermBaseResource",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "components": [
+               {
+                  "sourceParameters": {},
+                  "name": "KeyBlockTermSelect",
+                  "sourceModel": "TermListResource",
+                  "label": "Active Registration Terms",
+                  "loadInitially": true,
+                  "type": "select",
+                  "labelKey": "STVTERM_DATE_DESC",
+                  "valueKey": "STVTERM_CODE",
+                  "onUpdate": "$DetailBlock.$visible=true;\n$DetailBlockDetail.$load();\n$KeyBlock.$visible=false;",
+                  "required": false
+               }
+            ],
+            "name": "KeyBlock",
+            "showInitially": true,
+            "label": "",
+            "type": "block"
+         },
+         {
+            "components": [
+               {
+                  "components": [
+                     {
+                        "asHtml": false,
+                        "name": "DetailBlockTermSelectedBlockTermCode",
+                        "label": "Term:",
+                        "loadInitially": true,
+                        "type": "display",
+                        "value": "$KeyBlockTermSelect.$selected.STVTERM_CODE"
+                     },
+                     {
+                        "asHtml": false,
+                        "name": "DetailBlockTermSelectedBlockTermDescription",
+                        "model": "",
+                        "label": "Description:",
+                        "loadInitially": true,
+                        "type": "display",
+                        "value": "$KeyBlockTermSelect.$selected.STVTERM_DATE_DESC"
+                     },
+                     {
+                        "onClick": "$DetailBlock.$visible=false;\n$KeyBlock.$visible=true;",
+                        "name": "StartOverButton",
+                        "label": "Select a Different Term",
+                        "type": "button"
+                     }
+                  ],
+                  "name": "DetailBlockTermSelectedBlock",
+                  "showInitially": true,
+                  "type": "block"
+               },
+               {
+                  "allowDelete": true,
+                  "components": [
+                     {
+                        "readonly": false,
+                        "booleanTrueValue": "Y",
+                        "booleanFalseValue": "N",
+                        "name": "DetailBlockDetailRefundByTotal",
+                        "model": "REFUND_BY_TOTAL",
+                        "label": "Refund By Total",
+                        "loadInitially": false,
+                        "type": "boolean"
+                     },
+                     {
+                        "readonly": false,
+                        "booleanTrueValue": "Y",
+                        "booleanFalseValue": "N",
+                        "name": "DetailBlockDetailRefundByCrn",
+                        "model": "REFUND_BY_CRN",
+                        "label": "Refund By Crn",
+                        "loadInitially": false,
+                        "type": "boolean"
+                     },
+                     {
+                        "readonly": false,
+                        "booleanTrueValue": "Y",
+                        "booleanFalseValue": "N",
+                        "name": "DetailBlockDetailOnlineAssessment",
+                        "model": "ONLINE_FEE_ASSESSMENT",
+                        "label": "Online Assessment",
+                        "loadInitially": false,
+                        "type": "boolean"
+                     },
+                     {
+                        "label": "Fee Assesment Effective Date",
+                        "loadInitially": false,
+                        "type": "datetime",
+                        "required": false,
+                        "readonly": false,
+                        "name": "DetailBlockDetailFeeAssessEffectiveDate",
+                        "onLoad": "",
+                        "model": "ONLINE_ASSESS_EFF_DATE",
+                        "placeholder": "",
+                        "parameters": {},
+                        "value": "",
+                        "onUpdate": "",
+                        "validation": {}
+                     },
+                     {
+                        "name": "DetailBlockDetailTermCode",
+                        "model": "TERM_CODE",
+                        "loadInitially": false,
+                        "type": "hidden"
+                     },
+                     {
+                        "name": "DetailBlockDetailId",
+                        "model": "id",
+                        "loadInitially": false,
+                        "type": "hidden"
+                     },
+                     {
+                        "name": "DetailBlockDetailFormatedFeeAssessEffDate",
+                        "model": "FORMATTED_FEE_ASSESS_EFF_DATE",
+                        "loadInitially": true,
+                        "type": "hidden"
+                     }
+                  ],
+                  "onError": "if (response.status == 404)\n    alert('invalid resource');\nelse if (response.status == 500) {\n    if (response.data.errors.errorMessage)\n        alert(\"Error updating Term Base ruies:\" + response.data.errors.errorMessage);\n    else\n        alert(response.data.errors[0].errorMessage);\n}",
+                  "onSave": "",
+                  "allowNew": false,
+                  "pageSize": 5,
+                  "saveDataLabel": "Save",
+                  "onSaveSuccess": "alert(\"Save Successful\");",
+                  "loadInitially": false,
+                  "label": "Term Detail",
+                  "type": "detail",
+                  "name": "DetailBlockDetail",
+                  "allowModify": true,
+                  "onLoad": "",
+                  "model": "TermBaseResource",
+                  "allowReload": false,
+                  "parameters": {
+                     "term_code": "$KeyBlockTermSelect.$selected.STVTERM_CODE"
+                  }
+               }
+            ],
+            "name": "DetailBlock",
+            "showInitially": false,
+            "label": "Term Controls",
+            "type": "block"
+         }
+      ],
+      "name": "FeeAssessmentTermControls",
+      "type": "page"
+   },
+   "owner": null,
+   "pageRoles": [
+      {
+         "roleName": "ADMIN-GPBADMN",
+         "allow": true
+      }
+   ]
+}

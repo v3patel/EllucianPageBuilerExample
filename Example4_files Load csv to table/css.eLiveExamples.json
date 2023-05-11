@@ -1,0 +1,8 @@
+{
+   "constantName": "eLiveExamples",
+   "css": ".charges-table {\n  font-family: Arial, Helvetica, sans-serif;\n  border-collapse: collapse;\n  width: 100%;\n}\n\n.charges-table td, .charges-table th {\n  border: 1px solid #ddd;\n  padding: 8px;\n}\n\n.charges-table tr:nth-child(even){background-color: #f2f2f2;}\n\n.charges-table tr:hover {background-color: #ddd;}\n\n.charges-table th {\n  padding-top: 12px;\n  padding-bottom: 12px;\n  text-align: left;\n  background-color: #4CAF50;\n  color: white;\n}\n\n/* progress bar */\n.updateProgressBlock {\n  width: 100%;\n  background-color: grey;\n}\n \n.updateProgressBar {\n  width: 1%;\n  height: 30px;\n  background-color: green;\n}",
+   "description": "Examples for Ellucian Live",
+   "fileTimestamp": null,
+   "developerSecurity": [],
+   "owner": null
+}

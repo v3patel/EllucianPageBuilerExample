@@ -1,0 +1,164 @@
+CREATE OR REPLACE PACKAGE BODY gzk_example_4 AS
+
+  GV_PARKING_FEES_MODULE CONSTANT VARCHAR2(65) := 'GZK_UPLOAD_PARKING_FEES';
+
+  -- get progress when we know total tables to process and can track current number of tables processed
+  FUNCTION f_get_update_stu_acct_progress RETURN update_stu_acct_progress_t
+    PIPELINED IS
+    lv_progress_data update_stu_acct_progress;
+    CURSOR progress_c IS
+      select sofar, totalwork, units
+        from v$session_longops
+       where opname = gzk_example_4.f_get_parking_fees_module
+         and sofar < totalwork;
+    progress_rec progress_c%ROWTYPE;
+    CURSOR status_c IS
+      select action
+        from v$session
+       WHERE module = gzk_example_4.f_get_parking_fees_module;
+    status_rec status_c%ROWTYPE;
+  
+    lv_status_data_found BOOLEAN;
+    lv_progress_data_found BOOLEAN;
+  BEGIN
+    lv_status_data_found := TRUE;
+    lv_progress_data_found := TRUE;
+    OPEN progress_c;
+    --    LOOP
+    FETCH progress_c
+      INTO progress_rec;
+    --      EXIT WHEN progress_c%NOTFOUND;
+    IF progress_c%FOUND THEN
+      lv_progress_data.so_far     := progress_rec.sofar;
+      lv_progress_data.total_work := progress_rec.totalwork;
+      lv_progress_data.units      := progress_rec.units;
+    ELSE
+      lv_progress_data_found := FALSE;
+    END IF;
+    --    END LOOP;
+    CLOSE progress_c;
+  
+    OPEN status_c;
+    --    LOOP
+    FETCH status_c
+      INTO status_rec;
+    --     EXIT WHEN status_c%NOTFOUND;
+  
+    --      lv_status_data.current_status := status_rec.action;
+    --      PIPE ROW(lv_status_data);
+    --    END LOOP;
+    IF status_c%FOUND THEN
+      lv_progress_data.status_text := status_rec.action;
+    ELSE
+      lv_status_data_found := FALSE;
+    END IF;
+  
+    CLOSE status_c;
+  
+    IF lv_progress_data_found OR lv_status_data_found THEN
+      PIPE ROW(lv_progress_data);
+    END IF;
+    RETURN;
+  END f_get_update_stu_acct_progress;
+  --
+  FUNCTION f_get_parking_fees_module RETURN VARCHAR2 IS
+  BEGIN
+    RETURN GV_PARKING_FEES_MODULE;
+  END f_get_parking_fees_module;
+
+  PROCEDURE p_update_student_accounts_job(p_csv_file_name VARCHAR2) IS
+    lv_sql      VARCHAR2(4000);
+    lv_job_name VARCHAR2(30) := 'RUN_CREATE_PARKING_FEES';
+    lv_job_type VARCHAR2(30) := 'STORED_PROCEDURE';
+  
+  BEGIN
+    lv_sql := 'BANINST1.GZK_EXAMPLE_4.P_UPDATE_STUDENT_ACCOUNTS';
+  
+    lv_job_name := DBMS_SCHEDULER.GENERATE_JOB_NAME(prefix => 'INS_PARKING_FEES');
+    DBMS_SCHEDULER.create_job(job_name            => lv_job_name,
+                              job_type            => lv_job_type,
+                              job_action          => lv_sql,
+                              number_of_arguments => 1,
+                              comments            => 'Job insert parking fees into TBRACCD based on uploaded CSV file');
+    DBMS_SCHEDULER.SET_JOB_ARGUMENT_VALUE(job_name          => lv_job_name,
+                                          argument_position => 1,
+                                          argument_value    => p_csv_file_name);
+  
+    DBMS_SCHEDULER.RUN_JOB(job_name            => lv_job_name,
+                           use_current_session => FALSE);
+  
+  END p_update_student_accounts_job;
+
+  PROCEDURE p_update_student_accounts(p_csv_file_name VARCHAR2) IS
+  
+    lv_total_records     NUMBER;
+    lv_processed_records NUMBER;
+    CURSOR charges_count_c(file_in VARCHAR2) IS
+      SELECT NVL(COUNT(*), 0)
+        FROM tzrprkg
+       WHERE file_in = tzrprkg_csv_file_name
+         and tzrprkg.tzrprkg_accd_tran_number IS NULL;
+  
+    CURSOR uploaded_charges_c(file_in VARCHAR2) IS
+      SELECT *
+        FROM tzrprkg
+       WHERE file_in = tzrprkg_csv_file_name
+         and tzrprkg.tzrprkg_accd_tran_number IS NULL;
+  
+    charges_rec uploaded_charges_c%ROWTYPE;
+  
+    -- session monitoring variables
+    lv_rindex binary_integer := dbms_application_info.set_session_longops_nohint;
+    lv_slno   binary_integer;
+  BEGIN
+    DBMS_APPLICATION_INFO.SET_MODULE(module_name => f_get_parking_fees_module,
+                                     action_name => 'Start processing student accounts for ' ||
+                                                    p_csv_file_name);
+  
+    OPEN charges_count_c(p_csv_file_name);
+    FETCH charges_count_c
+      INTO lv_total_records;
+    CLOSE charges_count_c;
+    lv_processed_records := 0;
+    DBMS_APPLICATION_INFO.SET_ACTION(action_name => 'Processing records in file');
+    DBMS_APPLICATION_INFO.SET_SESSION_LONGOPS(rindex      => lv_rindex,
+                                              slno        => lv_slno,
+                                              op_name     => f_get_parking_fees_module,
+                                              target      => 0,
+                                              context     => 0,
+                                              sofar       => 0,
+                                              totalwork   => lv_total_records,
+                                              target_desc => 'no target',
+                                              units       => 'records');
+    IF lv_total_records > 0 THEN
+      OPEN uploaded_charges_c(p_csv_file_name);
+      LOOP
+        FETCH uploaded_charges_c
+          INTO charges_rec;
+        EXIT WHEN uploaded_charges_c%NOTFOUND;
+        DBMS_APPLICATION_INFO.SET_ACTION(action_name => 'Processing ID:' ||
+                                                        charges_rec.tzrprkg_banner_id);
+        -- force pause so transaction times out
+        -- simulate complicated processing with pause
+        DBMS_LOCK.sleep(0.25);
+        -- increment count after processing
+        lv_processed_records := lv_processed_records + 1;
+        DBMS_APPLICATION_INFO.SET_SESSION_LONGOPS(rindex      => lv_rindex,
+                                                  slno        => lv_slno,
+                                                  op_name     => f_get_parking_fees_module,
+                                                  target      => 0,
+                                                  context     => 0,
+                                                  sofar       => lv_processed_records,
+                                                  totalwork   => lv_total_records,
+                                                  target_desc => 'no target',
+                                                  units       => 'records');
+      END LOOP;
+      CLOSE uploaded_charges_c;
+    END IF;
+    DBMS_APPLICATION_INFO.set_module(module_name => NULL,
+                                     action_name => NULL);
+  END p_update_student_accounts;
+
+END;
+/
+SHOW ERRORS

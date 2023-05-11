@@ -1,0 +1,99 @@
+
+DECLARE
+
+   l_rowid VARCHAR2(30) := :id;
+
+   myBlob BLOB;
+
+   v_offset integer := 1;
+
+   v_buffer_size binary_integer := 4800;
+
+   v_buffer_varchar varchar2(4800);
+
+   v_buffer_raw raw(4800);
+
+ 
+
+ 
+
+    v_amount                 binary_integer := 4800;
+
+   
+
+    r_string                 VARCHAR2 (4000);
+
+    r_substring              VARCHAR2 (4000);
+
+    v_term_code              VARCHAR2 (6);
+
+    v_name_exam_number       VARCHAR2 (6);
+
+    v_crn_select             VARCHAR2 (5);
+
+    v_stu_grade              VARCHAR2 (4);
+
+    v_grade_gcmt             VARCHAR2 (5);
+
+    lf_position              INTEGER;
+
+    prev_position            INTEGER;
+
+    length_4_coma            INTEGER;
+
+    grade_error      varchar2(1);
+
+    comment_error    varchar2(1); 
+
+     msg varchar2(100);
+
+begin
+
+DBMS_LOB.CreateTemporary (myBlob, TRUE);
+
+ 
+
+    FOR i IN 1 .. CEIL (DBMS_LOB.getlength ( :file) / v_buffer_size)
+
+    LOOP
+
+        DBMS_LOB.read ( :file,
+
+                       v_buffer_size,
+
+                       v_offset,
+
+                       v_buffer_varchar);
+
+        v_buffer_raw := UTL_RAW.cast_to_raw (v_buffer_varchar);
+
+        v_buffer_raw := UTL_ENCODE.base64_decode (v_buffer_raw);
+
+        DBMS_LOB.writeappend (myBlob,
+
+                              UTL_RAW.LENGTH (v_buffer_raw),
+
+                              v_buffer_raw);
+
+        v_offset := v_offset + v_buffer_size;
+
+    END LOOP;
+
+ 
+
+        szpkfgdp.p_post_grades_from_gorblob (myBlob,----------------------------------------------------------Oracle proceudre to parse the csv file
+
+                                             :parm_user_pidm,
+
+                                             :CRN,
+
+                                             :TERM,
+
+                                             msg);
+
+ 
+
+    if msg ='Y' then raise_application_error(-20000,'CRN error'); end if   ;
+
+end;
+

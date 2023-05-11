@@ -1,0 +1,203 @@
+{
+   "constantName": "KeyBlockTemplate",
+   "developerSecurity": [],
+   "extendsPage": null,
+   "fileTimestamp": "2020-01-31T14:03:24Z",
+   "modelView": {
+      "components": [
+         {
+            "name": "PRSNLOOKUP_Domain",
+            "resource": "virtualDomains.PRSNLOOKUP_Domain",
+            "staticData": [],
+            "type": "resource"
+         },
+         {
+            "components": [
+               {
+                  "components": [
+                     {
+                        "components": [
+                           {
+                              "components": [
+                                 {
+                                    "components": [
+                                       {
+                                          "label": "ID",
+                                          "loadInitially": true,
+                                          "name": "personCriteriaID",
+                                          "onUpdate": "",
+                                          "parameters": {},
+                                          "readonly": false,
+                                          "required": false,
+                                          "style": "col-auto-width",
+                                          "type": "text",
+                                          "validation": {}
+                                       },
+                                       {
+                                          "label": "Last Name",
+                                          "loadInitially": true,
+                                          "name": "personCriteriaLastName",
+                                          "onUpdate": "",
+                                          "parameters": {},
+                                          "readonly": false,
+                                          "required": false,
+                                          "style": "col-auto-width",
+                                          "type": "text",
+                                          "validation": {}
+                                       },
+                                       {
+                                          "label": "First Name",
+                                          "loadInitially": true,
+                                          "name": "personCriteriaFirstName",
+                                          "onUpdate": "",
+                                          "parameters": {},
+                                          "readonly": false,
+                                          "required": false,
+                                          "style": "col-auto-width",
+                                          "type": "text",
+                                          "validation": {}
+                                       },
+                                       {
+                                          "label": "MI",
+                                          "loadInitially": true,
+                                          "name": "personCriteriaMI",
+                                          "parameters": {},
+                                          "readonly": false,
+                                          "required": false,
+                                          "style": "col-auto-width",
+                                          "type": "text",
+                                          "validation": {}
+                                       },
+                                       {
+                                          "label": "Search",
+                                          "name": "pesonsCriteriaButton",
+                                          "onClick": "$personGrid.$load();",
+                                          "style": "",
+                                          "type": "button",
+                                          "valueStyle": "primary"
+                                       }
+                                    ],
+                                    "name": "PesonsCriteriaRow",
+                                    "showInitially": true,
+                                    "style": "row",
+                                    "type": "block"
+                                 },
+                                 {
+                                    "components": [
+                                       {
+                                          "components": [
+                                             {
+                                                "allowDelete": false,
+                                                "allowModify": false,
+                                                "allowNew": false,
+                                                "allowReload": false,
+                                                "components": [
+                                                   {
+                                                      "label": "ID",
+                                                      "loadInitially": true,
+                                                      "model": "SPRIDEN_ID",
+                                                      "name": "personID",
+                                                      "parameters": {},
+                                                      "readonly": true,
+                                                      "required": false,
+                                                      "type": "text",
+                                                      "validation": {}
+                                                   },
+                                                   {
+                                                      "label": "Last Name",
+                                                      "loadInitially": true,
+                                                      "model": "SPRIDEN_LAST_NAME",
+                                                      "name": "personLastName",
+                                                      "parameters": {},
+                                                      "readonly": true,
+                                                      "required": false,
+                                                      "type": "text",
+                                                      "validation": {}
+                                                   },
+                                                   {
+                                                      "label": "First Name",
+                                                      "loadInitially": true,
+                                                      "model": "SPRIDEN_FIRST_NAME",
+                                                      "name": "personFirstName",
+                                                      "parameters": {},
+                                                      "readonly": true,
+                                                      "required": false,
+                                                      "type": "text",
+                                                      "validation": {}
+                                                   },
+                                                   {
+                                                      "label": "Middle Name",
+                                                      "loadInitially": true,
+                                                      "model": "SPRIDEN_MI",
+                                                      "name": "personMIName",
+                                                      "parameters": {},
+                                                      "readonly": true,
+                                                      "required": false,
+                                                      "type": "text",
+                                                      "validation": {}
+                                                   }
+                                                ],
+                                                "loadInitially": false,
+                                                "model": "PRSNLOOKUP_Domain",
+                                                "name": "personGrid",
+                                                "onClick": "$currentPesonsSelection = currentSelection;",
+                                                "pageSize": 10,
+                                                "parameters": {
+                                                   "p_first_name": "nvl($personCriteriaFirstName,\"\").toUpperCase()",
+                                                   "p_id": "nvl($personCriteriaID,\"\").toUpperCase()",
+                                                   "p_last_name": "nvl($personCriteriaLastName,\"\").toUpperCase()",
+                                                   "p_mi": "nvl($personCriteriaMI,\"\").toUpperCase()"
+                                                },
+                                                "style": "",
+                                                "type": "grid"
+                                             }
+                                          ],
+                                          "name": "popupPesonsMainCol",
+                                          "showInitially": true,
+                                          "style": "col-md-12",
+                                          "type": "block"
+                                       }
+                                    ],
+                                    "name": "pesonsMainRow",
+                                    "showInitially": true,
+                                    "style": "row",
+                                    "type": "block"
+                                 }
+                              ],
+                              "name": "keyBlockBannerIdCol",
+                              "showInitially": true,
+                              "style": "col-md-9",
+                              "type": "block"
+                           }
+                        ],
+                        "name": "keyBlockRow",
+                        "showInitially": true,
+                        "style": "row",
+                        "type": "block"
+                     }
+                  ],
+                  "name": "keyBlockContainer",
+                  "showInitially": true,
+                  "style": "container width-100pct",
+                  "type": "block"
+               }
+            ],
+            "name": "keyBlockForm",
+            "showInitially": true,
+            "type": "block"
+         }
+      ],
+      "importCSS": "componentLibrary",
+      "label": "Components",
+      "name": "KeyBlockTemplate",
+      "title": "Components",
+      "type": "page"
+   },
+   "owner": "RVARGAS20",
+   "pageRoles": [
+      {
+         "roleName": "ADMIN-GPBADMN",
+         "allow": true
+      }
+   ]
+}

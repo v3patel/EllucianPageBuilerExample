@@ -1,0 +1,20 @@
+{
+   "developerSecurity": [],
+   "codePost": null,
+   "virtualDomainRoles": [
+      {
+         "allowGet": true,
+         "allowPost": false,
+         "allowPut": false,
+         "roleName": "ADMIN-GPBADMN",
+         "allowDelete": false
+      }
+   ],
+   "codePut": null,
+   "owner": "RVARGAS20",
+   "fileTimestamp": null,
+   "codeDelete": null,
+   "codeGet": "SELECT\r\n    SPRIDEN_PIDM\r\n    , SPRIDEN_ID\r\n    , SPRIDEN_LAST_NAME\r\n    , SPRIDEN_FIRST_NAME\r\n    , SPRIDEN_MI\r\n    , SPRIDEN_CHANGE_IND\r\n    , SPRIDEN_ENTITY_IND\r\n    , SPRIDEN_NTYP_CODE\r\n    , SPBPERS_BIRTH_DATE\r\n    , SPBPERS_NAME_PREFIX\r\n    , SPBPERS_NAME_SUFFIX\r\nFROM spriden, spbpers\r\nWHERE spriden_pidm = spbpers_pidm\r\n    AND ( :p_id IS NULL OR spriden_id = :p_id )\r\n    AND ( :p_last_name IS NULL OR spriden_search_last_name LIKE :p_last_name )\r\n    AND ( :p_first_name IS NULL OR spriden_search_first_name LIKE :p_first_name )\r\n    AND ( :p_mi IS NULL OR SPRIDEN_MI LIKE :p_mi )\r\n    AND ( :change_ind IS NULL \r\n            OR ( :change_ind = 'NULL' AND spriden_change_ind IS NULL )\r\n            OR :change_ind = spriden_change_ind )",
+   "typeOfCode": "S",
+   "serviceName": "PRSNLOOKUP_Domain"
+}

@@ -1,0 +1,95 @@
+{
+   "constantName": "MYPAGE",
+   "developerSecurity": [],
+   "extendsPage": null,
+   "fileTimestamp": "2020-01-30T14:57:35Z",
+   "modelView": {
+      "components": [
+         {
+            "resource": "virtualDomains.MYPAGE_SPRIDEN",
+            "name": "MYPAGE_SPRIDEN",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "resource": "virtualDomains.MYPAGE_MYTABLE",
+            "name": "MYPAGE_MYTABLE",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "components": [
+               {
+                  "sourceParameters": {},
+                  "name": "KeyBlockPidm",
+                  "sourceModel": "MYPAGE_SPRIDEN",
+                  "model": "",
+                  "label": "Student:",
+                  "loadInitially": true,
+                  "placeholder": "...",
+                  "type": "select",
+                  "labelKey": "SPRIDEN_DISPLAY",
+                  "valueKey": "SPRIDEN_PIDM",
+                  "required": false
+               },
+               {
+                  "onClick": "document.getElementById(\"pbid-KeyBlock\").reset();",
+                  "name": "btnReset",
+                  "label": "Reset",
+                  "type": "button"
+               },
+               {
+                  "onClick": "$DataGrid.$load();",
+                  "name": "btnSearch",
+                  "label": "Search",
+                  "type": "button"
+               }
+            ],
+            "nextButtonLabel": "Next",
+            "name": "KeyBlock",
+            "showInitially": true,
+            "type": "form"
+         },
+         {
+            "components": [
+               {
+                  "allowDelete": true,
+                  "components": [
+                     {
+                        "readonly": false,
+                        "name": "myComment",
+                        "model": "MYCOMMENT",
+                        "label": "Comments:",
+                        "loadInitially": true,
+                        "type": "text",
+                        "parameters": {},
+                        "validation": {},
+                        "required": false
+                     }
+                  ],
+                  "allowNew": true,
+                  "name": "DataGrid",
+                  "allowModify": true,
+                  "pageSize": 5,
+                  "onLoad": "alert(\"test\"+ document.getElementByID(\"pbid-DataGrid\").$data.length);",
+                  "model": "MYPAGE_MYTABLE",
+                  "allowReload": true,
+                  "loadInitially": true,
+                  "type": "grid",
+                  "parameters": {
+                     "inpidm": "$KeyBlockPidm"
+                  }
+               }
+            ],
+            "name": "DataBlock",
+            "showInitially": true,
+            "label": "Comments:",
+            "type": "block"
+         }
+      ],
+      "name": "MYPAGE",
+      "type": "page"
+   },
+   "owner": null,
+   "pageRoles": []
+}

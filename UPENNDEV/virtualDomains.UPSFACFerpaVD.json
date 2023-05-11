@@ -1,0 +1,27 @@
+{
+   "owner": null,
+   "codePut": null,
+   "codeDelete": null,
+   "virtualDomainRoles": [
+      {
+         "allowDelete": false,
+         "allowPost": false,
+         "allowPut": false,
+         "roleName": "ADMIN-GPBADMN",
+         "allowGet": true
+      },
+      {
+         "allowDelete": false,
+         "allowPost": false,
+         "allowPut": false,
+         "roleName": "ALLROLES",
+         "allowGet": true
+      }
+   ],
+   "codeGet": "SELECT SPriden_pidm, SPRIDEN_ID                                                             PENN_ID\r\n      ,SPRIDEN_FIRST_NAME || ' ' || SPRIDEN_MI || ' ' || SPRIDEN_LAST_NAME    STUDENTNAME\r\n      ,   a.\"SPREMRG_FIRST_NAME\"\r\n       || ' '\r\n       || a.\"SPREMRG_MI\"\r\n       || ' '\r\n       || a.\"SPREMRG_LAST_NAME\"                                               CONTACTNAME\r\n      ,   a.\"SPREMRG_STREET_LINE1\"\r\n       || ' '\r\n       || a.\"SPREMRG_STREET_LINE2\"\r\n       || ' '\r\n       || a.\"SPREMRG_STREET_LINE3\"\r\n       || ' '\r\n       || a.\"SPREMRG_CITY\"\r\n       || ', '\r\n       || a.\"SPREMRG_STAT_CODE\"\r\n       || ' '\r\n       || a.\"SPREMRG_ZIP\"                                                     CONTACTADDRESS\r\n      ,a.\"SPREMRG_NATN_CODE\"\r\n      ,   a2.gorsdav_value.accessVARCHAR2 ()\r\n       || '-'\r\n       || a.\"SPREMRG_PHONE_AREA\"\r\n       || ' '\r\n       || a.\"SPREMRG_PHONE_NUMBER\"\r\n       || ' '\r\n       || a.\"SPREMRG_PHONE_EXT\"                                               CONTACTPHONE\r\n      ,a.\"SPREMRG_RELT_CODE\" || '-' || STVRELT_DESC                           RELATIONSHIP\r\n      ,a1.gorsdav_value.accessVARCHAR2 ()                                     CONTACTEMAIL\r\n      ,MAX (NVL (SORFOLK_PARENT_EMPLOYER, 'NO'))\r\n           OVER (PARTITION BY SPREMRG_PIDM, SPREMRG_PRIORITY)                 ACADEMICRELEASE\r\n      ,MAX (NVL (SORFOLK_PARENT_JOB_TITLE, 'NO'))\r\n           OVER (PARTITION BY SPREMRG_PIDM, SPREMRG_PRIORITY)                 FINANCIALRELEASE\r\n           ,SPBPERS_CONFID_IND CONFID_IND\r\n  FROM spremrg  a\r\n      ,gorsdav  a1\r\n      ,gorsdav  a2\r\n      ,sorfolk  folk\r\n      ,stvrelt\r\n      ,spriden\r\n      ,spbpers\r\n WHERE     1 = 1\r\n       AND spremrg_pidm = spriden_pidm\r\n       --  AND (spremrg_priority = :spremrg_priority OR :spremrg_priority IS NULL)\r\n       AND a1.gorsdav_table_name(+) = 'SPREMRG'\r\n       AND a1.gorsdav_attr_name(+) = 'EMAIL_ADDRESS'\r\n       AND a1.gorsdav_pk_parenttab(+) =\r\n           SPREMRG_pidm || CHR (1) || SPREMRG_PRIORITY\r\n       AND a2.gorsdav_table_name(+) = 'SPREMRG'\r\n       AND a2.gorsdav_attr_name(+) = 'TELEPHONE_TYPE'\r\n       AND a2.gorsdav_pk_parenttab(+) =\r\n           SPREMRG_pidm || CHR (1) || SPREMRG_PRIORITY\r\n       AND folk.sorfolk_pidm(+) = SPREMRG_pidm\r\n       AND folk.SORFOLK_PARENT_LAST(+) = SPREMRG_LAST_NAME\r\n       AND folk.SORFOLK_PARENT_FIRST(+) = SPREMRG_FIRST_NAME\r\n       AND NVL (folk.SORFOLK_PARENT_MI(+), '@') = NVL (SPREMRG_MI, '@')\r\n       AND folk.SORFOLK_RELT_CODE(+) = SPREMRG_RELT_CODE\r\n       AND STVRELT_CODE = SPREMRG_RELT_CODE\r\n       AND spriden_pidm = spbpers_pidm(+)\r\n       AND ( :p_id IS NULL OR spriden_id = :p_id)\r\n       AND (   :p_last_name IS NULL\r\n            OR spriden_search_last_name LIKE :p_last_name)\r\n       AND (   :p_first_name IS NULL\r\n            OR spriden_search_first_name LIKE :p_first_name)\r\n       AND ( :p_mi IS NULL OR SPRIDEN_MI LIKE :p_mi)\r\n       AND (   :change_ind IS NULL\r\n            OR ( :change_ind = 'NULL' AND spriden_change_ind IS NULL)\r\n            OR :change_ind = spriden_change_ind)",
+   "typeOfCode": "S",
+   "fileTimestamp": null,
+   "serviceName": "UPSFACFerpaVD",
+   "codePost": null,
+   "developerSecurity": []
+}

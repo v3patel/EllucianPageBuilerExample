@@ -1,0 +1,346 @@
+{
+   "constantName": "UP_S_CrossListedCourseGradeVIP",
+   "developerSecurity": [],
+   "extendsPage": null,
+   "fileTimestamp": "2022-07-06T22:29:09Z",
+   "modelView": {
+      "components": [
+         {
+            "resource": "virtualDomains.UP_S_COURSE_LIST",
+            "name": "XL_CRNS",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "resource": "virtualDomains.UP_S_CLASS_LIST",
+            "name": "XL_STUDENTS",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "resource": "virtualDomains.UP_S_GRADES",
+            "name": "XL_GRADES",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "resource": "virtualDomains.UP_S_EC_LOV",
+            "documentation": "",
+            "name": "LOVS",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "name": "CSS_",
+            "type": "literal",
+            "value": "<style>\n.datefield  {\n    //background-color: red !important;\n    border-color: grey !important; \n border: solid !important;  \n border-width: thin !important;\n\n}\nXXXinput.hasDatepicker.pb-datetime  {\n    //background-color: red !important;\n    border-color: grey !important; \n border: solid !important;  \n border-width: thin !important;\n\n}\n\n\n.ngHeaderButton {\ndisplay: none;\n}\n\n.ngCell  {\n  display : table-cell;\n  height: auto !important;\n  overflow:visible;\n  position: static;\n}\n\n.ngRow {\n  display : table-row;\n  height: auto !important;\n  position: static;\n}\n\n.ngCellText{\n  height: auto !important;\n  white-space: normal;\n  overflow:visible;\n}\n\n\n\ntable, td, th {\n  border: .5px solid black;\n}\n\ntable {\n  border-collapse: collapse;\n  width: 100%;\n}\n\n\n</style>"
+         },
+         {
+            "name": "JS_",
+            "type": "literal",
+            "value": "<script type=\"text/javascript\">\n    var popup;\n   function setgrade(obj){\n      var value = obj.options[obj.selectedIndex].value;\ndebugger;\n     var scope=getControllerScopeById(controllerId);\n     scope.XL_Class_list.FINALG =value;\nscope.XL_Class_listDS.setModified(scope.XL_Class_listDS.currentRecord);\n$(this).parent().next().focus();\n   //   \\$XL_Class_list.\\$selected.FINALG = value;\n      //  document.getElementsByName('XLS_FINAL')[0].value = value;\n   }    \nfunction SelectName() {\nvar params=\"spidm =\" + \\$scrn; \nparams += \"scrn=\" + \\$spidm ; \nparams += \"stermcode =\" + \\$stermcode ; \n\n        popup = window.open(\"UP_S_CrossListedGradeSelection?\" + params, \"Popup\", \"width=300,height=500\");\n        popup.focus();\n        return false;\n    }\n$(document).ready(function () {\n    $(\"a\").click(function () {\ndebugger;\n       $(this).prevAll(\"input\").val(\"\");\n       $(this).prevAll(\"input\").val($(this).text());\n    })\n});\n</script>"
+         },
+         {
+            "components": [
+               {
+                  "allowDelete": false,
+                  "components": [
+                     {
+                        "readonly": false,
+                        "name": "XL_GRADING_STATUS",
+                        "model": "GRADEDING_STATUS",
+                        "label": "Grading Status",
+                        "loadInitially": true,
+                        "type": "text",
+                        "parameters": {},
+                        "validation": {},
+                        "required": false
+                     },
+                     {
+                        "readonly": false,
+                        "name": "XL_ROLLED",
+                        "model": "ROLLED",
+                        "label": "Rolled",
+                        "loadInitially": true,
+                        "type": "text",
+                        "parameters": {},
+                        "validation": {},
+                        "required": false
+                     },
+                     {
+                        "readonly": false,
+                        "documentation": "",
+                        "name": "XL_SUBJECT",
+                        "model": "SUBJECT",
+                        "label": "Subject",
+                        "loadInitially": true,
+                        "type": "text",
+                        "parameters": {},
+                        "validation": {},
+                        "required": false
+                     },
+                     {
+                        "readonly": false,
+                        "name": "XL_COURSE",
+                        "model": "COURSE",
+                        "label": "Course",
+                        "loadInitially": true,
+                        "type": "text",
+                        "parameters": {},
+                        "validation": {},
+                        "required": false
+                     },
+                     {
+                        "readonly": false,
+                        "name": "XL_SECTION",
+                        "model": "SECTION",
+                        "label": "Section",
+                        "loadInitially": true,
+                        "type": "text",
+                        "parameters": {},
+                        "validation": {},
+                        "required": false
+                     },
+                     {
+                        "readonly": false,
+                        "name": "XL_TITLE",
+                        "model": "COURSETITLE",
+                        "label": "Title",
+                        "loadInitially": true,
+                        "type": "text",
+                        "parameters": {},
+                        "validation": {},
+                        "required": false
+                     },
+                     {
+                        "readonly": false,
+                        "name": "XL_TERM",
+                        "model": "TERM",
+                        "label": "Term",
+                        "loadInitially": true,
+                        "type": "text",
+                        "parameters": {},
+                        "validation": {},
+                        "required": false
+                     },
+                     {
+                        "readonly": false,
+                        "name": "XL_CRN",
+                        "model": "CRN",
+                        "label": "CRN",
+                        "loadInitially": true,
+                        "type": "text",
+                        "parameters": {},
+                        "validation": {},
+                        "required": false
+                     },
+                     {
+                        "readonly": false,
+                        "name": "XL_CROSS_LISTED",
+                        "model": "XLISTEDGROUPS",
+                        "label": "Cross listed CRN's",
+                        "loadInitially": true,
+                        "type": "text",
+                        "parameters": {},
+                        "validation": {},
+                        "required": false
+                     },
+                     {
+                        "name": "XL_TERM1",
+                        "model": "TERM1",
+                        "loadInitially": true,
+                        "type": "hidden"
+                     },
+                     {
+                        "name": "XL_FACULTYPIDM",
+                        "model": "FACULTYPIDM",
+                        "loadInitially": true,
+                        "type": "hidden"
+                     }
+                  ],
+                  "onClick": "// Show Child\n$termcode = currentSelection.TERM1; \n$crn =  currentSelection.CRN; \n$facultypidm =  currentSelection.FACULTYPIDM; \n$XL_Class_list.$load();\n//$XLS_FINAL.$load();",
+                  "allowNew": false,
+                  "name": "XL_CRN_LIST",
+                  "allowModify": false,
+                  "pageSize": 5,
+                  "model": "XL_CRNS",
+                  "allowReload": false,
+                  "loadInitially": true,
+                  "type": "grid",
+                  "parameters": {}
+               }
+            ],
+            "name": "BL_CRN",
+            "showInitially": true,
+            "label": "Course List",
+            "type": "block"
+         },
+         {
+            "submitLabel": "SAVE",
+            "components": [
+               {
+                  "allowDelete": false,
+                  "components": [
+                     {
+                        "name": "XLS_PIC",
+                        "label": "Picture",
+                        "type": "literal",
+                        "value": "<img src=\"{{ $item.PIC_URL}}\" width=\"100\" height=\"100\">"
+                     },
+                     {
+                        "asHtml": false,
+                        "name": "XLS_NAME",
+                        "model": "STUDENT_NAME",
+                        "label": "Name",
+                        "loadInitially": true,
+                        "type": "display"
+                     },
+                     {
+                        "readonly": false,
+                        "name": "XLS_ID",
+                        "model": "STID",
+                        "label": "ID",
+                        "loadInitially": true,
+                        "type": "text",
+                        "parameters": {},
+                        "validation": {
+                           "vipul": "asdsadasdasdasd"
+                        },
+                        "required": false
+                     },
+                     {
+                        "asHtml": true,
+                        "name": "XL_SELECTLIST",
+                        "model": "SELECTLIST",
+                        "loadInitially": true,
+                        "label": "Grades",
+                        "type": "display",
+                        "value": "SELECTLIST"
+                     },
+                     {
+                        "name": "XLS_FINAL",
+                        "model": "FINALG",
+                        "loadInitially": true,
+                        "type": "hidden"
+                     },
+                     {
+                        "valueStyle": "",
+                        "readonly": false,
+                        "name": "XLS_LAST_ATT",
+                        "model": "SFRSTCR_LAST_ATTEND",
+                        "style": "datefield",
+                        "label": "Last Attended",
+                        "loadInitially": true,
+                        "type": "datetime",
+                        "parameters": {},
+                        "validation": {},
+                        "required": true
+                     },
+                     {
+                        "valueStyle": "disabled",
+                        "readonly": true,
+                        "booleanTrueValue": "Y",
+                        "booleanFalseValue": "N",
+                        "name": "XL_ISXLISTED",
+                        "onLoad": "debugger;\nvar cbs = document.getElementsByName(\"XL_ISXLISTED\");\n                if (cbs.length != 0){\n                   for (var i=0;i< cbs.length;i++){\n                      //cbs [i]. disabled = true;\n                   }\n                }",
+                        "model": "ISXLISTED",
+                        "style": "disabled=\"disabled\"",
+                        "label": "Cross Listed?",
+                        "loadInitially": true,
+                        "type": "boolean"
+                     },
+                     {
+                        "sourceParameters": {},
+                        "name": "BL_CLASS_child_2",
+                        "sourceModel": "DUMMY",
+                        "loadInitially": true,
+                        "label": "test",
+                        "type": "select",
+                        "labelKey": "COl1",
+                        "valueKey": "COL2",
+                        "value": "sdsafsfa",
+                        "required": false
+                     }
+                  ],
+                  "onClick": "var cbs = document.getElementsByName(\"XL_ISXLISTED\");\n                if (cbs.length != 0){\n                   for (var i=0;i< cbs.length;i++){\n                      cbs [i]. disabled = true;\n                   }\n                }\ndebugger;\n$stermcode = currentSelection.SFRSTCR_TERM_CODE; \n$scrn =  currentSelection.CRN; \n$spidm =  currentSelection.SFRSTCR_PIDM; \n $XL_SELECTLISTG.$load();\n\n/*\n// Show Child\n$stermcode = currentSelection.SFRSTCR_TERM_CODE; \n$scrn =  currentSelection.CRN; \n$spidm =  currentSelection.SFRSTCR_PIDM; \n\n\n//debugger;\n\nif ($spidm== $tspidm){\n}\nelse {\n//alert(\"SPIDM \" + $spidm + \" SCRN \" + $scrn + \" STERMCODE \" + $stermcode, {});\n\n  // $XLS_FINAL.$load();\n}\ndocument.getElementById('txtName').value  = \"\";\nvar params=\"scrn=\" + $scrn; \nparams += \"&spidm=\" + $spidm ; \nparams += \"&stermcode=\" + $stermcode ; \n\n        popup = window.open(\"UP_S_CrossListedGradeSelection?\" + params, \"Popup\", \"width=300,height=500\");\n        popup.focus();\n    var timer = setInterval(function() {\n        if (popup.closed) {\n            clearInterval(timer);\ndebugger;\ncurrentSelection.FINALG = document.getElementById('txtName').value; // \"A\";\n$XL_Class_list.$selected.FINALG =  document.getElementById('txtName').value;\n$XLS_FINAL=  document.getElementById('txtName').value;\n$XL_Class_listDS.dirty = true;\n\n          //  alert(\"'pop up window closed !\");\n        }else {\n          console.log (\"Waiting for pop up to close\");\n        }\n    }, 500);\n*/",
+                  "onError": "var errorMessage =response.data.errors? response.data.errors.errorMessage: null;\nif (errorMessage && errorMessage.indexOf(\"ORA-20000\") > -1) \n{        \n     alert(\"An entry already exists for this virtual domain and role, cannot add a duplicate\", {type:\"error\"});\n} else {\n          alert( errorMessage?errorMessage:response.data, {type:\"error\"});\n}",
+                  "allowNew": false,
+                  "pageSize": 10,
+                  "onSaveSuccess": "alert($.i18n.prop(\"js.notification.success\"), {type:\"success\", flash:true}); \nwindow.params.saved=true;\n$XL_Class_list.$load();",
+                  "loadInitially": true,
+                  "type": "grid",
+                  "name": "XL_Class_list",
+                  "allowModify": true,
+                  "onLoad": "",
+                  "model": "XL_STUDENTS",
+                  "style": "",
+                  "allowReload": true,
+                  "parameters": {
+                     "facultypidm": "$facultypidm",
+                     "termcode": "$termcode",
+                     "crn": "$crn"
+                  }
+               }
+            ],
+            "nextButtonLabel": "Next",
+            "name": "BL_CLASS",
+            "showInitially": true,
+            "label": "Class List",
+            "type": "form"
+         },
+         {
+            "components": [
+               {
+                  "allowDelete": false,
+                  "components": [
+                     {
+                        "sourceParameters": {
+                           "scrn": "$scrn",
+                           "spidm": "$spidm",
+                           "stermcode": "$stermcode"
+                        },
+                        "name": "XL_SELECTLISTG",
+                        "model": "SELECTLIST",
+                        "sourceModel": "XL_GRADES",
+                        "loadInitially": true,
+                        "label": "Grades",
+                        "type": "select",
+                        "labelKey": "GCODE",
+                        "valueKey": "GDESC",
+                        "value": "SELECTLIST",
+                        "required": false
+                     }
+                  ],
+                  "allowNew": false,
+                  "name": "BL_STUDENT_LIST",
+                  "allowModify": true,
+                  "pageSize": 1,
+                  "model": "XL_GRADES",
+                  "allowReload": false,
+                  "loadInitially": true,
+                  "type": "grid",
+                  "parameters": {}
+               }
+            ],
+            "nextButtonLabel": "Next",
+            "name": "BL_STUDENT",
+            "showInitially": true,
+            "type": "form"
+         }
+      ],
+      "name": "UPSCrossListedCourseGradeVIP",
+      "type": "page",
+      "title": "Cross Listed Grading"
+   },
+   "owner": null,
+   "pageRoles": [
+      {
+         "roleName": "ADMIN-GPBADMN",
+         "allow": true
+      },
+      {
+         "roleName": "FACULTY",
+         "allow": true
+      }
+   ]
+}

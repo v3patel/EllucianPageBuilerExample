@@ -1,0 +1,450 @@
+{
+   "constantName": "UP_S_EmergencyContact",
+   "developerSecurity": [],
+   "extendsPage": null,
+   "fileTimestamp": "2022-07-06T22:28:52Z",
+   "modelView": {
+      "components": [
+         {
+            "resource": "virtualDomains.UP_S_SPREMRG_SDE_PRIROTY",
+            "name": "EmergencyContactPriorityModel",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "resource": "virtualDomains.UP_S_EC_LOV",
+            "name": "LOVS",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "name": "cssLiteral",
+            "type": "literal",
+            "value": "<style>\n\n.pb-radio>div {\n    margin-right: 7px;\n    display     : inline-block;\n    text-align  : right;\n}\n\n[id*=\"pbid-EC_DIS_FIN-container-\"] {\n    text-align: right !important;\n}\n\n\n[id*=\"pbid-EC_DIS_ACAD-container-\"] {\n    text-align: right !important;\n}\n\n\n.pb-detail-record {\n    display              : grid;\n    grid-template-columns: repeat(4, 1fr);\n    grid-gap             : 10px;\n}\n\n.pb-detail-record>div {\n    text-align: left;\n}\n\n\n.colt1 {\n    min-width: 73px !important;\n}\n\n.ugrid,\n.ngGrid {\n    background-color: white;\n    min-width       : 800px !important;\n    padding-right   : 10px !important;\n}\n\n.upadded {\n    padding: 5px !important;\n}\n\n.clickable {\n    cursor: pointer;\n}\n\n.edit-page {\n    color     : #026BC8;\n    float     : right;\n    background: url(/BannerExtensibility/assets/edit-page.svg) 20px no-repeat;\n    height    : 30px;\n}\n\n\n.col31 {\n    grid-column-start: 1;\n    grid-column-end  : 2;\n}\n\n.col32 {\n    grid-column-start: 2;\n    grid-column-end  : 3;\n}\n\n.col33 {\n    grid-column-start: 3;\n    grid-column-end  : 4;\n}\n\n.col21 {\n    grid-column-start: 1;\n    grid-column-end  : 3;\n}\n\n.col22 {\n    grid-column-start: 3;\n    grid-column-end  : 5;\n}\n\n.col11 {\n    grid-column-start: 1;\n    grid-column-end  : 5;\n}\n\n.col2a {\n    grid-column: 1 / 1;\n}\n\n.col2b {\n    grid-column: 2 / 5;\n}\n\n.pb-label {\n    width: 130px !important;\n}\n\n.box h2 {\n    background: #011F5B;\n    color: white;\n}\n\n.box p {\n    color  : #333;\n    padding: 10px;\n}\n\n.box {\n    -moz-border-radius-topright    : 5px;\n    -moz-border-radius-topleft     : 5px;\n    -webkit-border-top-right-radius: 5px;\n    -webkit-border-top-left-radius : 5px;\n}\n\n</style>"
+         },
+         {
+            "components": [
+               {
+                  "allowDelete": false,
+                  "components": [
+                     {
+                        "valueStyle": "upadded",
+                        "loadInitially": true,
+                        "label": "Priority",
+                        "type": "text",
+                        "required": false,
+                        "readonly": true,
+                        "name": "EC_NAME_PRIORITY",
+                        "labelStyle": "",
+                        "model": "SPREMRG_PRIORITY",
+                        "style": "edit-page clickable",
+                        "parameters": {},
+                        "value": "SPREMRG_PRIORITY",
+                        "validation": {}
+                     },
+                     {
+                        "valueStyle": "upadded",
+                        "sourceParameters": {
+                           "tab_name": "\"STVRETL\""
+                        },
+                        "name": "EC_NAME_RETL",
+                        "model": "SPREMRG_RELT_CODE",
+                        "sourceModel": "LOVS",
+                        "style": "",
+                        "loadInitially": true,
+                        "label": "Relationship",
+                        "type": "select",
+                        "labelKey": "DESCRIPTION",
+                        "valueKey": "CODE",
+                        "required": false
+                     },
+                     {
+                        "valueStyle": "upadded",
+                        "name": "EC_name_NAME",
+                        "label": "Name",
+                        "type": "literal",
+                        "value": "{{ $item.SPREMRG_LAST_NAME }},  {{ $item.SPREMRG_FIRST_NAME }}  {{  $item.SPREMRG_MI ? $item.SPREMRG_MI  : \"\" }}"
+                     },
+                     {
+                        "valueStyle": "upadded",
+                        "name": "EC_name_address",
+                        "label": "Address",
+                        "type": "literal",
+                        "value": "{{$item.SPREMRG_STREET_LINE1 ? $item.SPREMRG_STREET_LINE1:\"\" }} {{$item.SPREMRG_STREET_LINE1 ? $item.SPREMRG_STREET_LINE2:\"\" }} {{$item.SPREMRG_STREET_LINE1 ? $item.SPREMRG_STREET_LINE3:\"\" }} {{$item.SPREMRG_STREET_LINE1 ? $item.SPREMRG_STREET_LINE4:\"\" }} <br> <span class=\"upadded\"> {{$item.SPREMRG_CITY ? $item.SPREMRG_CITY:\"\" }} {{$item.SPREMRG_STAT_CODE ? $item.SPREMRG_STAT_CODE:\"\" }}, {{$item.SPREMRG_ZIP ? $item.SPREMRG_ZIP:\"\" }} {{$item.SPREMRG_NATN_CODE ? $item.SPREMRG_NATN_CODE:\"\" }} </span>"
+                     },
+                     {
+                        "valueStyle": "upadded",
+                        "name": "EC_name_phone",
+                        "label": "Phone",
+                        "type": "literal",
+                        "value": "{{$item.SPREMRG_PHONE_AREA ? \"(\" + $item.SPREMRG_PHONE_AREA+\")\":\"\" }} {{$item.SPREMRG_PHONE_NUMBER ? $item.SPREMRG_PHONE_NUMBER:\"\" }} {{$item.SPREMRG_PHONE_EXT ? \" X \" + $item.SPREMRG_PHONE_EXT:\"\" }}"
+                     },
+                     {
+                        "valueStyle": "upadded",
+                        "name": "EC_NAME_EMAIL_ADDRESS",
+                        "style": "clickable",
+                        "label": "Email Address",
+                        "type": "literal",
+                        "value": "{{$item.EMAIL_ADDRESS ? $item.EMAIL_ADDRESS :\"\" }}"
+                     }
+                  ],
+                  "onClick": "// Show Child\n$selPrority = currentSelection.SPREMRG_PRIORITY; \n$EC_Edit.$load();",
+                  "allowNew": false,
+                  "pageSize": 3,
+                  "loadInitially": true,
+                  "type": "grid",
+                  "name": "EC_name",
+                  "allowModify": false,
+                  "onLoad": "var widths = ['7%','10%', '20%', '*','15%', '15%'];\nfor ( var i in widths  ) {  \n   //  Banner Extensibility 9.7.x and older:\n// debugger;\n   $EC_nameGrid.columnDefs[i].width = widths[i];\n   // FOR OTHERS \n   //$EC_nameagridApi.grid.columns[i].width = widths[i];\n}\n// FOR OTHERS \n//$EC_namegridApi.grid.refresh();\n\n$selPrority = 1; \n//$EC_Edit.$load();",
+                  "model": "EmergencyContactPriorityModel",
+                  "allowReload": true,
+                  "parameters": {}
+               },
+               {
+                  "components": [
+                     {
+                        "allowDelete": true,
+                        "components": [
+                           {
+                              "asHtml": false,
+                              "valueStyle": "",
+                              "name": "EC_PRIORITY",
+                              "labelStyle": "",
+                              "model": "SPREMRG_PRIORITY",
+                              "style": "col21",
+                              "label": "Priority",
+                              "loadInitially": true,
+                              "type": "display"
+                           },
+                           {
+                              "valueStyle": "",
+                              "label": "Relationship *",
+                              "loadInitially": true,
+                              "type": "select",
+                              "required": true,
+                              "sourceParameters": {
+                                 "tab_name": "\"STVRETL\""
+                              },
+                              "name": "EC_relation",
+                              "labelStyle": "",
+                              "model": "SPREMRG_RELT_CODE",
+                              "sourceModel": "LOVS",
+                              "style": "col22",
+                              "labelKey": "DESCRIPTION",
+                              "valueKey": "CODE"
+                           },
+                           {
+                              "sourceParameters": {
+                                 "tab_name": "\"DISCLOUSER\""
+                              },
+                              "name": "EC_DIS_ACAD",
+                              "style": "col2a",
+                              "model": "ACADEMIC_CK",
+                              "sourceModel": "LOVS",
+                              "label": "",
+                              "loadInitially": true,
+                              "type": "radio",
+                              "labelKey": "DESCRIPTION",
+                              "valueKey": "CODE",
+                              "value": "",
+                              "required": true
+                           },
+                           {
+                              "name": "EC_Edit_acad_literal",
+                              "style": "col2b",
+                              "type": "literal",
+                              "value": "Disclose academic information (grades, attendance, academic standing, etc)"
+                           },
+                           {
+                              "valueStyle": "",
+                              "label": "",
+                              "loadInitially": true,
+                              "type": "radio",
+                              "required": true,
+                              "sourceParameters": {
+                                 "tab_name": "\"DISCLOUSER\""
+                              },
+                              "name": "EC_DIS_FIN",
+                              "labelStyle": "",
+                              "sourceModel": "LOVS",
+                              "style": "col2a",
+                              "model": "FINANCIAL_CK",
+                              "labelKey": "DESCRIPTION",
+                              "valueKey": "CODE",
+                              "value": ""
+                           },
+                           {
+                              "name": "EC_Edit_fin_literal",
+                              "style": "col2b",
+                              "type": "literal",
+                              "value": "Disclose financial information (billing, Payments, financial aid, loans, etc) <font color=#9900> If NO, individuals who pay your bills may not be able to get infomation pertaining to your bill.</font>"
+                           },
+                           {
+                              "readonly": false,
+                              "name": "EC_LAST_NAME",
+                              "labelStyle": "",
+                              "model": "SPREMRG_LAST_NAME",
+                              "style": "col31",
+                              "label": "Last Name *",
+                              "loadInitially": true,
+                              "type": "text",
+                              "parameters": {},
+                              "value": "",
+                              "validation": {},
+                              "required": true
+                           },
+                           {
+                              "valueStyle": "",
+                              "label": "First Name *",
+                              "loadInitially": true,
+                              "type": "text",
+                              "required": true,
+                              "readonly": false,
+                              "name": "EC_FIRST_NAME",
+                              "labelStyle": "",
+                              "model": "SPREMRG_FIRST_NAME",
+                              "style": "col32",
+                              "parameters": {},
+                              "value": "",
+                              "validation": {}
+                           },
+                           {
+                              "valueStyle": "",
+                              "readonly": false,
+                              "name": "EC_MI",
+                              "labelStyle": "",
+                              "model": "SPREMRG_MI",
+                              "style": "col33",
+                              "label": "Mi",
+                              "loadInitially": true,
+                              "type": "text",
+                              "parameters": {},
+                              "validation": {},
+                              "required": false
+                           },
+                           {
+                              "name": "EC_ATYP_CODE",
+                              "model": "SPREMRG_ATYP_CODE",
+                              "loadInitially": true,
+                              "type": "hidden"
+                           },
+                           {
+                              "valueStyle": "",
+                              "readonly": false,
+                              "name": "EC_STREET_LINE1",
+                              "labelStyle": "",
+                              "model": "SPREMRG_STREET_LINE1",
+                              "style": "col41",
+                              "label": "Street Line1",
+                              "loadInitially": true,
+                              "type": "text",
+                              "parameters": {},
+                              "validation": {},
+                              "required": false
+                           },
+                           {
+                              "valueStyle": "",
+                              "readonly": false,
+                              "name": "EC_STREET_LINE2",
+                              "labelStyle": "",
+                              "model": "SPREMRG_STREET_LINE2",
+                              "style": "col42",
+                              "label": "Street Line2",
+                              "loadInitially": true,
+                              "type": "text",
+                              "parameters": {},
+                              "validation": {},
+                              "required": false
+                           },
+                           {
+                              "valueStyle": "",
+                              "readonly": false,
+                              "name": "EC_STREET_LINE3",
+                              "labelStyle": "",
+                              "model": "SPREMRG_STREET_LINE3",
+                              "style": "col43",
+                              "label": "Street Line3",
+                              "loadInitially": true,
+                              "type": "text",
+                              "parameters": {},
+                              "validation": {},
+                              "required": false
+                           },
+                           {
+                              "valueStyle": "",
+                              "readonly": false,
+                              "name": "EC_CITY",
+                              "labelStyle": "",
+                              "model": "SPREMRG_CITY",
+                              "style": "col21",
+                              "label": "City",
+                              "loadInitially": true,
+                              "type": "text",
+                              "parameters": {},
+                              "validation": {},
+                              "required": false
+                           },
+                           {
+                              "sourceParameters": {
+                                 "tab_name": "\"STVSTAT\""
+                              },
+                              "name": "EC_STAT_CODE",
+                              "model": "SPREMRG_STAT_CODE",
+                              "style": "col22",
+                              "sourceModel": "LOVS",
+                              "label": "State",
+                              "loadInitially": true,
+                              "type": "select",
+                              "labelKey": "DESCRIPTION",
+                              "valueKey": "CODE",
+                              "required": true
+                           },
+                           {
+                              "sourceParameters": {
+                                 "tab_name": "\"STVNATN\""
+                              },
+                              "name": "EC_NATN_CODE",
+                              "model": "SPREMRG_NATN_CODE",
+                              "sourceModel": "LOVS",
+                              "style": "col21",
+                              "label": "Country",
+                              "loadInitially": true,
+                              "type": "select",
+                              "labelKey": "DESCRIPTION",
+                              "valueKey": "CODE",
+                              "required": false
+                           },
+                           {
+                              "readonly": false,
+                              "name": "EC_ZIP",
+                              "model": "SPREMRG_ZIP",
+                              "style": "col22",
+                              "label": "Zip",
+                              "loadInitially": true,
+                              "type": "text",
+                              "parameters": {},
+                              "validation": {},
+                              "required": false
+                           },
+                           {
+                              "sourceParameters": {
+                                 "tab_name": "\"ER_TELE_TYPE\""
+                              },
+                              "name": "EC_TELEPHONE_TYPE",
+                              "model": "TELEPHONE_TYPE",
+                              "sourceModel": "LOVS",
+                              "style": "col11",
+                              "loadInitially": true,
+                              "label": "Telephone Type *",
+                              "type": "select",
+                              "labelKey": "DESCRIPTION",
+                              "valueKey": "CODE",
+                              "required": true
+                           },
+                           {
+                              "readonly": false,
+                              "name": "EC_PHONE_AREA",
+                              "model": "SPREMRG_PHONE_AREA",
+                              "style": "col31",
+                              "label": "Phone Area",
+                              "loadInitially": true,
+                              "placeholder": "Phone area",
+                              "type": "text",
+                              "parameters": {},
+                              "validation": {},
+                              "required": false
+                           },
+                           {
+                              "readonly": false,
+                              "name": "EC_PHONE_NUMBER",
+                              "model": "SPREMRG_PHONE_NUMBER",
+                              "style": "col32",
+                              "label": "Phone Number",
+                              "loadInitially": true,
+                              "placeholder": "Phone Number",
+                              "type": "text",
+                              "parameters": {},
+                              "validation": {},
+                              "required": false
+                           },
+                           {
+                              "readonly": false,
+                              "name": "EC_PHONE_EXT",
+                              "model": "SPREMRG_PHONE_EXT",
+                              "style": "col33",
+                              "label": "Phone Ext",
+                              "loadInitially": true,
+                              "placeholder": "Phone Ext",
+                              "type": "text",
+                              "parameters": {},
+                              "validation": {},
+                              "required": false
+                           },
+                           {
+                              "readonly": false,
+                              "name": "EC_EMAIL_ADDRESS",
+                              "model": "EMAIL_ADDRESS",
+                              "style": "col11",
+                              "label": "Email Address *",
+                              "loadInitially": true,
+                              "type": "email",
+                              "parameters": {},
+                              "validation": {},
+                              "required": true
+                           }
+                        ],
+                        "onError": "var errorMessage =response.data.errors? response.data.errors.errorMessage: null;\nif (errorMessage && errorMessage.indexOf(\"ORA-20000\") > -1) { \n       alert(\"An entry already exists for this virtual domain and role, cannot add a duplicate\", {type:\"error\"});\n} else {   \n       alert( errorMessage?errorMessage:response.data, {type:\"error\"});\n}",
+                        "onSave": "//Make an array from the Grids Model Deleted properties and check if it is empty or not.\n\n//If it is empty do a regular save.  If it is not empty proceed through the process of the deleteFunction()\n\n//You can see all the properties by console.log(myGridDS)\n\nvar recordDeleted = $EC_EditDS.deleted;\nvar str = \"Press OK to delete record(s):\";\n\nfunction deleteFunction() {\n    for (let recd in recordDeleted) {\n        console.log(recd + \": \" + recordDeleted[recd].SPREMRG_PRIORITY);\n        if (recordDeleted[recd].SPREMRG_PRIORITY != undefined) {\n            str = str + \" priority = \" + recordDeleted[recd].SPREMRG_PRIORITY;\n        }\n    }\n    var r = confirm(str);\n    if (r == true) {\n        //$EC_Edit.$save();\n        //alert(str.replace(\"Press OK to delete\", \"You Deleted \"));\n\n    } else {\n        alert(\"You pressed Cancel! NO Record(s) Deleted!\");\n        //If pressing cancel set the deleted array attribute to empty clearing all records to be deleted\n        $EC_EditDS.deleted = [];\n    }\n\n    //$EC_Edit.$load();\n}\n\nif (Array.isArray(recordDeleted) && recordDeleted.length) {\n    deleteFunction();\n    $EC_name.$load({ clearCache: true }, true);\n} else {\n    //$EC_Edit.$save();\n   //alert(\"Changes are saved\", { type: \"success\", flash: true });\n}",
+                        "allowNew": true,
+                        "pageSize": 1,
+                        "onSaveSuccess": "alert($.i18n.prop(\"js.notification.success\"), {type:\"success\", flash:true}); \n\nwindow.params.saved=true;\n$EC_name.$load();\n$EC_Edit.$load();",
+                        "saveDataLabel": "",
+                        "loadInitially": true,
+                        "type": "detail",
+                        "newRecordLabel": "",
+                        "deleteRecordLabel": "",
+                        "refreshDataLabel": "",
+                        "name": "EC_Edit",
+                        "allowModify": true,
+                        "onLoad": "",
+                        "model": "EmergencyContactPriorityModel",
+                        "style": "",
+                        "allowReload": true,
+                        "parameters": {
+                           "spremrg_priority": "$selPrority"
+                        }
+                     }
+                  ],
+                  "nextButtonLabel": "Next",
+                  "name": "EC_Form",
+                  "showInitially": true,
+                  "style": "",
+                  "label": "Edit",
+                  "type": "form"
+               }
+            ],
+            "name": "EC_Block",
+            "showInitially": true,
+            "style": "ugrid",
+            "label": "Disclosure Consent and Emergency Contact Maintenance",
+            "type": "block"
+         }
+      ],
+      "name": "UPSEmergencyContact",
+      "style": "",
+      "type": "page",
+      "title": "Emergency Contact",
+      "importCSS": ""
+   },
+   "owner": null,
+   "pageRoles": [
+      {
+         "roleName": "ADMIN-GPBADMN",
+         "allow": true
+      },
+      {
+         "roleName": "STUDENT",
+         "allow": true
+      }
+   ]
+}

@@ -1,0 +1,364 @@
+{
+   "constantName": "KeyBlockTemplate",
+   "developerSecurity": [],
+   "extendsPage": null,
+   "fileTimestamp": "2022-07-07T14:37:46Z",
+   "modelView": {
+      "components": [
+         {
+            "resource": "virtualDomains.PRSNLOOKUP_Domain",
+            "name": "PRSNLOOKUP_Domain",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "resource": "virtualDomains.UP_S_SHREVNT",
+            "name": "SHREVNT",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "resource": "virtualDomains.UP_S_HAP_LOV",
+            "name": "LOVS",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "name": "JsLiteral",
+            "type": "literal",
+            "value": "<script>\nfunction appendScriptText(filepath) {\n\tvar ele = document.createElement('script');\n\tele.setAttribute(\"type\", \"text/javascript\");\n\tele.setAttribute(\"src\", filepath);\n\tvar request = new XMLHttpRequest();\n\trequest.open('GET', filepath, true);\n\trequest.send(null);\n\trequest.onreadystatechange = function() {\n\t\tif (request.readyState === 4 && request.status === 200) {\n\t\t\tvar type = request.getResponseHeader('Content-Type');\n\t\t\tif (type.indexOf(\"text\") !== 1) {\n\t\t\t\tvar src = request.responseText;\n                                src = '<sc' + 'ript type=\"text/javascript\">' + src ;\n                                 src = src + \"</scr\" + \"ipt>\";\n\t\t\t\t$('head').append(src );\n\t\t\t}\n\t\t}\n\t};\n\n}\n\nfunction appendScript(filepath) {\n\tif ($('head script[src=\"' + filepath + '\"]').length > 0)\n\t\treturn;\n\n\tvar ele = document.createElement('script');\n\tele.setAttribute(\"type\", \"text/javascript\");\n\tele.setAttribute(\"src\", filepath);\n\t$('head').append(ele);\n}\n\nfunction appendStyle(filepath) {\n\tif ($('head link[href=\"' + filepath + '\"]').length > 0)\n\t\treturn;\n\n\tvar ele = document.createElement('link');\n\tele.setAttribute(\"type\", \"text/css\");\n\tele.setAttribute(\"rel\", \"Stylesheet\");\n\tele.setAttribute(\"href\", filepath);\n\t$('head').append(ele);\n}\n\n</script>"
+         },
+         {
+            "name": "cssLiteral",
+            "type": "literal",
+            "value": "<style>\n.col-auto-width {\n  position: relative;\n  min-height: 1px;\n  padding-right: 15px;\n  padding-left: 15px;\n  float: left;\n  width:auto\n}\n</style>"
+         },
+         {
+            "components": [
+               {
+                  "components": [
+                     {
+                        "components": [
+                           {
+                              "components": [
+                                 {
+                                    "components": [
+                                       {
+                                          "label": "ID",
+                                          "loadInitially": true,
+                                          "type": "text",
+                                          "required": false,
+                                          "readonly": false,
+                                          "name": "personCriteriaID",
+                                          "style": "col-auto-width",
+                                          "model": "",
+                                          "placeholder": "",
+                                          "onUpdate": "",
+                                          "parameters": {},
+                                          "value": "",
+                                          "validation": {}
+                                       },
+                                       {
+                                          "readonly": false,
+                                          "name": "personCriteriaLastName",
+                                          "style": "col-auto-width",
+                                          "label": "Last Name",
+                                          "loadInitially": true,
+                                          "type": "text",
+                                          "onUpdate": "",
+                                          "parameters": {},
+                                          "value": "Patel",
+                                          "required": false,
+                                          "validation": {}
+                                       },
+                                       {
+                                          "readonly": false,
+                                          "name": "personCriteriaFirstName",
+                                          "style": "col-auto-width",
+                                          "label": "First Name",
+                                          "loadInitially": true,
+                                          "type": "text",
+                                          "onUpdate": "",
+                                          "parameters": {},
+                                          "required": false,
+                                          "validation": {}
+                                       },
+                                       {
+                                          "readonly": false,
+                                          "name": "personCriteriaMI",
+                                          "style": "col-auto-width",
+                                          "label": "MI",
+                                          "loadInitially": true,
+                                          "type": "text",
+                                          "parameters": {},
+                                          "required": false,
+                                          "validation": {}
+                                       },
+                                       {
+                                          "valueStyle": "primary",
+                                          "onClick": "$personGrid.$load();",
+                                          "name": "pesonsCriteriaButton",
+                                          "style": "",
+                                          "label": "Search",
+                                          "type": "button"
+                                       }
+                                    ],
+                                    "name": "PesonsCriteriaRow",
+                                    "showInitially": true,
+                                    "style": "",
+                                    "type": "block"
+                                 },
+                                 {
+                                    "components": [
+                                       {
+                                          "components": [
+                                             {
+                                                "allowDelete": false,
+                                                "components": [
+                                                   {
+                                                      "readonly": true,
+                                                      "name": "personID",
+                                                      "model": "SPRIDEN_ID",
+                                                      "label": "ID",
+                                                      "loadInitially": true,
+                                                      "type": "text",
+                                                      "parameters": {},
+                                                      "required": false,
+                                                      "validation": {}
+                                                   },
+                                                   {
+                                                      "readonly": true,
+                                                      "name": "personLastName",
+                                                      "model": "SPRIDEN_LAST_NAME",
+                                                      "label": "Last Name",
+                                                      "loadInitially": true,
+                                                      "type": "text",
+                                                      "parameters": {},
+                                                      "required": false,
+                                                      "validation": {}
+                                                   },
+                                                   {
+                                                      "readonly": true,
+                                                      "name": "personFirstName",
+                                                      "model": "SPRIDEN_FIRST_NAME",
+                                                      "label": "First Name",
+                                                      "loadInitially": true,
+                                                      "type": "text",
+                                                      "parameters": {},
+                                                      "required": false,
+                                                      "validation": {}
+                                                   },
+                                                   {
+                                                      "readonly": true,
+                                                      "name": "personMIName",
+                                                      "model": "",
+                                                      "label": "Middle Name",
+                                                      "loadInitially": true,
+                                                      "type": "text",
+                                                      "parameters": {},
+                                                      "required": false,
+                                                      "validation": {}
+                                                   },
+                                                   {
+                                                      "name": "PIDM",
+                                                      "model": "SPRIDEN_PIDM",
+                                                      "loadInitially": true,
+                                                      "type": "hidden"
+                                                   }
+                                                ],
+                                                "onClick": "$currentPesonsSelection = currentSelection;\ndebugger;\n\n$PIDM = currentSelection.SPRIDEN_PIDM; \n$HAP_Edit.$load();",
+                                                "allowNew": false,
+                                                "pageSize": 5,
+                                                "loadInitially": false,
+                                                "type": "grid",
+                                                "name": "personGrid",
+                                                "allowModify": false,
+                                                "model": "PRSNLOOKUP_Domain",
+                                                "style": "",
+                                                "allowReload": false,
+                                                "parameters": {
+                                                   "p_first_name": "nvl($personCriteriaFirstName,\"\").toUpperCase()",
+                                                   "p_last_name": "nvl($personCriteriaLastName,\"\").toUpperCase()",
+                                                   "p_id": "nvl($personCriteriaID,\"\").toUpperCase()",
+                                                   "p_mi": "nvl($personCriteriaMI,\"\").toUpperCase()"
+                                                }
+                                             }
+                                          ],
+                                          "name": "popupPesonsMainCol",
+                                          "showInitially": true,
+                                          "style": "",
+                                          "type": "block"
+                                       }
+                                    ],
+                                    "name": "pesonsMainRow",
+                                    "showInitially": true,
+                                    "style": "",
+                                    "type": "block"
+                                 },
+                                 {
+                                    "components": [
+                                       {
+                                          "allowDelete": true,
+                                          "components": [
+                                             {
+                                                "valueStyle": "onlinecode_org",
+                                                "label": "Event",
+                                                "loadInitially": true,
+                                                "type": "select",
+                                                "required": false,
+                                                "sourceParameters": {
+                                                   "tab_name": "\"STVEVEN\""
+                                                },
+                                                "name": "HAP_Edit_Event",
+                                                "onLoad": "",
+                                                "sourceModel": "LOVS",
+                                                "model": "SHREVNT_EVEN_CODE",
+                                                "style": "",
+                                                "labelKey": "DESCRIPTION",
+                                                "valueKey": "CODE"
+                                             },
+                                             {
+                                                "sourceParameters": {
+                                                   "tab_name": "\"STVORIG\""
+                                                },
+                                                "name": "HAP_Edit_Orig",
+                                                "sourceModel": "LOVS",
+                                                "model": "SHREVNT_ORIG_CODE",
+                                                "label": "Orig",
+                                                "loadInitially": true,
+                                                "type": "select",
+                                                "labelKey": "DESCRIPTION",
+                                                "valueKey": "CODE",
+                                                "required": false
+                                             },
+                                             {
+                                                "sourceParameters": {
+                                                   "tab_name": "\"STVLEVL\""
+                                                },
+                                                "name": "HAP_Edit_Level1",
+                                                "sourceModel": "LOVS",
+                                                "model": "SHREVNT_LEVL_CODE",
+                                                "label": "Level",
+                                                "loadInitially": true,
+                                                "type": "select",
+                                                "labelKey": "DESCRIPTION",
+                                                "valueKey": "CODE",
+                                                "required": false
+                                             },
+                                             {
+                                                "readonly": false,
+                                                "name": "HAP_Edit_desc",
+                                                "model": "SHREVNT_DESC",
+                                                "loadInitially": true,
+                                                "label": "Description",
+                                                "type": "text",
+                                                "parameters": {},
+                                                "validation": {},
+                                                "required": false
+                                             },
+                                             {
+                                                "readonly": false,
+                                                "name": "HAP_Edit_eff_date",
+                                                "model": "SHREVNT_EFFECTIVE_DATE",
+                                                "loadInitially": true,
+                                                "label": "Effective Date",
+                                                "type": "datetime",
+                                                "parameters": {},
+                                                "validation": {},
+                                                "required": false
+                                             },
+                                             {
+                                                "sourceParameters": {
+                                                   "tab_name": "\"DECISION\""
+                                                },
+                                                "name": "HAP_Edit_Decision",
+                                                "sourceModel": "LOVS",
+                                                "model": "SHREVNT_DECISION",
+                                                "label": "Decision",
+                                                "loadInitially": true,
+                                                "type": "select",
+                                                "labelKey": "DESCRIPTION",
+                                                "valueKey": "CODE",
+                                                "required": false
+                                             }
+                                          ],
+                                          "onClick": "$(\".onlinecode_org\").chosen();",
+                                          "allowNew": true,
+                                          "pageSize": 10,
+                                          "loadInitially": true,
+                                          "type": "grid",
+                                          "refreshDataLabel": "",
+                                          "name": "HAP_Edit",
+                                          "allowModify": true,
+                                          "onLoad": "",
+                                          "model": "SHREVNT",
+                                          "allowReload": true,
+                                          "parameters": {
+                                             "pidm": "$PIDM"
+                                          }
+                                       },
+                                       {
+                                          "onClick": "$(\".onlinecode_org\").chosen();",
+                                          "name": "HAP_Form_child_2",
+                                          "label": "Search",
+                                          "type": "button"
+                                       }
+                                    ],
+                                    "nextButtonLabel": "Next",
+                                    "name": "HAP_Form",
+                                    "showInitially": true,
+                                    "type": "form"
+                                 },
+                                 {
+                                    "components": [
+                                       {
+                                          "name": "keyBlockBannerIdCol_child_4_child_1",
+                                          "type": "literal",
+                                          "value": "<script type=\"text/javascript\">\ndebugger;\nappendScriptText('/BannerExtensibility/cssRender?name=jqueryandchosen1');\nappendStyle('/BannerExtensibility/cssRender?name=HAP_CSS');\n</script>"
+                                       }
+                                    ],
+                                    "nextButtonLabel": "Next",
+                                    "name": "keyBlockBannerIdCol_child_4",
+                                    "showInitially": true,
+                                    "type": "form"
+                                 }
+                              ],
+                              "name": "keyBlockBannerIdCol",
+                              "showInitially": true,
+                              "style": "",
+                              "type": "block"
+                           }
+                        ],
+                        "name": "keyBlockRow",
+                        "showInitially": true,
+                        "style": "",
+                        "type": "block"
+                     }
+                  ],
+                  "name": "keyBlockContainer",
+                  "showInitially": true,
+                  "style": "",
+                  "type": "block"
+               }
+            ],
+            "name": "keyBlockForm",
+            "showInitially": true,
+            "style": "",
+            "type": "block"
+         }
+      ],
+      "name": "KeyBlockTemplate",
+      "style": "",
+      "label": "Components",
+      "title": "Components",
+      "type": "page",
+      "importCSS": ""
+   },
+   "owner": null,
+   "pageRoles": [
+      {
+         "roleName": "ADMIN-GPBADMN",
+         "allow": true
+      }
+   ]
+}

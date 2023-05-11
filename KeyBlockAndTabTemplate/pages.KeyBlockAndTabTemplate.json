@@ -1,0 +1,342 @@
+{
+   "constantName": "KeyBlockAndTabTemplate",
+   "developerSecurity": [],
+   "extendsPage": null,
+   "fileTimestamp": "2020-02-17T23:11:04Z",
+   "modelView": {
+      "components": [
+         {
+            "resource": "virtualDomains.PRSNLOOKUP_Domain",
+            "name": "PRSNLOOKUP_Domain",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "resource": "virtualDomains.GOREMAL_PREFERRED",
+            "name": "GOREMAL_PREFERRED",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "name": "tabLogic",
+            "type": "literal",
+            "value": "<script>\nfunction selectTab (evt, elmntName) {\n    // Declare all variables\n    var i, tabcontent, tablinks;\n\n    // Get all elements with class=\"tabcontent\" and hide them\n    tabcontent = document.getElementsByClassName(\"tabcontent\");\n    for (i = 0; i < tabcontent.length; i++) {\n        tabcontent[i].style.display = \"none\";\n    }\n\n    // Get all elements with class=\"tablinks\" and remove the class \"active\"\n    tablinks = document.getElementsByClassName(\"tablinks\");\n    for (i = 0; i < tablinks.length; i++) {\n        //console.log(i);\n        //console.log(tablinks[i].id);\n        //console.log(\"before: \" + tablinks[i].className);\n        tablinks[i].className = tablinks[i].className.substr(0, tablinks[i].className.indexOf(' active'));\n        //console.log(\"after: \" + tablinks[i].className);\n    }\n\n    // Show the current tab, and add an \"active\" class to the button that opened the tab\n    document.getElementById(elmntName).style.display = \"block\";\n    document.getElementById(evt).className += \" active\";\n    //console.log(\"updated: \" + evt + \": \" + document.getElementById(evt).className);\n}\n</script>"
+         },
+         {
+            "components": [
+               {
+                  "components": [
+                     {
+                        "components": [
+                           {
+                              "components": [
+                                 {
+                                    "components": [
+                                       {
+                                          "readonly": false,
+                                          "name": "personCriteriaID",
+                                          "style": "col-auto-width",
+                                          "label": "ID",
+                                          "loadInitially": true,
+                                          "type": "text",
+                                          "onUpdate": "",
+                                          "parameters": {},
+                                          "required": false,
+                                          "validation": {}
+                                       },
+                                       {
+                                          "readonly": false,
+                                          "name": "personCriteriaLastName",
+                                          "style": "col-auto-width",
+                                          "label": "Last Name",
+                                          "loadInitially": true,
+                                          "type": "text",
+                                          "onUpdate": "",
+                                          "parameters": {},
+                                          "required": false,
+                                          "validation": {}
+                                       },
+                                       {
+                                          "readonly": false,
+                                          "name": "personCriteriaFirstName",
+                                          "style": "col-auto-width",
+                                          "label": "First Name",
+                                          "loadInitially": true,
+                                          "type": "text",
+                                          "onUpdate": "",
+                                          "parameters": {},
+                                          "required": false,
+                                          "validation": {}
+                                       },
+                                       {
+                                          "readonly": false,
+                                          "name": "personCriteriaMI",
+                                          "style": "col-auto-width",
+                                          "label": "MI",
+                                          "loadInitially": true,
+                                          "type": "text",
+                                          "parameters": {},
+                                          "required": false,
+                                          "validation": {}
+                                       },
+                                       {
+                                          "valueStyle": "primary",
+                                          "onClick": "$personGrid.$load();\n$personMainRow.$visible = !$personMainRow.$visible;",
+                                          "name": "personCriteriaButton",
+                                          "style": "",
+                                          "label": "Search",
+                                          "type": "button"
+                                       }
+                                    ],
+                                    "name": "PersonCriteriaRow",
+                                    "showInitially": true,
+                                    "style": "row",
+                                    "type": "block"
+                                 },
+                                 {
+                                    "components": [
+                                       {
+                                          "components": [
+                                             {
+                                                "allowDelete": false,
+                                                "components": [
+                                                   {
+                                                      "readonly": true,
+                                                      "name": "personID",
+                                                      "model": "SPRIDEN_ID",
+                                                      "label": "ID",
+                                                      "loadInitially": true,
+                                                      "type": "text",
+                                                      "parameters": {},
+                                                      "required": false,
+                                                      "validation": {}
+                                                   },
+                                                   {
+                                                      "readonly": true,
+                                                      "name": "personLastName",
+                                                      "model": "SPRIDEN_LAST_NAME",
+                                                      "label": "Last Name",
+                                                      "loadInitially": true,
+                                                      "type": "text",
+                                                      "parameters": {},
+                                                      "required": false,
+                                                      "validation": {}
+                                                   },
+                                                   {
+                                                      "readonly": true,
+                                                      "name": "personFirstName",
+                                                      "model": "SPRIDEN_FIRST_NAME",
+                                                      "label": "First Name",
+                                                      "loadInitially": true,
+                                                      "type": "text",
+                                                      "parameters": {},
+                                                      "required": false,
+                                                      "validation": {}
+                                                   },
+                                                   {
+                                                      "readonly": true,
+                                                      "name": "personMIName",
+                                                      "model": "SPRIDEN_MI",
+                                                      "label": "Middle Name",
+                                                      "loadInitially": true,
+                                                      "type": "text",
+                                                      "parameters": {},
+                                                      "required": false,
+                                                      "validation": {}
+                                                   }
+                                                ],
+                                                "onClick": "$chosenId = currentSelection.SPRIDEN_ID;\n$dataGrid.$load();\n$dataGrid2.$load();\nselectTab('pbid-btnTab1', 'pbid-tab1Content');",
+                                                "allowNew": false,
+                                                "pageSize": 10,
+                                                "loadInitially": false,
+                                                "type": "grid",
+                                                "name": "personGrid",
+                                                "allowModify": false,
+                                                "model": "PRSNLOOKUP_Domain",
+                                                "style": "",
+                                                "allowReload": false,
+                                                "parameters": {
+                                                   "p_first_name": "nvl($personCriteriaFirstName,\"\").toUpperCase()",
+                                                   "p_last_name": "nvl($personCriteriaLastName,\"\").toUpperCase()",
+                                                   "p_id": "nvl($personCriteriaID,\"\").toUpperCase()",
+                                                   "p_mi": "nvl($personCriteriaMI,\"\").toUpperCase()"
+                                                }
+                                             }
+                                          ],
+                                          "name": "popupPersonMainCol",
+                                          "showInitially": true,
+                                          "style": "col-md-12",
+                                          "type": "block"
+                                       }
+                                    ],
+                                    "name": "personMainRow",
+                                    "showInitially": false,
+                                    "style": "row",
+                                    "type": "block"
+                                 }
+                              ],
+                              "name": "keyBlockBannerIdCol",
+                              "showInitially": true,
+                              "style": "col-md-9",
+                              "type": "block"
+                           }
+                        ],
+                        "name": "keyBlockRow",
+                        "showInitially": true,
+                        "style": "row",
+                        "type": "block"
+                     }
+                  ],
+                  "name": "keyBlockContainer",
+                  "showInitially": true,
+                  "style": "container width-100pct",
+                  "type": "block"
+               }
+            ],
+            "name": "keyBlockForm",
+            "showInitially": true,
+            "type": "block"
+         },
+         {
+            "components": [
+               {
+                  "onClick": "selectTab('pbid-btnTab1', 'pbid-tab1Content');",
+                  "name": "btnTab1",
+                  "style": "tablinks",
+                  "label": "Tab 1",
+                  "type": "button"
+               },
+               {
+                  "onClick": "selectTab('pbid-btnTab2', 'pbid-tab2Content');",
+                  "name": "btnTab2",
+                  "style": "tablinks",
+                  "label": "Tab 2",
+                  "type": "button"
+               }
+            ],
+            "name": "tabHeaderBlock",
+            "style": "tab",
+            "showInitially": true,
+            "type": "block"
+         },
+         {
+            "components": [
+               {
+                  "components": [
+                     {
+                        "allowDelete": true,
+                        "components": [
+                           {
+                              "readonly": false,
+                              "name": "preferredEmail",
+                              "model": "GOREMAL_EMAIL_ADDRESS",
+                              "label": "Preferred Email:",
+                              "loadInitially": true,
+                              "type": "email",
+                              "parameters": {},
+                              "validation": {},
+                              "required": false
+                           }
+                        ],
+                        "onClick": "",
+                        "allowNew": true,
+                        "pageSize": 5,
+                        "loadInitially": true,
+                        "type": "grid",
+                        "name": "dataGrid",
+                        "allowModify": true,
+                        "onLoad": "$popupPersonMainCol.$visible = !$popupPersonMainCol.$visible;",
+                        "model": "GOREMAL_PREFERRED",
+                        "allowReload": true,
+                        "parameters": {
+                           "inid": "$chosenId"
+                        }
+                     }
+                  ],
+                  "name": "DataBlock1",
+                  "showInitially": true,
+                  "style": "introBlock",
+                  "type": "block"
+               }
+            ],
+            "name": "tab1Content",
+            "style": "tabcontent",
+            "showInitially": true,
+            "label": "Email Info",
+            "type": "block"
+         },
+         {
+            "components": [
+               {
+                  "components": [
+                     {
+                        "allowDelete": true,
+                        "components": [
+                           {
+                              "readonly": false,
+                              "name": "preferredEmail2",
+                              "model": "GOREMAL_EMAIL_ADDRESS",
+                              "label": "Preferred Email:",
+                              "loadInitially": true,
+                              "type": "email",
+                              "parameters": {},
+                              "validation": {},
+                              "required": false
+                           }
+                        ],
+                        "allowNew": true,
+                        "name": "dataGrid2",
+                        "allowModify": true,
+                        "pageSize": 5,
+                        "model": "GOREMAL_PREFERRED",
+                        "allowReload": true,
+                        "loadInitially": true,
+                        "type": "grid",
+                        "parameters": {
+                           "inid": "$chosenId"
+                        }
+                     }
+                  ],
+                  "name": "DataBlock2",
+                  "showInitially": true,
+                  "style": "introBlock",
+                  "type": "block"
+               }
+            ],
+            "name": "tab2Content",
+            "style": "tabcontent",
+            "showInitially": true,
+            "label": "Other Info",
+            "type": "block"
+         },
+         {
+            "components": [
+               {
+                  "readonly": false,
+                  "name": "chosenId",
+                  "loadInitially": true,
+                  "type": "text",
+                  "parameters": {},
+                  "validation": {},
+                  "required": false
+               }
+            ],
+            "name": "VarBlock",
+            "showInitially": false,
+            "type": "block"
+         }
+      ],
+      "name": "KeyBlockAndTabTemplate",
+      "label": "Tabbed Page with Smart KeyBlock",
+      "title": "Tabbed Page with Smart KeyBlock",
+      "type": "page",
+      "importCSS": "componentLibrary,tabsCss"
+   },
+   "owner": null,
+   "pageRoles": [
+      {
+         "roleName": "ADMIN-GPBADMN",
+         "allow": true
+      }
+   ]
+}

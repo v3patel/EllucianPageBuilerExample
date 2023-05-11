@@ -1,0 +1,20 @@
+{
+   "owner": null,
+   "codePut": null,
+   "codeDelete": null,
+   "virtualDomainRoles": [
+      {
+         "allowDelete": false,
+         "allowPost": false,
+         "allowPut": false,
+         "roleName": "ALLROLES",
+         "allowGet": true
+      }
+   ],
+   "codeGet": "SELECT DISTINCT SPRIDEN_PIDM\r\n      ,SPRIDEN_ID              PENN_ID\r\n      ,   SPRIDEN_FIRST_NAME\r\n       || ' '\r\n       || CASE WHEN SPRIDEN_MI IS NULL THEN '' ELSE SPRIDEN_MI || ' ' END\r\n       || SPRIDEN_LAST_NAME    STUDENTNAME\r\n  FROM spriden\r\n WHERE spriden_id =  :p_id AND spriden_change_ind IS NULL",
+   "typeOfCode": "S",
+   "fileTimestamp": "2022-03-29T14:52:17Z",
+   "serviceName": "UPSFACFerpaStudentINFOVD",
+   "codePost": null,
+   "developerSecurity": []
+}

@@ -1,0 +1,118 @@
+{
+   "constantName": "VIP_UP_TEST",
+   "developerSecurity": [],
+   "extendsPage": null,
+   "fileTimestamp": "2022-07-06T22:29:09Z",
+   "modelView": {
+      "components": [
+         {
+            "name": "SELECTLIST",
+            "type": "resource",
+            "staticData": [
+               {
+                  "CODE": "ABC",
+                  "DESC": "abc"
+               },
+               {
+                  "CODE": "XYZ",
+                  "DESC": "xyz"
+               },
+               {
+                  "CODE": "PQR",
+                  "DESC": "pqr"
+               }
+            ]
+         },
+         {
+            "resource": "virtualDomains.VIP_UP_TEST",
+            "name": "M",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "components": [
+               {
+                  "readonly": false,
+                  "name": "Paravalue",
+                  "label": "Para value",
+                  "loadInitially": true,
+                  "type": "text",
+                  "parameters": {},
+                  "value": "$$params.param1",
+                  "validation": {},
+                  "required": false
+               },
+               {
+                  "allowDelete": false,
+                  "components": [
+                     {
+                        "readonly": false,
+                        "name": "T",
+                        "onLoad": "",
+                        "model": "P1",
+                        "label": "param1",
+                        "loadInitially": true,
+                        "type": "text",
+                        "parameters": {},
+                        "value": "",
+                        "onUpdate": "",
+                        "validation": {},
+                        "required": false
+                     },
+                     {
+                        "label": "Change param1",
+                        "loadInitially": true,
+                        "type": "select",
+                        "required": false,
+                        "sourceParameters": {},
+                        "name": "S",
+                        "onLoad": "",
+                        "sourceModel": "SELECTLIST",
+                        "model": "P1",
+                        "labelKey": "CODE",
+                        "valueKey": "DESC",
+                        "onUpdate": "debugger;\n$D  = window.location.href.split(\"?\")[0] + \"?param1=\" + $S\nwindow.location = window.location.href.split(\"?\")[0] + \"?param1=\" + $S",
+                        "value": ""
+                     },
+                     {
+                        "name": "L",
+                        "label": "Help",
+                        "type": "literal",
+                        "value": "{{$item.T}} {{$_contextroot}}"
+                     },
+                     {
+                        "name": "D",
+                        "type": "link",
+                        "replaceView": true,
+                        "url": "0000"
+                     }
+                  ],
+                  "allowNew": false,
+                  "name": "DL",
+                  "allowModify": false,
+                  "pageSize": 5,
+                  "model": "M",
+                  "allowReload": false,
+                  "loadInitially": true,
+                  "type": "detail",
+                  "parameters": {
+                     "param1": "$$params.param1"
+                  }
+               }
+            ],
+            "name": "F",
+            "showInitially": true,
+            "type": "block"
+         }
+      ],
+      "name": "VIPUPTEST",
+      "type": "page"
+   },
+   "owner": null,
+   "pageRoles": [
+      {
+         "roleName": "ALLROLES",
+         "allow": true
+      }
+   ]
+}

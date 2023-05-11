@@ -1,0 +1,20 @@
+{
+   "owner": null,
+   "codePut": null,
+   "codeDelete": null,
+   "virtualDomainRoles": [
+      {
+         "allowDelete": false,
+         "allowPost": false,
+         "allowPut": false,
+         "roleName": "ADMIN-GPBADMN",
+         "allowGet": true
+      }
+   ],
+   "codeGet": "select stvterm_code, stvterm_desc, stvterm_date_desc from svq_term_registration",
+   "typeOfCode": "S",
+   "fileTimestamp": null,
+   "serviceName": "TERM_LIST",
+   "codePost": null,
+   "developerSecurity": []
+}

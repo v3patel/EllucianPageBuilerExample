@@ -1,0 +1,77 @@
+{
+   "constantName": "UP_S_CrossListedGradeSelection",
+   "developerSecurity": [],
+   "extendsPage": null,
+   "fileTimestamp": "2022-07-06T22:28:52Z",
+   "modelView": {
+      "components": [
+         {
+            "resource": "virtualDomains.UP_S_GRADES",
+            "name": "XL_GRADES",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "name": "CSS_",
+            "type": "literal",
+            "value": "<style>\n.ngHeaderButton {\ndisplay: none;\n}\n\n.ngCell  {\n  display : table-cell;\n  height: auto !important;\n  overflow:visible;\n  position: static;\n}\n\n.ngRow {\n  display : table-row;\n  height: auto !important;\n  position: static;\n}\n\n.ngCellText{\n  height: auto !important;\n  white-space: normal;\n  overflow:visible;\n}\n\n\n\ntable, td, th {\n  border: .5px solid black;\n}\n\ntable {\n  border-collapse: collapse;\n  width: 100%;\n}\n\n\n</style>"
+         },
+         {
+            "name": "JS_",
+            "type": "literal",
+            "value": "<script type=\"text/javascript\">\n    function SetName() {\n        if (window.opener != null && !window.opener.closed) {\n            var txtName = window.opener.document.getElementById(\"txtName\");\n            txtName.value = document.getElementById(\"pbid-XLS_FINAL\").value;\n        }\n        window.close();\n    }\n</script>"
+         },
+         {
+            "submitLabel": "SAVE",
+            "components": [
+               {
+                  "sourceParameters": {
+                     "scrn": "$$params.scrn",
+                     "spidm": "$$params.spidm",
+                     "stermcode": "$$params.stermcode"
+                  },
+                  "name": "XLS_FINAL",
+                  "onLoad": "//alert(\"Parameter crn \" + atob(atob($$params.scrn)); , {});\n//alert(\"Parameter tc\" + $$params.stermcode, {});\n//alert(\"Parameter pidm\" + $$params.spidm, {});",
+                  "model": "",
+                  "sourceModel": "XL_GRADES",
+                  "loadInitially": true,
+                  "label": "Final",
+                  "type": "select",
+                  "labelKey": "GCODE",
+                  "valueKey": "GDESC",
+                  "required": false
+               },
+               {
+                  "name": "XL_SELGRADE",
+                  "type": "literal",
+                  "value": "<input type=\"button\" value=\"Select\" onclick=\"SetName();\" />"
+               },
+               {
+                  "name": "BL_CLASS_child_3",
+                  "type": "literal",
+                  "value": "{{ $param.scrn }} cipul"
+               }
+            ],
+            "nextButtonLabel": "Next",
+            "name": "BL_CLASS",
+            "showInitially": true,
+            "label": "Class List",
+            "type": "form"
+         }
+      ],
+      "name": "UPSCrossListedGradeSelection",
+      "type": "page",
+      "title": "Cross Listed Grading"
+   },
+   "owner": null,
+   "pageRoles": [
+      {
+         "roleName": "ADMIN-GPBADMN",
+         "allow": true
+      },
+      {
+         "roleName": "FACULTY",
+         "allow": true
+      }
+   ]
+}

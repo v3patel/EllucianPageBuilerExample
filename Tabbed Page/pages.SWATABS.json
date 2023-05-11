@@ -1,0 +1,85 @@
+{
+   "constantName": "SWATABS",
+   "developerSecurity": [],
+   "extendsPage": null,
+   "fileTimestamp": "2020-01-30T14:20:24Z",
+   "modelView": {
+      "components": [
+         {
+            "name": "tabLogic",
+            "type": "literal",
+            "value": "<script>\nfunction selectTab (evt, elmntName) {\n    // Declare all variables\n    var i, tabcontent, tablinks;\n\n    // Get all elements with class=\"tabcontent\" and hide them\n    tabcontent = document.getElementsByClassName(\"tabcontent\");\n    for (i = 0; i < tabcontent.length; i++) {\n        tabcontent[i].style.display = \"none\";\n    }\n\n    // Get all elements with class=\"tablinks\" and remove the class \"active\"\n    tablinks = document.getElementsByClassName(\"tablinks\");\n    for (i = 0; i < tablinks.length; i++) {\n        //console.log(i);\n        //console.log(tablinks[i].id);\n        //console.log(\"before: \" + tablinks[i].className);\n        tablinks[i].className = tablinks[i].className.substr(0, tablinks[i].className.indexOf(' active'));\n        //console.log(\"after: \" + tablinks[i].className);\n    }\n\n    // Show the current tab, and add an \"active\" class to the button that opened the tab\n    document.getElementById(elmntName).style.display = \"block\";\n    document.getElementById(evt).className += \" active\";\n    //console.log(\"updated: \" + evt + \": \" + document.getElementById(evt).className);\n}\n</script>"
+         },
+         {
+            "components": [
+               {
+                  "onClick": "selectTab('pbid-btnTab1', 'pbid-tab1Content');\nalert(\"hi\");",
+                  "name": "btnTab1",
+                  "style": "tablinks",
+                  "label": "Tab 1",
+                  "type": "button"
+               },
+               {
+                  "onClick": "selectTab('pbid-btnTab2', 'pbid-tab2Content');",
+                  "name": "btnTab2",
+                  "style": "tablinks",
+                  "label": "Tab 2",
+                  "type": "button"
+               }
+            ],
+            "name": "tabHeaderBlock",
+            "style": "tab",
+            "showInitially": true,
+            "type": "block"
+         },
+         {
+            "components": [
+               {
+                  "components": [
+                     {
+                        "name": "introText",
+                        "type": "literal",
+                        "value": "<p>This section provides an overview of Tab 1 content.</em></p>"
+                     }
+                  ],
+                  "name": "introBlock",
+                  "style": "introBlock",
+                  "showInitially": true,
+                  "type": "block"
+               }
+            ],
+            "name": "tab2Content",
+            "style": "tabcontent",
+            "showInitially": true,
+            "label": "Tab 2 Content",
+            "type": "block"
+         },
+         {
+            "components": [
+               {
+                  "asHtml": false,
+                  "name": "stackedColumnChartVisual",
+                  "loadInitially": true,
+                  "type": "display",
+                  "value": "<div id=\"stackedColumnChart\"></div>"
+               }
+            ],
+            "name": "tab1Content",
+            "style": "tabcontent",
+            "showInitially": true,
+            "label": "Tab 1 Content",
+            "type": "block"
+         }
+      ],
+      "name": "SWATABS",
+      "type": "page",
+      "importCSS": "demoAnnualCompensationCss"
+   },
+   "owner": null,
+   "pageRoles": [
+      {
+         "roleName": "ADMIN-GPBADMN",
+         "allow": true
+      }
+   ]
+}

@@ -1,0 +1,25 @@
+{
+   "codePost": "begin\r\n\r\nIF (:SWRAPOS_ORG_END_DATE < :SWRAPOS_ORG_BEGIN_DATE) THEN\r\n raise_application_error (-20005, 'The End date must be later than the begin date');\r\nELSE IF (:SWRAPOS_ORG_END_DATE = :SWRAPOS_ORG_BEGIN_DATE AND :SWRAPOS_INACTIVE_IND != 'Y') THEN\r\n  raise_application_error (-20006, 'The End date is the same as the begin date, please make inactive or choose a future term');\r\nELSE IF\r\n(:SWRAPOS_ORG_END_DATE <= sysdate AND :SWRAPOS_INACTIVE_IND != 'Y') THEN\r\n  raise_application_error (-20007, 'The End date is today or in the past, please make Inactive or choose a future date');\r\nelse\r\nINSERT INTO SWRAPOS (\r\nSWRAPOS_APPR_CODE      \r\n,SWRAPOS_GROUP         \r\n,SWRAPOS_APPR_TYPE    \r\n,SWRAPOS_COAS_CODE \r\n,SWRAPOS_ORGN_CODE  \r\n,SWRAPOS_PROXY_IND  \r\n,SWRAPOS_PRIOR_LEVL          \r\n,SWRAPOS_ORG_START_DATE            \r\n,SWRAPOS_ORG_END_DATE             \r\n,SWRAPOS_APPR_PIDM        \r\n,SWRAPOS_USER_ALIAS  \r\n,SWRAPOS_INACTIVE_IND   \r\n,SWRAPOS_ACTIVITY_DATE          \r\n,SWRAPOS_USER_ID  \r\n,SWRAPOS_DATA_ORIGIN \r\n) VALUES (\r\n NVL(:SWRAPOS_APPR_CODE, 'TEM')  \r\n,'ORGN'         \r\n,'S'    \r\n,COALESCE (:SWRAPOS_COAS_CODE, :coascode) \r\n,COALESCE (:SWRAPOS_ORGN_CODE, :orgncode, :orgncode2) \r\n,NVL(:SWRAPOS_PROXY_IND, 'N')  \r\n,:SWRAPOS_PRIOR_LEVL          \r\n,:SWRAPOS_ORG_START_DATE            \r\n,:SWRAPOS_ORG_END_DATE             \r\n,:SWRAPOS_APPR_PIDM        \r\n,:SWRAPOS_USER_ALIAS  \r\n,NVL(:SWRAPOS_INACTIVE_IND, 'N')   \r\n,SYSDATE\r\n,USER\r\n,'BANNER'\r\n);\r\nend if;\r\nend if;\r\nend if;\r\nend;",
+   "virtualDomainRoles": [
+      {
+         "allowGet": true,
+         "allowPost": true,
+         "allowPut": true,
+         "roleName": "ADMIN-SWRAPOS2DOMAIN",
+         "allowDelete": true
+      },
+      {
+         "allowGet": true,
+         "allowPost": true,
+         "allowPut": true,
+         "roleName": "ADMIN-GPBADMN",
+         "allowDelete": true
+      }
+   ],
+   "codePut": "begin\r\n\r\nIF (:SWRAPOS_ORG_END_DATE < :SWRAPOS_ORG_BEGIN_DATE) THEN\r\n raise_application_error (-20005, 'The End date must be later than the begin date');\r\nELSE IF (:SWRAPOS_ORG_END_DATE = :SWRAPOS_ORG_BEGIN_DATE AND :SWRAPOS_INACTIVE_IND != 'Y') THEN\r\n  raise_application_error (-20006, 'The End date is the same as the begin date, please make inactive or choose a future term');\r\nELSE IF\r\n(:SWRAPOS_ORG_END_DATE <= sysdate AND :SWRAPOS_INACTIVE_IND != 'Y') THEN\r\n  raise_application_error (-20007, 'The End date is today or in the past, please make Inactive or choose a future date');\r\nELSE\r\nUPDATE SWRAPOS\r\nSET  \r\nSWRAPOS_APPR_CODE = 'TEM'    \r\n,SWRAPOS_GROUP = 'ORGN'       \r\n,SWRAPOS_APPR_TYPE = 'S' \r\n,SWRAPOS_COAS_CODE = NVL(:SWRAPOS_COAS_CODE, :coascode)\r\n,SWRAPOS_ORGN_CODE = COALESCE (:SWRAPOS_ORGN_CODE, :orgncode, :orgncode2) \r\n,SWRAPOS_PROXY_IND = NVL(:SWRAPOS_PROXY_IND,'N') \r\n,SWRAPOS_PRIOR_LEVL  = :SWRAPOS_PRIOR_LEVL        \r\n,SWRAPOS_ORG_START_DATE = :SWRAPOS_ORG_START_DATE           \r\n,SWRAPOS_ORG_END_DATE = :SWRAPOS_ORG_END_DATE\r\n,SWRAPOS_APPR_PIDM  = :SWRAPOS_APPR_PIDM       \r\n,SWRAPOS_INACTIVE_IND = NVL(:SWRAPOS_INACTIVE_IND,'N')  \r\n,SWRAPOS_ACTIVITY_DATE = SYSDATE          \r\n,SWRAPOS_DATA_ORIGIN = 'BANNER'\r\n,SWRAPOS_USER_ID = USER\r\nWHERE rowid = :id;\r\nend if;\r\nend if;\r\nend if;\r\nEND;",
+   "fileTimestamp": "2019-04-08T19:39:37Z",
+   "codeDelete": "begin\r\nDELETE SWRAPOS\r\nWHERE rowid = :id;\r\nend;",
+   "codeGet": "SELECT\r\nrowidtochar(s.rowid) \"id\", s.*\r\n,TO_DATE('01/JAN/2099','DD/MON/YYYY') AS SWRAPOS_MAX_DATE\r\nFROM SWRAPOS s\r\nWHERE \r\nSWRAPOS_APPR_CODE = 'TEM'     \r\nAND SWRAPOS_GROUP = 'ORGN'        \r\nAND SWRAPOS_APPR_TYPE = 'S'\r\nAND SWRAPOS_COAS_CODE = :coascode\r\nAND SWRAPOS_ORGN_CODE = NVL(:orgncode, :orgncode2)",
+   "typeOfCode": "S",
+   "serviceName": "SWRAPOS2"
+}

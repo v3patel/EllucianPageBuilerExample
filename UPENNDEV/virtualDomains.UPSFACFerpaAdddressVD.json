@@ -1,0 +1,20 @@
+{
+   "owner": null,
+   "codePut": null,
+   "codeDelete": null,
+   "virtualDomainRoles": [
+      {
+         "allowDelete": false,
+         "allowPost": false,
+         "allowPut": false,
+         "roleName": "ALLROLES",
+         "allowGet": true
+      }
+   ],
+   "codeGet": "SELECT STVATYP_DESC                                   SPRADDR_ATYP_CODE\r\n        ,TO_CHAR (SPRADDR_FROM_DATE, 'DD-MON-RRRR')     SPRADDR_FROM_DATE\r\n        ,TO_CHAR (SPRADDR_TO_DATE, 'DD-MON-RRRR')       SPRADDR_TO_DATE\r\n        ,SPRADDR_STREET_LINE1\r\n        ,SPRADDR_STREET_LINE2\r\n        ,SPRADDR_STREET_LINE3\r\n        ,SPRADDR_CITY\r\n        ,stvstat_desc                                   SPRADDR_STAT_CODE\r\n        ,SPRADDR_ZIP\r\n        ,NVL (SPRADDR_STATUS_IND, 'N')                  SPRADDR_STATUS_IND\r\n    FROM spraddr\r\n        ,STVATYP\r\n        ,STVSTAT\r\n   WHERE  spraddr_pidm = :pidm\r\n         AND STVATYP_CODE = SPRADDR_ATYP_CODE\r\n         AND (SPRADDR_ATYP_CODE LIKE 'L%' OR SPRADDR_ATYP_CODE = 'PR')\r\n         AND stvstat_code = SPRADDR_STAT_CODE\r\nORDER BY spraddr_activity_date DESC",
+   "typeOfCode": "S",
+   "fileTimestamp": "2022-03-29T14:52:17Z",
+   "serviceName": "UPSFACFerpaAdddressVD",
+   "codePost": null,
+   "developerSecurity": []
+}

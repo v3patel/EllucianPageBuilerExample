@@ -1,0 +1,88 @@
+{
+   "constantName": "flowDemo",
+   "developerSecurity": [],
+   "extendsPage": null,
+   "fileTimestamp": null,
+   "modelView": {
+      "components": [
+         {
+            "sequence": "form1,form2,form3,lastForm",
+            "name": "flowSeq",
+            "type": "flow",
+            "activated": false
+         },
+         {
+            "components": [
+               {
+                  "name": "form1_child_1",
+                  "label": "Field",
+                  "type": "literal",
+                  "value": "This is form1"
+               }
+            ],
+            "nextButtonLabel": "Next",
+            "name": "form1",
+            "showInitially": false,
+            "type": "form"
+         },
+         {
+            "submitLabel": "",
+            "components": [
+               {
+                  "name": "form2_child_1",
+                  "type": "literal",
+                  "value": "This is form2"
+               }
+            ],
+            "submit": "",
+            "nextButtonLabel": "Continue",
+            "name": "form2",
+            "showInitially": false,
+            "type": "form"
+         },
+         {
+            "components": [
+               {
+                  "name": "form3_child_1",
+                  "type": "literal",
+                  "value": "This is form3"
+               }
+            ],
+            "submit": "alert('forms submitted');",
+            "nextButtonLabel": "Submit",
+            "name": "form3",
+            "showInitially": false,
+            "type": "form"
+         },
+         {
+            "components": [
+               {
+                  "name": "lastForm_child_1",
+                  "type": "literal",
+                  "value": "Flow of forms completed and submitted"
+               }
+            ],
+            "nextButtonLabel": "",
+            "name": "lastForm",
+            "showInitially": false,
+            "type": "form"
+         },
+         {
+            "onClick": "let s = getControllerScopeById(controllerId) ;\ns._activateFlow('flowSeq');\n$(\"#pbid-form1\").removeClass('ng-hide') ;\n$(\"#pbid-btnActivate\").remove() ;",
+            "documentation": "Use this button only if flow ('flowSeq') is not activated by default ('Activated' unchecked). Otherwise hide this button.",
+            "name": "btnActivate",
+            "label": "Activate Flow",
+            "type": "button"
+         }
+      ],
+      "name": "flowDemo",
+      "type": "page"
+   },
+   "owner": null,
+   "pageRoles": [
+      {
+         "roleName": "ADMIN-GPBADMN",
+         "allow": true
+      }
+   ]
+}

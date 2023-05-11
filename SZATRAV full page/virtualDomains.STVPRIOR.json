@@ -1,0 +1,25 @@
+{
+   "codePost": null,
+   "virtualDomainRoles": [
+      {
+         "allowGet": true,
+         "allowPost": false,
+         "allowPut": false,
+         "roleName": "ADMIN-GPBADMN",
+         "allowDelete": false
+      },
+      {
+         "allowGet": true,
+         "allowPost": true,
+         "allowPut": true,
+         "roleName": "ADMIN-STVPRIORDOMAIN",
+         "allowDelete": true
+      }
+   ],
+   "codePut": null,
+   "fileTimestamp": "2019-04-08T17:47:09Z",
+   "codeDelete": null,
+   "codeGet": "SELECT DISTINCT STVPRIOR_CODE||'     '||STVPRIOR_DESC AS STVPRIOR_TITLE, STVPRIOR_CODE, STVPRIOR_DESC FROM STVPRIOR ORDER BY STVPRIOR_CODE",
+   "typeOfCode": "S",
+   "serviceName": "STVPRIOR"
+}

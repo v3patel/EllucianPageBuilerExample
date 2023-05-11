@@ -1,0 +1,47 @@
+{
+   "constantName": "photoExample",
+   "developerSecurity": [],
+   "extendsPage": null,
+   "fileTimestamp": "2020-02-27T20:40:51Z",
+   "modelView": {
+      "components": [
+         {
+            "resource": "virtualDomains.showPhoto",
+            "name": "photoDomain",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "name": "photoData",
+            "onLoad": "if ( $photoData.$data.length > 0 ) {\n    $(\"#bannerPhoto\").attr(\"src\",\"data:image/jpeg;base64,\" + $photoData.$data[0].IMAGE);\n}",
+            "model": "photoDomain",
+            "loadInitially": true,
+            "type": "data",
+            "parameters": {}
+         },
+         {
+            "components": [
+               {
+                  "asHtml": false,
+                  "name": "photo",
+                  "loadInitially": true,
+                  "type": "display",
+                  "value": "<img id=\"bannerPhoto\" src=\"data:image/jpeg;base64,\"  alt=\"Photo not found\" style=\"width:auto;\n    max-width:auto;height:100%;\n    max-height:200px;\" />"
+               }
+            ],
+            "name": "photoBlock",
+            "showInitially": true,
+            "type": "block"
+         }
+      ],
+      "name": "photoExample",
+      "type": "page"
+   },
+   "owner": null,
+   "pageRoles": [
+      {
+         "roleName": "ADMIN-GPBADMN",
+         "allow": true
+      }
+   ]
+}

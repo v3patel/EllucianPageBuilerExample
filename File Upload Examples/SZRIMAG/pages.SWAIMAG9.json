@@ -1,0 +1,358 @@
+{
+   "constantName": "SWAIMAG9",
+   "developerSecurity": [],
+   "extendsPage": null,
+   "fileTimestamp": "2019-11-22T10:33:11Z",
+   "modelView": {
+      "components": [
+         {
+            "documentation": "Object information from DB",
+            "name": "AdminStylePage_PageInfo",
+            "resource": "virtualDomains.uogGetPageInfoByName",
+            "staticData": [],
+            "type": "resource"
+         },
+         {
+            "components": [
+               {
+                  "name": "AdminStylePage_HeaderBar",
+                  "style": "",
+                  "type": "literal",
+                  "value": "<div class=\"like-admin-page-bar\"><button class=\"closebutton\" onclick=\"closeButton()\">&#10005;</button> <img class=\"adminbarlogo\" src=\"https://banadm-1.gre.ac.uk/BannerAdmin/app/flat/img/ellucian-header-logo.png\">$AdminStylePage_PageString.PAGESTRING</div>\n\n<script>function closeButton() {\n    if (window.top!==window.self) {\n        alert('This page cannot be closed, please use the left bar to navigate away');\n    }\n    else {\n        window.close();\n    }\n}\n</script>"
+               },
+               {
+                  "documentation": "Put the DB OBJECT name in Value",
+                  "loadInitially": true,
+                  "name": "AdminStylePage_PageName",
+                  "parameters": {},
+                  "readonly": false,
+                  "required": false,
+                  "style": "invisible-item",
+                  "type": "text",
+                  "validation": {},
+                  "value": "SWAIMAG9"
+               },
+               {
+                  "documentation": "Text item bound to string from VD",
+                  "loadInitially": true,
+                  "model": "AdminStylePage_PageInfo.PAGESTRING",
+                  "name": "AdminStylePage_PageString",
+                  "onLoad": "if (typeof $AdminStylePage_PageString==\"undefined\") {    $AdminStylePage_PageString.$load();}",
+                  "parameters": {
+                     "page_name": "$AdminStylePage_PageName"
+                  },
+                  "readonly": false,
+                  "required": false,
+                  "style": "invisible-item",
+                  "type": "text",
+                  "validation": {}
+               }
+            ],
+            "name": "SWAIMAG_Header",
+            "showInitially": true,
+            "type": "block"
+         },
+         {
+            "documentation": "This is a test",
+            "name": "SWAIMAG_UOG_AUDIT",
+            "type": "literal",
+            "value": "<!-- UOG AUDIT -->"
+         },
+         {
+            "name": "SWAIMAG_JIRA_ID",
+            "type": "literal",
+            "value": "<!--BAN9-82 BAN9-410 BAN9-484-->"
+         },
+         {
+            "name": "SWAIMAG9_IDParam",
+            "resource": "virtualDomains.uog_f_decrypt",
+            "staticData": [],
+            "type": "resource"
+         },
+         {
+            "name": "SWAIMAG_Data",
+            "resource": "virtualDomains.uogSZRIMAG",
+            "staticData": [],
+            "type": "resource"
+         },
+         {
+            "name": "SWAIMAG_PIDM",
+            "resource": "virtualDomains.uogGetPidmById",
+            "staticData": [],
+            "type": "resource"
+         },
+         {
+            "name": "SWAIMAG9_JSCameraControl",
+            "type": "literal",
+            "value": "<script>\nfunction stopCam() {\n    console.log('UOG - Stop Button - Stopping video capture');\n    // Stops the live view of the camera and sets relevant buttons to enabled/disabled\n    var video = document.getElementById('camera');\n    var stream = video.srcObject;\n    if (stream!=null) {\n        var tracks = stream.getTracks();\n        // stop each 'track' of the media stream (video)\n        tracks.forEach(function(track) {\n            track.stop();\n        });\n        // set the video source to null to stop the display\n        video.srcObject = null;\n    }\n    // set buttons to enabled/disabled\n    cameraButtons('notcapturing')\n}\n\nfunction takeSnapshot() {\n    console.log('UOG - Capture Button - Taking snapshot from video device');\n    // captures a still of the video feed and draws it onto a hidden canvas. The 'capturedimage' image source is then set to the data in the canvas\n    var video = document.getElementById('camera');\n    var canvas;\n    // Set the size of the canvas and prepare to draw image\n    canvas = document.getElementById('capturedcanvas');\n    canvas.width = video.offsetWidth;\n    canvas.height = video.offsetHeight;\n    // draw the video image onto the canvas\n    canvas.getContext('2d').drawImage(video, 0, 0, video.offsetWidth, video.offsetHeight);\n    //set the source of the captured image to the canvas data\n    document.getElementById('capturedimage').src = canvas.toDataURL('image/jpeg');\n    // Unset the input file (as an image has been captured)\n    document.getElementById('input-file').value=null;\n    // stop the camera\n    stopCam();\n    cameraButtons('captured');\n    // resize and crop the image\n    resizeableImage($('.resize-image'));\n}\n\nfunction clearImage(){\n    console.log('UOG - Clear Button (also called by other functions) - Clearing current captured/uploaded image');\n    // clears the captured image and unsets the input file\n    var capturedimage=document.getElementById('capturedimage');\n    document.getElementById('input-file').value=null;\n    capturedimage.src = \"\";\n    // remove the overlay and the resize handles\n    $('.overlay').remove();\n    $('.resize-handle').remove();\n    cameraButtons('notcapturing');\n}\n\nfunction startCam(deviceId) {\n    console.log('UOG - Start Button (also called by changing camera source) - Starting video stream from '+deviceId);\n    // Starts the camera\n    var videoConstraints;\n    // clear current image\n    clearImage();\n    if(deviceId==null || deviceId==undefined) {\n        // show the no devices message and disable buttons\n        cameraButtons('nodevice');\n    }\n    // set the constraints for the video stream\n    // if a device has been selected (i.e. if there is more than one camera), then choose the selected device\n    else {\n        //unhide the video canvas\n        document.getElementById('camera').hidden=false;\n        // enable/disable buttons\n        cameraButtons('capturing');\n        videoConstraints = {\n            audio: false,\n            video: {width: { min: 350},\n                height: { min: 400},\n                deviceId: deviceId\n            }\n        }\n        var video = document.getElementById('camera');\n        // if media devices exist\n        if (navigator.mediaDevices) {\n            // access the media device (video) and start playing\n            navigator.mediaDevices.getUserMedia(videoConstraints)\n                .then(function (stream) {\n                    video.srcObject = stream;\n                    if (stream.getVideoTracks().length >= 2) {\n                        // if there is more than one video device, show a selection\n                        document.getElementById('camera-select').style.display = 'inline';\n                    }\n                    // start the video stream\n                    video.play();\n                })\n                // catch errors for media device\n                .catch(function (error) {\n                    // If the size specified in video constraints cannot be accessed\n                    if (error.name === 'OverconstrainedError') {\n                        alert('Camera cannot read at minimum image size. Error: ' + error.name);\n                        console.log('UOG - Camera cannot read at minimum image size. Error: ' + error.name);\n                        cameraButtons('nodevice');\n                    }\n                    // All other errors\n                    else {\n                        alert('Could not access the camera. Error: ' + error.name);\n                        console.log('UOG - Could not access the camera. Error: ' + error.name);\n                        stopCam();\n                        cameraButtons('nodevice');\n                    }\n                });\n        }\n    }\n}\n\nfunction getVideoDevices(){\n    console.log('UOG - Getting devices');\n    // Get a list of all devices and populate the dropdown with the ones which are video\n    var deviceInfos;\n    var videoSelect=document.getElementById('camera-select');\n    // if media devices exist\n    if (navigator.mediaDevices) {\n        // iterate though all media devices\n        navigator.mediaDevices.enumerateDevices()\n            .then(function(deviceInfos) {\n                for (var i = 0; i !== deviceInfos.length; ++i) {\n                    var deviceInfo = deviceInfos[i];\n                    // if the device is video (i.e. not audio), then add it to the drop down selection\n                    if (deviceInfo.kind === 'videoinput') {\n                        console.log('UOG - Found video device:'+deviceInfo.label);\n                        var option = document.createElement('option');\n                        option.value = deviceInfo.deviceId;\n                        option.text = deviceInfo.label || 'Camera ' + (videoSelect.length + 1);\n                        videoSelect.appendChild(option);\n                        cameraButtons('notcapturing');\n                    }\n                }\n            })\n    }\n}\n\nfunction previewFile() {\n    console.log('UOG - Loading file for preview, starting spinner');\n    $('#capturedimage').addClass('spinner');\n    // uploads the selected file into the 'capturedimage' image tag\n    var preview = document.getElementById('capturedimage');\n    var file    = document.getElementById('input-file').files[0];\n    var reader  = new FileReader();\n    // clear any image that may already exist\n    clearImage();\n    // enable/disable buttons\n    cameraButtons('uploaded');\n    //set the capturedimage to the file read in using onloadend event which fires when the file has finished being read\n    // and then start resizing\n    reader.onloadend = function() {\n        preview.src = reader.result;\n        //resize and crop the image\n        resizeableImage($('.resize-image'));\n    }  \n    // Read in the selected file\n    if (file) {\n        reader.readAsDataURL(file);\n    }\n}\n\nfunction cameraButtons(whatshappening) {\n    console.log('UOG - Set state of buttons to '+whatshappening);\n    // assume camera is detected for most cases...\n    $('#no-device').hide();\n    $('#camera-select').show();    \n    // check state and enable/disable items\n    if (whatshappening == \"capturing\") {\n        $('#pbid-SWAIMAG_Camera_Control_Start').attr(\"disabled\", true);\n        $('#pbid-SWAIMAG_Camera_Control_Update').attr(\"disabled\", true);\n        $('#input-file').attr(\"disabled\", true);\n        $('#pbid-SWAIMAG_Camera_Control_Capture').attr(\"disabled\", false);\n        $('#pbid-SWAIMAG_Camera_Control_Clear').attr(\"disabled\", true);\n        $('#pbid-SWAIMAG_Camera_Control_Stop').attr(\"disabled\", false);\n    }\n    else if (whatshappening == \"captured\") {\n        $('#pbid-SWAIMAG_Camera_Control_Start').attr(\"disabled\", false);\n        $('#pbid-SWAIMAG_Camera_Control_Update').attr(\"disabled\", false);\n        $('#input-file').attr(\"disabled\", false);\n        $('#pbid-SWAIMAG_Camera_Control_Capture').attr(\"disabled\", true);\n        $('#pbid-SWAIMAG_Camera_Control_Clear').attr(\"disabled\", false);\n        $('#pbid-SWAIMAG_Camera_Control_Stop').attr(\"disabled\", true);\n    }\n    else if (whatshappening == \"uploaded\") {\n        $('#pbid-SWAIMAG_Camera_Control_Start').attr(\"disabled\", true);\n        $('#pbid-SWAIMAG_Camera_Control_Update').attr(\"disabled\", false);\n        $('#input-file').attr(\"disabled\", false);\n        $('#pbid-SWAIMAG_Camera_Control_Capture').attr(\"disabled\", true);\n        $('#pbid-SWAIMAG_Camera_Control_Clear').attr(\"disabled\", false);\n        $('#pbid-SWAIMAG_Camera_Control_Stop').attr(\"disabled\", true);\n    }\n    else if  (whatshappening == \"notcapturing\") {\n        $('#pbid-SWAIMAG_Camera_Control_Start').attr(\"disabled\", false);\n        $('#pbid-SWAIMAG_Camera_Control_Update').attr(\"disabled\", true);\n        $('#input-file').attr(\"disabled\", false);\n        $('#pbid-SWAIMAG_Camera_Control_Capture').attr(\"disabled\", true);\n        $('#pbid-SWAIMAG_Camera_Control_Clear').attr(\"disabled\", true);\n        $('#pbid-SWAIMAG_Camera_Control_Stop').attr(\"disabled\", true);\n    }\n    // if there is no device in which case set all camera buttons off and show the no devices message\n    if (document.getElementById('camera-select').value==\"\" && whatshappening!='uploaded') {\n        $('#pbid-SWAIMAG_Camera_Control_Start').attr(\"disabled\", true);\n        $('#pbid-SWAIMAG_Camera_Control_Update').attr(\"disabled\", true);\n        $('#input-file').attr(\"disabled\", false);\n        $('#pbid-SWAIMAG_Camera_Control_Capture').attr(\"disabled\", true);\n        $('#pbid-SWAIMAG_Camera_Control_Clear').attr(\"disabled\", true);\n        $('#pbid-SWAIMAG_Camera_Control_Stop').attr(\"disabled\", true);\n        $('#camera-select').hide();\n        $('#no-device').show();\n    }\n}\n</script>"
+         },
+         {
+            "name": "SWAIMAG9_JSImageResizing",
+            "type": "literal",
+            "value": "<!-- Amended code from https://tympanus.net/codrops/2014/10/30/resizing-cropping-images-canvas/ -->\n<script>\nvar resizeableImage = function(image_target) {\n    // Some variable and settings\n    var mycontainer,\n        orig_src = new Image(),\n        image_target = $(image_target).get(0),\n        event_state = {},\n        constrain = false,\n        min_width = 350, // Change as required\n        min_height = 400,\n        max_width = window.innerWidth*.8, // Change as required\n        max_height = window.innerHeight*.8,\n        resize_canvas = document.createElement('canvas');\n\n    init = function(){\n\n        // When resizing, we will always use this copy of the original as the base\n        orig_src.src=image_target.src;\n\n        // Wrap the image with the container and add resize handles\n        $(image_target).wrap('<div class=\"resize-container\"></div>')\n            .before('<span class=\"resize-handle resize-handle-nw\"></span>')\n            .before('<span class=\"resize-handle resize-handle-ne\"></span>')\n            .after('<span class=\"resize-handle resize-handle-se\"></span>')\n            .after('<span class=\"resize-handle resize-handle-sw\"></span>');\n\n        // Assign the container to a variable\n        mycontainer =  $(image_target).parent('.resize-container');\n\n        // Add events\n        mycontainer.on('mousedown touchstart', '.resize-handle', startResize);\n        mycontainer.on('mousedown touchstart', 'img', startMoving);\n        // draw the overlay\n        $('body').append('<div class=\"overlay\" id=\"overlay\"><div class=\"overlay-inner\"></div></div>');\n        image_target.onload = function() {\n            // resize and crop the image\n            $('#save-button').prop('disabled',false);\n            // Make the image smaller if bigger than the maximum width or height - maintain the aspect ratio!\n            origwidth=orig_src.width;\n            origheight=orig_src.height;\n            if (image_target.width>max_width) {\n                 console.log(\"UOG - Image exceeds w:\"+max_width+\", reducing\");\n                 resizeImage(max_width,max_width / origwidth * origheight);\n             }\n            if (image_target.height>max_height) {\n                 console.log(\"UOG - Image exceeds h:\"+max_height+\", reducing\");\n                 resizeImage(max_height / origheight * origwidth,max_height);\n             }\n         // remove spinner\n         console.log(\"UOG - Load completed, remove spinner\");\n         $('#capturedimage').removeClass('spinner');\n         }\n    };\n\n    startResize = function(e){\n        e.preventDefault();\n        e.stopPropagation();\n        saveEventState(e);\n        $(document).on('mousemove touchmove', resizing);\n        $(document).on('mouseup touchend', endResize);\n    };\n\n    endResize = function(e){\n        e.preventDefault();\n        $(document).off('mouseup touchend', endResize);\n        $(document).off('mousemove touchmove', resizing);\n    };\n\n    saveEventState = function(e){\n        // Save the initial event details and container state\n        event_state.container_width = mycontainer.width();\n        event_state.container_height = mycontainer.height();\n        event_state.container_left = mycontainer.offset().left;\n        event_state.container_top = mycontainer.offset().top;\n        event_state.mouse_x = (e.clientX || e.pageX || e.originalEvent.touches[0].clientX) + $(window).scrollLeft();\n        event_state.mouse_y = (e.clientY || e.pageY || e.originalEvent.touches[0].clientY) + $(window).scrollTop();\n\n        // This is a fix for mobile safari\n        // For some reason it does not allow a direct copy of the touches property\n        if(typeof e.originalEvent.touches !== 'undefined'){\n            event_state.touches = [];\n            $.each(e.originalEvent.touches, function(i, ob){\n                event_state.touches[i] = {};\n                event_state.touches[i].clientX = 0+ob.clientX;\n                event_state.touches[i].clientY = 0+ob.clientY;\n            });\n        }\n        event_state.evnt = e;\n    };\n\n    resizing = function(e){\n        var mouse={},width,height,left,top,offset=mycontainer.offset();\n        mouse.x = (e.clientX || e.pageX || e.originalEvent.touches[0].clientX) + $(window).scrollLeft();\n        mouse.y = (e.clientY || e.pageY || e.originalEvent.touches[0].clientY) + $(window).scrollTop();\n\n        // Position image differently depending on the corner dragged and constraints\n        if( $(event_state.evnt.target).hasClass('resize-handle-se') ){\n            width = mouse.x - event_state.container_left;\n            height = mouse.y  - event_state.container_top;\n            left = event_state.container_left;\n            top = event_state.container_top;\n        } else if($(event_state.evnt.target).hasClass('resize-handle-sw') ){\n            width = event_state.container_width - (mouse.x - event_state.container_left);\n            height = mouse.y  - event_state.container_top;\n            left = mouse.x;\n            top = event_state.container_top;\n        } else if($(event_state.evnt.target).hasClass('resize-handle-nw') ){\n            width = event_state.container_width - (mouse.x - event_state.container_left);\n            height = event_state.container_height - (mouse.y - event_state.container_top);\n            left = mouse.x;\n            top = mouse.y;\n            //if(constrain || e.shiftKey){\n                top = mouse.y - ((width / orig_src.width * orig_src.height) - height);\n            //}\n        } else if($(event_state.evnt.target).hasClass('resize-handle-ne') ){\n            width = mouse.x - event_state.container_left;\n            height = event_state.container_height - (mouse.y - event_state.container_top);\n            left = event_state.container_left;\n            top = mouse.y;\n            //if(constrain || e.shiftKey){\n                top = mouse.y - ((width / orig_src.width * orig_src.height) - height);\n            //}\n        }\n\n        // maintain aspect ratio\n            height = width / orig_src.width * orig_src.height;\n\n        if(width > min_width && height > min_height && width < max_width && height < max_height){\n            // To improve performance you might limit how often resizeImage() is called\n            resizeImage(width, height);\n            // Without this Firefox will not re-calculate the the image dimensions until drag end\n            mycontainer.offset({'left': left, 'top': top});\n        }\n    }\n\n    resizeImage = function(width, height){\n        resize_canvas.width = width;\n        resize_canvas.height = height;\n        resize_canvas.getContext('2d').drawImage(orig_src, 0, 0, width, height);\n        $(image_target).attr('src', resize_canvas.toDataURL(\"image/jpeg\"));\n    };\n\n    startMoving = function(e){\n        e.preventDefault();\n        e.stopPropagation();\n        saveEventState(e);\n        $(document).on('mousemove touchmove', moving);\n        $(document).on('mouseup touchend', endMoving);\n    };\n\n    endMoving = function(e){\n        e.preventDefault();\n        $(document).off('mouseup touchend', endMoving);\n        $(document).off('mousemove touchmove', moving);\n    };\n\n    moving = function(e){\n        var  mouse={}, touches;\n        e.preventDefault();\n        e.stopPropagation();\n\n        touches = e.originalEvent.touches;\n\n        mouse.x = (e.clientX || e.pageX || touches[0].clientX) + $(window).scrollLeft();\n        mouse.y = (e.clientY || e.pageY || touches[0].clientY) + $(window).scrollTop();\n        mycontainer.offset({\n            'left': mouse.x - ( event_state.mouse_x - event_state.container_left ),\n            'top': mouse.y - ( event_state.mouse_y - event_state.container_top )\n        });\n        // Watch for pinch zoom gesture while moving\n        if(event_state.touches && event_state.touches.length > 1 && touches.length > 1){\n            var width = event_state.container_width, height = event_state.container_height;\n            var a = event_state.touches[0].clientX - event_state.touches[1].clientX;\n            a = a * a;\n            var b = event_state.touches[0].clientY - event_state.touches[1].clientY;\n            b = b * b;\n            var dist1 = Math.sqrt( a + b );\n\n            a = e.originalEvent.touches[0].clientX - touches[1].clientX;\n            a = a * a;\n            b = e.originalEvent.touches[0].clientY - touches[1].clientY;\n            b = b * b;\n            var dist2 = Math.sqrt( a + b );\n\n            var ratio = dist2 /dist1;\n\n            width = width * ratio;\n            height = height * ratio;\n            // To improve performance you might limit how often resizeImage() is called\n            resizeImage(width, height);\n        }\n    };\n\n    crop = function(){\n        //Find the part of the image that is inside the crop box\n        var crop_canvas,\n            left = $('.overlay').offset().left - mycontainer.offset().left,\n            top =  $('.overlay').offset().top - mycontainer.offset().top,\n            width = $('.overlay').width(),\n            height = $('.overlay').height();\n\n        crop_canvas = document.createElement('canvas');\n        crop_canvas.width = width;\n        crop_canvas.height = height;\n        crop_canvas.getContext('2d').drawImage(image_target, left, top, width, height, 0, 0, width, height);\n        $(image_target).attr('src', crop_canvas.toDataURL(\"image/jpeg\"));\n    }\n    init();\n};\n</script>"
+         },
+         {
+            "name": "SWAIMAG9_FullScreenMessage",
+            "style": "centered",
+            "type": "literal",
+            "value": "<p></p>\n<p>For the best experience please use this page maximised to the size of your screen</p>"
+         },
+         {
+            "components": [
+               {
+                  "labelStyle": "centered",
+                  "name": "SWAIMAG_Iframe_Message",
+                  "style": "centered",
+                  "type": "literal",
+                  "value": "<p>This page has been opened in a new tab in order to control camera features.</p>\n<p>If the new tab does not open, please check you that you are allowing popups.</p>\n<p>If you have closed the other tab, you can click the button below to re-open it.</p>",
+                  "valueStyle": "centered"
+               },
+               {
+                  "label": "Open this page in a new tab",
+                  "name": "SWAIMAG_Iframe_Button",
+                  "onClick": "window.open(\"https://banext-1.gre.ac.uk/BannerExtensibility/customPage/page/SWAIMAG9\",\"_blank\");",
+                  "type": "button"
+               },
+               {
+                  "loadInitially": true,
+                  "model": "SWAIMAG9_IDParam.PLAINTEXT",
+                  "name": "SWAIMAG_KEYBLOCK_IDParam",
+                  "onLoad": "if (typeof $$params.p1==\"undefined\") {\n    console.log('UOG - No parameters passed');}\nelse {\n    console.log('UOG - Parameter passed:'+$$params.p1+'=>'+$SWAIMAG_KEYBLOCK_IDParam.PLAINTEXT);\n    $SWAIMAG_BannerID=$SWAIMAG_KEYBLOCK_IDParam.PLAINTEXT;\n    $SWAIMAG_KEYBLOCK_PIDM.$load();\n}",
+                  "parameters": {
+                     "cyphertext": "$$params.p1"
+                  },
+                  "readonly": true,
+                  "required": false,
+                  "style": "invisible-item",
+                  "type": "text",
+                  "validation": {},
+                  "valueStyle": ""
+               },
+               {
+                  "loadInitially": false,
+                  "model": "SWAIMAG_PIDM.PIDM",
+                  "name": "SWAIMAG_KEYBLOCK_PIDM",
+                  "onLoad": "if (typeof $SWAIMAG_KEYBLOCK_PIDM==\"undefined\") {\n    alert(\"Invalid ID\");\n    $SWAIMAG_BannerID=\"\";}\nelse {\n    // start spinner\n    $('#capturedimage').addClass('spinner');\n    $SWAIMAG_Detail.$load();\n    $SWAIMAG_Camera_Control.$visible=true;\n    $SWAIMAG_Image_Preview.$visible=true;\n    $('#pbid-SWAIMAG_BannerID').prop( \"disabled\", true );\n}",
+                  "parameters": {
+                     "spridenid": "$SWAIMAG_BannerID"
+                  },
+                  "readonly": false,
+                  "required": false,
+                  "style": "hidden-item",
+                  "type": "text",
+                  "validation": {}
+               },
+               {
+                  "label": "Go",
+                  "name": "SWAIMAG_Go_Button",
+                  "onClick": "$SWAIMAG_KEYBLOCK_PIDM.$load();",
+                  "style": "go-startover",
+                  "type": "button",
+                  "valueStyle": "go-startover"
+               },
+               {
+                  "label": "Start Over",
+                  "name": "SWAIMAG_StartOver_Button",
+                  "onClick": "location.reload();",
+                  "style": "go-startover hidden-item",
+                  "type": "button",
+                  "valueStyle": "go-startover"
+               },
+               {
+                  "label": "Banner ID",
+                  "loadInitially": true,
+                  "model": "",
+                  "name": "SWAIMAG_BannerID",
+                  "onLoad": "",
+                  "onUpdate": "",
+                  "parameters": {},
+                  "readonly": false,
+                  "required": true,
+                  "type": "text",
+                  "validation": {},
+                  "value": ""
+               }
+            ],
+            "name": "SWAIMAG_KEYBLOCK",
+            "showInitially": true,
+            "type": "block"
+         },
+         {
+            "allowDelete": false,
+            "allowModify": false,
+            "allowNew": false,
+            "allowReload": false,
+            "components": [
+               {
+                  "asHtml": false,
+                  "label": "",
+                  "loadInitially": true,
+                  "model": "SPRIDEN_LAST_NAME",
+                  "name": "SWAIMAG_Detail_Last_Name",
+                  "style": "horizontal",
+                  "type": "display"
+               },
+               {
+                  "asHtml": false,
+                  "label": ",",
+                  "labelStyle": "",
+                  "loadInitially": true,
+                  "model": "SPRIDEN_FIRST_NAME",
+                  "name": "SWAIMAG_Detail_First_Name",
+                  "style": "horizontal",
+                  "type": "display",
+                  "valueStyle": ""
+               },
+               {
+                  "asHtml": false,
+                  "label": "Last Updated",
+                  "labelStyle": "",
+                  "loadInitially": true,
+                  "model": "SZRIMAG_ACTIVITY_DATE",
+                  "name": "SWAIMAG_Detail_Activity_Date",
+                  "style": "horizontal",
+                  "type": "display"
+               },
+               {
+                  "asHtml": false,
+                  "label": "by",
+                  "labelStyle": "",
+                  "loadInitially": true,
+                  "model": "SZRIMAG_USER_ID",
+                  "name": "SWAIMAG_Detail_User",
+                  "style": "horizontal",
+                  "type": "display",
+                  "valueStyle": ""
+               },
+               {
+                  "asHtml": true,
+                  "label": "",
+                  "loadInitially": true,
+                  "model": "USER_IMAGE_HTML",
+                  "name": "SWAIMAG_Detail_ImageHTML",
+                  "onLoad": "",
+                  "type": "display",
+                  "value": ""
+               },
+               {
+                  "loadInitially": true,
+                  "model": "USER_IMAGE",
+                  "name": "SWAIMAG_Detail_ImageData",
+                  "type": "hidden"
+               }
+            ],
+            "label": "",
+            "loadInitially": false,
+            "model": "SWAIMAG_Data",
+            "name": "SWAIMAG_Detail",
+            "newRecordLabel": "",
+            "onError": "alert('ERROR:'+response.data.errors.errorMessage, {type:\"error\"});",
+            "onLoad": "document.getElementById('pbid-SWAIMAG_Go_Button-container').style.display='none';\ndocument.getElementById('pbid-SWAIMAG_StartOver_Button').style.visibility='visible';\n\n//remove spinner\n$('#capturedimage').removeClass('spinner');",
+            "onSave": "",
+            "onSaveSuccess": "alert('Record Saved');\n$SWAIMAG_Detail.$load();",
+            "pageSize": 5,
+            "parameters": {
+               "id_spriden": "$SWAIMAG_BannerID"
+            },
+            "refreshDataLabel": "",
+            "saveDataLabel": "",
+            "style": "",
+            "type": "detail"
+         },
+         {
+            "components": [
+               {
+                  "name": "SWAIMAG_Camera_Control_VideoSelect",
+                  "type": "literal",
+                  "value": "<select id=\"camera-select\" onchange=\"startCam(document.getElementById('camera-select').value); cameraButtons('capturing');\"></select>"
+               },
+               {
+                  "name": "SWAIMAG_Camera_Control_NoDevice",
+                  "style": "",
+                  "type": "literal",
+                  "value": "<p id=\"no-device\">Note: Camera controls disabled; no video device found</p>"
+               },
+               {
+                  "label": "Start Video",
+                  "name": "SWAIMAG_Camera_Control_Start",
+                  "onClick": "startCam(document.getElementById('camera-select').value);",
+                  "style": "horizontal cameracontrolbutton",
+                  "type": "button"
+               },
+               {
+                  "label": "Stop",
+                  "name": "SWAIMAG_Camera_Control_Stop",
+                  "onClick": "stopCam();",
+                  "style": "horizontal cameracontrolbutton",
+                  "type": "button"
+               },
+               {
+                  "label": "Capture",
+                  "name": "SWAIMAG_Camera_Control_Capture",
+                  "onClick": "takeSnapshot();",
+                  "style": "horizontal cameracontrolbutton",
+                  "type": "button"
+               },
+               {
+                  "label": "Update",
+                  "name": "SWAIMAG_Camera_Control_Update",
+                  "onClick": "console.log('UOG - Update Button - Cropping image and saving to DB');\n// crop the image to the selection\ncrop();\n// put the image into the pb source blob then post it back to the database\nvar preview = document.getElementById('capturedimage');\n// the slice is to remove the remove the part of the string that contains the data type and image header\n$SWAIMAG_Detail.$data[0].USER_IMAGE = preview.src.slice(23);\n// Set the item as modified so it can be saved\n$SWAIMAG_DetailDS.setModified($SWAIMAG_Detail.$data[0]);\n//do the save \n$SWAIMAG_Detail.$save();\n// clear the image\nclearImage();",
+                  "style": "horizontal cameracontrolbutton",
+                  "type": "button"
+               },
+               {
+                  "label": "Clear",
+                  "name": "SWAIMAG_Camera_Control_Clear",
+                  "onClick": "clearImage();",
+                  "style": "horizontal cameracontrolbutton",
+                  "type": "button"
+               },
+               {
+                  "label": "",
+                  "name": "SWAIMAG_Camera_Control_FileUpload",
+                  "type": "literal",
+                  "value": "</br>\n<input type=\"file\" id=\"input-file\" accept=\"image/jpeg\" onchange=\"previewFile()\">",
+                  "valueStyle": "horizontal"
+               }
+            ],
+            "label": "",
+            "name": "SWAIMAG_Camera_Control",
+            "showInitially": false,
+            "type": "block"
+         },
+         {
+            "components": [
+               {
+                  "name": "SWAIMAG_Image_Preview_Canvas",
+                  "type": "literal",
+                  "value": "<!-- define captured image, canvas to draw the capture onto, and video -->\n        <img class=\"resize-image\" id=\"capturedimage\" src=\"\">\n        <canvas class=\"centred\" id=\"capturedcanvas\" hidden=\"enabled\"></canvas>\n        <video class=\"centred\" id=\"camera\" hidden=\"enabled\"></video>"
+               }
+            ],
+            "name": "SWAIMAG_Image_Preview",
+            "showInitially": false,
+            "type": "block"
+         },
+         {
+            "name": "SWAIMAG9_JSSetInitalState",
+            "type": "literal",
+            "value": "<script>\n// Check if the window is in an iframe and open in a new tab if it is\nif (window.top!==window.self) {\n    $('#pbid-SWAIMAG_Go_Button-container').hide();\n    $('#pbid-SWAIMAG_BannerID-container').hide();\n    $('#pbid-SWAIMAG_Iframe_Message').show();\n    $('#pbid-SWAIMAG_Iframe_Button').show();\n    window.open(\"https://banext-1.gre.ac.uk/BannerExtensibility/customPage/page/SWAIMAG9\",\"_blank\");\n}\nelse {\n    $('#pbid-SWAIMAG_Go_Button-container').show();\n    $('#pbid-SWAIMAG_BannerID-container').show();\n    $('#pbid-SWAIMAG_Iframe_Message').hide();\n    $('#pbid-SWAIMAG_Iframe_Button').hide();\n    document.title=\"SWAIMAG9 - Image Capture\"\n}\n\n// set initial state of camera buttons to no devices (it will be set to 'not capturing' if video devices are found) \ncameraButtons('nodevice');\n//Get list of video devices\ngetVideoDevices();\n</script>"
+         }
+      ],
+      "importCSS": "uog_SWAIMAG9_css,uog_AdminStylePage_css",
+      "name": "SWAIMAG9",
+      "objectName": "SWAIMAG9",
+      "pageURL": "javascript:void(0)",
+      "type": "page"
+   },
+   "owner": null,
+   "pageRoles": [
+      {
+         "roleName": "ADMIN-GPBADMN",
+         "allow": true
+      },
+      {
+         "roleName": "ADMIN-SWAIMAG9",
+         "allow": true
+      }
+   ]
+}

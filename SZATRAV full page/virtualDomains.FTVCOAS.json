@@ -1,0 +1,25 @@
+{
+   "codePost": null,
+   "virtualDomainRoles": [
+      {
+         "allowGet": true,
+         "allowPost": true,
+         "allowPut": true,
+         "roleName": "ADMIN-FTVCOASDOMAIN",
+         "allowDelete": true
+      },
+      {
+         "allowGet": true,
+         "allowPost": false,
+         "allowPut": false,
+         "roleName": "ADMIN-GPBADMN",
+         "allowDelete": false
+      }
+   ],
+   "codePut": null,
+   "fileTimestamp": "2019-04-08T19:39:52Z",
+   "codeDelete": null,
+   "codeGet": "SELECT distinct FTVCOAS_COAS_CODE, FTVCOAS_TITLE\r\nFROM FTVCOAS\r\nWHERE FTVCOAS_STATUS_IND = 'A'\r\nunion select ' ' as FTVCOAS_COAS_CODE, ' ' as FTVCOAS_TITLE from dual\r\norder by 1",
+   "typeOfCode": "S",
+   "serviceName": "FTVCOAS"
+}

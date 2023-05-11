@@ -1,0 +1,20 @@
+{
+   "owner": null,
+   "codePut": null,
+   "codeDelete": null,
+   "virtualDomainRoles": [
+      {
+         "allowDelete": false,
+         "allowPost": true,
+         "allowPut": true,
+         "roleName": "ADMIN-GPBADMN",
+         "allowGet": true
+      }
+   ],
+   "codeGet": "SELECT SYSDATE FROM DUAL",
+   "typeOfCode": "S",
+   "fileTimestamp": null,
+   "serviceName": "ELIVE_EXAMPLE4_UPD_STU_ACCTS",
+   "codePost": "BEGIN\r\n  baninst1.gzk_example_4.p_update_student_accounts_job(p_csv_file_name => :CsvFileName);\r\n \r\nEXCEPTION WHEN OTHERS THEN\r\n  raise_application_error (-20000, 'This part is only visible in the logs and for users with a debug role. @USERMESSAGE: error on POST:' || :CsvFileName);\r\nEND;\r\n",
+   "developerSecurity": []
+}

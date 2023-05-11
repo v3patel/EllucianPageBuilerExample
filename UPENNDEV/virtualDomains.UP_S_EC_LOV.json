@@ -1,0 +1,20 @@
+{
+   "owner": null,
+   "codePut": null,
+   "codeDelete": null,
+   "virtualDomainRoles": [
+      {
+         "allowDelete": false,
+         "allowPost": false,
+         "allowPut": false,
+         "roleName": "ALLROLES",
+         "allowGet": true
+      }
+   ],
+   "codeGet": "SELECT stvrelt_code CODE, stvrelt_desc DESCRIPTION\r\n  FROM stvrelt\r\n WHERE UPPER ( :tab_name) = 'STVRETL'\r\nUNION\r\nSELECT gtvsdlv_code, gtvsdlv_DESC\r\n  FROM gtvsdlv\r\n WHERE     gtvsdlv_table_name = 'SPREMRG'\r\n       AND gtvsdlv_attr_name = 'TELEPHONE_TYPE'\r\n       AND UPPER ( :tab_name) = 'ER_TELE_TYPE'\r\nUNION\r\nSELECT STVSTAT_CODE, STVSTAT_DESC\r\n  FROM stvstat\r\n WHERE UPPER ( :tab_name) = 'STVSTAT'\r\nUNION\r\nSELECT stvnatn_code, stvnatn_nation\r\n  FROM stvnatn\r\n WHERE UPPER ( :tab_name) = 'STVNATN'\r\nUNION\r\nSELECT STVATYP_code, STVATYP_desc\r\n  FROM STVATYP\r\n WHERE UPPER ( :tab_name) = 'STVATYP'\r\nunion\r\nSELECT CODE, CODE DESCRIPTION\r\n  FROM (SELECT 'NO' CODE FROM DUAL\r\n        UNION\r\n        SELECT 'YES' FROM DUAL)\r\n WHERE UPPER ( :tab_name) = 'DISCLOUSER'\r\nORDER BY 2",
+   "typeOfCode": "S",
+   "fileTimestamp": null,
+   "serviceName": "UP_S_EC_LOV",
+   "codePost": null,
+   "developerSecurity": []
+}

@@ -1,0 +1,193 @@
+{
+   "constantName": "ELIVE_EXAMPLE4_PAGE",
+   "developerSecurity": [],
+   "extendsPage": null,
+   "fileTimestamp": "2021-04-02T13:38:25Z",
+   "modelView": {
+      "components": [
+         {
+            "name": "SelectFileLiteral",
+            "type": "literal",
+            "value": "<div>\n   <label for=\"input-file\">Specify a file:</label>\n<br>\n   <input type=\"file\" id=\"input-file\" accept=\".csv\">\n</div>"
+         },
+         {
+            "resource": "virtualDomains.ELIVE_EXAMPLE4_UPLOAD_CHARGES",
+            "name": "UploadChargesResource",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "resource": "virtualDomains.ELIVE_EXAMPLE4_UPD_STU_ACCTS",
+            "name": "UpdateStudentAccountsResource",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "resource": "virtualDomains.ELIVE_EXAMPLE4_UPD_STU_PRGRS",
+            "name": "UpdStuAccountsProgressResource",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "components": [
+               {
+                  "onClick": "var r = confirm(\"This can take several minutes.  Do you want to continue?\");\nif (r == true) {\n  $UpdateStuAcctsStatusBlock.$visible=true;\n  $CsvTableBlock.$visible=false;\n  // use jQuery selector to get input file name to pass into POST\n  var filenameParts = $(\"#input-file\").val().split(\"\\\\\");\n  console.log(\"posting to student accounts\",filenameParts);\n  var filename = filenameParts[filenameParts.length - 1];\n  console.log(\"filename:\" + filename);\n  $UpdateStudentAccountsResource.$post({\"CsvFileName\": filename},\n      null,\n      function(response){ // if everything goes okay, this executes\n         alert('Update student accounts process started', {type:\"success\",flash:true});// send back an alert to user\n      },\n      function(response){ // something did not go as expected, time for error handling\n         var errors = response.data.errors;\n         if (errors === undefined) {\n            alert (\"No error messge data. Status code:\" + response.status);\n         } else {\n           var errorMessage =response.data.errors?response.data.errors.errorMessage: null;\n           if (response.data.errors.errorMessage) {\n             alert(response.data.errors.errorMessage,{type:\"error\"}); // send back an alert to user\n           }\n           else if (response.data.errors[0].errorMessage) {\n             alert(response.data.errors[0].errorMessage,{type:\"error\"});// send back an alert to user\n           } else {\n             alert(errorMessage?errorMessage:response.data, {type:\"error\"});// send back an alert to user\n          }\n        }\n      }\n  ); // end of $post\n  $UpdStuAccountsProgressData.$load();\n} else {\n  console.log(\"cancel pressed\");\n  $UpdateStuAcctsStatusBlock.$visible=false;\n  $CsvTableBlock.$visible=true;\n}",
+                  "name": "UpdateStudentAccountsBtn",
+                  "label": "Update Student Accounts",
+                  "type": "button"
+               }
+            ],
+            "name": "UpdateStudentAccountsBlock",
+            "showInitially": true,
+            "type": "block"
+         },
+         {
+            "components": [],
+            "name": "CsvTableBlock",
+            "showInitially": true,
+            "label": "CSV Data",
+            "type": "block"
+         },
+         {
+            "name": "ProcessFileLiteral",
+            "type": "literal",
+            "value": "<script>\n$(document).ready(function() {\ndocument.getElementById('input-file')\n  .addEventListener('change', getFile)\n\n   // there should be a javascript variable called controllerId \n   var controllerScope = getControllerScopeById(controllerId);\n   console.log(\"scope:\",controllerScope);\n\nfunction getFile(event) {\n  const input = event.target;\n  if ('files' in input && input.files.length > 0) {\n      console.log(\"file read\");\n      placeFileContent(\n          input.files[0])\n    \n  }\n}\n\nfunction placeFileContent( file) {\n  readFileContent(file).then( dataRead => {\n      parseCsv(file, dataRead)\n  }).catch(error => console.log(error))\n}\n\nfunction readFileContent(file) {\n  const reader = new FileReader();\n  return new Promise((resolve, reject) => {\n    reader.onload = event => resolve(event.target.result);\n    reader.onerror = error => reject(error);\n    reader.readAsText(file);\n  })\n}\n\nfunction parseCsv(fileObj, data) {\n  var allRows = data.split(/\\r?\\n|\\r/);\n  var table = '<table class=\"charges-table\">';\n  console.log(\"data object\", controllerScope.UploadChargesData);\n  for (var singleRow = 0; singleRow < allRows.length; singleRow++) {\n    var uploadRow = {};\n    if (singleRow === 0) {\n      table += '<thead>';\n      table += '<tr>';\n    } else {\n      table += '<tr>';\n    }\n    var rowCells = allRows[singleRow].split(',');\n    for (var rowCell = 0; rowCell < rowCells.length; rowCell++) {\n      if (singleRow === 0) {\n        table += '<th>';\n        table += rowCells[rowCell];\n        table += '</th>';\n      } else {\n        table += '<td class=\"table-container\">';\n        table += rowCells[rowCell];\n        //console.log(\"rowCell:\" + rowCell);\n        if (rowCell === 0)\n           uploadRow.BannerId = rowCells[rowCell];\n        else if (rowCell === 1)\n           uploadRow.Fee = rowCells[rowCell];\n        else if (rowCell === 2)\n           uploadRow.FeeDate = rowCells[rowCell];\n        else if (rowCell === 3)\n           uploadRow.Description = rowCells[rowCell];\n\n        table += '</td>';\n      }\n    }\n    if (singleRow === 0) {\n      table += '</tr>';\n      table += '</thead>';\n      table += '<tbody>';\n    } else {\n      table += '</tr>';\n    }\n    uploadRow.CsvFileName = fileObj.name;\n    //console.log(\"upload obj:\",uploadRow );\n   controllerScope.UploadChargesDataDS.add(uploadRow);\n  } \n  table += '</tbody>';\n  table += '</table>';\n  $('#pbid-CsvTableBlock').append(table);\nconsole.log(\"saving records to database\");\ncontrollerScope.UploadChargesDataDS.save();\n\n}\n});\n</script>"
+         },
+         {
+            "components": [
+               {
+                  "allowDelete": false,
+                  "components": [
+                     {
+                        "readonly": false,
+                        "name": "BannerId",
+                        "loadInitially": true,
+                        "label": "ID",
+                        "type": "text",
+                        "parameters": {},
+                        "validation": {},
+                        "required": false
+                     },
+                     {
+                        "readonly": false,
+                        "name": "Fee",
+                        "loadInitially": true,
+                        "label": "Fee",
+                        "type": "text",
+                        "parameters": {},
+                        "validation": {},
+                        "required": false
+                     },
+                     {
+                        "readonly": false,
+                        "name": "FeeDate",
+                        "loadInitially": true,
+                        "type": "datetime",
+                        "parameters": {},
+                        "validation": {},
+                        "required": false
+                     },
+                     {
+                        "readonly": false,
+                        "name": "Description",
+                        "loadInitially": true,
+                        "type": "text",
+                        "parameters": {},
+                        "validation": {},
+                        "required": false
+                     },
+                     {
+                        "readonly": false,
+                        "name": "CsvFileName",
+                        "loadInitially": true,
+                        "type": "text",
+                        "parameters": {},
+                        "validation": {},
+                        "required": false
+                     }
+                  ],
+                  "onError": "if (response.status == 404)\n  alert('response 404 - invalid resource');\nelse {    \n  var errorText = \"\";\n  if (response.data.errors.errorMessage)        \n    errorText = response.data.errors.errorMessage;\n  else\n    errorText = response.data.errors[0].errorMessage;\n  alert (response.status + \" Error uploading charges. \" + errorText);\n}",
+                  "allowNew": true,
+                  "name": "UploadChargesData",
+                  "allowModify": false,
+                  "pageSize": 505,
+                  "model": "UploadChargesResource",
+                  "loadInitially": true,
+                  "allowReload": false,
+                  "type": "grid",
+                  "parameters": {}
+               }
+            ],
+            "name": "UploadChargesDataBlock",
+            "showInitially": false,
+            "type": "block"
+         },
+         {
+            "name": "UpdStuAccountsProgressData",
+            "onLoad": "if (data.length <= 0) {\n    // hide progress  block if no data\n    //console.log(\"status data is empty\");\n    $UpdateStuAcctsProgressBlock.$visible = false;\n    $CsvTableBlock.$visible=true;\n     alert('Update student accounts process completed', {type:\"success\",flash:true});// send back an alert to user\n} else {\n    $CsvTableBlock.$visible=false;\n    $UpdateStuAcctsProgressBlock.$visible = true;\n    //console.log(\"status data is NOT empty\",data);\n    var firstRow = data[0];\n    //console.log(\"first row\",firstRow);\n    // determine percent complete\n    var pctComplete = ((firstRow.SO_FAR/firstRow.TOTAL_WORK) * 100).toFixed(0);\n    // update progress bar width and text\n    var pctCompleteString = pctComplete+\"%\";\n    $(\"#pbid-UpdateStuAcctsProgressBar\").width(pctCompleteString);\n    $(\"#pbid-UpdateStuAcctsProgressBar\").html(pctCompleteString);\n     \n    // if the current status is the same as what is currently being displayed add a period to the end so the\n    // the user gets some visual that we are still processing\n \n    var currentStatusData = firstRow.STATUS_TEXT;\n    var currentStatusDisplay = $(\"#pbid-UpdateStuAcctsStatusDisplay\").text();\n     if (currentStatusDisplay === undefined) {\n       $(\"#pbid-UpdateStuAcctsStatusDisplay\").text(currentStatusData);\n    }\n    else if (currentStatusDisplay.includes(currentStatusData)) {\n       $(\"#pbid-UpdateStuAcctsStatusDisplay\").text(currentStatusDisplay + \".\");\n    } else {\n       $(\"#pbid-UpdateStuAcctsStatusDisplay\").text(currentStatusData);\n    }\n    // wait 1.5 seconds to check the data again\n    var interval = setInterval(function() {\n         $UpdStuAccountsProgressData.$load({clearCache:true});\n          clearInterval(interval);\n    }, 1500);\n \n}",
+            "model": "UpdStuAccountsProgressResource",
+            "loadInitially": false,
+            "type": "data",
+            "parameters": {}
+         },
+         {
+            "components": [
+               {
+                  "asHtml": false,
+                  "name": "UpdateStuAcctsStatusDisplay",
+                  "label": "Status",
+                  "loadInitially": true,
+                  "type": "display",
+                  "value": ""
+               },
+               {
+                  "asHtml": false,
+                  "name": "UpdateStuAcctsStatusTotalTables",
+                  "label": "Total Records To Process",
+                  "loadInitially": true,
+                  "type": "display",
+                  "value": "$UpdStuAccountsProgressData.TOTAL_WORK"
+               },
+               {
+                  "asHtml": false,
+                  "name": "UpdateStuAcctsStatusTableSoFar",
+                  "model": "",
+                  "label": "Records Processed So Far",
+                  "loadInitially": true,
+                  "type": "display",
+                  "value": "$UpdStuAccountsProgressData.SO_FAR"
+               },
+               {
+                  "components": [
+                     {
+                        "name": "UpdateStuAcctsProgressBar",
+                        "style": "updateProgressBar",
+                        "showInitially": true,
+                        "type": "block"
+                     }
+                  ],
+                  "name": "UpdateStuAcctsProgress",
+                  "style": "updateProgressBlock",
+                  "showInitially": true,
+                  "label": "",
+                  "type": "block"
+               }
+            ],
+            "name": "UpdateStuAcctsStatusBlock",
+            "showInitially": false,
+            "label": "Update Student Accounts Status",
+            "type": "block"
+         }
+      ],
+      "name": "ELIVEEXAMPLE4PAGE",
+      "type": "page",
+      "importCSS": "eLiveExamples"
+   },
+   "owner": null,
+   "pageRoles": [
+      {
+         "roleName": "ADMIN-GPBADMN",
+         "allow": true
+      }
+   ]
+}

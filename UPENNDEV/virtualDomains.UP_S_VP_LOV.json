@@ -1,0 +1,20 @@
+{
+   "owner": null,
+   "codePut": null,
+   "codeDelete": null,
+   "virtualDomainRoles": [
+      {
+         "allowDelete": false,
+         "allowPost": false,
+         "allowPut": false,
+         "roleName": "ADMIN-GPBADMN",
+         "allowGet": true
+      }
+   ],
+   "codeGet": "select '<button class=\"tablinks\" onclick=\"openCity(event,'''||COL1||''')\"> ' ||COL1||' </button>' COL1, COL2 from (select 'Tab1' col1,  'Tab1' col2 from dual\r\nunion\r\nselect 'Tab2' col1,  'Tab 2' col2 from dual\r\nunion\r\nselect 'Tab2' col1,  'Tab 3' col2 from dual\r\nunion\r\nselect 'Tab4' col1,  'Tab 4' col2 from dual)",
+   "typeOfCode": "S",
+   "fileTimestamp": null,
+   "serviceName": "UP_S_VP_LOV",
+   "codePost": null,
+   "developerSecurity": []
+}

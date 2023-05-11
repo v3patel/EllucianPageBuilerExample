@@ -1,0 +1,25 @@
+{
+   "codePost": null,
+   "virtualDomainRoles": [
+      {
+         "allowGet": true,
+         "allowPost": true,
+         "allowPut": true,
+         "roleName": "ADMIN-FTVORGNDOMAIN",
+         "allowDelete": true
+      },
+      {
+         "allowGet": true,
+         "allowPost": false,
+         "allowPut": false,
+         "roleName": "ADMIN-GPBADMN",
+         "allowDelete": false
+      }
+   ],
+   "codePut": null,
+   "fileTimestamp": "2019-04-08T19:40:01Z",
+   "codeDelete": null,
+   "codeGet": "select FTVORGN_ORGN_CODE, FTVORGN_ORGN_CODE||'-'|| FTVORGN_TITLE as FTVORGN_TITLE from ftvorgn\r\nwhere FTVORGN_EFF_DATE <= trunc(sysdate) \r\nAND   FTVORGN_NCHG_DATE > trunc(sysdate)\r\nAND   FTVORGN_STATUS_IND = 'A'\r\nAND   FTVORGN_DATA_ENTRY_IND = 'Y'\r\nAND  (FTVORGN_TERM_DATE is NULL or FTVORGN_TERM_DATE < sysdate) \r\n--UNION select null as ftvorgn_orgn_code, '' as ftvorgn_title from dual\r\norder by 1",
+   "typeOfCode": "S",
+   "serviceName": "FTVORGN"
+}

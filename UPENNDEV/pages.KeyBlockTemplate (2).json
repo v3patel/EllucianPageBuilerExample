@@ -1,0 +1,363 @@
+{
+   "constantName": "KeyBlockTemplate",
+   "developerSecurity": [],
+   "extendsPage": null,
+   "fileTimestamp": "2022-07-07T14:45:21Z",
+   "modelView": {
+      "components": [
+         {
+            "resource": "virtualDomains.PRSNLOOKUP_Domain",
+            "name": "PRSNLOOKUP_Domain",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "resource": "virtualDomains.UP_S_SHREVNT",
+            "name": "SHREVNT",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "resource": "virtualDomains.UP_S_HAP_LOV",
+            "name": "LOVS",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "name": "JsLiteral",
+            "type": "literal",
+            "value": "<script>\nfunction appendScriptText(filepath) {\n\tvar ele = document.createElement('script');\n\tele.setAttribute(\"type\", \"text/javascript\");\n\tele.setAttribute(\"src\", filepath);\n\tvar request = new XMLHttpRequest();\n\trequest.open('GET', filepath, true);\n\trequest.send(null);\n\trequest.onreadystatechange = function() {\n\t\tif (request.readyState === 4 && request.status === 200) {\n\t\t\tvar type = request.getResponseHeader('Content-Type');\n\t\t\tif (type.indexOf(\"text\") !== 1) {\n\t\t\t\tvar src = request.responseText;\n                                src = '<sc' + 'ript type=\"text/javascript\">' + src ;\n                                 src = src + \"</scr\" + \"ipt>\";\n\t\t\t\t$('head').append(src );\n\t\t\t}\n\t\t}\n\t};\n\n}\n\nfunction appendScript(filepath) {\n\tif ($('head script[src=\"' + filepath + '\"]').length > 0)\n\t\treturn;\n\n\tvar ele = document.createElement('script');\n\tele.setAttribute(\"type\", \"text/javascript\");\n\tele.setAttribute(\"src\", filepath);\n\t$('head').append(ele);\n}\n\nfunction appendStyle(filepath) {\n\tif ($('head link[href=\"' + filepath + '\"]').length > 0)\n\t\treturn;\n\n\tvar ele = document.createElement('link');\n\tele.setAttribute(\"type\", \"text/css\");\n\tele.setAttribute(\"rel\", \"Stylesheet\");\n\tele.setAttribute(\"href\", filepath);\n\t$('head').append(ele);\n}\n\n</script>"
+         },
+         {
+            "name": "cssLiteral",
+            "type": "literal",
+            "value": "<style>\n\n.chosen-container {\n    position: relative;display: inline-block;vertical-align: middle;font-size: 13 px;-webkit-user-select: none;-moz-user-select: none;user-select: none\n}.chosen-container * {\n    -webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box\n}.chosen-container.chosen-drop {\n    position: absolute;top: 100 % ;left: -9999 px;z-index: 1010;width: 100 % ;border: 1 px solid #aaa;border-top: 0;background: #fff;box-shadow: 0 4 px 5 px rgba(0, 0, 0, .15)\n}.chosen-container.chosen-with-drop.chosen-drop {\n    left: 0\n}.chosen-container a {\n    cursor: pointer\n}.chosen-container.search-choice.group-name, .chosen-container.chosen-single.group-name {\n    margin-right: 4 px;\n    overflow: hidden;\n    white-space: nowrap;\n    text-overflow: ellipsis;\n    font-weight: 400;\n    color: #999}.chosen-container .search-choice .group-name:after,.chosen-container .chosen-single .group-name:after{content:\":\";padding-left:2px;vertical-align:top}.chosen-container-single .chosen-single{position:relative;display:block;overflow:hidden;padding:0 0 0 8px;height:25px;border:1px solid # aaa;\n    border-radius: 5 px;\n    background-color: #fff;\n    background: -webkit-gradient(linear, 50 % 0, 50 % 100 % , color-stop(20 % , #fff), color-stop(50 % , #f6f6f6), color-stop(52 % , #eee), color-stop(100 % , #f4f4f4));\n    background: -webkit-linear-gradient(#fff 20 % , #f6f6f6 50 % , #eee 52 % , #f4f4f4 100 % );\n    background: -moz-linear-gradient(#fff 20 % , #f6f6f6 50 % , #eee 52 % , #f4f4f4 100 % );\n    background: -o-linear-gradient(#fff 20 % , #f6f6f6 50 % , #eee 52 % , #f4f4f4 100 % );\n    background: linear-gradient(#fff 20 % , #f6f6f6 50 % , #eee 52 % , #f4f4f4 100 % );\n    background-clip: padding-box;\n    box-shadow: 0 0 3 px #fff inset, 0 1 px 1 px rgba(0, 0, 0, .1);\n    color: #444;text-decoration:none;white-space:nowrap;line-height:24px}.chosen-container-single .chosen-default{color:# 999\n}.chosen-container-single.chosen-single span {\n    display: block;overflow: hidden;margin-right: 26 px;text-overflow: ellipsis;white-space: nowrap\n}.chosen-container-single.chosen-single-with-deselect span {\n    margin-right: 38 px\n}.chosen-container-single.chosen-single abbr {\n    position: absolute;top: 6 px;right: 26 px;display: block;width: 12 px;height: 12 px;background: url(chosen-sprite.png)-42 px 1 px no-repeat;font-size: 1 px\n}.chosen-container-single.chosen-single abbr: hover {\n    background-position: -42 px-10 px\n}.chosen-container-single.chosen-disabled.chosen-single abbr: hover {\n    background-position: -42 px-10 px\n}.chosen-container-single.chosen-single div {\n    position: absolute;top: 0;right: 0;display: block;width: 18 px;height: 100 %\n}.chosen-container-single.chosen-single div b {\n    display: block;width: 100 % ;height: 100 % ;background: url(chosen-sprite.png) no-repeat 0 2 px\n}.chosen-container-single.chosen-search {\n    position: relative;z-index: 1010;margin: 0;padding: 3 px 4 px;white-space: nowrap\n}.chosen-container-single.chosen-search input[type = text] {\n    margin: 1 px 0;padding: 4 px 20 px 4 px 5 px;width: 100 % ;height: auto;outline: 0;border: 1 px solid #aaa;background: #fff url(chosen-sprite.png) no-repeat 100 % -20 px;background: url(chosen-sprite.png) no-repeat 100 % -20 px;font-size: 1 em;font-family: sans-serif;line-height: normal;border-radius: 0\n}.chosen-container-single.chosen-drop {\n    margin-top: -1 px;\n    border-radius: 0 0 4 px 4 px;\n    background-clip: padding-box\n}.chosen-container-single.chosen-container-single-nosearch.chosen-search {\n    position: absolute;left: -9999 px\n}.chosen-container.chosen-results {\n    color: #444;position:relative;overflow-x:hidden;overflow-y:auto;margin:0 4px 4px 0;padding:0 0 0 4px;max-height:240px;-webkit-overflow-scrolling:touch}.chosen-container .chosen-results li{display:none;margin:0;padding:5px 6px;list-style:none;line-height:15px;word-wrap:break-word;-webkit-touch-callout:none}.chosen-container .chosen-results li.active-result{display:list-item;cursor:pointer}.chosen-container .chosen-results li.disabled-result{display:list-item;color:# ccc;cursor: default\n}.chosen-container.chosen-results li.highlighted {\n    background-color: #3875d7;background-image:-webkit-gradient(linear,50% 0,50% 100%,color-stop(20%,# 3875 d7), color-stop(90 % , #2a62bc));background-image:-webkit-linear-gradient(# 3875 d7 20 % , #2a62bc 90%);background-image:-moz-linear-gradient(# 3875 d7 20 % , #2a62bc 90%);background-image:-o-linear-gradient(# 3875 d7 20 % , #2a62bc 90%);background-image:linear-gradient(# 3875 d7 20 % , #2a62bc 90%);color:# fff\n}.chosen-container.chosen-results li.no-results {\n    color: #777;display:list-item;background:# f4f4f4\n}.chosen-container.chosen-results li.group-result {\n    display: list-item;font-weight: 700;cursor: default\n}.chosen-container.chosen-results li.group-option {\n    padding-left: 15 px\n}.chosen-container.chosen-results li em {\n    font-style: normal;\n    text-decoration: underline\n}.chosen-container-multi.chosen-choices {\n    position: relative;overflow: hidden;margin: 0;padding: 0 5 px;width: 100 % ;height: auto!important;height: 1 % ;border: 1 px solid #aaa;background-color: #fff;background-image: -webkit-gradient(linear, 50 % 0, 50 % 100 % , color-stop(1 % , #eee), color-stop(15 % , #fff));background-image: -webkit-linear-gradient(#eee 1 % , #fff 15 % );background-image: -moz-linear-gradient(#eee 1 % , #fff 15 % );background-image: -o-linear-gradient(#eee 1 % , #fff 15 % );background-image: linear-gradient(#eee 1 % , #fff 15 % );cursor: text\n}.chosen-container-multi.chosen-choices li {\n    float: left;list-style: none\n}.chosen-container-multi.chosen-choices li.search-field {\n    margin: 0;padding: 0;white-space: nowrap\n}.chosen-container-multi.chosen-choices li.search-field input[type = text] {\n    margin: 1 px 0;padding: 0;height: 25 px;outline: 0;border: 0!important;background: transparent!important;box-shadow: none;color: #999;font-size:100%;font-family:sans-serif;line-height:normal;border-radius:0}.chosen-container-multi .chosen-choices li.search-choice{position:relative;margin:3px 5px 3px 0;padding:3px 20px 3px 5px;border:1px solid # aaa;max-width: 100 % ;border-radius: 3 px;background-color: #eee;background-image: -webkit-gradient(linear, 50 % 0, 50 % 100 % , color-stop(20 % , #f4f4f4), color-stop(50 % , #f0f0f0), color-stop(52 % , #e8e8e8), color-stop(100 % , #eee));background-image: -webkit-linear-gradient(#f4f4f4 20 % , #f0f0f0 50 % , #e8e8e8 52 % , #eee 100 % );background-image: -moz-linear-gradient(#f4f4f4 20 % , #f0f0f0 50 % , #e8e8e8 52 % , #eee 100 % );background-image: -o-linear-gradient(#f4f4f4 20 % , #f0f0f0 50 % , #e8e8e8 52 % , #eee 100 % );background-image: linear-gradient(#f4f4f4 20 % , #f0f0f0 50 % , #e8e8e8 52 % , #eee 100 % );background-size: 100 % 19 px;background-repeat: repeat-x;background-clip: padding-box;box-shadow: 0 0 2 px #fff inset,\n    0 1 px 0 rgba(0, 0, 0, .05);color: #333;line-height:13px;cursor:default}.chosen-container-multi .chosen-choices li.search-choice span{word-wrap:break-word}.chosen-container-multi .chosen-choices li.search-choice .search-choice-close{position:absolute;top:4px;right:3px;display:block;width:12px;height:12px;background:url(chosen-sprite.png) -42px 1px no-repeat;font-size:1px}.chosen-container-multi .chosen-choices li.search-choice .search-choice-close:hover{background-position:-42px -10px}.chosen-container-multi .chosen-choices li.search-choice-disabled{padding-right:5px;border:1px solid # ccc;background-color: #e4e4e4;background-image: -webkit-gradient(linear, 50 % 0, 50 % 100 % , color-stop(20 % , #f4f4f4), color-stop(50 % , #f0f0f0), color-stop(52 % , #e8e8e8), color-stop(100 % , #eee));background-image: -webkit-linear-gradient(#f4f4f4 20 % , #f0f0f0 50 % , #e8e8e8 52 % , #eee 100 % );background-image: -moz-linear-gradient(#f4f4f4 20 % , #f0f0f0 50 % , #e8e8e8 52 % , #eee 100 % );background-image: -o-linear-gradient(#f4f4f4 20 % , #f0f0f0 50 % , #e8e8e8 52 % , #eee 100 % );background-image: linear-gradient(#f4f4f4 20 % , #f0f0f0 50 % , #e8e8e8 52 % , #eee 100 % );color: #666}.chosen-container-multi .chosen-choices li.search-choice-focus{background:# d4d4d4\n}.chosen-container-multi.chosen-choices li.search-choice-focus.search-choice-close {\n    background-position: -42 px-10 px\n}.chosen-container-multi.chosen-results {\n    margin: 0;padding: 0\n}.chosen-container-multi.chosen-drop.result-selected {\n    display: list-item;color: #ccc;cursor: default\n}.chosen-container-active.chosen-single {\n    border: 1 px solid #5897fb;box-shadow:0 0 5px rgba(0,0,0,.3)}.chosen-container-active.chosen-with-drop .chosen-single{border:1px solid # aaa;-moz-border-radius-bottomright: 0;border-bottom-right-radius: 0;-moz-border-radius-bottomleft: 0;border-bottom-left-radius: 0;background-image: -webkit-gradient(linear, 50 % 0, 50 % 100 % , color-stop(20 % , #eee), color-stop(80 % , #fff));background-image: -webkit-linear-gradient(#eee 20 % , #fff 80 % );background-image: -moz-linear-gradient(#eee 20 % , #fff 80 % );background-image: -o-linear-gradient(#eee 20 % , #fff 80 % );background-image: linear-gradient(#eee 20 % , #fff 80 % );box-shadow: 0 1 px 0 #fff inset\n}.chosen-container-active.chosen-with-drop.chosen-single div {\n    border-left: 0;\n    background: transparent\n}.chosen-container-active.chosen-with-drop.chosen-single div b {\n    background-position: -18 px 2 px\n}.chosen-container-active.chosen-choices {\n    border: 1 px solid #5897fb;box-shadow:0 0 5px rgba(0,0,0,.3)}.chosen-container-active .chosen-choices li.search-field input[type= text] {\n    color: #222!important}.chosen-disabled{opacity:.5!important;cursor:default}.chosen-disabled .chosen-single{cursor:default}.chosen-disabled .chosen-choices .search-choice .search-choice-close{cursor:default}.chosen-rtl{text-align:right}.chosen-rtl .chosen-single{overflow:visible;padding:0 8px 0 0}.chosen-rtl .chosen-single span{margin-right:0;margin-left:26px;direction:rtl}.chosen-rtl .chosen-single-with-deselect span{margin-left:38px}.chosen-rtl .chosen-single div{right:auto;left:3px}.chosen-rtl .chosen-single abbr{right:auto;left:26px}.chosen-rtl .chosen-choices li{float:right}.chosen-rtl .chosen-choices li.search-field input[type= text] {\n    direction: rtl\n}.chosen-rtl.chosen-choices li.search-choice {\n    margin: 3 px 5 px 3 px 0;padding: 3 px 5 px 3 px 19 px\n}.chosen-rtl.chosen-choices li.search-choice.search-choice-close {\n    right: auto;left: 4 px\n}.chosen-rtl.chosen-container-single-nosearch.chosen-search, .chosen-rtl.chosen-drop {\n    left: 9999 px\n}.chosen-rtl.chosen-container-single.chosen-results {\n    margin: 0 0 4 px 4 px;padding: 0 4 px 0 0\n}.chosen-rtl.chosen-results li.group-option {\n    padding-right: 15 px;\n    padding-left: 0\n}.chosen-rtl.chosen-container-active.chosen-with-drop.chosen-single div {\n    border-right: 0\n}.chosen-rtl.chosen-search input[type = text] {\n    padding: 4 px 5 px 4 px 20 px;background: #fff url(chosen-sprite.png) no-repeat-30 px-20 px;background: url(chosen-sprite.png) no-repeat-30 px-20 px;direction: rtl\n}.chosen-rtl.chosen-container-single.chosen-single div b {\n    background-position: 6 px 2 px\n}.chosen-rtl.chosen-container-single.chosen-with-drop.chosen-single div b {\n    background-position: -12 px 2 px\n}\n@media only screen and(-webkit-min-device-pixel-ratio: 1.5), only screen and(min-resolution: 144 dpi), only screen and(min-resolution: 1.5 dppx) {\n    .chosen-rtl.chosen-search input[type = text], .chosen-container-single.chosen-single abbr, .chosen-container-single.chosen-single div b, .chosen-container-single.chosen-search input[type = text], .chosen-container-multi.chosen-choices.search-choice.search-choice-close, .chosen-container.chosen-results-scroll-down span, .chosen-container.chosen-results-scroll-up span {\n        background-image: url(chosen-sprite @2x.png) !important;\n        background-size: 52 px 37 px!important;\n        background-repeat: no-repeat!important\n    }\n}\n</style>"
+         },
+         {
+            "components": [
+               {
+                  "components": [
+                     {
+                        "components": [
+                           {
+                              "components": [
+                                 {
+                                    "components": [
+                                       {
+                                          "label": "ID",
+                                          "loadInitially": true,
+                                          "type": "text",
+                                          "required": false,
+                                          "readonly": false,
+                                          "name": "personCriteriaID",
+                                          "style": "col-auto-width",
+                                          "model": "",
+                                          "placeholder": "",
+                                          "onUpdate": "",
+                                          "parameters": {},
+                                          "value": "",
+                                          "validation": {}
+                                       },
+                                       {
+                                          "readonly": false,
+                                          "name": "personCriteriaLastName",
+                                          "style": "col-auto-width",
+                                          "label": "Last Name",
+                                          "loadInitially": true,
+                                          "type": "text",
+                                          "onUpdate": "",
+                                          "parameters": {},
+                                          "value": "Patel",
+                                          "required": false,
+                                          "validation": {}
+                                       },
+                                       {
+                                          "readonly": false,
+                                          "name": "personCriteriaFirstName",
+                                          "style": "col-auto-width",
+                                          "label": "First Name",
+                                          "loadInitially": true,
+                                          "type": "text",
+                                          "onUpdate": "",
+                                          "parameters": {},
+                                          "required": false,
+                                          "validation": {}
+                                       },
+                                       {
+                                          "readonly": false,
+                                          "name": "personCriteriaMI",
+                                          "style": "col-auto-width",
+                                          "label": "MI",
+                                          "loadInitially": true,
+                                          "type": "text",
+                                          "parameters": {},
+                                          "required": false,
+                                          "validation": {}
+                                       },
+                                       {
+                                          "valueStyle": "primary",
+                                          "onClick": "$personGrid.$load();",
+                                          "name": "pesonsCriteriaButton",
+                                          "style": "",
+                                          "label": "Search",
+                                          "type": "button"
+                                       }
+                                    ],
+                                    "name": "PesonsCriteriaRow",
+                                    "showInitially": true,
+                                    "style": "",
+                                    "type": "block"
+                                 },
+                                 {
+                                    "components": [
+                                       {
+                                          "components": [
+                                             {
+                                                "allowDelete": false,
+                                                "components": [
+                                                   {
+                                                      "readonly": true,
+                                                      "name": "personID",
+                                                      "model": "SPRIDEN_ID",
+                                                      "label": "ID",
+                                                      "loadInitially": true,
+                                                      "type": "text",
+                                                      "parameters": {},
+                                                      "required": false,
+                                                      "validation": {}
+                                                   },
+                                                   {
+                                                      "readonly": true,
+                                                      "name": "personLastName",
+                                                      "model": "SPRIDEN_LAST_NAME",
+                                                      "label": "Last Name",
+                                                      "loadInitially": true,
+                                                      "type": "text",
+                                                      "parameters": {},
+                                                      "required": false,
+                                                      "validation": {}
+                                                   },
+                                                   {
+                                                      "readonly": true,
+                                                      "name": "personFirstName",
+                                                      "model": "SPRIDEN_FIRST_NAME",
+                                                      "label": "First Name",
+                                                      "loadInitially": true,
+                                                      "type": "text",
+                                                      "parameters": {},
+                                                      "required": false,
+                                                      "validation": {}
+                                                   },
+                                                   {
+                                                      "readonly": true,
+                                                      "name": "personMIName",
+                                                      "model": "",
+                                                      "label": "Middle Name",
+                                                      "loadInitially": true,
+                                                      "type": "text",
+                                                      "parameters": {},
+                                                      "required": false,
+                                                      "validation": {}
+                                                   },
+                                                   {
+                                                      "name": "PIDM",
+                                                      "model": "SPRIDEN_PIDM",
+                                                      "loadInitially": true,
+                                                      "type": "hidden"
+                                                   }
+                                                ],
+                                                "onClick": "$currentPesonsSelection = currentSelection;\ndebugger;\n\n$PIDM = currentSelection.SPRIDEN_PIDM; \n$HAP_Edit.$load();",
+                                                "allowNew": false,
+                                                "pageSize": 5,
+                                                "loadInitially": false,
+                                                "type": "grid",
+                                                "name": "personGrid",
+                                                "allowModify": false,
+                                                "model": "PRSNLOOKUP_Domain",
+                                                "style": "",
+                                                "allowReload": false,
+                                                "parameters": {
+                                                   "p_first_name": "nvl($personCriteriaFirstName,\"\").toUpperCase()",
+                                                   "p_last_name": "nvl($personCriteriaLastName,\"\").toUpperCase()",
+                                                   "p_id": "nvl($personCriteriaID,\"\").toUpperCase()",
+                                                   "p_mi": "nvl($personCriteriaMI,\"\").toUpperCase()"
+                                                }
+                                             }
+                                          ],
+                                          "name": "popupPesonsMainCol",
+                                          "showInitially": true,
+                                          "style": "col-md-12",
+                                          "type": "block"
+                                       }
+                                    ],
+                                    "name": "pesonsMainRow",
+                                    "showInitially": true,
+                                    "style": "row",
+                                    "type": "block"
+                                 },
+                                 {
+                                    "components": [
+                                       {
+                                          "allowDelete": true,
+                                          "components": [
+                                             {
+                                                "valueStyle": "onlinecode_org",
+                                                "label": "Event",
+                                                "loadInitially": true,
+                                                "type": "select",
+                                                "required": false,
+                                                "sourceParameters": {
+                                                   "tab_name": "\"STVEVEN\""
+                                                },
+                                                "name": "HAP_Edit_Event",
+                                                "onLoad": "alert('Select loading');",
+                                                "sourceModel": "LOVS",
+                                                "model": "SHREVNT_EVEN_CODE",
+                                                "style": "",
+                                                "labelKey": "DESCRIPTION",
+                                                "valueKey": "CODE"
+                                             },
+                                             {
+                                                "sourceParameters": {
+                                                   "tab_name": "\"STVORIG\""
+                                                },
+                                                "name": "HAP_Edit_Orig",
+                                                "sourceModel": "LOVS",
+                                                "model": "SHREVNT_ORIG_CODE",
+                                                "label": "Orig",
+                                                "loadInitially": true,
+                                                "type": "select",
+                                                "labelKey": "DESCRIPTION",
+                                                "valueKey": "CODE",
+                                                "required": false
+                                             },
+                                             {
+                                                "sourceParameters": {
+                                                   "tab_name": "\"STVLEVL\""
+                                                },
+                                                "name": "HAP_Edit_Level1",
+                                                "sourceModel": "LOVS",
+                                                "model": "SHREVNT_LEVL_CODE",
+                                                "label": "Level",
+                                                "loadInitially": true,
+                                                "type": "select",
+                                                "labelKey": "DESCRIPTION",
+                                                "valueKey": "CODE",
+                                                "required": false
+                                             },
+                                             {
+                                                "readonly": false,
+                                                "name": "HAP_Edit_desc",
+                                                "model": "SHREVNT_DESC",
+                                                "loadInitially": true,
+                                                "label": "Description",
+                                                "type": "text",
+                                                "parameters": {},
+                                                "validation": {},
+                                                "required": false
+                                             },
+                                             {
+                                                "readonly": false,
+                                                "name": "HAP_Edit_eff_date",
+                                                "model": "SHREVNT_EFFECTIVE_DATE",
+                                                "loadInitially": true,
+                                                "label": "Effective Date",
+                                                "type": "datetime",
+                                                "parameters": {},
+                                                "validation": {},
+                                                "required": false
+                                             },
+                                             {
+                                                "sourceParameters": {
+                                                   "tab_name": "\"DECISION\""
+                                                },
+                                                "name": "HAP_Edit_Decision",
+                                                "sourceModel": "LOVS",
+                                                "model": "SHREVNT_DECISION",
+                                                "label": "Decision",
+                                                "loadInitially": true,
+                                                "type": "select",
+                                                "labelKey": "DESCRIPTION",
+                                                "valueKey": "CODE",
+                                                "required": false
+                                             }
+                                          ],
+                                          "allowNew": true,
+                                          "pageSize": 10,
+                                          "loadInitially": true,
+                                          "type": "grid",
+                                          "refreshDataLabel": "",
+                                          "name": "HAP_Edit",
+                                          "allowModify": true,
+                                          "onLoad": "$(\".onlinecode_org\").chosen();",
+                                          "model": "SHREVNT",
+                                          "allowReload": true,
+                                          "parameters": {
+                                             "pidm": "$PIDM"
+                                          }
+                                       },
+                                       {
+                                          "onClick": "$(\".onlinecode_org\").chosen();",
+                                          "name": "HAP_Form_child_2",
+                                          "label": "Search",
+                                          "type": "button"
+                                       }
+                                    ],
+                                    "nextButtonLabel": "Next",
+                                    "name": "HAP_Form",
+                                    "showInitially": true,
+                                    "type": "form"
+                                 },
+                                 {
+                                    "components": [
+                                       {
+                                          "name": "keyBlockBannerIdCol_child_4_child_1",
+                                          "type": "literal",
+                                          "value": "<script type=\"text/javascript\">\ndebugger;\nappendScriptText('/BannerExtensibility/cssRender?name=jqueryandchosen');\nappendStyle('/BannerExtensibility/cssRender?name=HAP_CSS');\n\n\n</script>"
+                                       }
+                                    ],
+                                    "nextButtonLabel": "Next",
+                                    "name": "keyBlockBannerIdCol_child_4",
+                                    "showInitially": true,
+                                    "type": "form"
+                                 }
+                              ],
+                              "name": "keyBlockBannerIdCol",
+                              "showInitially": true,
+                              "style": "",
+                              "type": "block"
+                           }
+                        ],
+                        "name": "keyBlockRow",
+                        "showInitially": true,
+                        "style": "",
+                        "type": "block"
+                     }
+                  ],
+                  "name": "keyBlockContainer",
+                  "showInitially": true,
+                  "style": "",
+                  "type": "block"
+               }
+            ],
+            "name": "keyBlockForm",
+            "showInitially": true,
+            "style": "",
+            "type": "block"
+         }
+      ],
+      "name": "KeyBlockTemplate",
+      "style": "",
+      "label": "Components",
+      "title": "Components",
+      "type": "page",
+      "importCSS": "componentLibrary"
+   },
+   "owner": null,
+   "pageRoles": [
+      {
+         "roleName": "ADMIN-GPBADMN",
+         "allow": true
+      }
+   ]
+}

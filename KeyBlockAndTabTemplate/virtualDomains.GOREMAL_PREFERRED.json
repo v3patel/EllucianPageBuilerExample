@@ -1,0 +1,20 @@
+{
+   "owner": null,
+   "codePut": null,
+   "codeDelete": null,
+   "virtualDomainRoles": [
+      {
+         "allowDelete": true,
+         "allowPost": true,
+         "allowPut": true,
+         "roleName": "ADMIN-GPBADMN",
+         "allowGet": true
+      }
+   ],
+   "codeGet": "select * from goremal\r\nwhere GOREMAL_PIDM = (SELECT SPRIDEN_PIDM FROM SPRIDEN \r\n                      WHERE SPRIDEN_ID = :inid\r\n                      AND SPRIDEN_CHANGE_IND IS NULL )\r\n",
+   "typeOfCode": "S",
+   "fileTimestamp": null,
+   "serviceName": "GOREMAL_PREFERRED",
+   "codePost": null,
+   "developerSecurity": []
+}

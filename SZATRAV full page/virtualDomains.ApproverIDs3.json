@@ -1,0 +1,18 @@
+{
+   "codePost": null,
+   "virtualDomainRoles": [
+      {
+         "allowGet": true,
+         "allowPost": false,
+         "allowPut": false,
+         "roleName": "ADMIN-GPBADMN",
+         "allowDelete": false
+      }
+   ],
+   "codePut": null,
+   "fileTimestamp": null,
+   "codeDelete": null,
+   "codeGet": "SELECT s.spriden_Id, s.spriden_last_name||', '||s.spriden_first_name||' '||s.spriden_mi||'    ID:   '||s.spriden_id  AS APPROVER_NAME, SPRIDEN_PIDM AS APPROVER_PIDM FROM SPRIDEN s \r\nWHERE s.SPRIDEN_PIDM IN (\r\nSELECT PEBEMPL_PIDM FROM PEBEMPL WHERE PEBEMPL_EMPL_STATUS = 'A')\r\nAND s.SPRIDEN_PIDM IN (SELECT SIBINST_PIDM FROM SIBINST)\r\nand spriden_change_ind is null\r\nUNION\r\nSELECT s.spriden_Id, s.spriden_last_name||', '||s.spriden_first_name||' '||s.spriden_mi||'    ID:   '||s.spriden_id  AS APPROVER_NAME, SPRIDEN_PIDM AS APPROVER_PIDM FROM SPRIDEN s \r\nWHERE s.spriden_pidm in (select swrapos_appr_pidm from swrapos)\r\nAND s.SPRIDEN_CHANGE_IND IS NULL\r\norder by APPROVER_NAME",
+   "typeOfCode": "S",
+   "serviceName": "ApproverIDs3"
+}

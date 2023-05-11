@@ -1,0 +1,20 @@
+{
+   "owner": null,
+   "codePut": "BEGIN\r\n  IF :id = null THEN\r\n    null; \r\n  END IF;\r\n  raise_application_error (-20000, 'This part is only visible in the logs and for users with a debug role. @USERMESSAGE: Update not allowed');\r\nEND;\r\n",
+   "codeDelete": "BEGIN\r\n  IF :id = null THEN\r\n    null; \r\n  END IF;\r\n  raise_application_error (-20000, 'This part is only visible in the logs and for users with a debug role. @USERMESSAGE: Delete not allowed');\r\nEND;\r\n",
+   "virtualDomainRoles": [
+      {
+         "allowDelete": true,
+         "allowPost": true,
+         "allowPut": true,
+         "roleName": "ADMIN-GPBADMN",
+         "allowGet": true
+      }
+   ],
+   "codeGet": "select '12345678' id, t.* from tzrprkg t\r\nwhere TZRPRKG_CSV_FILE_NAME = :csv_file_name",
+   "typeOfCode": "S",
+   "fileTimestamp": null,
+   "serviceName": "ELIVE_EXAMPLE4_UPLOAD_CHARGES",
+   "codePost": "BEGIN\r\n  IF :BannerId IS NOT NULL THEN\r\n    INSERT INTO TZRPRKG\r\n      (TZRPRKG_BANNER_ID,\r\n       TZRPRKG_FEE,\r\n       TZRPRKG_FEE_DATE,\r\n       TZRPRKG_DESC,\r\n       TZRPRKG_CSV_FILE_NAME,\r\n       TZRPRKG_ACTIVITY_DATE,\r\n       TZRPRKG_USER_ID)\r\n      SELECT :BannerId, :Fee, TRUNC(TO_DATE(:FeeDate,'MM/DD/YYYY')), :Description, :CsvFileName, SYSDATE, USER\r\n        FROM DUAL\r\n       WHERE NOT EXISTS (SELECT NULL\r\n                FROM TZRPRKG\r\n               WHERE TZRPRKG_BANNER_ID = :BannerId\r\n                 AND TZRPRKG_FEE = :Fee\r\n                 AND TZRPRKG_FEE_DATE = TRUNC(TO_DATE(:FeeDate,'MM/DD/YYYY'))\r\n                 AND TZRPRKG_DESC = :Description\r\n                 AND TZRPRKG_CSV_FILE_NAME = :CsvFileName);\r\n  END IF;\r\nEXCEPTION\r\n  WHEN OTHERS THEN\r\n    raise_application_error(-20000,\r\n                            'This part is only visible in the logs and for users with a debug role. @USERMESSAGE: Error on insert:' ||\r\n                            SQLERRM);\r\nEND;\r\n",
+   "developerSecurity": []
+}

@@ -1,0 +1,25 @@
+{
+   "codePost": null,
+   "virtualDomainRoles": [
+      {
+         "allowGet": true,
+         "allowPost": false,
+         "allowPut": false,
+         "roleName": "ADMIN-GPBADMN",
+         "allowDelete": false
+      },
+      {
+         "allowGet": true,
+         "allowPost": true,
+         "allowPut": true,
+         "roleName": "ADMIN-APPROVER2DOMAIN",
+         "allowDelete": true
+      }
+   ],
+   "codePut": null,
+   "fileTimestamp": "2019-04-08T19:40:09Z",
+   "codeDelete": null,
+   "codeGet": "SELECT s.spriden_Id, s.spriden_last_name||', '||s.spriden_first_name||' '||s.spriden_mi||'    ID:   '||s.spriden_id  AS APPROVER_NAME, SPRIDEN_PIDM AS APPROVER_PIDM FROM SPRIDEN s \r\nWHERE s.SPRIDEN_PIDM IN (\r\nSELECT PEBEMPL_PIDM FROM PEBEMPL WHERE PEBEMPL_EMPL_STATUS = 'A')\r\nAND s.SPRIDEN_PIDM IN (SELECT SIBINST_PIDM FROM SIBINST)\r\nand spriden_change_ind is null\r\norder by APPROVER_NAME",
+   "typeOfCode": "S",
+   "serviceName": "ApproverIds2"
+}

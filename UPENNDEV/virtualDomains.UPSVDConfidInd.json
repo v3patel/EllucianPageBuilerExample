@@ -1,0 +1,20 @@
+{
+   "owner": null,
+   "codePut": "DECLARE\r\n    V_ROWID   gb_common.internal_record_id_type;\r\nBEGIN\r\n    SELECT MAX (ROWID)     rid\r\n      INTO V_ROWID\r\n      FROM spbpers\r\n     WHERE spbpers_pidm = :parm_user_pidm;\r\n\r\n    IF v_rowid IS NULL\r\n    THEN\r\n        gb_bio.p_create (p_pidm          => :parm_user_pidm,\r\n                         p_confid_ind    => :SPBPERS_CONFID_IND,\r\n                         p_rowid_out     => V_ROWID,\r\n                         p_data_origin   => 'UPSPB_CONIFGIND',\r\n                         p_user_id       => USER);\r\n    ELSE\r\n        gb_bio.p_update (p_pidm          => :parm_user_pidm,\r\n                         p_confid_ind    => :SPBPERS_CONFID_IND,\r\n                         p_data_origin   => 'UPSPB_CONIFGIND',\r\n                         p_user_id       => USER);\r\n    END IF;\r\nEND;",
+   "codeDelete": "begin   \r\n  raise_application_error ( -20001, '@USERMESSAGE: Delete is not allowed for this domain');\r\nend;",
+   "virtualDomainRoles": [
+      {
+         "allowDelete": false,
+         "allowPost": true,
+         "allowPut": true,
+         "roleName": "STUDENT",
+         "allowGet": true
+      }
+   ],
+   "codeGet": "SELECT rowidtochar(rowid) \"id\",  \r\n       NVL (sp.SPBPERS_CONFID_IND, 'N')     SPBPERS_CONFID_IND\r\n  FROM SPBPERS SP\r\n WHERE SP.SPBPERS_PIDM =  :parm_user_pidm \r\nUNION\r\nSELECT rowidtochar(rowid) \"id\",   'N'\r\n  FROM DUAL\r\n WHERE NOT EXISTS\r\n           (SELECT 1\r\n              FROM spbpers\r\n             WHERE spbpers_pidm = :parm_user_pidm)",
+   "typeOfCode": "S",
+   "fileTimestamp": "2022-02-15T19:28:17Z",
+   "serviceName": "UPSVDConfidInd",
+   "codePost": "begin   \r\n  raise_application_error ( -20001, '@USERMESSAGE: Insert is not allowed for this domain');\r\nend;",
+   "developerSecurity": []
+}

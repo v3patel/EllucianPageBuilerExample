@@ -1,0 +1,20 @@
+{
+   "owner": null,
+   "codePut": "UPDATE MYTABLE SET\r\nMYPIDM = :MYPIDM\r\n,MYCOMMENT = TRIM(:MYCOMMENT)",
+   "codeDelete": "Begin\r\n  delete from MYTABLE where rowid = :id;\r\nend;",
+   "virtualDomainRoles": [
+      {
+         "allowDelete": true,
+         "allowPost": true,
+         "allowPut": true,
+         "roleName": "ADMIN-GPBADMN",
+         "allowGet": true
+      }
+   ],
+   "codeGet": "select \r\nrowidtochar(rowid) \"id\"\r\n,MYPIDM\r\n,MYCOMMENT\r\nfrom MYTABLE\r\nWHERE MYPIDM = :inpidm",
+   "typeOfCode": "S",
+   "fileTimestamp": null,
+   "serviceName": "MYPAGE_MYTABLE",
+   "codePost": "INSERT INTO MYTABLE VALUES (\r\n:MYPIDM\r\n:MYCOMMENT )",
+   "developerSecurity": []
+}

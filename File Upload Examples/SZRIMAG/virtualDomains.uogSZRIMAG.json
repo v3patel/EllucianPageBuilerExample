@@ -1,0 +1,25 @@
+{
+   "codePost": null,
+   "virtualDomainRoles": [
+      {
+         "allowGet": true,
+         "allowPost": true,
+         "allowPut": true,
+         "roleName": "ADMIN-VD_SZRIMAG",
+         "allowDelete": false
+      },
+      {
+         "allowGet": true,
+         "allowPost": true,
+         "allowPut": true,
+         "roleName": "ADMIN-GPBADMN",
+         "allowDelete": false
+      }
+   ],
+   "codePut": "BEGIN\r\n  P_UOG_SZRIMAG_PB(:SPRIDEN_ID, F_UOG_BASE64CLOB2BLOB(:USER_IMAGE), :parm_user_loginName);\r\nEND;\r\n",
+   "fileTimestamp": "2019-05-23T13:10:34Z",
+   "codeDelete": null,
+   "codeGet": "/* Virtual Domain Definition\r\n            Name: uogSZRIMAG\r\n         Purpose: To manage the reading and writing of images to SZRIMAG\r\nInput parameters: id_spriden - relating to the SPRIDEN_ID field\r\n          Output: Single row from the table storing images\r\nChange History (Date, Initials, Description of Change)\r\n25/06/19 MH changed date to be string so it displays better\r\n            changed query to return all data apart from image data if there is no image in DB\r\n            this is so new users without an image still return results correctly\r\n            removed Post statements as strictly speaking all images will now be updates\r\n23/06/19 MH added Statements for inserting and updating\r\n24/05/19 MH added 'and spriden_change_ind is null' to where clause to only retrieve current record\r\n23/05/19 MH changed function name to be more generic as it will now be used with files other than images\r\n29/08/18 MH added id field to select query, added order by clause to retrieve most recent photo first\r\n28/08/18 MH function did not have public synonym-fixed, now VD working as expected\r\n24/08/18 MH using custom function to convert blob into base64 clob and return as image in html - still causing server error if the szrimag field is referenced, unsure why\r\n23/08/18 MH Initial creation of domain - image retrieval not working\r\n*/\r\n\r\nselect rowidtochar(SZRIMAG.ROWID) \"id\", spriden_pidm, spriden_id, spriden_last_name, spriden_first_name,\r\n       szrimag_pidm, TO_CHAR(szrimag_activity_date, 'DD-MM-YYYY') as szrimag_activity_date, szrimag_user_id, \r\n       f_uog_blob2base64clob(szrimag_image) as user_image,\r\n       '<img id=\"dbimage\" src=\"data:image/jpeg;base64,' || f_uog_blob2base64clob(szrimag_image) || '\" height=\"400\" border=\"0\" width=\"350\"/>' as user_image_html\r\nfrom spriden, szrimag\r\nwhere spriden_pidm=szrimag_pidm\r\nand spriden_id=:id_spriden\r\nand spriden_change_ind is null\r\nunion all\r\nselect 'N/A' as \"id\", spriden_pidm, spriden_id, spriden_last_name, spriden_first_name,\r\n       spriden_pidm as szrimag_pidm, 'Image Not Yet Uploaded' as szrimag_activity_date, 'N/A' as szrimag_user_id, \r\n       (select f_uog_blob2base64clob(szrimag_image) from szrimag where szrimag_pidm='99999999') as user_image,\r\n       '<img id=\"dbimage\" src=\"data:image/jpeg;base64,' || (select f_uog_blob2base64clob(szrimag_image) from szrimag where szrimag_pidm='99999999') || '\" height=\"400\" border=\"0\" width=\"350\"/>' as user_image_html\r\n       from spriden\r\nwhere not exists\r\n    (select szrimag_pidm,spriden_pidm from spriden, szrimag\r\n        where spriden_pidm=szrimag_pidm\r\n        and spriden_id=:id_spriden\r\n        and spriden_change_ind is null)\r\nand spriden_id=:id_spriden\r\nand spriden_change_ind is null",
+   "typeOfCode": "S",
+   "serviceName": "uogSZRIMAG"
+}

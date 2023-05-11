@@ -1,0 +1,25 @@
+{
+   "codePost": "declare\r\n  ln_cnt number;\r\nbegin\r\n\r\n  select count(*)\r\n  into ln_cnt\r\n  from Saturn.swvappr\r\n  where swvappr_code = :SWVAPPR_CODE;\r\n\r\n  if nvl(ln_cnt,0) = 0 then\r\n     INSERT INTO SATURN.SWVAPPR \r\n     (SWVAPPR_CODE, SWVAPPR_DESC, SWVAPPR_GROUP, \r\n      SWVAPPR_INACTIVE_IND, SWVAPPR_USER_ID, SWVAPPR_ACTIVITY_DATE)\r\n     VALUES\r\n     (:SWVAPPR_CODE, :SWVAPPR_DESC, :SWVAPPR_GROUP, \r\n      NVL(:SWVAPPR_INACTIVE_IND,'N') , USER, SYSDATE);\r\n else\r\n     raise_application_error(-20001,'Duplicate SWVAPPR Code: '||:SWVAPPR_CODE );\r\n\r\n end if;\r\nend;\r\n",
+   "virtualDomainRoles": [
+      {
+         "allowGet": true,
+         "allowPost": true,
+         "allowPut": true,
+         "roleName": "ADMIN-GPBADMN",
+         "allowDelete": true
+      },
+      {
+         "allowGet": true,
+         "allowPost": true,
+         "allowPut": true,
+         "roleName": "ADMIN-SWVAPPRDOMAIN",
+         "allowDelete": true
+      }
+   ],
+   "codePut": "UPDATE SATURN.SWVAPPR\r\nset\r\nSWVAPPR_CODE = :SWVAPPR_CODE, \r\nSWVAPPR_DESC = :SWVAPPR_DESC, \r\nSWVAPPR_GROUP =:SWVAPPR_GROUP, \r\nSWVAPPR_INACTIVE_IND = NVL(:SWVAPPR_INACTIVE_IND,'N'), \r\nSWVAPPR_USER_ID = USER, \r\nSWVAPPR_ACTIVITY_DATE=SYSDATE\r\nWHERE\r\nrowid=:id",
+   "fileTimestamp": "2019-01-31T21:46:33Z",
+   "codeDelete": "DELETE from SATURN.SWVAPPR\r\nWHERE\r\nrowid=:id",
+   "codeGet": "select ROWIDTOCHAR (ROWID) \"id\",\r\nswvappr_code, swvappr_desc, swvappr_group, nvl(swvappr_inactive_ind,'N') as swvappr_inactive_ind, swvappr_user_id, swvappr_activity_date, swvappr_code||' '||swvappr_desc as swvappr_title\r\nfrom saturn.swvappr a\r\nwhere swvappr_code like nvl(:code,'%')\r\norder by a.SWVAPPR_INACTIVE_IND,a.swvappr_code,  a.swvappr_group",
+   "typeOfCode": "S",
+   "serviceName": "SwvapprDomain"
+}
